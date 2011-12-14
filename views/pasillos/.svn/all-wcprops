@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/60/trunk/0.2/views/pasillos
+END
+view.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/56/trunk/0.2/views/pasillos/view.ctp
+END
+edit.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/60/trunk/0.2/views/pasillos/edit.ctp
+END
+index.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/60/trunk/0.2/views/pasillos/index.ctp
+END
+add.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/60/trunk/0.2/views/pasillos/add.ctp
+END

@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/57/trunk/0.2/views/layouts
+END
+flash.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/56/trunk/0.2/views/layouts/flash.ctp
+END
+ajax.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/56/trunk/0.2/views/layouts/ajax.ctp
+END
+Copy of default.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/56/trunk/0.2/views/layouts/Copy%20of%20default.ctp
+END
+default.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/101/trunk/0.2/views/layouts/default.ctp
+END
+mobile.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/102/trunk/0.2/views/layouts/mobile.ctp
+END

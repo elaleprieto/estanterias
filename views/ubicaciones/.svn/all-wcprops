@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/56/trunk/0.2/views/ubicaciones
+END
+view.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/56/trunk/0.2/views/ubicaciones/view.ctp
+END
+edit.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/56/trunk/0.2/views/ubicaciones/edit.ctp
+END
+index.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/99/trunk/0.2/views/ubicaciones/index.ctp
+END
+add.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/56/trunk/0.2/views/ubicaciones/add.ctp
+END

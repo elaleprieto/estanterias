@@ -1,0 +1,58 @@
+.lista {
+	float: left;
+	width: 70%;
+}
+.atributos {
+	display: inline-block;
+	width: 25%;
+	margin-bottom: 5px;
+}
+.atributo {
+	vertical-align: top;
+}
+/************************************************************
+ * 							div								*
+ ************************************************************/
+div.atributo {
+	padding: 0px;
+	margin: 0px;
+}
+div.atributos {
+	margin-bottom: 10px;
+	padding-bottom: 0px;
+}
+div.lista {
+	margin-bottom: 0px;
+}
+/************************************************************
+ * 							label							*
+ ************************************************************/
+label.atributo {
+	margin-bottom: 10px;
+	width: 90px;
+	display: inline-block;
+}
+label {
+	display: inline;
+}
+input.pedidos_add[type="checkbox"] {
+	margin-left: 7px;
+}
+/************************************************************
+ * 							ID								*
+ ************************************************************/
+#agregar {
+	width: 130px;
+	font-size: 100%;
+	margin: 0px;
+	margin-left: 60px;
+}
+#busqueda {
+	width: 63%;
+	margin-left: 20px;
+	margin-right: 50px;
+}
+#info_cantidad {
+	padding-left: 1172px;
+	padding-top: 0px;
+}

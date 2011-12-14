@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/56/trunk/0.2/tests/cases/models
+END
+articulo.test.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/56/trunk/0.2/tests/cases/models/articulo.test.php
+END
+pasillo.test.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/56/trunk/0.2/tests/cases/models/pasillo.test.php
+END
+ubicado.test.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/56/trunk/0.2/tests/cases/models/ubicado.test.php
+END

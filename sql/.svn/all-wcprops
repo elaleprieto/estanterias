@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 20
+/svn/!svn/ver/80/sql
+END
+ivas.sql
+K 25
+svn:wc:ra_dav:version-url
+V 29
+/svn/!svn/ver/80/sql/ivas.sql
+END
+localidades.sql
+K 25
+svn:wc:ra_dav:version-url
+V 36
+/svn/!svn/ver/87/sql/localidades.sql
+END
+articulos.sql
+K 25
+svn:wc:ra_dav:version-url
+V 34
+/svn/!svn/ver/92/sql/articulos.sql
+END
+pasillos.sql
+K 25
+svn:wc:ra_dav:version-url
+V 33
+/svn/!svn/ver/60/sql/pasillos.sql
+END
+clientes.sql
+K 25
+svn:wc:ra_dav:version-url
+V 33
+/svn/!svn/ver/87/sql/clientes.sql
+END
+pedidos.sql
+K 25
+svn:wc:ra_dav:version-url
+V 32
+/svn/!svn/ver/60/sql/pedidos.sql
+END
+facturas.sql
+K 25
+svn:wc:ra_dav:version-url
+V 34
+/svn/!svn/ver/102/sql/facturas.sql
+END
+ubicados.sql
+K 25
+svn:wc:ra_dav:version-url
+V 32
+/svn/!svn/ver/5/sql/ubicados.sql
+END
+ubicados2.sql
+K 25
+svn:wc:ra_dav:version-url
+V 34
+/svn/!svn/ver/60/sql/ubicados2.sql
+END
+ubicacion.sql
+K 25
+svn:wc:ra_dav:version-url
+V 33
+/svn/!svn/ver/2/sql/ubicacion.sql
+END
+provincias.sql
+K 25
+svn:wc:ra_dav:version-url
+V 35
+/svn/!svn/ver/80/sql/provincias.sql
+END
+ubicacion2.sql
+K 25
+svn:wc:ra_dav:version-url
+V 34
+/svn/!svn/ver/5/sql/ubicacion2.sql
+END
+ordenes.sql
+K 25
+svn:wc:ra_dav:version-url
+V 32
+/svn/!svn/ver/94/sql/ordenes.sql
+END

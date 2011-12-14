@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/!svn/ver/78/trunk/0.2/controllers
+END
+pasillos_controller.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/60/trunk/0.2/controllers/pasillos_controller.php
+END
+clientes_controller.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/88/trunk/0.2/controllers/clientes_controller.php
+END
+pedidos_controller.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/105/trunk/0.2/controllers/pedidos_controller.php
+END
+ubicados_controller.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/101/trunk/0.2/controllers/ubicados_controller.php
+END
+provincias_controller.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/85/trunk/0.2/controllers/provincias_controller.php
+END
+pages_controller.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/56/trunk/0.2/controllers/pages_controller.php
+END
+ordenes_controller.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/95/trunk/0.2/controllers/ordenes_controller.php
+END
+ivas_controller.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/84/trunk/0.2/controllers/ivas_controller.php
+END
+ubicaciones_controller.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/99/trunk/0.2/controllers/ubicaciones_controller.php
+END
+localidades_controller.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/87/trunk/0.2/controllers/localidades_controller.php
+END
+articulos_controller.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/104/trunk/0.2/controllers/articulos_controller.php
+END

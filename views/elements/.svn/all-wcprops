@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/73/trunk/0.2/views/elements
+END
+acciones_comunes.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/56/trunk/0.2/views/elements/acciones_comunes.ctp
+END
+update_listado.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/56/trunk/0.2/views/elements/update_listado.ctp
+END
+get_codigo.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/56/trunk/0.2/views/elements/get_codigo.ctp
+END
+ordenes_pedido.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/56/trunk/0.2/views/elements/ordenes_pedido.ctp
+END
+get_unidad.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/62/trunk/0.2/views/elements/get_unidad.ctp
+END
+paging.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/101/trunk/0.2/views/elements/paging.ctp
+END
+get_foto.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/56/trunk/0.2/views/elements/get_foto.ctp
+END
+admin_update_listado.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/73/trunk/0.2/views/elements/admin_update_listado.ctp
+END
+get_detalle.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/70/trunk/0.2/views/elements/get_detalle.ctp
+END

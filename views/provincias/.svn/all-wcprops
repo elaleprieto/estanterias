@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/84/trunk/0.2/views/provincias
+END
+view.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/84/trunk/0.2/views/provincias/view.ctp
+END
+actualizar.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/85/trunk/0.2/views/provincias/actualizar.ctp
+END
+edit.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/84/trunk/0.2/views/provincias/edit.ctp
+END
+index.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/84/trunk/0.2/views/provincias/index.ctp
+END
+add.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/84/trunk/0.2/views/provincias/add.ctp
+END

@@ -1,0 +1,8 @@
+<ul class="auto_complete">
+	<?php foreach($articulos as $articulo): ?>
+		<li class="auto_complete" onclick="seleccionar(<?php echo $articulo['Articulo']['id'];?>)"><?php echo $articulo['Articulo']['detalle'];?></li>
+	<?php 
+		//echo $javascript -> event('au'.$articulo['Articulo']['id'], 'keydown', 'alert("ale")');
+	endforeach;
+	?>
+</ul>

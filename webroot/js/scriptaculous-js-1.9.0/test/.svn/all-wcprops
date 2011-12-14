@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/56/trunk/0.2/webroot/js/scriptaculous-js-1.9.0/test
+END
+test.css
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/56/trunk/0.2/webroot/js/scriptaculous-js-1.9.0/test/test.css
+END
+run_unit_tests.html
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/56/trunk/0.2/webroot/js/scriptaculous-js-1.9.0/test/run_unit_tests.html
+END
+run_functional_tests.html
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/56/trunk/0.2/webroot/js/scriptaculous-js-1.9.0/test/run_functional_tests.html
+END

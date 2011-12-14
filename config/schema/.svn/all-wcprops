@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/56/trunk/0.2/config/schema
+END
+db_acl.sql
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/56/trunk/0.2/config/schema/db_acl.sql
+END
+sessions.sql
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/56/trunk/0.2/config/schema/sessions.sql
+END
+i18n.php
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/56/trunk/0.2/config/schema/i18n.php
+END
+db_acl.php
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/56/trunk/0.2/config/schema/db_acl.php
+END
+sessions.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/56/trunk/0.2/config/schema/sessions.php
+END
+i18n.sql
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/56/trunk/0.2/config/schema/i18n.sql
+END

@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/74/trunk/0.2/views/articulos
+END
+view.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/56/trunk/0.2/views/articulos/view.ctp
+END
+admin_listar_desubicados.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/90/trunk/0.2/views/articulos/admin_listar_desubicados.ctp
+END
+actualizar.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/56/trunk/0.2/views/articulos/actualizar.ctp
+END
+auto_complete.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/56/trunk/0.2/views/articulos/auto_complete.ctp
+END
+admin_add.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/92/trunk/0.2/views/articulos/admin_add.ctp
+END
+fotografiar.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/56/trunk/0.2/views/articulos/fotografiar.ctp
+END
+edit.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/56/trunk/0.2/views/articulos/edit.ctp
+END
+admin_listar.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/101/trunk/0.2/views/articulos/admin_listar.ctp
+END
+index.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/91/trunk/0.2/views/articulos/index.ctp
+END

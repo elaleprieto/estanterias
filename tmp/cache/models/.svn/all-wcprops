@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/56/trunk/0.2/tmp/cache/models
+END
+cake_model_default_ubicados
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/56/trunk/0.2/tmp/cache/models/cake_model_default_ubicados
+END
+cake_model_default_estanterias_list
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/56/trunk/0.2/tmp/cache/models/cake_model_default_estanterias_list
+END
+cake_model_default_ordenes
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/56/trunk/0.2/tmp/cache/models/cake_model_default_ordenes
+END
+cake_model_default_ubicaciones
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/56/trunk/0.2/tmp/cache/models/cake_model_default_ubicaciones
+END
+cake_model_default_articulos
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/56/trunk/0.2/tmp/cache/models/cake_model_default_articulos
+END
+cake_model_default_pasillos
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/56/trunk/0.2/tmp/cache/models/cake_model_default_pasillos
+END
+cake_model_default_clientes
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/56/trunk/0.2/tmp/cache/models/cake_model_default_clientes
+END
+cake_model_default_pedidos
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/56/trunk/0.2/tmp/cache/models/cake_model_default_pedidos
+END

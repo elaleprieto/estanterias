@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/56/trunk/0.2/tests/cases/controllers
+END
+ubicados_controller.test.php
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/56/trunk/0.2/tests/cases/controllers/ubicados_controller.test.php
+END
+ubicaciones_controller.test.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/56/trunk/0.2/tests/cases/controllers/ubicaciones_controller.test.php
+END
+articulos_controller.test.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/56/trunk/0.2/tests/cases/controllers/articulos_controller.test.php
+END
+pasillos_controller.test.php
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/56/trunk/0.2/tests/cases/controllers/pasillos_controller.test.php
+END

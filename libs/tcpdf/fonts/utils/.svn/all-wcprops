@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/82/trunk/0.2/libs/tcpdf/fonts/utils
+END
+freetype6.dll
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/82/trunk/0.2/libs/tcpdf/fonts/utils/freetype6.dll
+END
+makeallttffonts.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/82/trunk/0.2/libs/tcpdf/fonts/utils/makeallttffonts.php
+END
+ttf2ufm
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/82/trunk/0.2/libs/tcpdf/fonts/utils/ttf2ufm
+END
+ttf2ufm.exe
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/82/trunk/0.2/libs/tcpdf/fonts/utils/ttf2ufm.exe
+END
+pfm2afm
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/82/trunk/0.2/libs/tcpdf/fonts/utils/pfm2afm
+END
+pfm2afm.exe
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/82/trunk/0.2/libs/tcpdf/fonts/utils/pfm2afm.exe
+END
+makefont.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/82/trunk/0.2/libs/tcpdf/fonts/utils/makefont.php
+END
+README.TXT
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/82/trunk/0.2/libs/tcpdf/fonts/utils/README.TXT
+END
+zlib1.dll
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/82/trunk/0.2/libs/tcpdf/fonts/utils/zlib1.dll
+END
+makeallotfufm.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/82/trunk/0.2/libs/tcpdf/fonts/utils/makeallotfufm.php
+END

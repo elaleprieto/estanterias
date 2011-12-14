@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/81/trunk/0.2/views/pedidos
+END
+view.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/56/trunk/0.2/views/pedidos/view.ctp
+END
+admin_finalizados.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/78/trunk/0.2/views/pedidos/admin_finalizados.ctp
+END
+auto_complete.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/93/trunk/0.2/views/pedidos/auto_complete.ctp
+END
+admin_imprimir.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/96/trunk/0.2/views/pedidos/admin_imprimir.ctp
+END
+edit.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/61/trunk/0.2/views/pedidos/edit.ctp
+END
+index.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/56/trunk/0.2/views/pedidos/index.ctp
+END
+admin_actualizar.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/101/trunk/0.2/views/pedidos/admin_actualizar.ctp
+END
+add.ctp
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/94/trunk/0.2/views/pedidos/add.ctp
+END
