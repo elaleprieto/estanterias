@@ -5,4 +5,7 @@
 \.settings
 \.metadata/
 Servers/
-target/
+target/config
+config/
+config
+config/*
