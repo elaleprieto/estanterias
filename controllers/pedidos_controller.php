@@ -57,7 +57,6 @@ class PedidosController extends AppController {
 
 	function admin_add() {
 		if (!empty($this -> data)) {
-			debug($this -> data);
 			$this -> Pedido -> create();
 			if ($this -> Pedido -> save($this -> data)) {
 				foreach ($this -> data['Orden'] as $orden) {
@@ -77,9 +76,8 @@ class PedidosController extends AppController {
 			}
 		}
 		$clientes = $this -> Pedido -> Cliente -> find('list', array('order' => array('Cliente.nombre')));
-		$articulos = $this -> Pedido -> Orden -> Articulo -> find('list', array('order' => array('Articulo.detalle', )));
+		$articulos = $this -> Pedido -> Orden -> Articulo -> find('list', array('order' => array('Articulo.orden')));
 		$this -> set(compact('clientes', 'articulos'));
-		// $this -> render('admin_addaux');
 	}
 
 	function edit($id = null) {
