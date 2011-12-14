@@ -3,6 +3,7 @@ $(document).ready(function() {
 	 *						Variables Globales							*
 	 ********************************************************************/
 	var seleccionado = 0;
+	var submit = false;
 	var opciones = new Array();
 	/********************************************************************
 	 *					Inicialización de Objetos						*
@@ -29,6 +30,15 @@ $(document).ready(function() {
 	});
 	$('#lista option').click(function() {
 		setLabelUnidad($('#lista option:selected').val())
+	});
+	$('#formulario').submit(function(e) {
+		// se envía el formulario sólo se se ha presionadao del botón #crear
+		return submit;
+	});
+	$('#crear').click(function(e) {
+		// se envía el formulario
+		submit = true;
+		$('#formulario').submit();
 	});
 	/********************************************************************
 	 * 								Funciones							*
@@ -213,8 +223,8 @@ $(document).ready(function() {
 	function existeEnLista(articulo_id) {
 		var codigo = "c" + articulo_id;
 		var existe = false;
-		
-		// se busca si existe una celda (td) en la tabla cuya ID sea el Codigo 
+
+		// se busca si existe una celda (td) en la tabla cuya ID sea el Codigo
 		// y contenga la leyenda Sin Cargo o el articulo_id según el artículo que se está agregando.
 		if(($('#sin_cargo_ckeckbox').attr('checked'))) {
 			// si está marcado el campo Sin Cargo
@@ -223,7 +233,7 @@ $(document).ready(function() {
 			// si no está marcado el campo Sin Cargo
 			celda = $('td[id=' + codigo + ']:contains("' + articulo_id + '")');
 		}
-		
+
 		// aquí se verifica si se encontró alguna coincidencia.
 		if(celda.length > 0) {
 			existe = true;
@@ -241,9 +251,9 @@ $(document).ready(function() {
 		// var filas = ($("articulos").childElements());
 		var codigo = "c" + articulo_id;
 		var existe = false;
-		
+
 		if(!(isNaN(cantidad))) {
-			// se busca si existe una celda (td) en la tabla cuya ID sea el Codigo 
+			// se busca si existe una celda (td) en la tabla cuya ID sea el Codigo
 			// y contenga la leyenda Sin Cargo o el articulo_id según el artículo que se está agregando.
 			if(($('#sin_cargo_ckeckbox').attr('checked'))) {
 				// si está marcado el campo Sin Cargo
@@ -252,15 +262,15 @@ $(document).ready(function() {
 				// si no está marcado el campo Sin Cargo
 				celda = $('td[id=' + codigo + ']:contains("' + articulo_id + '")');
 			}
-			
+
 			// aquí se verifica si se encontró alguna coincidencia.
 			if(celda.length > 0) {
 				// se obntienen todas las columnas de la fila
 				columnas = $(celda).parent().children();
-				
+
 				// la columna 4 es la cantidad
 				$(columnas[4]).html(parseInt($(columnas[4]).html()) + parseInt(cantidad));
-				
+
 				// la columna 1 es el campo oculto de la cantidad
 				// el campo oculto de la cantidad es el que se toma para guardar en la BD
 				$(columnas[1]).children().val(parseInt($(columnas[1]).children().val()) + parseInt(cantidad));

@@ -15,7 +15,7 @@ echo $javascript -> codeBlock('WEBROOT="../../"', $options = array(
 # Se agregan las CSS
 echo $html -> css('pedidos_add');
 ?>
-<?php echo $this -> Form -> create('Pedido', array('class' => 'pedidos_add'));?>
+<?php echo $this -> Form -> create('Pedido', array('class' => 'pedidos_add', 'id' => 'formulario'));?>
 <div class="pedidos_add">
 	<fieldset>
 		<legend>
@@ -104,9 +104,11 @@ echo $html -> css('pedidos_add');
 			<?php echo 'Pedido';?>
 		</legend>
 		<?php
-		echo $this -> Form -> submit('Crear Pedido', array(
+		echo $this -> Form -> button('Crear Pedido', array(
 				'class' => 'articulo',
+				'type' => 'button',
 				'div' => FALSE,
+				'id' => 'crear',
 		));
 		?>
 		<table id="ordenes" cellpadding="0" cellspacing="0">
