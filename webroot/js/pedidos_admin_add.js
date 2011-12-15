@@ -40,6 +40,14 @@ $(document).ready(function() {
 		submit = true;
 		$('#formulario').submit();
 	});
+	$('#b').click(function(e) {
+		console.info('#b');
+		if($('#b').attr('checked')) {
+			$('#b').val(1);
+		} else {
+			$('#b').val(0);
+		}
+	});
 	/********************************************************************
 	 * 								Funciones							*
 	 ********************************************************************/

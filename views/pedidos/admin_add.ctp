@@ -103,6 +103,7 @@ echo $html -> css('pedidos_add');
 		<legend>
 			<?php echo 'Pedido';?>
 		</legend>
+		<input id="b" type="checkbox" class="pedidos_add" name="data[Pedido][b]" value="0"/>
 		<?php
 		echo $this -> Form -> button('Crear Pedido', array(
 				'class' => 'articulo',

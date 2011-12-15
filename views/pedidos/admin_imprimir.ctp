@@ -61,9 +61,21 @@
 	$celda_ancho_cantidad 	= 8;
 	$celda_ancho_unidad		= 8;
 	$celda_ancho_detalle	= 162;
+	$celda_ancho_transporte	= 98;
 
 	# Alto de celda (en milímetros)
 	$celda_alto = 6;
+	
+	###############################################################
+	# Fila de Transporte
+	###############################################################
+
+	if ($pedido['Pedido']['b']) {
+		$tcpdf -> Cell($celda_ancho_transporte, $celda_alto, 'Transporte:', 0, 0, '');
+		$tcpdf -> Cell($celda_ancho_transporte, $celda_alto, '/', 0, 1, 'R');
+	} else {
+		$tcpdf -> Cell($celda_ancho_transporte, $celda_alto, 'Transporte:', 0, 1, '');
+	}
 
 	###############################################################
 	# Fila de títulos de columna
