@@ -74,6 +74,7 @@
 		$tcpdf -> Cell($celda_ancho_transporte, $celda_alto, 'Transporte:', 0, 0, '');
 		$tcpdf -> Cell($celda_ancho_transporte, $celda_alto, '/', 0, 1, 'R');
 	} else {
+		// se hace salto de línea si no va el campo
 		$tcpdf -> Cell($celda_ancho_transporte, $celda_alto, 'Transporte:', 0, 1, '');
 	}
 
