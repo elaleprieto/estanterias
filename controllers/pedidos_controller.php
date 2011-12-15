@@ -170,7 +170,6 @@ class PedidosController extends AppController {
 			$this -> redirect(array('action' => 'index'));
 		}
 		$pedido = $this -> Pedido -> read(null, $id);
-		// $ordenes = $this -> Pedido -> Orden -> findAllByPedidoId($id);
 		$consulta = "SELECT orden_id, cantidad, orden_estado, sin_cargo, id, detalle, unidad,
 				array_agg(pasillo_nombre) AS pasillo_nombre, array_agg(pasillo_lado) AS pasillo_lado,
 				min(pasillo_distancia) AS pasillo_distancia, array_agg(ubicacion_altura) AS ubicacion_altura, 
@@ -189,9 +188,9 @@ class PedidosController extends AppController {
 			GROUP BY orden_id, cantidad, orden_estado, sin_cargo, id, detalle, unidad
 			ORDER BY pasillo_distancia ASC, pasillo_nombre ASC, ubicacion_posicion ASC, ubicacion_altura ASC";
 		$ordenes = $this -> Pedido -> Orden -> query($consulta);
-		// debug($ordenes);
-
+		
 		$this -> set(compact('pedido', 'ordenes'));
+		$this -> layout = 'ajax';
 	}
 
 	/**

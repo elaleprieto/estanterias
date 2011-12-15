@@ -102,5 +102,7 @@
 		$tcpdf -> Cell($celda_ancho_detalle, $celda_alto, $orden[0]["detalle"], 1, 1, 'L');
 	}
 
-	$tcpdf -> Output("ejemplo.pdf", "I");
+	$fecha = date('Y-m-d H.i', strtotime($pedido['Pedido']['created']));
+
+	$tcpdf -> Output($pedido['Cliente']['nombre'] . " - ". $fecha . ".pdf", "I");
 ?>
