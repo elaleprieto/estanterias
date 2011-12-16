@@ -1,9 +1,8 @@
 <?php
-class Iva extends AppModel {
-	var $name = 'Iva';
-	var $displayField = 'categoria';
+class Transporte extends AppModel {
+	var $name = 'Transporte';
 	var $validate = array(
-		'categoria' => array(
+		'nombre' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
@@ -17,9 +16,9 @@ class Iva extends AppModel {
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $hasMany = array(
-		'Cliente' => array(
-			'className' => 'Cliente',
-			'foreignKey' => 'iva_id',
+		'Pedido' => array(
+			'className' => 'Pedido',
+			'foreignKey' => 'transporte_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',

@@ -7,9 +7,13 @@ CREATE TABLE pedidos
   id SERIAL NOT NULL PRIMARY KEY,
   -- numero INTEGER NOT NULL,
   estado BOOLEAN NOT NULL DEFAULT FALSE,
+  b integer NOT NULL DEFAULT 0,
+  contrarrembolso boolean NOT NULL DEFAULT false,
+  cobinpro boolean NOT NULL DEFAULT false,
   created TIMESTAMP DEFAULT NULL,
   modified TIMESTAMP DEFAULT NULL,
   finalizado TIMESTAMP DEFAULT NULL,
+  transporte_id integer NOT NULL DEFAULT 0,
   cliente_id INTEGER NOT NULL
 );
 
