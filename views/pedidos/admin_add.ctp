@@ -14,21 +14,34 @@ echo $javascript -> codeBlock('WEBROOT="../../"', $options = array(
 
 # Se agregan las CSS
 echo $html -> css('pedidos_add');
-?>
-<?php echo $this -> Form -> create('Pedido', array('class' => 'pedidos_add', 'id' => 'formulario'));?>
+
+# Aquí se arma el Formulario de Creación del Pedido
+echo $this -> Form -> create('Pedido', array('class' => 'pedidos_add', 'id' => 'formulario'));?>
 <div class="pedidos_add">
 	<fieldset>
 		<legend>
-			<?php echo 'Cliente';?>
+			<?php echo 'Datos del Cliente';?>
 		</legend>
+		<label class="datosCliente">Cliente:</label>
 		<?php
-		# Aquí se arma el Formulario de Creación del Pedido
 		echo $this -> Form -> input('cliente_id', array(
 				'class' => 'articulo',
 				'div' => FALSE,
-				'label' => FALSE
+				'label' => FALSE,
 		));
 		?>
+		<label class="datosCliente">Transporte:</label>
+		<?php
+		echo $this -> Form -> input('transporte_id', array(
+				// 'class' => 'articulo',
+				'div' => FALSE,
+				'label' => FALSE,
+		));
+		?>
+		<label class="datosCliente">Contrarrembolso:</label>
+		<input id="contrarrembolso" type="checkbox" class="pedidos_add" name="data[Pedido][contrarrembolso]" value="0"/>
+		<label class="datosCliente">Cobinpro:</label>
+		<input id="cobinpro" type="checkbox" class="pedidos_add" name="data[Pedido][cobinpro]" value="0"/>
 	</fieldset>
 	<fieldset>
 		<legend>

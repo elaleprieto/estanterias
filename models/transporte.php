@@ -1,6 +1,7 @@
 <?php
 class Transporte extends AppModel {
 	var $name = 'Transporte';
+	var $displayField = 'nombre';
 	var $validate = array(
 		'nombre' => array(
 			'notempty' => array(

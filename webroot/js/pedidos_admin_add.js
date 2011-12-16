@@ -40,12 +40,11 @@ $(document).ready(function() {
 		submit = true;
 		$('#formulario').submit();
 	});
-	$('#b').click(function(e) {
-		console.info('#b');
-		if($('#b').attr('checked')) {
-			$('#b').val(1);
+	$('#b,#contrarrembolso,#cobinpro').click(function() {
+		if($(this).attr('checked')) {
+			$(this).val(1);
 		} else {
-			$('#b').val(0);
+			$(this).val(0);
 		}
 	});
 	/********************************************************************

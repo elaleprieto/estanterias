@@ -22,8 +22,16 @@ class Pedido extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
+		),
+		'Transporte' => array(
+			'className' => 'Transporte',
+			'foreignKey' => 'transporte_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
 		)
 	);
+	
 	
 	var $hasMany = array(
 		'Orden' => array(

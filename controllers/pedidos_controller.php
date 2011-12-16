@@ -77,7 +77,8 @@ class PedidosController extends AppController {
 		}
 		$clientes = $this -> Pedido -> Cliente -> find('list', array('order' => array('Cliente.nombre')));
 		$articulos = $this -> Pedido -> Orden -> Articulo -> find('list', array('order' => array('Articulo.orden')));
-		$this -> set(compact('clientes', 'articulos'));
+		$transportes = $this -> Pedido -> Transporte -> find('list', array('order' => array('Transporte.nombre')));
+		$this -> set(compact('clientes', 'articulos', 'transportes'));
 	}
 
 	function edit($id = null) {
