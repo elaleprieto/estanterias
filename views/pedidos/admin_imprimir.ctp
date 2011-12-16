@@ -71,24 +71,19 @@ $celda_alto = 6;
 ###############################################################
 # Fila de Transporte
 ###############################################################
-
 # Cell ($w, $h=0, $txt='', $border=0, $ln=0, $align='', $fill=false, $link='', $stretch=0, $ignore_min_height=false, $calign='T', $valign='M')
+
+# Se imprime el Transporte
 $tcpdf -> Cell($celda_ancho_transporte, $celda_alto, 'Transporte: ' . $pedido['Transporte']['nombre'], 0, 0, '');
-if ($pedido['Pedido']['contrarrembolso'] && $pedido['Pedido']['cobinpro']) {
-	$celda_ancho_transporte /= 3;
-	$tcpdf -> Cell($celda_ancho_transporte, $celda_alto, 'Contrarrembolso', 0, 0, 'L');
-	$tcpdf -> Cell($celda_ancho_transporte, $celda_alto, 'Cobinpro', 0, 0, 'L');
-} else if ($pedido['Pedido']['contrarrembolso'] || $pedido['Pedido']['cobinpro']) {
-	$celda_ancho_transporte /= 2;
-	if ($pedido['Pedido']['contrarrembolso']) {
-		$tcpdf -> Cell($celda_ancho_transporte, $celda_alto, 'Contrarrembolso', 0, 0, 'L');
-	} else {
-		$tcpdf -> Cell($celda_ancho_transporte, $celda_alto, 'Cobinpro', 0, 0, 'L');
-	}
-}
+# Si se envía Contrarrembolso, se imprime... si no, se imprime en blanco.
+$pedido['Pedido']['contrarrembolso'] ? $tcpdf -> Cell($celda_ancho_transporte / 3, $celda_alto, 'Contrarrembolso', 0, 0, 'C') : $tcpdf -> Cell($celda_ancho_transporte / 3, $celda_alto, '', 0, 0, 'L');
+# Si se envía Cobinpro, se imprime... si no, se imprime en blanco.
+$pedido['Pedido']['cobinpro'] ? $tcpdf -> Cell($celda_ancho_transporte / 3, $celda_alto, 'Cobinpro', 0, 0, 'C') : $tcpdf -> Cell($celda_ancho_transporte / 3, $celda_alto, '', 0, 0, 'L');
+
 if ($pedido['Pedido']['b']) {
-	$tcpdf -> Cell($celda_ancho_transporte, $celda_alto, '***', 0, 0, 'R');
+	$tcpdf -> Cell($celda_ancho_transporte / 3, $celda_alto, '***', 0, 0, 'R');
 }
+# Se imprime la celda que provoca el salto de línea
 $tcpdf -> Cell(1, $celda_alto, '', 0, 1, '');
 ###############################################################
 # Fila de títulos de columna
