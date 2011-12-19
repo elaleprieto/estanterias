@@ -5,7 +5,8 @@
 	<tr>
 			<th><?php echo $this -> Paginator -> sort('Número', 'Pedido.id');?></th>
 			<th><?php echo $this -> Paginator -> sort('cliente_id');?></th>
-			<th><?php echo $this -> Paginator -> sort('Fecha', 'created');?></th>
+			<th><?php echo $this -> Paginator -> sort('Creado', 'created');?></th>
+			<th><?php echo $this -> Paginator -> sort('Finalizado', 'Pedido.finalizado');?></th>
 			<th><?php echo $this -> Paginator -> sort('estado');?></th>
 			<th class="actions"><?php __('Acciones');?></th>
 	</tr>
@@ -24,6 +25,12 @@
 			<?php
 				# Fecha de creación formateada 
 				echo $this -> Time -> format($format = 'd/m/Y H:i', $pedido['Pedido']['created']); 
+			?>&nbsp;
+		</td>
+		<td>
+			<?php
+				# Fecha de finalización formateada 
+				echo $this -> Time -> format($format = 'd/m/Y H:i', $pedido['Pedido']['finalizado']); 
 			?>&nbsp;
 		</td>
 		<td>

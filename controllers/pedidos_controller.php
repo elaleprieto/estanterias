@@ -10,7 +10,6 @@ class PedidosController extends AppController {
 			'Javascript',
 			'Js' => array('Jquery')
 	);
-	
 
 	function index() {
 		$this -> Pedido -> recursive = 1;
@@ -19,6 +18,9 @@ class PedidosController extends AppController {
 
 	function admin_finalizados() {
 		$this -> Pedido -> recursive = 1;
+		$this -> paginate = array('Pedido' => array(
+					'order' => array('finalizado' => 'ASC'),
+			));
 		$this -> set('pedidos', $this -> paginate('Pedido', array('Pedido.estado' => '1')));
 	}
 
@@ -70,7 +72,10 @@ class PedidosController extends AppController {
 					$this -> Pedido -> Orden -> save();
 				}
 				$this -> Session -> setFlash('El pedido ha sido creado');
-				$this -> redirect(array('action' => 'index', 'admin' => FALSE));
+				$this -> redirect(array(
+						'action' => 'index',
+						'admin' => FALSE
+				));
 			} else {
 				$this -> Session -> setFlash('El pedido no se ha guardado, intente nuevamente.');
 			}
@@ -189,7 +194,7 @@ class PedidosController extends AppController {
 			GROUP BY orden_id, cantidad, orden_estado, sin_cargo, id, detalle, unidad
 			ORDER BY pasillo_distancia ASC, pasillo_nombre ASC, ubicacion_posicion ASC, ubicacion_altura ASC";
 		$ordenes = $this -> Pedido -> Orden -> query($consulta);
-		
+
 		$this -> set(compact('pedido', 'ordenes'));
 		$this -> layout = 'ajax';
 	}
