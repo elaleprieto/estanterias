@@ -16,8 +16,20 @@ $(document).ready(function() {
 	 *
 	 * 		Aquí se registran los eventos para los objetos de la vista	*
 	 ********************************************************************/
-	$('#busqueda').keyup(function() {
-		buscar();
+	$('#busqueda').keyup(function(e) {
+		//37=>Left Key,38=>Up Key,39=>Right Key,40=>Down Key
+		if(e.which == 39 || e.which == 40) {
+			avanzar();
+		} else if(e.which == 37 || e.which == 38) {
+			retroceder();
+		} else {
+			buscar();
+		}
+	});
+	$('#busqueda').keydown(function(e) {
+		if(e.which == 9) {
+			$('#lista').focus();
+		}
 	});
 	$('#anterior').click(function() {
 		retroceder();
@@ -27,6 +39,11 @@ $(document).ready(function() {
 	});
 	$('#agregar').click(function() {
 		articulosActualizar();
+	});
+	$('#cantidad, #lista').keypress(function(e) {
+		if(e.which == 13) {
+			articulosActualizar();
+		}
 	});
 	$('#lista option').click(function() {
 		setLabelUnidad($('#lista option:selected').val())
@@ -222,8 +239,10 @@ $(document).ready(function() {
 					// se le corrige la cantidad, se le suma la nueva.
 					corregirCantidad(articulo_id, cantidad);
 				}
+				$('#lista').focus();
 			} else {
 				alert("Verifique la Cantidad.");
+				$('#cantidad').focus();
 			}
 		} else {
 			alert("Verifique el Artículo.");
