@@ -19,7 +19,7 @@ class PedidosController extends AppController {
 	function admin_finalizados() {
 		$this -> Pedido -> recursive = 1;
 		$this -> paginate = array('Pedido' => array(
-					'order' => array('finalizado' => 'ASC'),
+					'order' => array('finalizado' => 'DESC'),
 			));
 		$this -> set('pedidos', $this -> paginate('Pedido', array('Pedido.estado' => '1')));
 	}
