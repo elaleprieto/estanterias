@@ -58,7 +58,21 @@ $(document).ready(function() {
 	function buscar() {
 		deshabilitarBotones();
 		var texto = $('#busqueda').val().toUpperCase();
-		opciones = $('#lista option:contains(' + texto + ')');
+		var palabras = texto.split(" ");
+
+		if (palabras.length > 1) {
+			var contiene = "";
+			for(var i = palabras.length - 1; i >= 0; i--) {
+				if(palabras[i] != "") {
+					contiene += ':contains(' + palabras[i] + ')';
+				};
+			}
+			opciones = $('#lista option' + contiene);
+		} else {
+			opciones = $('#lista option:contains(' + texto + ')');
+		}
+
+		// opciones = $('#lista option:contains(' + texto + ')');
 		seleccionado = 0;
 
 		if(opciones.length > 0) {
