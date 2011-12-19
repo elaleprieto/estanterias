@@ -22,10 +22,10 @@ echo $this -> Form -> create('Pedido', array('class' => 'pedidos_add', 'id' => '
 		<legend>
 			<?php echo 'Datos del Cliente';?>
 		</legend>
-		<label class="datosCliente">Cliente:</label>
+		<label id="labelCliente" class="datosCliente">Cliente:</label>
 		<?php
 		echo $this -> Form -> input('cliente_id', array(
-				'class' => 'articulo',
+				'class' => 'articulo desplegable',
 				'div' => FALSE,
 				'label' => FALSE,
 		));
@@ -33,7 +33,7 @@ echo $this -> Form -> create('Pedido', array('class' => 'pedidos_add', 'id' => '
 		<label class="datosCliente">Transporte:</label>
 		<?php
 		echo $this -> Form -> input('transporte_id', array(
-				// 'class' => 'articulo',
+				'class' => 'desplegable',
 				'div' => FALSE,
 				'label' => FALSE,
 		));
@@ -45,7 +45,7 @@ echo $this -> Form -> create('Pedido', array('class' => 'pedidos_add', 'id' => '
 	</fieldset>
 	<fieldset>
 		<legend>
-			<?php echo 'Articulos';?>
+			<?php echo 'Artículos';?>
 		</legend>
 		<div>
 			<?php
@@ -72,7 +72,7 @@ echo $this -> Form -> create('Pedido', array('class' => 'pedidos_add', 'id' => '
 					'div' => FALSE,
 					'label' => FALSE,
 					'type' => 'select',
-					'size' => '5'
+					'size' => '8'
 			));
 			?>
 		</div>
