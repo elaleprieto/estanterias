@@ -161,11 +161,11 @@ div.pedidos_index {
 }
 div.pedidos_info {
 	border-left: 1px solid #666666;
-	float: right;
 	margin: auto;
 	padding: 10px 0 10px 2%;
 	text-align: center;
 	width: 76%;
+	display: inline-block;
 }
 div.ordenes_add {
 	text-align: left;
