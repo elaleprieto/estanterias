@@ -122,7 +122,7 @@ foreach ($ordenes as $key => $orden) {
 	$tcpdf -> Cell($celda_ancho_detalle, $celda_alto, $orden[0]["detalle"], 1, 1, 'L');
 }
 
-$fecha = date('Y-m-d H.i', strtotime($pedido['Pedido']['created']));
+$fecha = date('Y-m-d H.i', strtotime($pedido['Pedido']['finalizado']));
 
 $tcpdf -> Output($pedido['Cliente']['nombre'] . " - " . $fecha . ".pdf", "I");
 ?>
