@@ -59,20 +59,14 @@ $(document).ready(function() {
 		deshabilitarBotones();
 		var texto = $('#busqueda').val().toUpperCase();
 		var palabras = texto.split(" ");
+		var contiene = "";
 
-		if (palabras.length > 1) {
-			var contiene = "";
-			for(var i = palabras.length - 1; i >= 0; i--) {
-				if(palabras[i] != "") {
-					contiene += ':contains(' + palabras[i] + ')';
-				};
-			}
-			opciones = $('#lista option' + contiene);
-		} else {
-			opciones = $('#lista option:contains(' + texto + ')');
+		for(var i = palabras.length - 1; i >= 0; i--) {
+			if(palabras[i] != "") {
+				contiene += ':contains(' + palabras[i] + ')';
+			};
 		}
-
-		// opciones = $('#lista option:contains(' + texto + ')');
+		opciones = $('#lista option' + contiene);
 		seleccionado = 0;
 
 		if(opciones.length > 0) {
