@@ -18,9 +18,7 @@ class PedidosController extends AppController {
 
 	function admin_finalizados() {
 		$this -> Pedido -> recursive = 1;
-		$this -> paginate = array('Pedido' => array(
-					'order' => array('finalizado' => 'DESC'),
-			));
+		$this -> paginate = array('Pedido' => array('order' => array('finalizado' => 'DESC'), ));
 		$this -> set('pedidos', $this -> paginate('Pedido', array('Pedido.estado' => '1')));
 	}
 
@@ -80,8 +78,18 @@ class PedidosController extends AppController {
 				$this -> Session -> setFlash('El pedido no se ha guardado, intente nuevamente.');
 			}
 		}
+		$condicionesArticulo = array(
+				'OR' => array('NOT' => array('OR' => array(
+								array("Articulo.detalle LIKE" => "FAROL%"),
+								array("Articulo.detalle LIKE" => "BULONES%")
+						))),
+				array("Articulo.precio >" => "0")
+		);
+		$articulos = $this -> Pedido -> Orden -> Articulo -> find('list', array(
+				'conditions' => $condicionesArticulo,
+				'order' => array('Articulo.orden')
+		));
 		$clientes = $this -> Pedido -> Cliente -> find('list', array('order' => array('Cliente.nombre')));
-		$articulos = $this -> Pedido -> Orden -> Articulo -> find('list', array('order' => array('Articulo.orden')));
 		$transportes = $this -> Pedido -> Transporte -> find('list', array('order' => array('Transporte.nombre')));
 		$this -> set(compact('clientes', 'articulos', 'transportes'));
 	}
