@@ -21,6 +21,12 @@ select.desplegable {
 	background: -moz-linear-gradient(center top , #F1F1D4, #E6E49F) repeat scroll 0 0 #F1F1D4;
 	vertical-align: top;
 }
+.textfield {
+	font-size: 100%;
+	height: 50px;
+	padding: 2px;
+	width: 467px;
+}
 /************************************************************
  * 							div								*
  ************************************************************/
@@ -37,6 +43,11 @@ div.atributos {
 }
 div.lista {
 	margin-bottom: 0px;
+	margin-left: 85px;
+	width: 790px;
+}
+div.unidad {
+	margin-top: 10px;
 }
 /************************************************************
  * 							label							*
@@ -51,8 +62,8 @@ label {
 }
 label.datosCliente {
 	font-size: 120%;
-    vertical-align: top;
-    padding-left: 2%;
+	vertical-align: top;
+	padding-left: 2%;
 }
 input.pedidos_add[type="checkbox"] {
 	margin-left: 7px;
@@ -67,7 +78,7 @@ input.pedidos_add[type="checkbox"] {
 	margin-left: 60px;
 }
 #busqueda {
-	width: 63%;
+	width: 750px;
 	margin-left: 20px;
 	margin-right: 50px;
 }
@@ -83,6 +94,14 @@ input.pedidos_add[type="checkbox"] {
 #contrarrembolso, #cobinpro {
 	margin-left: 0px;
 }
-#labelCliente {
+#labelCliente, #labelObservaciones {
 	padding-left: 0%;
+}
+#cantidad {
+	padding-bottom: 0;
+    padding-top: 0;
+    vertical-align: top;
+}
+#unidad {
+	margin-left: 35px;
 }

@@ -20,7 +20,7 @@ echo $this -> Form -> create('Pedido', array('class' => 'pedidos_add', 'id' => '
 <div class="pedidos_add">
 	<fieldset>
 		<legend>
-			<?php echo 'Datos del Cliente';?>
+			<?php echo 'Datos del Pedido';?>
 		</legend>
 		<label id="labelCliente" class="datosCliente">Cliente:</label>
 		<?php
@@ -42,6 +42,15 @@ echo $this -> Form -> create('Pedido', array('class' => 'pedidos_add', 'id' => '
 		<input id="contrarrembolso" type="checkbox" class="pedidos_add" name="data[Pedido][contrarrembolso]" value="0"/>
 		<label class="datosCliente">Cobinpro:</label>
 		<input id="cobinpro" type="checkbox" class="pedidos_add" name="data[Pedido][cobinpro]" value="0"/>
+		<br />
+		<label id="labelObservaciones" class="datosCliente">Observaciones:</label>
+		<?php
+		echo $this -> Form -> input('observaciones', array(
+				'class' => 'textfield',
+				'div' => FALSE,
+				'label' => FALSE,
+		));
+		?>
 	</fieldset>
 	<fieldset>
 		<legend>
@@ -77,7 +86,7 @@ echo $this -> Form -> create('Pedido', array('class' => 'pedidos_add', 'id' => '
 			?>
 		</div>
 		<div class="atributos">
-			<div class="atributo">
+			<div class="atributo unidad">
 				<label class="atributo">Unidad:</label>
 				<label id="unidad">C/U</label>
 			</div>

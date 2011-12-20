@@ -38,10 +38,18 @@ $tcpdf -> SetFooterMargin(7);
 
 # Encabezado de Página
 $tcpdf -> SetHeaderData("", "", "Pedido de " . $pedido['Cliente']['nombre'], "");
-$tcpdf -> SetHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+$tcpdf -> SetHeaderFont(Array(
+		PDF_FONT_NAME_MAIN,
+		'',
+		PDF_FONT_SIZE_MAIN
+));
 
 # Pie de Página
-$tcpdf -> SetFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+$tcpdf -> SetFooterFont(Array(
+		PDF_FONT_NAME_DATA,
+		'',
+		PDF_FONT_SIZE_DATA
+));
 $tcpdf -> SetFooterMargin(7);
 
 $tcpdf -> AddPage();
@@ -85,6 +93,23 @@ if ($pedido['Pedido']['b']) {
 }
 # Se imprime la celda que provoca el salto de línea
 $tcpdf -> Cell(1, $celda_alto, '', 0, 1, '');
+
+###############################################################
+# Fila de Observaciones
+###############################################################
+# TCPDF::MultiCell($w, $h, $txt, $border=0,	$align='J', $fill=false, $ln=1, $x='', $y='', $reseth=true, $stretch=0, $ishtml=false, $autopadding=true, $maxh=0,$valign='T', $fitcell=false)
+if ($pedido['Pedido']['observaciones']) {
+	$tcpdf -> Cell(0, $celda_alto, "Observaciones: ", array('LTR' => 1), 1);
+
+	# Tamaño y Tipo de Letra
+	$tcpdf -> SetFont("freesans", "", 9);
+
+	$tcpdf -> MultiCell(0, $celda_alto, $pedido['Pedido']['observaciones'], array('LR' => 1), 'L');
+
+	# Tamaño y Tipo de Letra
+	$tcpdf -> SetFont("freesans", "B", 9);
+}
+
 ###############################################################
 # Fila de títulos de columna
 ###############################################################
