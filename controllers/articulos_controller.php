@@ -341,7 +341,11 @@ class ArticulosController extends AppController {
 		if (!empty($this -> data)) {
 			if ($this -> Articulo -> save($this -> data, TRUE, array('stock'))) {
 				$this -> Session -> setFlash('El stock ha sido actualizado');
-				$this -> redirect(array('action' => 'index'));
+				// $this -> redirect(array('action' => 'index'));
+				$this -> redirect(array(
+					'controller' => 'articulos',
+					'action' => 'index', $this -> Session -> read('URL.letra'), 'page:'.$this -> Session -> read('URL.page')
+			));
 			} else {
 				$this -> Session -> setFlash('Ocurrió un problema. Por favor, inténtelo nuevamente');
 			}
