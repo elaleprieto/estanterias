@@ -144,7 +144,7 @@ foreach ($ordenes as $key => $orden) {
 		$html .= '<td width="'.$celda_ancho_codigo.'mm" height="'.$celda_alto.'mm"></td>';
 	}
 		$html .= '<td width="'.$celda_ancho_cantidad.'mm" height="'.$celda_alto.'mm" align="center">'.$orden[0]["cantidad"].'</td>';
-		$html .= '<td width="'.$celda_ancho_unidad.'mm" height="'.$celda_alto.'mm" align="center">'.$orden[0]["unidad"].'</td>';
+		$html .= '<td width="'.$celda_ancho_unidad.'mm" height="'.$celda_alto.'mm" align="center"><font size="8">'.$orden[0]["unidad"].'</font></td>';
 		$html .= '<td width="'.$celda_ancho_detalle.'mm" height="'.$celda_alto.'mm">'.$orden[0]["detalle"].'</td>';
 		
 		$html .= '<td width="'.$celda_ancho_observaciones.'mm" height="'.$celda_alto.'mm"><font size="8">'.$orden[0]["observaciones"].'</font></td>';
