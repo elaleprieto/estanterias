@@ -127,6 +127,7 @@ class OrdenesController extends AppController {
 				# Esto es igual que el Guardar Pedido.
 				# Además, se resta la cantidad de la Orden del Stock del Artículo
 				foreach ($this->data['Orden'] as $index => $orden) {
+					$this -> Orden -> create($orden);
 					if ($this -> Orden -> save($orden)) {
 						$articulo_id = $this -> Orden -> read('articulo_id', $orden['id']);
 						$this -> Orden -> Articulo -> recursive = 0;
