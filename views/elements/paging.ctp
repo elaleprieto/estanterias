@@ -22,7 +22,7 @@
 			} else {
 				echo $html -> link($alpha[$i], array(
 						'controller' => strtolower($this -> params['controller']),
-						'action' => 'listar',
+						'action' => $accion,
 						$alpha[$i]
 				), array('class' => 'link')) . "";
 			}

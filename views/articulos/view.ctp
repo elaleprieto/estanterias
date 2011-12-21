@@ -3,7 +3,7 @@
 	<dl><?php $i = 0; $class = ' class="altrow"';?>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Codigo'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $articulo['Articulo']['codigo']; ?>
+			<?php echo $articulo['Articulo']['id']; ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Detalle'); ?></dt>
@@ -14,6 +14,11 @@
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Unidad'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $articulo['Articulo']['unidad']; ?>
+			&nbsp;
+		</dd>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Stock'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $articulo['Articulo']['stock']; ?>
 			&nbsp;
 		</dd>
 		<?php if(!empty($ubicacion)) { 

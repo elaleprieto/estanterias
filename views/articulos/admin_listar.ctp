@@ -16,7 +16,7 @@
 	echo $this -> Form -> create(null, array('url' => array('controller' => 'ubicados', 'action' => 'agregar'), 'class' => 'articulos'));
 	
 	# Paginación
-	echo $this -> element('paging');
+	echo $this -> element('paging', array('accion' => 'listar'));
 	
 	# Submit Formulario
 	echo $this -> Form -> submit('Agregar Seleccionados', array('div' => array('class' => 'agregar')));
@@ -72,7 +72,7 @@
 	echo $this -> Form -> end(array('label' => 'Agregar Seleccionados','div' => array('class' => 'agregar')));
 
 	# Paginación
-	echo $this -> element('paging');
+	echo $this -> element('paging', array('accion' => 'listar'));
 	?>
 </div>
 <div class="actions">

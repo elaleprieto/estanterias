@@ -190,13 +190,67 @@ class ArticulosController extends AppController {
 				'limit' => 30,
 				'order' => array('Articulo.orden' => 'asc')
 		);
-		
+
 		# busco los articulos que ya están ubicados
 		$ubicados = $this -> Articulo -> Ubicado -> find('list', array('fields' => array('Ubicado.articulo_id')));
 		# seteo los articulos que no están ubicados
-		$data = $this -> paginate('Articulo', array('Articulo.detalle LIKE' => $filter . '%', 'NOT' => array('Articulo.id' => $ubicados)));
+		$data = $this -> paginate('Articulo', array(
+				'Articulo.detalle LIKE' => $filter . '%',
+				'NOT' => array('Articulo.id' => $ubicados)
+		));
 
 		$this -> set('data', $data);
+		$this -> set('filter', $filter);
+
+		# Descomentar para la vista mobile
+		// $this -> render('mobile/admin_listar', 'mobile');
+
+	}
+
+	function admin_index($filter = null) {
+		# Se define la página actual para luego de agregar la ubicación del artículo, volver a esta página.
+		if (isset($this -> passedArgs['0'])) {
+			$this -> Session -> write('URL.letra', $this -> passedArgs['0']);
+		} else {
+			$this -> Session -> write('URL.letra', 'A');
+		}
+		if (isset($this -> passedArgs['page'])) {
+			$this -> Session -> write('URL.page', $this -> passedArgs['page']);
+		} else {
+			$this -> Session -> write('URL.page', '1');
+		}
+
+		$this -> set('filter', $filter);
+
+		// query all distinct first letters used in names
+		$consulta = 'SELECT DISTINCT SUBSTRING("detalle", 1, 1) AS detalle 
+					FROM (SELECT A.id AS id, detalle
+							FROM articulos A
+							WHERE A.id NOT IN (SELECT ART.id AS id
+												FROM articulos ART, ubicados U
+												WHERE ART.id = U.articulo_id)) AS B
+					ORDER BY detalle';
+		$letras = $this -> Articulo -> query($consulta);
+
+		$links = array();
+		// push all letters into a non-nested array
+		foreach ($letras as $row) {
+			array_push($links, current($row[0]));
+		}
+
+		$this -> set('links', $links);
+
+		$this -> paginate['Articulo'] = array(
+				'limit' => 30,
+				'order' => array('Articulo.orden' => 'asc')
+		);
+
+		# busco los articulos que ya están ubicados
+		$ubicados = $this -> Articulo -> Ubicado -> find('list', array('fields' => array('Ubicado.articulo_id')));
+		# seteo los articulos que no están ubicados
+		$data = $this -> paginate('Articulo', array('Articulo.detalle LIKE' => $filter . '%'));
+
+		$this -> set('articulos', $data);
 		$this -> set('filter', $filter);
 
 		# Descomentar para la vista mobile
@@ -274,6 +328,58 @@ class ArticulosController extends AppController {
 			$this -> set('articulo', $this -> Articulo -> findById($id));
 			$this -> render("/elements/get_detalle");
 		}
+	}
+
+	/**
+	 * Setea el Stock pasado en el formulario
+	 */
+	public function admin_set_stock($id = null) {
+		if (!$id && empty($this -> data)) {
+			$this -> Session -> setFlash('Artículo Inválido');
+			$this -> redirect(array('action' => 'index'));
+		}
+		if (!empty($this -> data)) {
+			if ($this -> Articulo -> save($this -> data, TRUE, array('stock'))) {
+				$this -> Session -> setFlash('El stock ha sido actualizado');
+				$this -> redirect(array('action' => 'index'));
+			} else {
+				$this -> Session -> setFlash('Ocurrió un problema. Por favor, inténtelo nuevamente');
+			}
+		}
+		if (empty($this -> data)) {
+			$this -> data = $this -> Articulo -> read(null, $id);
+		}
+	}
+
+	function admin_listar_stock($id = null) {
+		// if (!$id) {
+			// $this -> Session -> setFlash('Pedido inválido');
+			// $this -> redirect(array('action' => 'index'));
+		// }
+		// $pedido = $this -> Pedido -> read(null, $id);
+		// $consulta = "SELECT orden_id, cantidad, orden_estado, sin_cargo, id, detalle, unidad, observaciones,
+				// array_agg(pasillo_nombre) AS pasillo_nombre, array_agg(pasillo_lado) AS pasillo_lado,
+				// min(pasillo_distancia) AS pasillo_distancia, array_agg(ubicacion_altura) AS ubicacion_altura, 
+				// array_agg(ubicacion_posicion) AS ubicacion_posicion
+			// FROM (SELECT O.id AS orden_id, O.cantidad AS cantidad, O.estado AS orden_estado, O.sin_cargo AS sin_cargo, O.observaciones AS observaciones,
+					// A.id AS id, A.detalle AS detalle, A.unidad AS unidad,
+					// P.nombre AS pasillo_nombre, P.lado AS pasillo_lado, 
+					// P.distancia AS pasillo_distancia, Ub.altura AS ubicacion_altura, 
+					// Ub.posicion AS ubicacion_posicion, U.estado AS ubicacion_estado 
+				// FROM Ordenes AS O, Articulos AS A LEFT JOIN Ubicados AS U ON U.articulo_id = A.id 
+					// LEFT JOIN Pasillos AS P ON U.pasillo_id = P.id LEFT JOIN Ubicaciones AS Ub ON U.ubicacion_id = Ub.id
+				// WHERE O.pedido_id	= $id
+				// AND O.articulo_id 	= A.id
+				// ORDER BY ubicacion_estado DESC
+			// ) AS E
+			// GROUP BY orden_id, cantidad, orden_estado, sin_cargo, id, detalle, unidad, observaciones
+			// ORDER BY pasillo_distancia ASC, pasillo_nombre ASC, ubicacion_posicion ASC, ubicacion_altura ASC";
+		// $ordenes = $this -> Pedido -> Orden -> query($consulta);
+$this -> Articulo -> recursive = 0;
+		$articulos = $this -> Articulo -> find('all', array('conditions' => array('Articulo.modified >' => '2011-12-20')));
+// debug($articulos);
+		$this -> set('articulos', $articulos);
+		$this -> layout = 'ajax';
 	}
 
 }

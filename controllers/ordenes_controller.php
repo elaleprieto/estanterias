@@ -2,12 +2,18 @@
 class OrdenesController extends AppController {
 	var $name = 'Ordenes';
 	var $components = array('RequestHandler');
-	var $helpers = array('Paginator', 'Form', 'Time', 'Ajax', 'Foto');
+	var $helpers = array(
+			'Paginator',
+			'Form',
+			'Time',
+			'Ajax',
+			'Foto'
+	);
 	var $paginate = array('Orden' => array(
-	//'limit' => 25,
-	'recursive' => 3,
-	// 'order' => array('Pasillo.distancia' => 'asc', )
-	), );
+			//'limit' => 25,
+			'recursive' => 3,
+			// 'order' => array('Pasillo.distancia' => 'asc', )
+		), );
 
 	function index() {
 		$this -> Orden -> recursive = 0;
@@ -78,7 +84,10 @@ class OrdenesController extends AppController {
 			# se actualizan las Ordenes pero no el estado del Pedido.
 			if (!$pedido_id && empty($this -> data)) {
 				$this -> Session -> setFlash('Pedido Inválido');
-				$this -> redirect(array('controller' => 'pedidos', 'action' => 'index'));
+				$this -> redirect(array(
+						'controller' => 'pedidos',
+						'action' => 'index'
+				));
 			}
 			if (!empty($this -> data)) {
 				# Se recorre cada Orden del Pedido y se lo salva.
@@ -90,18 +99,24 @@ class OrdenesController extends AppController {
 						$this -> Session -> setFlash('Se ha producido un error. Por favor, avise al Administrador.');
 					}
 				}
-				$this -> redirect(array('controller' => 'pedidos', 'action' => 'index'));
+				$this -> redirect(array(
+						'controller' => 'pedidos',
+						'action' => 'index'
+				));
 			}
 		} elseif (isset($this -> params['form']['finalizar'])) {
 			# si se presionó el botón Finalizar Pedido...
 			if (!$pedido_id && empty($this -> data)) {
 				$this -> Session -> setFlash('Pedido Inválido');
-				$this -> redirect(array('controller' => 'pedidos', 'action' => 'index'));
+				$this -> redirect(array(
+						'controller' => 'pedidos',
+						'action' => 'index'
+				));
 			}
 			if (!empty($this -> data)) {
 				# Se agrega la fecha de finalización
 				$fecha = new DateTime();
-				$this -> data['Pedido']['finalizado'] = $fecha->format('Y-m-d H:i:s');
+				$this -> data['Pedido']['finalizado'] = $fecha -> format('Y-m-d H:i:s');
 
 				# Esta es la diferencia entre el Guardar y Finalizar: se cambia el Estado del Pedido
 				# cuando se lo salva acá, porque viene un campo oculto desde la vista
@@ -110,31 +125,33 @@ class OrdenesController extends AppController {
 
 				# Luego se recorre cada Orden del Pedido y se lo salva.
 				# Esto es igual que el Guardar Pedido.
+				# Además, se resta la cantidad de la Orden del Stock del Artículo
 				foreach ($this->data['Orden'] as $index => $orden) {
 					if ($this -> Orden -> save($orden)) {
-						$this -> Session -> setFlash('El Pedido ha sido Finalizado');
+						$articulo_id = $this -> Orden -> read('articulo_id', $orden['id']);
+						$this -> Orden -> Articulo -> recursive = 0;
+						$stock = $this -> Orden -> Articulo -> read('stock', $articulo_id['Orden']['articulo_id']);
+						$this -> Orden -> Articulo -> id = $articulo_id;
+						if ($this -> Orden -> Articulo -> saveField('stock', $stock['Articulo']['stock'] - $orden['cantidad'])) {
+							$this -> Session -> setFlash('El Pedido ha sido Finalizado');
+						}
 					} else {
 						$this -> Session -> setFlash('Se ha producido un error. Por favor, avise al Administrador.');
 					}
 				}
-				$this -> redirect(array('controller' => 'pedidos', 'action' => 'index'));
+				$this -> redirect(array(
+						'controller' => 'pedidos',
+						'action' => 'index'
+				));
 			}
 		} elseif (isset($this -> params['form']['salir'])) {
 			# si se presionó el botón Cancelar...
-			$this -> redirect(array('controller' => 'pedidos', 'action' => 'index'));
+			$this -> redirect(array(
+					'controller' => 'pedidos',
+					'action' => 'index'
+			));
 		}
 		$this -> set('pedido', $this -> Orden -> Pedido -> read(null, $pedido_id));
-		// $this -> set('articulos', $this -> paginate('Orden', array('Orden.pedido_id' => $pedido_id)));
-		// $articulos_id = $this -> Orden -> find('list', array('fields' => 'Orden.articulo_id', 'conditions' => array('Orden.pedido_id' => $pedido_id)));
-		// $articulos = $this -> Orden -> Articulo -> Ubicado -> find('all', array('conditions' => array('Articulo.id' => $articulos_id, ), 'order' => 'Pasillo.distancia ASC', 'recursive' => 2,));
-
-		// $consulta = "SELECT O.id AS orden_id, O.cantidad, O.estado AS orden_estado, A.id, A.detalle, A.unidad, A.foto, P.nombre, P.lado, P.distancia, Ub.altura, Ub.posicion, U.estado AS ubicacion_estado
-		// FROM Ordenes AS O, Articulos AS A LEFT JOIN Ubicados AS U ON U.articulo_id = A.id LEFT JOIN Pasillos AS P ON U.pasillo_id = P.id LEFT JOIN Ubicaciones AS Ub ON U.ubicacion_id = Ub.id
-		// WHERE O.pedido_id	= $pedido_id
-		// AND O.articulo_id 	= A.id
-		// ORDER BY P.distancia
-		// ;";
-
 		$consulta = "SELECT orden_id, cantidad, orden_estado, sin_cargo, id, detalle, unidad, foto, 
 					array_agg(pasillo_nombre) AS pasillo_nombre, array_agg(pasillo_lado) AS pasillo_lado, 
 					min(pasillo_distancia) AS pasillo_distancia, array_agg(ubicacion_altura) AS ubicacion_altura, 
@@ -152,9 +169,7 @@ class OrdenesController extends AppController {
 					) AS E
 				GROUP BY orden_id, cantidad, orden_estado, sin_cargo, id, detalle, unidad, foto
 				ORDER BY pasillo_distancia ASC, pasillo_nombre ASC, ubicacion_posicion ASC, ubicacion_altura ASC";
-
 		$articulos = $this -> Orden -> query($consulta);
-
 		$this -> set(compact('articulos'));
 	}
 
@@ -164,7 +179,10 @@ class OrdenesController extends AppController {
 			# si se presionó el botón Finalizar Pedido...
 			if (!$pedido_id && empty($this -> data)) {
 				$this -> Session -> setFlash('Pedido Inválido');
-				$this -> redirect(array('controller' => 'pedidos', 'action' => 'index'));
+				$this -> redirect(array(
+						'controller' => 'pedidos',
+						'action' => 'index'
+				));
 			}
 			if (!empty($this -> data)) {
 				debug($this -> data);
@@ -176,11 +194,17 @@ class OrdenesController extends AppController {
 						$this -> Session -> setFlash('Se ha producido un error. Por favor, avise al Administrador.');
 					}
 				}
-				$this -> redirect(array('controller' => 'pedidos', 'action' => 'index'));
+				$this -> redirect(array(
+						'controller' => 'pedidos',
+						'action' => 'index'
+				));
 			}
 		} elseif (isset($this -> params['form']['cancelar'])) {
 			# si se presionó el botón Cancelar...
-			$this -> redirect(array('controller' => 'pedidos', 'action' => 'index'));
+			$this -> redirect(array(
+					'controller' => 'pedidos',
+					'action' => 'index'
+			));
 		}
 		$this -> set('pedido', $this -> Orden -> Pedido -> read(null, $pedido_id));
 		// $this -> set('articulos', $this -> paginate('Orden', array('Orden.pedido_id' => $pedido_id)));

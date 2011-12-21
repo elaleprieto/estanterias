@@ -1,16 +1,16 @@
 <div class="articulos form">
 <?php echo $this->Form->create('Articulo');?>
 	<fieldset>
- 		<legend><?php __('Edit Articulo'); ?></legend>
+ 		<legend><?php __('Set Stock Articulo'); ?></legend>
 	<?php
-		echo $this->Form->input('id', array('type' => 'text', 'label' => 'Código'));
-		echo $this->Form->input('detalle');
-		echo $this->Form->input('unidad');
-		echo $this->Form->input('precio');
+		echo $this->Form->input('id');
+		echo $this->Form->input('detalle', array('disabled' => 'disabled'));
+		echo $this->Form->input('unidad', array('disabled' => 'disabled'));
+		echo $this->Form->input('precio', array('disabled' => 'disabled'));
 		echo $this->Form->input('stock');
 	?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit', true));?>
+<?php echo $this->Form->end('Guardar');?>
 </div>
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>
