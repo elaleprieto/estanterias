@@ -72,6 +72,11 @@ echo $this -> Form -> create('Pedido', array('class' => 'pedidos_add', 'id' => '
 					'type' => 'button',
 					'id' => 'siguiente'
 			));
+			echo $this -> Form -> button('Agregar Artículo', array(
+					'type' => 'button',
+					'id' => 'agregar',
+					'class' => 'articulo',
+			));
 			?>
 		</div>
 		<div class="lista">
@@ -105,13 +110,9 @@ echo $this -> Form -> create('Pedido', array('class' => 'pedidos_add', 'id' => '
 			<div class="atributo">
 				<label class="atributo">Sin Cargo:</label>
 				<input id="sin_cargo_ckeckbox" type="checkbox" class="pedidos_add"/>
-				<?php
-				echo "<input type='button' id='agregar' class='articulo' value='Agregar Artículo' />";
-				echo $javascript -> event('agregar', 'click', 'articulos_actualizar()');
-				?>
 			</div>
-		</div>
-		<div id="info_cantidad">
+			<br />
+			<div id="info_cantidad">
 			<label class="cantidad_articulos">Cantidad Artículos: </label>
 			<div id="cantidad_articulos" class="cantidad_articulos">
 				0
@@ -120,6 +121,18 @@ echo $this -> Form -> create('Pedido', array('class' => 'pedidos_add', 'id' => '
 				0
 			</div>
 		</div>
+		</div>
+		<div class="observaciones">
+			<label class="atributo">Observaciones:</label>
+			<?php
+			echo $this -> Form -> textarea('articuloObservaciones', array(
+						'id' => 'articuloObservaciones',
+						'div' => FALSE,
+						'label' => "Observaciones",
+				));
+			?>
+		</div>
+		
 	</fieldset>
 	<fieldset>
 		<legend>
@@ -142,6 +155,7 @@ echo $this -> Form -> create('Pedido', array('class' => 'pedidos_add', 'id' => '
 					<th><?php echo 'Cantidad';?></th>
 					<th><?php echo 'Unidad';?></th>
 					<th><?php echo 'Articulo';?></th>
+					<th><?php echo 'Observ.';?></th>
 					<th><?php echo 'Acciones';?></th>
 				</tr>
 			</thead>

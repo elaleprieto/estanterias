@@ -8,8 +8,9 @@ fieldset {
 }
 .atributos {
 	display: inline-block;
-	width: 25%;
+	width: 230px;
 	margin-bottom: 5px;
+	height: 160px;
 }
 .atributo {
 	vertical-align: top;
@@ -49,6 +50,10 @@ div.lista {
 div.unidad {
 	margin-top: 10px;
 }
+div.observaciones {
+	display: inline-block;
+	width: 160px;
+}
 /************************************************************
  * 							label							*
  ************************************************************/
@@ -86,7 +91,7 @@ input.pedidos_add[type="checkbox"] {
 	display: inline-block;
 	padding-top: 0;
 	text-align: right;
-	width: 25%;
+	width: 190px;
 }
 #b {
 	-moz-appearance: checkbox;
@@ -104,4 +109,8 @@ input.pedidos_add[type="checkbox"] {
 }
 #unidad {
 	margin-left: 35px;
+}
+#articuloObservaciones{
+	width: 185px;
+	height: 100px;
 }

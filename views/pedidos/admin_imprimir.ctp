@@ -70,7 +70,8 @@ $celda_ancho = 90;
 $celda_ancho_codigo = 9;
 $celda_ancho_cantidad = 8;
 $celda_ancho_unidad = 8;
-$celda_ancho_detalle = 162;
+$celda_ancho_detalle = 137;
+$celda_ancho_observaciones = 25;
 $celda_ancho_transporte = 98;
 
 # Alto de celda (en milímetros)
@@ -117,7 +118,8 @@ $tcpdf -> Cell($celda_ancho_codigo, $celda_alto, '', 1, 0, 'C');
 $tcpdf -> Cell($celda_ancho_codigo, $celda_alto, 'Cód', 1, 0, 'C');
 $tcpdf -> Cell($celda_ancho_cantidad, $celda_alto, 'Cant', 1, 0, 'C');
 $tcpdf -> Cell($celda_ancho_unidad, $celda_alto, 'Unid', 1, 0, 'C');
-$tcpdf -> Cell($celda_ancho_detalle, $celda_alto, 'Detalle', 1, 1, 'C');
+$tcpdf -> Cell($celda_ancho_detalle, $celda_alto, 'Detalle', 1, 0, 'C');
+$tcpdf -> Cell($celda_ancho_observaciones, $celda_alto, 'Observaciones', 1, 1, 'C');
 
 ###############################################################
 # Armo la lista
@@ -126,26 +128,33 @@ $tcpdf -> Cell($celda_ancho_detalle, $celda_alto, 'Detalle', 1, 1, 'C');
 # Tamaño y Tipo de Letra
 $tcpdf -> SetFont("freesans", "", 10);
 
-# Cell ($w, $h=0, $txt='', $border=0, $ln=0, $align='', $fill=false, $link='', $stretch=0, $ignore_min_height=false, $calign='T', $valign='M')
-//print_r($usuarios);
+$html = '<table cellspacing="0" cellpadding="1" border="0.7">';
 foreach ($ordenes as $key => $orden) {
+	$html .= "<tr>"; 
 	if ($orden[0]["orden_estado"]) {
-		$tcpdf -> Cell($celda_ancho_codigo, $celda_alto, "X", 1, 0, 'C');
+		$html .= '<td width="'.$celda_ancho_codigo.'mm" height="'.$celda_alto.'mm" align="center">X</td>';
+		
 		if ($orden[0]["sin_cargo"]) {
-			$tcpdf -> SetFont("freesans", "", 9);
-			$tcpdf -> Cell($celda_ancho_codigo, $celda_alto, 'Sin Cargo', 1, 0, 'C', '', '', 2);
-			$tcpdf -> SetFont("freesans", "", 10);
+			$html .= '<td width="'.$celda_ancho_codigo.'mm" height="'.$celda_alto.'mm" align="center"><font size="8">Sin Cargo</font></td>';
 		} else {
-			$tcpdf -> Cell($celda_ancho_codigo, $celda_alto, $orden[0]["id"], 1, 0, 'C');
+			$html .= '<td width="'.$celda_ancho_codigo.'mm" height="'.$celda_alto.'mm" align="center"><font size="9">'.$orden[0]["id"].'</font></td>';
 		}
 	} else {
-		$tcpdf -> Cell($celda_ancho_codigo, $celda_alto, "--", 1, 0, 'C');
-		$tcpdf -> Cell($celda_ancho_codigo, $celda_alto, "", 1, 0, 'C');
+		$html .= '<td width="'.$celda_ancho_codigo.'mm" height="'.$celda_alto.'mm" align="center">--</td>';
+		$html .= '<td width="'.$celda_ancho_codigo.'mm" height="'.$celda_alto.'mm"></td>';
 	}
-	$tcpdf -> Cell($celda_ancho_cantidad, $celda_alto, $orden[0]["cantidad"], 1, 0, 'C');
-	$tcpdf -> Cell($celda_ancho_unidad, $celda_alto, $orden[0]["unidad"], 1, 0, 'C');
-	$tcpdf -> Cell($celda_ancho_detalle, $celda_alto, $orden[0]["detalle"], 1, 1, 'L');
+		$html .= '<td width="'.$celda_ancho_cantidad.'mm" height="'.$celda_alto.'mm" align="center">'.$orden[0]["cantidad"].'</td>';
+		$html .= '<td width="'.$celda_ancho_unidad.'mm" height="'.$celda_alto.'mm" align="center">'.$orden[0]["unidad"].'</td>';
+		$html .= '<td width="'.$celda_ancho_detalle.'mm" height="'.$celda_alto.'mm">'.$orden[0]["detalle"].'</td>';
+		
+		$html .= '<td width="'.$celda_ancho_observaciones.'mm" height="'.$celda_alto.'mm"><font size="8">'.$orden[0]["observaciones"].'</font></td>';
+
+	$html .= "</tr>";
 }
+$html .= '</table>';
+
+// output the HTML content
+$tcpdf -> writeHTML($html);
 
 $fecha = date('Y-m-d H.i', strtotime($pedido['Pedido']['finalizado']));
 

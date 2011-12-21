@@ -202,6 +202,14 @@ $(document).ready(function() {
 					// columna Artículo
 					columnaArticulo = $('<td>').attr("id", "d" + articulo_id);
 					columnaArticulo.append($('#lista option:selected').html());
+					
+					// columna Observaciones
+					columnaObservaciones = $('<td>');
+					columnaObservaciones.append($('#articuloObservaciones').val());
+					
+					// columna Observaciones (oculta)
+					inputObservacionesHidden = $('<input />').attr("type", "hidden").attr("name", "data[Orden][" + indice + "][Observaciones]").attr("value", $('#articuloObservaciones').val());
+					columnaObservacionesHidden = $('<td>').attr("class", "invisible").append(inputObservacionesHidden);
 
 					// columna Acciones
 					quitar = $('<input />').attr("type", "button").attr("class", "articulo").attr("value", "Quitar");
@@ -225,6 +233,8 @@ $(document).ready(function() {
 					fila.append(columnaCantidad);
 					fila.append(columnaUnidad);
 					fila.append(columnaArticulo);
+					fila.append(columnaObservaciones);
+					fila.append(columnaObservacionesHidden);
 					fila.append(columnaAcciones);
 					fila.append(columnaSinCargo);
 
