@@ -358,7 +358,11 @@ class ArticulosController extends AppController {
 
 	function admin_listar_stock($id = null) {
 		$this -> Articulo -> recursive = 0;
-		$articulos = $this -> Articulo -> find('all', array('conditions' => array('Articulo.modified >' => '2011-12-20')));
+		# Opciones de Búsqueda
+		$fecha = '2011-12-20';
+		$condiciones = array('Articulo.modified >' => $fecha, 'Articulo.stock >=' => 0);
+		
+		$articulos = $this -> Articulo -> find('all', array('order' => 'Articulo.orden', 'conditions' => $condiciones));
 		$this -> set('articulos', $articulos);
 		$this -> layout = 'ajax';
 	}
