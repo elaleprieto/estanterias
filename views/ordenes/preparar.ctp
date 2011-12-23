@@ -32,7 +32,7 @@ echo $this -> Form -> create('Orden');
 			</tr>
 			<tr>
 				<td class="info_titulo"><?php echo 'Cliente';?></td>
-				<td class="info_data"><?php echo 'Ferretería del Sur';?></td>
+				<td class="info_data"><?php echo $pedido['Cliente']['nombre'];?></td>
 			</tr>
 			<tr>
 				<td class="info_titulo"><?php echo 'Fecha';?></td>

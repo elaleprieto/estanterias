@@ -172,6 +172,7 @@ class OrdenesController extends AppController {
 				ORDER BY pasillo_distancia ASC, pasillo_nombre ASC, ubicacion_posicion ASC, ubicacion_altura ASC";
 		$articulos = $this -> Orden -> query($consulta);
 		$this -> set(compact('articulos'));
+		// $this -> layout = 'mobile';
 	}
 
 	function finalizadas($pedido_id = null) {
