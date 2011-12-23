@@ -321,6 +321,14 @@ class ArticulosController extends AppController {
 			$this -> render("/elements/get_unidad");
 		}
 	}
+	
+	public function get_stock($id = null) {
+		$this -> layout = 'ajax';
+		if ($id) {
+			$this -> set('articulo', $this -> Articulo -> findById($id));
+			$this -> render("/elements/get_stock");
+		}
+	}
 
 	public function get_detalle($id = null) {
 		$this -> layout = 'ajax';

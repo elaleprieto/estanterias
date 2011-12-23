@@ -41,7 +41,7 @@ echo $this -> Form -> create('Pedido', array('class' => 'pedidos_add', 'id' => '
 		<label class="datosCliente">Contrarrembolso:</label>
 		<input id="contrarrembolso" type="checkbox" class="pedidos_add" name="data[Pedido][contrarrembolso]" value="0"/>
 		<label class="datosCliente">Cobinpro:</label>
-		<input id="cobinpro" type="checkbox" class="pedidos_add" name="data[Pedido][cobinpro]" value="0"/>
+		<input id="cobinpro" type="checkbox" class="pedidos_add" name="data[Pedido][cobinpro]" value="1" />
 		<br />
 		<label id="labelObservaciones" class="datosCliente">Observaciones:</label>
 		<?php
@@ -94,6 +94,10 @@ echo $this -> Form -> create('Pedido', array('class' => 'pedidos_add', 'id' => '
 			<div class="atributo unidad">
 				<label class="atributo">Unidad:</label>
 				<label id="unidad">C/U</label>
+			</div>
+			<div class="atributo">
+				<label class="atributo">Stock:</label>
+				<label id="stock">0</label>
 			</div>
 			<div class="atributo">
 				<label class="atributo">Cantidad:</label>

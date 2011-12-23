@@ -46,7 +46,8 @@ $(document).ready(function() {
 		}
 	});
 	$('#lista option').click(function() {
-		setLabelUnidad($('#lista option:selected').val())
+		setLabelUnidad($('#lista option:selected').val());
+		setLabelStock($('#lista option:selected').val());
 	});
 	$('#formulario').submit(function(e) {
 		// se envía el formulario sólo se se ha presionadao del botón #crear
@@ -89,6 +90,7 @@ $(document).ready(function() {
 		if(opciones.length > 0) {
 			$(opciones[0]).attr('selected', 'selected');
 			setLabelUnidad($('#lista option:selected').val());
+			setLabelStock($('#lista option:selected').val());
 			habilitarBotones();
 		}
 	}
@@ -105,6 +107,7 @@ $(document).ready(function() {
 		}
 		$(opciones[seleccionado]).attr('selected', 'selected');
 		setLabelUnidad($('#lista option:selected').val());
+		setLabelStock($('#lista option:selected').val());
 	}
 
 	/**
@@ -119,6 +122,7 @@ $(document).ready(function() {
 		}
 		$(opciones[seleccionado]).attr('selected', 'selected');
 		setLabelUnidad($('#lista option:selected').val());
+		setLabelStock($('#lista option:selected').val());
 	}
 
 	/**
@@ -146,6 +150,7 @@ $(document).ready(function() {
 	function limpiarCampos() {
 		$('#busqueda').val('');
 		$('#cantidad').val('');
+		$('#cobinpro').attr('checked', 'checked');
 	}
 
 	/**
@@ -337,7 +342,20 @@ $(document).ready(function() {
 	 */
 	function setLabelUnidad(id) {
 		if(id) {
+			imagen = $('<img>').attr('src', WEBROOT + 'img/load.gif').attr('class', 'load');
+			$('#unidad').html(imagen);
 			$('#unidad').load(WEBROOT + "articulos/get_unidad/" + id);
+		}
+	}
+	
+	/**
+	 * 	setLabelStock setea la etiqueta Stock para proporcionar información al usuario.
+	 */
+	function setLabelStock(id) {
+		if(id) {
+			imagen = $('<img>').attr('src', WEBROOT + 'img/load.gif').attr('class', 'load');
+			$('#stock').html(imagen);
+			$('#stock').load(WEBROOT + "articulos/get_stock/" + id);
 		}
 	}
 
