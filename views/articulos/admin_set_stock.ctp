@@ -7,7 +7,7 @@
 		echo $this->Form->input('detalle', array('disabled' => 'disabled'));
 		echo $this->Form->input('unidad', array('disabled' => 'disabled'));
 		echo $this->Form->input('precio', array('disabled' => 'disabled'));
-		echo $this->Form->input('stock');
+		echo $this->Form->input('stock', array('autocomplete' => 'off'));
 	?>
 	</fieldset>
 <?php echo $this->Form->end('Guardar');?>
