@@ -3,8 +3,8 @@ fieldset {
 }
 .lista {
 	float: left;
-	width: 70%;
-	font-size: 90%;
+	width: 750%;
+	font-size: 80%;
 }
 .atributos {
 	display: inline-block;
@@ -20,6 +20,7 @@ select.articulo {
 }
 select.desplegable {
 	background: -moz-linear-gradient(center top , #F1F1D4, #E6E49F) repeat scroll 0 0 #F1F1D4;
+	background: -webkit-gradient(linear, left top, left bottom, from(#F1F1D4), to(#E6E49F));
 	vertical-align: top;
 }
 .textfield {
@@ -117,4 +118,8 @@ input.pedidos_add[type="checkbox"] {
 #articuloObservaciones{
 	width: 185px;
 	height: 100px;
+}
+#lista {
+	width: 100%;
+	background-color: white;
 }
