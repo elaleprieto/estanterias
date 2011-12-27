@@ -318,11 +318,12 @@ $(document).ready(function() {
 				columnas = $(celda).parent().children();
 
 				// la columna 4 es la cantidad
-				$(columnas[4]).html(parseInt($(columnas[4]).html()) + parseInt(cantidad));
+				$(columnas[4]).html(parseFloat($(columnas[4]).html()) + parseFloat(cantidad));
+				
 
 				// la columna 1 es el campo oculto de la cantidad
 				// el campo oculto de la cantidad es el que se toma para guardar en la BD
-				$(columnas[1]).children().val(parseInt($(columnas[1]).children().val()) + parseInt(cantidad));
+				$(columnas[1]).children().val(parseFloat($(columnas[1]).children().val()) + parseFloat(cantidad));
 			}
 		}
 	}
