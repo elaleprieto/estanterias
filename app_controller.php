@@ -44,6 +44,8 @@
 					$mobileView = strtolower($this -> params['controller']) . '/mobile/';
 					$this -> viewPath = $mobileView;
 				}
+			} else if(isset($this->params['admin'])) {
+				$this->layout = 'admin';
 			}
 		}
 

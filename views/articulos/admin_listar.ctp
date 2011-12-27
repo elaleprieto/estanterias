@@ -1,14 +1,11 @@
 <?php
-	# Se cargan las librería JavaScript
-	echo $javascript -> link('prototype');
-	echo $javascript -> link('scriptaculous');
 	# Se define la ruta base
 	echo $javascript -> codeBlock('WEBROOT="../"', 
 		$options = array('allowCache'=>true,'safe'=>true,'inline'=>true));
 
 	# Se crean las funciones auxiliares
 	# (en webroot/js) 
-	echo $javascript -> link('articulos_listar_desubicados');
+	echo $javascript -> link('admin_articulos_listar', FALSE);
 ?>
 <div class="articulos index">
 	<?php
@@ -56,13 +53,6 @@
 		));
 			?></span>
 	</div>
-	<?php
-		# Definición del evento JavaScript que cambia el estilo y tilda el checkbox
-		# cada vez que se hace clic.
-		# La función cambiar_estilo(fila_id) se encuentra en el archivo 
-		# webroot/js/articulos_listar_desubicados.js
-		echo $javascript -> event('div'.$articulo['Articulo']['id'], 'click', 'cambiar_estilo("div'.$articulo['Articulo']['id'].'", "Articulos'.$articuloN.'Estado")');
-	?>
 	<?php
 	} # Fin foreach
 
