@@ -131,11 +131,12 @@ class OrdenesController extends AppController {
 					if ($this -> Orden -> save($orden)) {
 						$articulo_id = $this -> Orden -> read('articulo_id', $orden['id']);
 						$this -> Orden -> Articulo -> recursive = 0;
-						$stock = $this -> Orden -> Articulo -> read('stock', $articulo_id['Orden']['articulo_id']);
-						$this -> Orden -> Articulo -> id = $articulo_id;
-						if ($this -> Orden -> Articulo -> saveField('stock', $stock['Articulo']['stock'] - $orden['cantidad'])) {
-							$this -> Session -> setFlash('El Pedido ha sido Finalizado');
+						if($orden['estado']) {
+							$stock = $this -> Orden -> Articulo -> read('stock', $articulo_id['Orden']['articulo_id']);
+							$this -> Orden -> Articulo -> id = $articulo_id;
+							$this -> Orden -> Articulo -> saveField('stock', $stock['Articulo']['stock'] - $orden['cantidad']);
 						}
+						$this -> Session -> setFlash('El Pedido ha sido Finalizado');
 					} else {
 						$this -> Session -> setFlash('Se ha producido un error. Por favor, avise al Administrador.');
 					}
