@@ -95,7 +95,7 @@ while ($cantidadEtiquetas > 0) {
 		$y = $margen_superior;
 	}
 	$tcpdf -> MultiCell($celda_ancho, $celda_alto / 2, $this -> data['Articulos']['detalle'], 0, 'C', FALSE, 1, $x, $y, TRUE, 0, FALSE, TRUE, $celda_alto / 2, 'M', TRUE);
-	$tcpdf -> MultiCell($celda_ancho, $celda_alto / 2, $this -> data['Articulos']['unidades'] . ' unidades', 0, 'C', FALSE, 1, $x, '', TRUE, 0, FALSE, TRUE, $celda_alto / 2, 'M', TRUE);
+	$tcpdf -> MultiCell($celda_ancho, $celda_alto / 2, $this -> data['Articulos']['unidades'] . ' unidades', 0, 'C', FALSE, 1, $x, '', TRUE, 0, FALSE, TRUE, $celda_alto / 2, 'B', TRUE);
 
 	if ($x > $celda_ancho_total * 3) {
 		$x = $margen_izquierdo;
