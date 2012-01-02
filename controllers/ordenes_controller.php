@@ -131,7 +131,7 @@ class OrdenesController extends AppController {
 					if ($this -> Orden -> save($orden)) {
 						$articulo_id = $this -> Orden -> read('articulo_id', $orden['id']);
 						$this -> Orden -> Articulo -> recursive = 0;
-						if($orden['estado']) {
+						if ($orden['estado']) {
 							$stock = $this -> Orden -> Articulo -> read('stock', $articulo_id['Orden']['articulo_id']);
 							$this -> Orden -> Articulo -> id = $articulo_id;
 							$this -> Orden -> Articulo -> saveField('stock', $stock['Articulo']['stock'] - $orden['cantidad']);
@@ -274,15 +274,49 @@ class OrdenesController extends AppController {
 		}
 	}
 
-	public function actualizar_codigos() {
-		$ordenes = $this -> Orden -> find('all');
+	/**
+	 * faltantes()
+	 * Obtiene los Artículos que no fueron enviados porque faltaba mercadería.
+	 */
+	public function admin_faltantes() {
+		$clienteSeleccionado = $articuloSeleccionado = "";
+		if (!empty($this -> data)) {
+			# Fecha Inicial
+			$fechaInicio = new DateTime($this -> data['fechaInicio']['year'] . "-" . $this -> data['fechaInicio']['month'] . "-" . $this -> data['fechaInicio']['day']);
+			$fechaInicio = $fechaInicio -> format('Y-m-d');
 
-		foreach ($ordenes as $orden) {
-			$articulo = $this -> Orden -> Articulo -> findById($orden['Orden']['articulo_id']);
-			$this -> Orden -> id = $orden['Orden']['id'];
-			$this -> Orden -> saveField('articulo_id', $articulo['Articulo']['codigo']);
+			# Fecha Final
+			$fechaFin = new DateTime($this -> data['fechaFin']['year'] . "-" . $this -> data['fechaFin']['month'] . "-" . $this -> data['fechaFin']['day'] . " 23:59");
+			$fechaFin = $fechaFin -> format('Y-m-d H:m');
 
+			$this -> set('fechaInicio', $this -> data['fechaInicio']);
+			$this -> set('fechaFin', $this -> data['fechaFin']);
+
+			if ($this -> data['Ordenes']['cliente']) {
+				$clienteSeleccionado = 'AND C.id = ' . $this -> data['Ordenes']['cliente'];
+			}
+			if ($this -> data['Ordenes']['articulo']) {
+				$articuloSeleccionado = 'AND A.id = ' . $this -> data['Ordenes']['articulo'];
+			}
+		} else {
+			$fecha = new DateTime();
+			$fechaInicio = $fecha -> format('Y-m-d');
+			$fechaFin = $fecha -> format('Y-m-d');
 		}
+		$consulta = "SELECT *
+					FROM Ordenes O, Pedidos P, Articulos A, Clientes C
+					WHERE O.articulo_id = A.id
+					AND O.pedido_id = P.id
+					AND P.cliente_id = C.id
+					AND O.estado = FALSE
+					AND P.estado = 1
+					AND P.finalizado BETWEEN '$fechaInicio' AND '$fechaFin'
+					$clienteSeleccionado
+					$articuloSeleccionado
+					ORDER BY P.finalizado ASC, A.detalle ASC, C.nombre ASC;";
+		$this -> set('ordenes', $this -> Orden -> query($consulta));
+		$this -> set('clientes', $this -> Orden -> Pedido -> Cliente -> find('list', array('order' => 'Cliente.nombre ASC')));
+		$this -> set('articulos', $this -> Orden -> Articulo -> find('list', array('order' => 'Articulo.detalle ASC')));
 	}
 
 }
