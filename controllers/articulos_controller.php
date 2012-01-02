@@ -375,5 +375,15 @@ class ArticulosController extends AppController {
 		$this -> layout = 'ajax';
 	}
 
+	function admin_etiquetas_mini() {
+		if (!empty($this -> data)) {
+			$this -> layout = 'ajax';
+			$this -> render('admin_etiquetas_mini_imprimir');
+		}
+		$this -> Articulo -> recursive = 0;
+		$articulos = $this -> Articulo -> find('list', array('order' => 'Articulo.orden'));
+		$this -> set('articulos', $articulos);
+	}
+
 }
 ?>

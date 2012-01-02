@@ -117,6 +117,9 @@
 			<br />
 			<?php echo $this -> Html -> link('Desubicados', 
 					array('controller' => 'articulos', 'action' => 'listar')); ?>
+			<br />
+			<?php echo $this -> Html -> link('Etiquetas Mini', 
+					array('controller' => 'articulos', 'action' => 'etiquetas_mini')); ?>
 		</div>
 		<div id="content">
 
