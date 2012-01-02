@@ -1,5 +1,9 @@
+<?php
+# Se agregan las CSS
+echo $this -> Html -> css('admin_articulos_index');
+?>
 <div class="articulos index">
-	<h2><?php __('Articulos');?></h2>
+	<h2><?php __('Listado de Artículos');?></h2>
 	<?php 
 	# Paginación
 	echo $this -> element('paging', array('accion' => 'index'));
@@ -55,11 +59,4 @@
 	# Paginación
 	echo $this -> element('paging', array('accion' => 'index'));
 	?>
-</div>
-<div class="actions">
-	<h3><?php __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Listar Ubicados', true), array('controller' => 'ubicados', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('Listar Desubicados', true), array('controller' => 'articulos', 'action' => 'listar_desubicados')); ?> </li>
-	</ul>
 </div>
