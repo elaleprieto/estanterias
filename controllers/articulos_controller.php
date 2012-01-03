@@ -329,6 +329,14 @@ class ArticulosController extends AppController {
 			$this -> render("/elements/get_stock");
 		}
 	}
+	
+	public function get_pack($id = null) {
+		$this -> layout = 'ajax';
+		if ($id) {
+			$this -> set('articulo', $this -> Articulo -> findById($id));
+			$this -> render("/elements/get_pack");
+		}
+	}
 
 	public function get_detalle($id = null) {
 		$this -> layout = 'ajax';
@@ -348,6 +356,32 @@ class ArticulosController extends AppController {
 		}
 		if (!empty($this -> data)) {
 			if ($this -> Articulo -> save($this -> data, TRUE, array('stock'))) {
+				$this -> Session -> setFlash('El stock ha sido actualizado');
+				$this -> redirect(array(
+						'controller' => 'articulos',
+						'action' => 'index',
+						$this -> Session -> read('URL.letra'),
+						'page:' . $this -> Session -> read('URL.page')
+				));
+			} else {
+				$this -> Session -> setFlash('Ocurrió un problema. Por favor, inténtelo nuevamente');
+			}
+		}
+		if (empty($this -> data)) {
+			$this -> data = $this -> Articulo -> read(null, $id);
+		}
+	}
+
+	/**
+	 * Setea el Pack pasado en el formulario
+	 */
+	public function admin_set_pack($id = null) {
+		if (!$id && empty($this -> data)) {
+			$this -> Session -> setFlash('Artículo Inválido');
+			$this -> redirect(array('action' => 'index'));
+		}
+		if (!empty($this -> data)) {
+			if ($this -> Articulo -> save($this -> data, TRUE, array('pack'))) {
 				$this -> Session -> setFlash('El stock ha sido actualizado');
 				$this -> redirect(array(
 						'controller' => 'articulos',

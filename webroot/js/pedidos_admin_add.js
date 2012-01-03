@@ -48,6 +48,7 @@ $(document).ready(function() {
 	$('#lista option').click(function() {
 		setLabelUnidad($('#lista option:selected').val());
 		setLabelStock($('#lista option:selected').val());
+		setLabelPack($('#lista option:selected').val());
 	});
 	$('#formulario').submit(function(e) {
 		// se envía el formulario sólo se se ha presionadao del botón #crear
@@ -91,6 +92,7 @@ $(document).ready(function() {
 			$(opciones[0]).attr('selected', 'selected');
 			setLabelUnidad($('#lista option:selected').val());
 			setLabelStock($('#lista option:selected').val());
+			setLabelPack($('#lista option:selected').val());
 			habilitarBotones();
 		}
 	}
@@ -108,6 +110,7 @@ $(document).ready(function() {
 		$(opciones[seleccionado]).attr('selected', 'selected');
 		setLabelUnidad($('#lista option:selected').val());
 		setLabelStock($('#lista option:selected').val());
+		setLabelPack($('#lista option:selected').val());
 	}
 
 	/**
@@ -123,6 +126,7 @@ $(document).ready(function() {
 		$(opciones[seleccionado]).attr('selected', 'selected');
 		setLabelUnidad($('#lista option:selected').val());
 		setLabelStock($('#lista option:selected').val());
+		setLabelPack($('#lista option:selected').val());
 	}
 
 	/**
@@ -357,6 +361,17 @@ $(document).ready(function() {
 			imagen = $('<img>').attr('src', WEBROOT + 'img/load.gif').attr('class', 'load');
 			$('#stock').html(imagen);
 			$('#stock').load(WEBROOT + "articulos/get_stock/" + id);
+		}
+	}
+	
+	/**
+	 * 	setLabelPack setea la etiqueta Pack para proporcionar información al usuario.
+	 */
+	function setLabelPack(id) {
+		if(id) {
+			imagen = $('<img>').attr('src', WEBROOT + 'img/load.gif').attr('class', 'load');
+			$('#pack').html(imagen);
+			$('#pack').load(WEBROOT + "articulos/get_pack/" + id);
 		}
 	}
 

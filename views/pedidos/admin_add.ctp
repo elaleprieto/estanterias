@@ -100,6 +100,10 @@ echo $this -> Form -> create('Pedido', array('class' => 'pedidos_add', 'id' => '
 				<label id="stock">0</label>
 			</div>
 			<div class="atributo">
+				<label class="atributo">Pack:</label>
+				<label id="pack">0</label>
+			</div>
+			<div class="atributo">
 				<label class="atributo">Cantidad:</label>
 				<?php
 				echo $this -> Form -> input('cantidad', array(

@@ -16,6 +16,7 @@ echo $this -> Html -> css('admin_articulos_index');
 			<th><?php echo $this->Paginator->sort('unidad');?></th>
 			<th><?php echo $this->Paginator->sort('precio');?></th>
 			<th><?php echo $this->Paginator->sort('stock');?></th>
+			<th><?php echo $this->Paginator->sort('pack');?></th>
 			<th><?php echo $this->Paginator->sort('created');?></th>
 			<th><?php echo $this->Paginator->sort('modified');?></th>
 			<th class="actions">Acciones</th>
@@ -43,12 +44,14 @@ echo $this -> Html -> css('admin_articulos_index');
 		<td><?php echo $articulo['Articulo']['unidad']; ?>&nbsp;</td>
 		<td><?php echo $articulo['Articulo']['precio']; ?>&nbsp;</td>
 		<td><?php echo $articulo['Articulo']['stock']; ?>&nbsp;</td>
+		<td><?php echo $articulo['Articulo']['pack']; ?>&nbsp;</td>
 		<td><?php echo $articulo['Articulo']['created']; ?>&nbsp;</td>
 		<td><?php echo $articulo['Articulo']['modified']; ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link('Ver', array('action' => 'view', $articulo['Articulo']['id'], 'admin' => FALSE)); ?>
 			<?php echo $this->Html->link('Editar', array('action' => 'edit', $articulo['Articulo']['id'])); ?>
 			<?php echo $this->Html->link('Set Stock', array('action' => 'set_stock', $articulo['Articulo']['id'])); ?>
+			<?php echo $this->Html->link('Set Pack', array('action' => 'set_pack', $articulo['Articulo']['id'])); ?>
 			<?php echo $this->Html->link('Fotografiar', array('action' => 'fotografiar', $articulo['Articulo']['id'])); ?>
 			<?php echo $this->Html->link('Eliminar', array('action' => 'delete', $articulo['Articulo']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $articulo['Articulo']['id'])); ?>
 		</td>
