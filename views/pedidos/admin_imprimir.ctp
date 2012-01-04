@@ -70,7 +70,8 @@ $celda_ancho = 90;
 $celda_ancho_codigo = 9;
 $celda_ancho_cantidad = 8;
 $celda_ancho_unidad = 8;
-$celda_ancho_detalle = 137;
+$celda_ancho_stock = 8;
+$celda_ancho_detalle = 129;
 $celda_ancho_observaciones = 25;
 $fila_ancho_transporte = 171;
 $celda_ancho_b = 5;
@@ -124,6 +125,9 @@ $tcpdf -> Cell($celda_ancho_codigo, $celda_alto, '', 1, 0, 'C');
 $tcpdf -> Cell($celda_ancho_codigo, $celda_alto, 'Cód', 1, 0, 'C');
 $tcpdf -> Cell($celda_ancho_cantidad, $celda_alto, 'Cant', 1, 0, 'C');
 $tcpdf -> Cell($celda_ancho_unidad, $celda_alto, 'Unid', 1, 0, 'C');
+$tcpdf -> SetFont("freesans", "B", 8);
+$tcpdf -> Cell($celda_ancho_stock, $celda_alto, 'Stock', 1, 0, 'C');
+$tcpdf -> SetFont("freesans", "B", 9);
 $tcpdf -> Cell($celda_ancho_detalle, $celda_alto, 'Detalle', 1, 0, 'C');
 $tcpdf -> Cell($celda_ancho_observaciones, $celda_alto, 'Observaciones', 1, 1, 'C');
 
@@ -151,6 +155,7 @@ foreach ($ordenes as $key => $orden) {
 	}
 		$html .= '<td width="'.$celda_ancho_cantidad.'mm" height="'.$celda_alto.'mm" align="center">'.$orden[0]["cantidad"].'</td>';
 		$html .= '<td width="'.$celda_ancho_unidad.'mm" height="'.$celda_alto.'mm" align="center"><font size="8">'.$orden[0]["unidad"].'</font></td>';
+		$html .= '<td width="'.$celda_ancho_stock.'mm" height="'.$celda_alto.'mm" align="center">'.$orden[0]["stock"].'</td>';
 		$html .= '<td width="'.$celda_ancho_detalle.'mm" height="'.$celda_alto.'mm">'.$orden[0]["detalle"].'</td>';
 		
 		$html .= '<td width="'.$celda_ancho_observaciones.'mm" height="'.$celda_alto.'mm"><font size="8">'.$orden[0]["observaciones"].'</font></td>';
