@@ -16,12 +16,6 @@ class PedidosController extends AppController {
 		$this -> set('pedidos', $this -> paginate('Pedido', array('Pedido.estado' => '0')));
 	}
 
-	function admin_finalizados() {
-		$this -> Pedido -> recursive = 1;
-		$this -> paginate = array('Pedido' => array('order' => array('finalizado' => 'DESC'), ));
-		$this -> set('pedidos', $this -> paginate('Pedido', array('Pedido.estado' => '1')));
-	}
-
 	function view($id = null) {
 		if (!$id) {
 			$this -> Session -> setFlash(__('Invalid pedido', true));
@@ -55,6 +49,17 @@ class PedidosController extends AppController {
 		$this -> set(compact('clientes'));
 	}
 
+	function admin_index() {
+		$this -> Pedido -> recursive = 1;
+		$this -> set('pedidos', $this -> paginate('Pedido', array('Pedido.estado' => '0')));
+	}
+
+	function admin_finalizados() {
+		$this -> Pedido -> recursive = 1;
+		$this -> paginate = array('Pedido' => array('order' => array('finalizado' => 'DESC'), ));
+		$this -> set('pedidos', $this -> paginate('Pedido', array('Pedido.estado' => '1')));
+	}
+
 	function admin_add() {
 		if (!empty($this -> data)) {
 			$this -> Pedido -> create();
@@ -73,7 +78,6 @@ class PedidosController extends AppController {
 				$this -> Session -> setFlash('El pedido ha sido creado');
 				$this -> redirect(array(
 						'action' => 'index',
-						'admin' => FALSE
 				));
 			} else {
 				$this -> Session -> setFlash('El pedido no se ha guardado, intente nuevamente.');
@@ -95,12 +99,18 @@ class PedidosController extends AppController {
 		$this -> set(compact('clientes', 'articulos', 'transportes'));
 	}
 
-	function edit($id = null) {
+	function admin_edit($id = null) {
 		if (!$id && empty($this -> data)) {
 			$this -> Session -> setFlash(__('Invalid pedido', true));
 			$this -> redirect(array('action' => 'index'));
 		}
 		if (!empty($this -> data)) {
+			if (!isset($this -> data['Pedido']['b'])) {$this -> data['Pedido']['b'] = 0;
+			}
+			if (!isset($this -> data['Pedido']['cobinpro'])) {$this -> data['Pedido']['cobinpro'] = FALSE;
+			}
+			if (!isset($this -> data['Pedido']['contrarrembolso'])) {$this -> data['Pedido']['contrarrembolso'] = FALSE;
+			}
 			if ($this -> Pedido -> save($this -> data)) {
 				# Lo que se hace acá es borrar todas las ordenes que tenía el pedido
 				# y crear las nuevas.
@@ -116,10 +126,18 @@ class PedidosController extends AppController {
 				# Creo todas las órdenes que vienen
 				foreach ($this -> data['Orden'] as $articulo_id => $datos) {
 					$this -> Pedido -> Orden -> create();
+					
+					# verificación de variables
+					if (!isset($datos['estado'])) {$datos['estado'] = 0;}
+					if (!isset($datos['SinCargo'])) {$datos['SinCargo'] = 0;}
+					if (!isset($datos['Observaciones'])) {$datos['Observaciones'] = "";}
+					
 					$this -> Pedido -> Orden -> set(array(
-							'articulo_id' => $articulo_id,
-							'cantidad' => $datos['cantidad'],
+							'articulo_id' => $datos['id'],
+							'cantidad' => $datos['Cantidad'],
 							'estado' => $datos['estado'],
+							'sin_cargo' => $datos['SinCargo'],
+							'observaciones' => $datos['Observaciones'],
 							'pedido_id' => $this -> Pedido -> id,
 					));
 					$this -> Pedido -> Orden -> save();
@@ -131,16 +149,15 @@ class PedidosController extends AppController {
 				$this -> Session -> setFlash(__('The pedido could not be saved. Please, try again.', true));
 			}
 		}
-		if (empty($this -> data)) {
-			$this -> data = $this -> Pedido -> read(null, $id);
-		}
+		$this -> data = $this -> Pedido -> read(null, $id);
 		$clientes = $this -> Pedido -> Cliente -> find('list');
 		$articulos = $this -> Pedido -> Orden -> Articulo -> find('list');
 		$ordenes = $this -> Pedido -> Orden -> findAllByPedidoId($id);
-		$this -> set(compact('clientes', 'articulos', 'ordenes'));
+		$transportes = $this -> Pedido -> Transporte -> find('list', array('order' => array('Transporte.nombre')));
+		$this -> set(compact('clientes', 'articulos', 'ordenes', 'transportes'));
 	}
 
-	function delete($id = null) {
+	function admin_delete($id = null) {
 		if (!$id) {
 			$this -> Session -> setFlash('Pedido inválido');
 			$this -> redirect(array('action' => 'index'));
@@ -185,12 +202,12 @@ class PedidosController extends AppController {
 			$this -> redirect(array('action' => 'index'));
 		}
 		$pedido = $this -> Pedido -> read(null, $id);
-		$consulta = "SELECT orden_id, cantidad, orden_estado, sin_cargo, id, detalle, unidad, observaciones,
+		$consulta = "SELECT orden_id, cantidad, orden_estado, sin_cargo, id, detalle, unidad, observaciones, stock,
 				array_agg(pasillo_nombre) AS pasillo_nombre, array_agg(pasillo_lado) AS pasillo_lado,
 				min(pasillo_distancia) AS pasillo_distancia, array_agg(ubicacion_altura) AS ubicacion_altura, 
 				array_agg(ubicacion_posicion) AS ubicacion_posicion
 			FROM (SELECT O.id AS orden_id, O.cantidad AS cantidad, O.estado AS orden_estado, O.sin_cargo AS sin_cargo, O.observaciones AS observaciones,
-					A.id AS id, A.detalle AS detalle, A.unidad AS unidad,
+					A.id AS id, A.detalle AS detalle, A.unidad AS unidad, A.stock as stock,
 					P.nombre AS pasillo_nombre, P.lado AS pasillo_lado, 
 					P.distancia AS pasillo_distancia, Ub.altura AS ubicacion_altura, 
 					Ub.posicion AS ubicacion_posicion, U.estado AS ubicacion_estado 
@@ -200,8 +217,8 @@ class PedidosController extends AppController {
 				AND O.articulo_id 	= A.id
 				ORDER BY ubicacion_estado DESC
 			) AS E
-			GROUP BY orden_id, cantidad, orden_estado, sin_cargo, id, detalle, unidad, observaciones
-			ORDER BY pasillo_distancia ASC, pasillo_nombre ASC, ubicacion_posicion ASC, ubicacion_altura ASC";
+			GROUP BY orden_id, cantidad, orden_estado, sin_cargo, id, detalle, unidad, stock, observaciones
+			ORDER BY pasillo_distancia ASC, pasillo_nombre ASC, ubicacion_posicion ASC, ubicacion_altura ASC, detalle ASC";
 		$ordenes = $this -> Pedido -> Orden -> query($consulta);
 
 		$this -> set(compact('pedido', 'ordenes'));

@@ -90,7 +90,7 @@
 									array('articulo' => $orden));
 							?>
 						</td>
-						<td id="<?php echo 'c'.$orden['Articulo']['id']; ?>"><?php echo $orden['Articulo']['codigo']; ?></td>
+						<td id="<?php echo 'c'.$orden['Articulo']['id']; ?>"><?php echo $orden['Articulo']['id']; ?></td>
 						<td><?php echo $orden['Orden']['cantidad']; ?></td>
 						<td><?php echo $orden['Articulo']['detalle']; ?></td>
 						<td><input class="articulo" type="button" value="Quitar" onclick="quitar_articulo(this);"></td>
