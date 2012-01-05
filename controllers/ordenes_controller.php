@@ -170,7 +170,7 @@ class OrdenesController extends AppController {
 					ORDER BY ubicacion_estado DESC
 					) AS E
 				GROUP BY orden_id, cantidad, orden_estado, sin_cargo, id, detalle, unidad, foto
-				ORDER BY pasillo_distancia ASC, pasillo_nombre ASC, ubicacion_posicion ASC, ubicacion_altura ASC";
+				ORDER BY pasillo_distancia ASC, pasillo_nombre ASC, ubicacion_posicion ASC, ubicacion_altura ASC, detalle ASC";
 		$articulos = $this -> Orden -> query($consulta);
 		$this -> set(compact('articulos'));
 		// $this -> layout = 'mobile';
