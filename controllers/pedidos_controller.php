@@ -150,8 +150,18 @@ class PedidosController extends AppController {
 			}
 		}
 		$this -> data = $this -> Pedido -> read(null, $id);
+		$condicionesArticulo = array(
+				'OR' => array('NOT' => array('OR' => array(
+								array("Articulo.detalle LIKE" => "FAROL%"),
+								array("Articulo.detalle LIKE" => "BULONES%")
+						))),
+				array("Articulo.precio >" => "0")
+		);
+		$articulos = $this -> Pedido -> Orden -> Articulo -> find('list', array(
+				'conditions' => $condicionesArticulo,
+				'order' => array('Articulo.orden')
+		));
 		$clientes = $this -> Pedido -> Cliente -> find('list');
-		$articulos = $this -> Pedido -> Orden -> Articulo -> find('list');
 		$ordenes = $this -> Pedido -> Orden -> findAllByPedidoId($id);
 		$transportes = $this -> Pedido -> Transporte -> find('list', array('order' => array('Transporte.nombre')));
 		$this -> set(compact('clientes', 'articulos', 'ordenes', 'transportes'));
