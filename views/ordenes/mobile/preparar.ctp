@@ -51,6 +51,7 @@
 				<th><?php echo 'Pos';?></th>
 				<th><?php echo 'A';?></th>
 				<th><?php echo 'U';?></th>
+				<th><?php echo 'Obs';?></th>
 				<th><?php echo 'Listo';?></th>
 			</tr>
 			<?php
@@ -198,6 +199,7 @@
 					<td><?php echo $posicion;?>&nbsp;</td>
 					<td><?php echo $altura;?>&nbsp;</td>
 					<td><?php echo $estado;?>&nbsp;</td>
+					<td><?php echo $articulo['observaciones'];?>&nbsp;</td>
 					<td>
 						<?php 
 							# Aquí armo el formulario para modificar el estado de las ordenes (artículos)
