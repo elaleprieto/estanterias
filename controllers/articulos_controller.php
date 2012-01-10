@@ -258,10 +258,11 @@ class ArticulosController extends AppController {
 
 	}
 
-	public function fotografiar($id = null) {
+	public function admin_fotografiar($id = null) {
 		if (!$id && empty($this -> data)) {
 			$this -> Session -> setFlash(__('Artículo inválido', true));
-			$this -> redirect(array('action' => 'index'));
+			// $this -> redirect(array('action' => 'index'));
+			$this -> redirect($this -> Session -> read('URL.redirect'));
 		}
 		if (!empty($this -> data)) {
 			# Obtengo el nombre del archivo
@@ -288,7 +289,8 @@ class ArticulosController extends AppController {
 			$this -> data['Articulo']['foto'] = substr($nombreArchivo, 0, strlen($nombreArchivo) - 4);
 			if ($this -> Articulo -> save($this -> data)) {
 				$this -> Session -> setFlash(__('El artículo ha sido actualizado', true));
-				$this -> redirect(array('action' => 'index'));
+				// $this -> redirect(array('action' => 'index'));
+				$this -> redirect($this -> Session -> read('URL.redirect'));
 			} else {
 				$this -> Session -> setFlash(__('Hubo un problema actualizando el artículo.', true));
 			}
@@ -296,6 +298,7 @@ class ArticulosController extends AppController {
 		if (empty($this -> data)) {
 			$this -> data = $this -> Articulo -> read(null, $id);
 		}
+		$this -> Session -> write('URL.redirect', $this -> referer());
 	}
 
 	public function get_foto($id = null) {
