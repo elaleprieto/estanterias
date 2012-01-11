@@ -135,6 +135,8 @@ class OrdenesController extends AppController {
 							$stock = $this -> Orden -> Articulo -> read('stock', $articulo_id['Orden']['articulo_id']);
 							$this -> Orden -> Articulo -> id = $articulo_id;
 							$this -> Orden -> Articulo -> saveField('stock', $stock['Articulo']['stock'] - $orden['cantidad']);
+						} else {
+							$this -> Orden -> saveField('cantidad', 0);
 						}
 						$this -> Session -> setFlash('El Pedido ha sido Finalizado');
 					} else {

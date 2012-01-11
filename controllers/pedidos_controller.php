@@ -69,6 +69,7 @@ class PedidosController extends AppController {
 					$this -> Pedido -> Orden -> set(array(
 							'articulo_id' => $orden['id'],
 							'cantidad' => $orden['Cantidad'],
+							'cantidad_original' => $orden['Cantidad'],
 							'sin_cargo' => $orden['SinCargo'],
 							'observaciones' => $orden['Observaciones'],
 							'pedido_id' => $this -> Pedido -> id,
@@ -212,11 +213,12 @@ class PedidosController extends AppController {
 			$this -> redirect(array('action' => 'index'));
 		}
 		$pedido = $this -> Pedido -> read(null, $id);
-		$consulta = "SELECT orden_id, cantidad, orden_estado, sin_cargo, id, detalle, unidad, observaciones, stock,
-				array_agg(pasillo_nombre) AS pasillo_nombre, array_agg(pasillo_lado) AS pasillo_lado,
+		$consulta = "SELECT orden_id, cantidad, orden_estado, sin_cargo, id, detalle, unidad, observaciones, cantidad_original,
+				stock, array_agg(pasillo_nombre) AS pasillo_nombre, array_agg(pasillo_lado) AS pasillo_lado,
 				min(pasillo_distancia) AS pasillo_distancia, array_agg(ubicacion_altura) AS ubicacion_altura, 
 				array_agg(ubicacion_posicion) AS ubicacion_posicion
-			FROM (SELECT O.id AS orden_id, O.cantidad AS cantidad, O.estado AS orden_estado, O.sin_cargo AS sin_cargo, O.observaciones AS observaciones,
+			FROM (SELECT O.id AS orden_id, O.cantidad AS cantidad, O.estado AS orden_estado, O.sin_cargo AS sin_cargo, 
+					O.observaciones AS observaciones, O.cantidad_original AS cantidad_original,
 					A.id AS id, A.detalle AS detalle, A.unidad AS unidad, A.stock as stock,
 					P.nombre AS pasillo_nombre, P.lado AS pasillo_lado, 
 					P.distancia AS pasillo_distancia, Ub.altura AS ubicacion_altura, 
@@ -227,7 +229,7 @@ class PedidosController extends AppController {
 				AND O.articulo_id 	= A.id
 				ORDER BY ubicacion_estado DESC
 			) AS E
-			GROUP BY orden_id, cantidad, orden_estado, sin_cargo, id, detalle, unidad, stock, observaciones
+			GROUP BY orden_id, cantidad, orden_estado, sin_cargo, id, detalle, unidad, stock, observaciones, cantidad_original
 			ORDER BY pasillo_distancia ASC, pasillo_nombre ASC, ubicacion_posicion ASC, ubicacion_altura ASC, detalle ASC";
 		$ordenes = $this -> Pedido -> Orden -> query($consulta);
 

@@ -70,7 +70,8 @@ $celda_ancho = 90;
 $celda_ancho_codigo = 9;
 $celda_ancho_cantidad = 8;
 $celda_ancho_unidad = 8;
-$celda_ancho_detalle = 137;
+$celda_ancho_detalle = 126;
+$celda_ancho_cantidad_original = 11;
 $celda_ancho_observaciones = 25;
 $fila_ancho_transporte = 171;
 $celda_ancho_b = 5;
@@ -125,6 +126,7 @@ $tcpdf -> Cell($celda_ancho_codigo, $celda_alto, 'Cód', 1, 0, 'C');
 $tcpdf -> Cell($celda_ancho_cantidad, $celda_alto, 'Cant', 1, 0, 'C');
 $tcpdf -> Cell($celda_ancho_unidad, $celda_alto, 'Unid', 1, 0, 'C');
 $tcpdf -> Cell($celda_ancho_detalle, $celda_alto, 'Detalle', 1, 0, 'C');
+$tcpdf -> Cell($celda_ancho_cantidad_original, $celda_alto, 'Pedido', 1, 0, 'C');
 $tcpdf -> Cell($celda_ancho_observaciones, $celda_alto, 'Observaciones', 1, 1, 'C');
 
 ###############################################################
@@ -140,6 +142,7 @@ foreach ($ordenes as $key => $orden) {
 	if ($orden[0]["orden_estado"]) {
 		$html .= '<td width="'.$celda_ancho_codigo.'mm" height="'.$celda_alto.'mm" align="center">X</td>';
 		
+		# Se verifica si el artículo se envía sin cargo.
 		if ($orden[0]["sin_cargo"]) {
 			$html .= '<td width="'.$celda_ancho_codigo.'mm" height="'.$celda_alto.'mm" align="center"><font size="8">Sin Cargo</font></td>';
 		} else {
@@ -149,11 +152,17 @@ foreach ($ordenes as $key => $orden) {
 		$html .= '<td width="'.$celda_ancho_codigo.'mm" height="'.$celda_alto.'mm" align="center">--</td>';
 		$html .= '<td width="'.$celda_ancho_codigo.'mm" height="'.$celda_alto.'mm"></td>';
 	}
-		$html .= '<td width="'.$celda_ancho_cantidad.'mm" height="'.$celda_alto.'mm" align="center">'.$orden[0]["cantidad"].'</td>';
-		$html .= '<td width="'.$celda_ancho_unidad.'mm" height="'.$celda_alto.'mm" align="center"><font size="8">'.$orden[0]["unidad"].'</font></td>';
-		$html .= '<td width="'.$celda_ancho_detalle.'mm" height="'.$celda_alto.'mm">'.$orden[0]["detalle"].'</td>';
-		
-		$html .= '<td width="'.$celda_ancho_observaciones.'mm" height="'.$celda_alto.'mm"><font size="8">'.$orden[0]["observaciones"].'</font></td>';
+	$html .= '<td width="'.$celda_ancho_cantidad.'mm" height="'.$celda_alto.'mm" align="center">'.$orden[0]["cantidad"].'</td>';
+	$html .= '<td width="'.$celda_ancho_unidad.'mm" height="'.$celda_alto.'mm" align="center"><font size="8">'.$orden[0]["unidad"].'</font></td>';
+	$html .= '<td width="'.$celda_ancho_detalle.'mm" height="'.$celda_alto.'mm">'.$orden[0]["detalle"].'</td>';
+	
+	# Se verifica si la cantidad que se envía es distinta de la cantidad pedida y se modifica el estilo en dicho caso.
+	if($orden[0]["cantidad"] != $orden[0]["cantidad_original"]) {
+		$html .= '<td width="'.$celda_ancho_cantidad_original.'mm" height="'.$celda_alto.'mm" align="center"><span style="text-decoration:line-through">'.$orden[0]["cantidad_original"].'</span></td>';
+	} else {
+		$html .= '<td width="'.$celda_ancho_cantidad_original.'mm" height="'.$celda_alto.'mm" align="center">'.$orden[0]["cantidad_original"].'</td>';
+	}
+	$html .= '<td width="'.$celda_ancho_observaciones.'mm" height="'.$celda_alto.'mm"><font size="8">'.$orden[0]["observaciones"].'</font></td>';
 
 	$html .= "</tr>";
 }
