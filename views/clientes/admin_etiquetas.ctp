@@ -28,7 +28,7 @@ echo $this -> Form -> label('provincia', 'Provincia', array('class'=>'etiqueta')
 echo $this -> Html -> image('load.gif', array('id' => 'provinciaIMG', 'class' => 'noIMG'));
 echo $this -> Form -> input('provincia', array('div' => FALSE, 'id' => 'provincia', 'label' => false));
 echo $this -> Form -> input('bultos', array('div' => FALSE, 'id' => 'bultos'));
-echo $this -> Form -> input('etiquetas', array('div' => FALSE, 'value' => 1));
+echo $this -> Form -> input('etiquetas', array('div' => FALSE, 'id' => 'etiquetas', 'value' => 1));
 echo $this -> Form -> input('inicio', array('div' => FALSE, 'value' => 1));
 echo $this -> Form -> end('Etiquetar');
 ?>

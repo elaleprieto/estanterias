@@ -20,6 +20,14 @@ $(document).ready(function() {
 		}
 		return true;
 	});
+	
+	$('#bultos').keyup(function() {
+		$('#etiquetas').val($('#bultos').val());
+	});
+	/************************************************************************
+	 * 						Definición de Funciones							*
+	 *********************************************************************** */
+
 	/**
 	 * 	setDireccion setea la dirección del cliente.
 	 */
