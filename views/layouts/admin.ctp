@@ -49,19 +49,6 @@
 						</h1>
 					</td>
 					<td class="header">
-						<div class="header" id="boton_transporte">
-							<?php echo $this -> Html -> link('Transportes', array(
-									'controller' => 'transportes',
-									'action' => 'index'
-							));
-							echo $this -> Html -> image('down_arroww.png', array(
-									'alt' => '',
-									'class' => 'down_arrow'
-							));
-							?>
-						</div>
-					</td>
-					<td class="header">
 						<div class="header" id="boton_pedido">
 							<?php echo $this -> Html -> link('Pedidos', array(
 									'controller' => 'pedidos',
@@ -88,15 +75,34 @@
 							?>
 						</div>
 					</td>
+					<td class="header">
+						<div class="header" id="boton_cliente">
+							<?php echo $this -> Html -> link('Clientes', array(
+									'controller' => 'clientes',
+									'action' => 'index'
+							));
+							echo $this -> Html -> image('down_arroww.png', array(
+									'alt' => '',
+									'class' => 'down_arrow'
+							));
+							?>
+						</div>
+					</td>
+					<td class="header">
+						<div class="header" id="boton_transporte">
+							<?php echo $this -> Html -> link('Transportes', array(
+									'controller' => 'transportes',
+									'action' => 'index'
+							));
+							echo $this -> Html -> image('down_arroww.png', array(
+									'alt' => '',
+									'class' => 'down_arrow'
+							));
+							?>
+						</div>
+					</td>
 				</tr>
 			</table>
-		</div>
-		<div id='menu_transportes'>
-			<?php echo $this -> Html -> link('Nuevo', 
-					array('controller' => 'transportes', 'action' => 'add')); ?>
-			<br />
-			<?php echo $this -> Html -> link('Listar', 
-					array('controller' => 'transportes', 'action' => 'index')); ?>
 		</div>
 		<div id='menu_pedidos'>
 			<?php echo $this -> Html -> link('Nuevo', 
@@ -122,6 +128,23 @@
 					array('controller' => 'articulos', 'action' => 'etiquetas_mini')); ?>
 			<?php echo $this -> Html -> link('Faltantes', 
 					array('controller' => 'ordenes', 'action' => 'faltantes')); ?>
+		</div>
+		<div id='menu_clientes'>
+			<?php echo $this -> Html -> link('Nuevo', 
+					array('controller' => 'clientes', 'action' => 'add')); ?>
+			<br />
+			<?php echo $this -> Html -> link('Listar', 
+					array('controller' => 'clientes', 'action' => 'index')); ?>
+			<br />
+			<?php echo $this -> Html -> link('Etiquetas', 
+					array('controller' => 'clientes', 'action' => 'etiquetas')); ?>
+		</div>
+		<div id='menu_transportes'>
+			<?php echo $this -> Html -> link('Nuevo', 
+					array('controller' => 'transportes', 'action' => 'add')); ?>
+			<br />
+			<?php echo $this -> Html -> link('Listar', 
+					array('controller' => 'transportes', 'action' => 'index')); ?>
 		</div>
 		<div id="content">
 

@@ -17,7 +17,7 @@ img.down_arrow {
 	margin-left: 5px;
 	vertical-align: top;
 }
-#menu_articulos, #menu_pedidos, #menu_transportes {
+#menu_articulos, #menu_pedidos, #menu_clientes, #menu_transportes {
 	display: none;
 	background: #E6E49F;
 	background: -webkit-gradient(linear, left top, left bottom, from(#F1F1D4), to(#E6E49F));
@@ -34,12 +34,12 @@ img.down_arrow {
     padding: 5px;
     text-align: center;
 }
-#menu_articulos a, #menu_pedidos a, #menu_transportes a {
+#menu_articulos a, #menu_pedidos a, #menu_clientes a, #menu_transportes a {
     color: #000000;
     text-shadow: white 2px 2px;
     text-decoration: none;
 }
-td.header a:hover, #menu_articulos a:hover, #menu_pedidos a:hover, #menu_transportes a:hover {
+td.header a:hover, #menu_articulos a:hover, #menu_pedidos a:hover, #menu_clientes a:hover, #menu_transportes a:hover {
 	color: #ffa500;
     text-decoration: none;
 }
