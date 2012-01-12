@@ -17,6 +17,29 @@ class UbicadosController extends AppController {
 		));
 
 	function index() {
+		if (!empty($this -> data)) {
+			$cadena = explode(' ', mb_strtoupper($this -> data['Ubicado']['articulo'], 'utf-8'));
+			$consulta = "SELECT  id, detalle, unidad, foto, 
+							array_agg(pasillo_nombre) AS pasillo_nombre, array_agg(pasillo_lado) AS pasillo_lado, 
+							min(pasillo_distancia) AS pasillo_distancia, array_agg(ubicacion_altura) AS ubicacion_altura, 
+							array_agg(ubicacion_posicion) AS ubicacion_posicion, array_agg(ubicacion_estado) AS ubicacion_estado 
+						FROM (SELECT 	A.id AS id, A.detalle AS detalle, A.unidad AS unidad, A.foto AS foto, A.orden AS orden,
+								P.nombre AS pasillo_nombre, P.lado AS pasillo_lado, 
+								P.distancia AS pasillo_distancia, Ub.altura AS ubicacion_altura, 
+								Ub.posicion AS ubicacion_posicion, U.estado AS ubicacion_estado 
+							FROM Articulos AS A LEFT JOIN Ubicados AS U ON U.articulo_id = A.id 
+								LEFT JOIN Pasillos AS P ON U.pasillo_id = P.id LEFT JOIN Ubicaciones AS Ub ON U.ubicacion_id = Ub.id
+							WHERE 1=1";
+			foreach($cadena as $palabra) {
+				$consulta .= "AND A.detalle LIKE '%". $palabra . "%'";
+			}
+			$consulta .= "ORDER BY ubicacion_estado DESC
+					) AS E
+					GROUP BY id, detalle, unidad, foto, orden
+					ORDER BY orden ASC";
+			$this -> set('ubicados', $this -> Ubicado -> query($consulta));
+			$this -> render();
+		}
 		$this -> Ubicado -> recursive = 0;
 		$this -> set('ubicados', $this -> paginate());
 	}
@@ -77,7 +100,9 @@ class UbicadosController extends AppController {
 				$this -> Session -> setFlash('El artículo ha sido guardado');
 				$this -> redirect(array(
 						'controller' => 'articulos',
-						'action' => 'listar', $this -> Session -> read('URL.letra'), 'page:'.$this -> Session -> read('URL.page')
+						'action' => 'listar',
+						$this -> Session -> read('URL.letra'),
+						'page:' . $this -> Session -> read('URL.page')
 				));
 			} else {
 				$this -> Session -> setFlash('Ocurrió un problema y no se ha guardado el artículo.');
@@ -117,7 +142,9 @@ class UbicadosController extends AppController {
 		} else {
 			$this -> redirect(array(
 					'controller' => 'articulos',
-					'action' => 'listar', $this -> Session -> read('URL.letra'), 'page:'.$this -> Session -> read('URL.page')
+					'action' => 'listar',
+					$this -> Session -> read('URL.letra'),
+					'page:' . $this -> Session -> read('URL.page')
 			));
 		}
 	}
@@ -155,7 +182,9 @@ class UbicadosController extends AppController {
 			$this -> Session -> setFlash('Articulos guardados');
 			$this -> redirect(array(
 					'controller' => 'articulos',
-					'action' => 'listar', $this -> Session -> read('URL.letra'), 'page:'.$this -> Session -> read('URL.page')
+					'action' => 'listar',
+					$this -> Session -> read('URL.letra'),
+					'page:' . $this -> Session -> read('URL.page')
 			));
 		}
 		if ($this -> data['Articulos']) {
@@ -196,7 +225,9 @@ class UbicadosController extends AppController {
 		} else {
 			$this -> redirect(array(
 					'controller' => 'articulos',
-					'action' => 'listar', $this -> Session -> read('URL.letra'), 'page:'.$this -> Session -> read('URL.page')
+					'action' => 'listar',
+					$this -> Session -> read('URL.letra'),
+					'page:' . $this -> Session -> read('URL.page')
 			));
 		}
 	}

@@ -6,10 +6,6 @@
 			<?php __('Buscar');?>
 		</legend>
 		<?php
-		# Se cargan las librería JavaScript
-		// echo $javascript -> link('prototype');
-		// echo $javascript -> link('scriptaculous');
-
 		# Aquí se inicia el Formulario para Buscar
 		echo $this -> Form -> create('Ubicado');
 
@@ -21,21 +17,9 @@
 				'class' => 'articulo'
 		));
 
-		# Se definen las opciones del elemento Ajax
-		// $options = array(
-		// 'url' => array('action' => 'update_listado'),
-		// 'update' => 'listado',
-		// 'div' => false
-		// );
-		//
-		// # Se inserta el botón buscar
-		// echo $ajax -> submit('Buscar', $options);
-
 		# Se finaliza el formulario
 		echo $this -> Form -> end('Buscar');
 
-		# Defino el comportamiento del cuadro de texto
-		// echo $ajax -> observeField('articulo', $options);
 		?>
 	</fieldset>
 	<div id="listado">
