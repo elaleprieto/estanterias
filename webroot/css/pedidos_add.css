@@ -92,11 +92,17 @@ input.pedidos_add[type="checkbox"] {
 	margin-left: 20px;
 	margin-right: 50px;
 }
+#codigo {
+	width: 50px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
 #info_cantidad {
 	display: inline-block;
 	padding-top: 0;
-	text-align: right;
-	width: 190px;
+	text-align: center;
+	width: 70%;
+	margin: -20px;
 }
 #b {
 	-moz-appearance: checkbox;
@@ -122,4 +128,7 @@ input.pedidos_add[type="checkbox"] {
 #lista {
 	width: 100%;
 	background-color: white;
+}
+#siguiente {
+	margin-right: 30px;
 }

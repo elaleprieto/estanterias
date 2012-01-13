@@ -16,7 +16,11 @@ echo $javascript -> codeBlock('WEBROOT="../../"', $options = array(
 echo $html -> css('pedidos_add');
 
 # Aquí se arma el Formulario de Creación del Pedido
-echo $this -> Form -> create('Pedido', array('class' => 'pedidos_add', 'id' => 'formulario'));?>
+echo $this -> Form -> create('Pedido', array(
+		'class' => 'pedidos_add',
+		'id' => 'formulario'
+));
+?>
 <div class="pedidos_add">
 	<fieldset>
 		<legend>
@@ -72,10 +76,11 @@ echo $this -> Form -> create('Pedido', array('class' => 'pedidos_add', 'id' => '
 					'type' => 'button',
 					'id' => 'siguiente'
 			));
-			echo $this -> Form -> button('Agregar Artículo', array(
-					'type' => 'button',
-					'id' => 'agregar',
-					'class' => 'articulo',
+			echo $this -> Form -> input('codigo', array(
+					'id' => 'codigo',
+					'div' => FALSE,
+					'label' => 'Código:',
+					'autocomplete' => 'off'
 			));
 			?>
 		</div>
@@ -120,7 +125,25 @@ echo $this -> Form -> create('Pedido', array('class' => 'pedidos_add', 'id' => '
 				<input id="sin_cargo_ckeckbox" type="checkbox" class="pedidos_add"/>
 			</div>
 			<br />
-			<div id="info_cantidad">
+		</div>
+		<div class="observaciones">
+			<label class="atributo">Observaciones:</label>
+			<?php
+			echo $this -> Form -> textarea('articuloObservaciones', array(
+					'id' => 'articuloObservaciones',
+					'div' => FALSE,
+					'label' => "Observaciones",
+			));
+			?>
+		</div>
+		<div id="info_cantidad">
+			<?php
+			echo $this -> Form -> button('Agregar Artículo', array(
+					'type' => 'button',
+					'id' => 'agregar',
+					'class' => 'articulo',
+			));
+			?>
 			<label class="cantidad_articulos">Cantidad Artículos: </label>
 			<div id="cantidad_articulos" class="cantidad_articulos">
 				0
@@ -129,18 +152,6 @@ echo $this -> Form -> create('Pedido', array('class' => 'pedidos_add', 'id' => '
 				0
 			</div>
 		</div>
-		</div>
-		<div class="observaciones">
-			<label class="atributo">Observaciones:</label>
-			<?php
-			echo $this -> Form -> textarea('articuloObservaciones', array(
-						'id' => 'articuloObservaciones',
-						'div' => FALSE,
-						'label' => "Observaciones",
-				));
-			?>
-		</div>
-		
 	</fieldset>
 	<fieldset>
 		<legend>

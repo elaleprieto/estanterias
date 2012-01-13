@@ -31,6 +31,9 @@ $(document).ready(function() {
 			$('#lista').focus();
 		}
 	});
+	$('#codigo').keyup(function(e) {
+		$('#lista option[value="' + $('#codigo').val() +'"]').attr('selected', 'selected');
+	});
 	$('#anterior').click(function() {
 		retroceder();
 	});
