@@ -51,7 +51,7 @@
 		 ?></td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('Editar', true), array('controller' => 'pedidos', 'action' => 'edit', $pedido['Pedido']['id'])); ?>
-			<?php echo $this->Html->link(__('Preparar', true), array('controller' => 'ordenes', 'action' => 'preparar', $pedido['Pedido']['id'])); ?>
+			<?php echo $this->Html->link(__('Preparar', true), array('admin' => FALSE, 'controller' => 'ordenes', 'action' => 'preparar', $pedido['Pedido']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
