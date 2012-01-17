@@ -33,6 +33,9 @@ $(document).ready(function() {
 	});
 	$('#codigo').keyup(function(e) {
 		$('#lista option[value="' + $('#codigo').val() +'"]').attr('selected', 'selected');
+		setLabelUnidad($('#lista option:selected').val());
+		setLabelStock($('#lista option:selected').val());
+		setLabelPack($('#lista option:selected').val());
 	});
 	$('#anterior').click(function() {
 		retroceder();
