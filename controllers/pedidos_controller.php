@@ -36,9 +36,32 @@ class PedidosController extends AppController {
 	}
 
 	function admin_add() {
-		if (!empty($this -> data)) {
+		if (!empty($this -> data) && isset($this -> data['Orden'])) {
 			$this -> Pedido -> create();
 			if ($this -> Pedido -> save($this -> data)) {
+				# actualizo los datos del Cliente
+				$this -> Pedido -> Cliente -> id = $this -> data['Pedido']['cliente_id'];
+				if (isset($this -> data['Pedido']['transporte_id'])) {
+					$this -> Pedido -> Cliente -> saveField('transporte_id', $this -> data['Pedido']['transporte_id']);
+				} else {
+					$this -> Pedido -> Cliente -> saveField('transporte_id', 0);
+				}
+				if (isset($this -> data['Pedido']['contrarrembolso'])) {
+					$this -> Pedido -> Cliente -> saveField('contrarrembolso', $this -> data['Pedido']['contrarrembolso']);
+				} else {
+					$this -> Pedido -> Cliente -> saveField('contrarrembolso', FALSE);
+				}
+				if (isset($this -> data['Pedido']['cobinpro'])) {
+					$this -> Pedido -> Cliente -> saveField('cobinpro', $this -> data['Pedido']['cobinpro']);
+				} else {
+					$this -> Pedido -> Cliente -> saveField('cobinpro', FALSE);
+				}
+				if (isset($this -> data['Pedido']['b'])) {
+					$this -> Pedido -> Cliente -> saveField('presupuesto', $this -> data['Pedido']['b']);
+				} else {
+					$this -> Pedido -> Cliente -> saveField('presupuesto', FALSE);
+				}
+				# inserto las ordenes
 				foreach ($this -> data['Orden'] as $orden) {
 					$this -> Pedido -> Orden -> create();
 					$this -> Pedido -> Orden -> set(array(
@@ -52,9 +75,9 @@ class PedidosController extends AppController {
 					$this -> Pedido -> Orden -> save();
 				}
 				$this -> Session -> setFlash('El pedido ha sido creado');
-				$this -> redirect(array(
-						'action' => 'index',
-				));
+				// $this -> redirect(array(
+				// 'action' => 'index',
+				// ));
 			} else {
 				$this -> Session -> setFlash('El pedido no se ha guardado, intente nuevamente.');
 			}
@@ -102,12 +125,15 @@ class PedidosController extends AppController {
 				# Creo todas las órdenes que vienen
 				foreach ($this -> data['Orden'] as $articulo_id => $datos) {
 					$this -> Pedido -> Orden -> create();
-					
+
 					# verificación de variables
-					if (!isset($datos['estado'])) {$datos['estado'] = 0;}
-					if (!isset($datos['SinCargo'])) {$datos['SinCargo'] = 0;}
-					if (!isset($datos['Observaciones'])) {$datos['Observaciones'] = "";}
-					
+					if (!isset($datos['estado'])) {$datos['estado'] = 0;
+					}
+					if (!isset($datos['SinCargo'])) {$datos['SinCargo'] = 0;
+					}
+					if (!isset($datos['Observaciones'])) {$datos['Observaciones'] = "";
+					}
+
 					$this -> Pedido -> Orden -> set(array(
 							'articulo_id' => $datos['id'],
 							'cantidad' => $datos['Cantidad'],

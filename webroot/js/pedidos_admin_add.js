@@ -10,6 +10,7 @@ $(document).ready(function() {
 	 ********************************************************************/
 	deshabilitarBotones();
 	limpiarCampos();
+	setCliente($('#cliente option:selected').val());
 
 	/********************************************************************
 	 * 								Eventos								*
@@ -65,7 +66,7 @@ $(document).ready(function() {
 		submit = true;
 		$('#formulario').submit();
 	});
-	$('#b,#contrarrembolso,#cobinpro').click(function() {
+	$('#presupuesto,#contrarrembolso,#cobinpro').click(function() {
 		if($(this).attr('checked')) {
 			$(this).val(1);
 		} else {
@@ -410,7 +411,6 @@ $(document).ready(function() {
 	 */
 	function setCliente(cliente_id) {
 		$.getJSON(WEBROOT + "clientes/get_cliente/" + cliente_id, function(data) {
-			console.info("Data Transporte: " + data.transporte_id);
 			// seteo del transporte
 			if(data.transporte_id > 0) {
 				$('#transporte option[value="' + data.transporte_id + '"]').attr('selected', 'selected');
@@ -421,15 +421,27 @@ $(document).ready(function() {
 			// seteo del contrarrembolso
 			if(data.contrarrembolso) {
 				$('#contrarrembolso').attr('checked', 'checked');
+				$('#contrarrembolso').val(1);
 			} else {
 				$('#contrarrembolso').removeAttr('checked');
+				$('#contrarrembolso').val(0);
 			}
 			
 			// seteo del cobinpro
 			if(data.cobinpro) {
 				$('#cobinpro').attr('checked', 'checked');
+				$('#cobinpro').val(1);
 			} else {
 				$('#cobinpro').removeAttr('checked');
+				$('#cobinpro').val(0);
+			}
+			// seteo el presupuesto
+			if(data.presupuesto > 0) {
+				$('#presupuesto').attr('checked', 'checked');
+				$('#presupuesto').val(1);
+			} else {
+				$('#presupuesto').removeAttr('checked');
+				$('#presupuesto').val(0);
 			}
 			$('#load_cliente').css('display', 'none');
 		});

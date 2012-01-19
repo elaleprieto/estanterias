@@ -164,7 +164,7 @@ echo $this -> Form -> create('Pedido', array(
 		<legend>
 			<?php echo 'Pedido';?>
 		</legend>
-		<input id="b" type="checkbox" class="pedidos_add" name="data[Pedido][b]" value="0"/>
+		<input id="presupuesto" type="checkbox" class="pedidos_add" name="data[Pedido][b]" value="0"/>
 		<?php
 		echo $this -> Form -> button('Crear Pedido', array(
 				'class' => 'articulo',
