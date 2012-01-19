@@ -75,9 +75,9 @@ class PedidosController extends AppController {
 					$this -> Pedido -> Orden -> save();
 				}
 				$this -> Session -> setFlash('El pedido ha sido creado');
-				// $this -> redirect(array(
-				// 'action' => 'index',
-				// ));
+				$this -> redirect(array(
+				'action' => 'index',
+				));
 			} else {
 				$this -> Session -> setFlash('El pedido no se ha guardado, intente nuevamente.');
 			}
