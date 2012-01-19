@@ -90,7 +90,7 @@ class ClientesController extends AppController {
 			}
 		}
 	}
-	
+
 	public function admin_etiquetas() {
 		if (!empty($this -> data)) {
 			$this -> layout = 'ajax';
@@ -100,7 +100,7 @@ class ClientesController extends AppController {
 		$clientes = $this -> Cliente -> find('list', array('order' => 'Cliente.nombre'));
 		$this -> set('clientes', $clientes);
 	}
-	
+
 	public function get_direccion($id = null) {
 		$this -> layout = 'ajax';
 		if ($id) {
@@ -108,6 +108,7 @@ class ClientesController extends AppController {
 			$this -> render("/elements/get_direccion");
 		}
 	}
+
 	public function get_localidad($id = null) {
 		$this -> layout = 'ajax';
 		if ($id) {
@@ -115,14 +116,24 @@ class ClientesController extends AppController {
 			$this -> render("/elements/get_localidad");
 		}
 	}
+
 	public function get_provincia($id = null) {
 		$this -> layout = 'ajax';
 		if ($id) {
-			$cliente =  $this -> Cliente -> findById($id);
+			$cliente = $this -> Cliente -> findById($id);
 			$this -> set('cliente', $this -> Cliente -> Localidad -> Provincia -> findById($cliente['Localidad']['provincia_id']));
 			$this -> render("/elements/get_provincia");
 		}
 	}
+
+	public function get_cliente($id = null) {
+		$this -> layout = 'ajax';
+		if ($id) {
+			$this -> set('cliente', $this -> Cliente -> findById($id));
+		}
+	}
+	
+	
 
 }
 ?>

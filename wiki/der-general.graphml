@@ -207,16 +207,21 @@ modified<y:LabelModel>
     <node id="n12">
       <data key="d6">
         <y:GenericNode configuration="EntityRelationship_DetailedEntity">
-          <y:Geometry height="127.72080088987764" width="98.2007786429366" x="469.27153658776973" y="-185.94966629588407"/>
+          <y:Geometry height="197.57125681692935" width="114.01597621132566" x="469.27153658776973" y="-220.87489425940993"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="DetailedEntity_NameLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="44.529296875" x="26.8357408839683" y="4.0">Pedido</y:NodeLabel>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="DetailedEntity_AttributeLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="87.8125" modelName="custom" textColor="#000000" visible="true" width="61.796875" x="2.0" y="29.96875">id
+          <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="DetailedEntity_NameLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="44.529296875" x="34.74333966816283" y="4.0">Pedido</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="DetailedEntity_AttributeLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="157.65625" modelName="custom" textColor="#000000" visible="true" width="103.36328125" x="2.0" y="29.96875">id
 estado
+b
+cobinpro
+contrarrembolso
+observaciones
 created
 modified
 finalizado
-cliente_id<y:LabelModel>
+cliente_id
+transporte_id<y:LabelModel>
               <y:ErdAttributesNodeLabelModel/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -358,20 +363,24 @@ cliente_id<y:LabelModel>
     <node id="n23">
       <data key="d6">
         <y:GenericNode configuration="EntityRelationship_DetailedEntity">
-          <y:Geometry height="176.08405573906828" width="98.2007786429366" x="748.5153884062458" y="-210.1312937204794"/>
+          <y:Geometry height="235.39104662052725" width="114.01597621132566" x="748.5153884062458" y="-269.43828460193834"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="DetailedEntity_NameLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="46.123046875" x="26.038865883968356" y="4.0">Cliente</y:NodeLabel>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="DetailedEntity_AttributeLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="143.6875" modelName="custom" textColor="#000000" visible="true" width="76.287109375" x="2.0" y="29.96875">id
+          <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="DetailedEntity_NameLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="46.123046875" x="33.94646466816289" y="4.0">Cliente</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="DetailedEntity_AttributeLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="199.5625" modelName="custom" textColor="#000000" visible="true" width="103.36328125" x="2.0" y="29.96875">id
 codigo
 nombre
 direccion
 cuit
 bonificacion
+presupuesto
+contrarrembolso
+cobinpro
 created
 modified
 localidad_id
-iva_id<y:LabelModel>
+iva_id
+transporte_id<y:LabelModel>
               <y:ErdAttributesNodeLabelModel/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -543,6 +552,55 @@ pedido_id<y:LabelModel>
         </y:GenericNode>
       </data>
     </node>
+    <node id="n33">
+      <data key="d6">
+        <y:GenericNode configuration="EntityRelationship_DetailedEntity">
+          <y:Geometry height="106.40621122422414" width="98.2007786429366" x="756.4229871904405" y="114.43828576488204"/>
+          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="DetailedEntity_NameLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="69.455078125" x="14.372850258968356" y="4.0">Trasnporte</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="DetailedEntity_AttributeLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="59.875" modelName="custom" textColor="#000000" visible="true" width="56.541015625" x="2.0" y="29.96875">id
+nombre
+created
+modified<y:LabelModel>
+              <y:ErdAttributesNodeLabelModel/>
+            </y:LabelModel>
+            <y:ModelParameter>
+              <y:ErdAttributesNodeLabelModelParameter/>
+            </y:ModelParameter>
+          </y:NodeLabel>
+          <y:StyleProperties>
+            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+          </y:StyleProperties>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n34">
+      <data key="d6">
+        <y:GenericNode configuration="EntityRelationship_Relationship">
+          <y:Geometry height="56.0" width="90.0" x="612.9938518184761" y="139.6413913769941"/>
+          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="75.443359375" x="7.2783203125" y="19.015625">enviado por</y:NodeLabel>
+          <y:StyleProperties>
+            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+          </y:StyleProperties>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n35">
+      <data key="d6">
+        <y:GenericNode configuration="EntityRelationship_Relationship">
+          <y:Geometry height="56.0" width="90.0" x="760.5233765119087" y="37.34910158583274"/>
+          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="75.443359375" x="7.2783203125" y="19.015625">enviado por</y:NodeLabel>
+          <y:StyleProperties>
+            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+          </y:StyleProperties>
+        </y:GenericNode>
+      </data>
+    </node>
     <edge id="e0" source="n1" target="n2">
       <data key="d10">
         <y:PolyLineEdge>
@@ -661,7 +719,7 @@ pedido_id<y:LabelModel>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="none"/>
-          <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="six_pos" modelPosition="tail" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="11.60546875" x="1.9999776670505298" y="-204.82301449107624">n</y:EdgeLabel>
+          <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="six_pos" modelPosition="tail" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="11.60546875" x="5.06873249250998" y="-187.65553600736018">n</y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
         </y:PolyLineEdge>
       </data>
@@ -773,7 +831,7 @@ pedido_id<y:LabelModel>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="none"/>
-          <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="six_pos" modelPosition="shead" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="11.60546875" x="10.105493941643772" y="-19.968751934929628">n</y:EdgeLabel>
+          <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="six_pos" modelPosition="shead" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="11.60546875" x="9.0443688322232" y="-19.968751934929628">n</y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
         </y:PolyLineEdge>
       </data>
@@ -781,10 +839,10 @@ pedido_id<y:LabelModel>
     <edge id="e23" source="n23" target="n24">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:Path sx="-57.003873320419984" sy="29.653495440729444" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="none"/>
-          <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="six_pos" modelPosition="shead" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="11.634765625" x="-21.740226828129153" y="-19.968751934929628">1</y:EdgeLabel>
+          <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="six_pos" modelPosition="shead" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="11.634765625" x="-21.719657980472903" y="-19.968751934929628">1</y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
         </y:PolyLineEdge>
       </data>
@@ -792,10 +850,10 @@ pedido_id<y:LabelModel>
     <edge id="e24" source="n23" target="n27">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="49.103031637787126" sy="-43.928240936399476" tx="0.0" ty="0.0"/>
+          <y:Path sx="56.98704613246798" sy="-14.274745495670032" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="none"/>
-          <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="six_pos" modelPosition="shead" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="11.60546875" x="10.122356014026195" y="-19.96875495629007">n</y:EdgeLabel>
+          <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="six_pos" modelPosition="shead" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="11.60546875" x="10.110527215227762" y="-19.968754956290013">n</y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
         </y:PolyLineEdge>
       </data>
@@ -836,10 +894,10 @@ pedido_id<y:LabelModel>
     <edge id="e28" source="n29" target="n23">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="29.933614369550014" ty="60.04202786953414"/>
+          <y:Path sx="0.0" sy="0.0" tx="56.99734248505126" ty="89.69552331026358"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="none"/>
-          <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="six_pos" modelPosition="thead" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="11.60546875" x="-32.593037052380055" y="-19.96875058517088">n</y:EdgeLabel>
+          <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="six_pos" modelPosition="thead" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="11.60546875" x="-19.270137603203466" y="-19.968750585170895">n</y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
         </y:PolyLineEdge>
       </data>
@@ -856,7 +914,6 @@ pedido_id<y:LabelModel>
       </data>
     </edge>
     <edge id="e30" source="n31" target="n32">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -867,7 +924,48 @@ pedido_id<y:LabelModel>
       </data>
     </edge>
     <edge id="e31" source="n32" target="n12">
-      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="none"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e32" source="n12" target="n34">
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="33.39972393878577" sy="98.80497633726736" tx="0.0" ty="0.0">
+            <y:Point x="559.6792486322183" y="167.6413913769941"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="none"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e33" source="n34" target="n33">
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="none"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e34" source="n23" target="n35">
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="none"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e35" source="n35" target="n33">
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>

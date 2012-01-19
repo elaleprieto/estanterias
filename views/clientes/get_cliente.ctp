@@ -1,0 +1,15 @@
+{ 
+	"id":"<?=$cliente['Cliente']['id']?>",
+	"nombre":"<?=$cliente['Cliente']['nombre']?>",
+	"direccion":"<?=$cliente['Cliente']['direccion']?>",
+	"cuit":"<?=$cliente['Cliente']['cuit']?>",
+	"bonificacion":"<?=$cliente['Cliente']['bonificacion']?>",
+	"created":"<?=$cliente['Cliente']['created']?>",
+	"modified":"<?=$cliente['Cliente']['modified']?>",
+	"localidad_id":"<?=$cliente['Cliente']['localidad_id']?>",
+	"iva_id":"<?=$cliente['Cliente']['iva_id']?>",
+	"presupuesto":"<?=$cliente['Cliente']['presupuesto']?>",
+	"transporte_id":"<?=$cliente['Cliente']['transporte_id']?>",
+	"contrarrembolso":"<?=$cliente['Cliente']['contrarrembolso']?>",
+	"cobinpro":"<?=$cliente['Cliente']['cobinpro']?>"
+}

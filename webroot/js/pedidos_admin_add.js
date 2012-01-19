@@ -32,7 +32,7 @@ $(document).ready(function() {
 		}
 	});
 	$('#codigo').keyup(function(e) {
-		$('#lista option[value="' + $('#codigo').val() +'"]').attr('selected', 'selected');
+		$('#lista option[value="' + $('#codigo').val() + '"]').attr('selected', 'selected');
 		setLabelUnidad($('#lista option:selected').val());
 		setLabelStock($('#lista option:selected').val());
 		setLabelPack($('#lista option:selected').val());
@@ -71,6 +71,10 @@ $(document).ready(function() {
 		} else {
 			$(this).val(0);
 		}
+	});
+	$('#cliente').change(function() {
+		$('#load_cliente').css('display', 'inline');
+		setCliente($('#cliente option:selected').val());
 	});
 	/********************************************************************
 	 * 								Funciones							*
@@ -217,11 +221,11 @@ $(document).ready(function() {
 					// columna Artículo
 					columnaArticulo = $('<td>').attr("id", "d" + articulo_id);
 					columnaArticulo.append($('#lista option:selected').html());
-					
+
 					// columna Observaciones
 					columnaObservaciones = $('<td>');
 					columnaObservaciones.append($('#articuloObservaciones').val());
-					
+
 					// columna Observaciones (oculta)
 					inputObservacionesHidden = $('<input />').attr("type", "hidden").attr("name", "data[Orden][" + indice + "][Observaciones]").attr("value", $('#articuloObservaciones').val());
 					columnaObservacionesHidden = $('<td>').attr("class", "invisible").append(inputObservacionesHidden);
@@ -329,7 +333,6 @@ $(document).ready(function() {
 
 				// la columna 4 es la cantidad
 				$(columnas[4]).html(parseFloat($(columnas[4]).html()) + parseFloat(cantidad));
-				
 
 				// la columna 1 es el campo oculto de la cantidad
 				// el campo oculto de la cantidad es el que se toma para guardar en la BD
@@ -358,7 +361,7 @@ $(document).ready(function() {
 			$('#unidad').load(WEBROOT + "articulos/get_unidad/" + id);
 		}
 	}
-	
+
 	/**
 	 * 	setLabelStock setea la etiqueta Stock para proporcionar información al usuario.
 	 */
@@ -369,7 +372,7 @@ $(document).ready(function() {
 			$('#stock').load(WEBROOT + "articulos/get_stock/" + id);
 		}
 	}
-	
+
 	/**
 	 * 	setLabelPack setea la etiqueta Pack para proporcionar información al usuario.
 	 */
@@ -400,6 +403,36 @@ $(document).ready(function() {
 
 		// se resta 1(uno) a la cantidad de artículos del pedido.
 		$('#cantidad_articulos').html(parseInt($('#cantidad_articulos').html()) - 1);
+	}
+
+	/**
+	 * setCliente(cliente_id): setea los valores de transporte, contrarrembolso y cobinpro, del cliente seleccionado en el combobox.
+	 */
+	function setCliente(cliente_id) {
+		$.getJSON(WEBROOT + "clientes/get_cliente/" + cliente_id, function(data) {
+			console.info("Data Transporte: " + data.transporte_id);
+			// seteo del transporte
+			if(data.transporte_id > 0) {
+				$('#transporte option[value="' + data.transporte_id + '"]').attr('selected', 'selected');
+			} else {
+				$('#transporte option[value=""]').attr('selected', 'selected');
+			}
+
+			// seteo del contrarrembolso
+			if(data.contrarrembolso) {
+				$('#contrarrembolso').attr('checked', 'checked');
+			} else {
+				$('#contrarrembolso').removeAttr('checked');
+			}
+			
+			// seteo del cobinpro
+			if(data.cobinpro) {
+				$('#cobinpro').attr('checked', 'checked');
+			} else {
+				$('#cobinpro').removeAttr('checked');
+			}
+			$('#load_cliente').css('display', 'none');
+		});
 	}
 
 });

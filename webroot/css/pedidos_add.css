@@ -22,16 +22,18 @@ select.desplegable {
 	background: -moz-linear-gradient(center top , #F1F1D4, #E6E49F) repeat scroll 0 0 #F1F1D4;
 	background: -webkit-gradient(linear, left top, left bottom, from(#F1F1D4), to(#E6E49F));
 	vertical-align: top;
+	margin-bottom: 5px;
 }
 .textfield {
 	font-size: 100%;
-	height: 50px;
+	height: 20px;
 	padding: 2px;
 	width: 467px;
 }
 img.load {
 	width: 20px;
 	height: 20px;
+	vertical-align: middle;
 }
 /************************************************************
  * 							div								*
@@ -73,7 +75,7 @@ label {
 label.datosCliente {
 	font-size: 120%;
 	vertical-align: top;
-	padding-left: 2%;
+/*	padding-left: 2%;*/
 }
 input.pedidos_add[type="checkbox"] {
 	margin-left: 7px;
@@ -131,4 +133,9 @@ input.pedidos_add[type="checkbox"] {
 }
 #siguiente {
 	margin-right: 30px;
+}
+#load_cliente {
+	display: none;
+	margin: 0;
+    vertical-align: top;
 }

@@ -24,31 +24,6 @@ class PedidosController extends AppController {
 		$this -> set('pedido', $this -> Pedido -> read(null, $id));
 	}
 
-	function add() {
-		if (!empty($this -> data)) {
-			$this -> Pedido -> create();
-			if ($this -> Pedido -> save($this -> data)) {
-				foreach ($this -> data['Orden'] as $orden) {
-					$this -> Pedido -> Orden -> create();
-					$this -> Pedido -> Orden -> set(array(
-							'articulo_id' => $orden['id'],
-							'cantidad' => $orden['Cantidad'],
-							'sin_cargo' => $orden['SinCargo'],
-							'pedido_id' => $this -> Pedido -> id,
-					));
-					$this -> Pedido -> Orden -> save();
-				}
-				$this -> Session -> setFlash('El pedido ha sido creado');
-				$this -> redirect(array('action' => 'index'));
-			} else {
-				$this -> Session -> setFlash('El pedido no se ha guardado, intente nuevamente.');
-			}
-		}
-		$clientes = $this -> Pedido -> Cliente -> find('list', array('order' => array('Cliente.nombre')));
-		// $articulos = $this -> Pedido -> Orden -> Articulo -> find('list', array('order' => array('Articulo.detalle', )));
-		$this -> set(compact('clientes'));
-	}
-
 	function admin_index() {
 		$this -> Pedido -> recursive = 1;
 		$this -> set('pedidos', $this -> paginate('Pedido', array('Pedido.estado' => '0')));
