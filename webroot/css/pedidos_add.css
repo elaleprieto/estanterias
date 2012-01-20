@@ -135,7 +135,7 @@ input.pedidos_add[type="checkbox"] {
 	margin-right: 30px;
 }
 #load_cliente {
-	display: none;
+	display: inline;
 	margin: 0;
     vertical-align: top;
 }

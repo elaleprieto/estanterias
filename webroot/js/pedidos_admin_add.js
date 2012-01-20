@@ -74,7 +74,7 @@ $(document).ready(function() {
 		}
 	});
 	$('#cliente').change(function() {
-		$('#load_cliente').css('display', 'inline');
+		$('#load_cliente').show();
 		setCliente($('#cliente option:selected').val());
 	});
 	/********************************************************************
@@ -443,7 +443,7 @@ $(document).ready(function() {
 				$('#presupuesto').removeAttr('checked');
 				$('#presupuesto').val(0);
 			}
-			$('#load_cliente').css('display', 'none');
+			$('#load_cliente').hide();
 		});
 	}
 
