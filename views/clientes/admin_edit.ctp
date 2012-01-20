@@ -10,6 +10,10 @@
 		echo $this->Form->input('bonificacion');
 		echo $this->Form->input('localidad_id');
 		echo $this->Form->input('iva_id');
+		echo $this->Form->input('transporte_id');
+		echo $this->Form->input('cobinpro');
+		echo $this->Form->input('contrarrembolso');
+		echo $this->Form->input('presupuesto');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit', true));?>

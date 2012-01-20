@@ -2,7 +2,7 @@
 class Cliente extends AppModel {
 	var $name = 'Cliente';
 	var $displayField = 'nombre';
-
+	var $order = 'Cliente.nombre ASC';
 	var $validate = array(
 			'nombre' => array('notempty' => array('rule' => array('notempty'),
 					//'message' => 'Your custom message here',
@@ -63,6 +63,13 @@ class Cliente extends AppModel {
 					'conditions' => '',
 					'fields' => '',
 					'order' => ''
+			),
+			'Transporte' => array(
+					'className' => 'Transporte',
+					'foreignKey' => 'transporte_id',
+					'conditions' => '',
+					'fields' => '',
+					'order' => ''
 			)
 	);
 
@@ -96,7 +103,7 @@ class Cliente extends AppModel {
 
 		# read the 1st row as headings
 		$header = fgetcsv($handle);
-		
+
 		# definición de variables
 		$retorno = array();
 
@@ -135,7 +142,7 @@ class Cliente extends AppModel {
 			# busco si existe la categoría de IVA
 			$iva = $this -> Iva -> findByCategoria($iva_categoria);
 			# si existe, se usa, sino se crea
-			if(isset($iva['Iva'])) {
+			if (isset($iva['Iva'])) {
 				$data['Cliente']['iva_id'] = $iva['Iva']['id'];
 			} else {
 				$data_iva = array();

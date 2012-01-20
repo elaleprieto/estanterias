@@ -56,7 +56,8 @@ class ClientesController extends AppController {
 		}
 		$localidades = $this -> Cliente -> Localidad -> find('list');
 		$ivas = $this -> Cliente -> Iva -> find('list');
-		$this -> set(compact('localidades', 'ivas'));
+		$transportes = $this -> Cliente -> Transporte -> find('list');
+		$this -> set(compact('localidades', 'ivas', 'transportes'));
 	}
 
 	function admin_delete($id = null) {
