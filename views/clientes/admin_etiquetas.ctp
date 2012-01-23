@@ -14,7 +14,7 @@ echo $javascript -> codeBlock('WEBROOT="../../"', $options = array(
 # Se agregan las CSS
 echo $html -> css('admin_etiquetas');
 
-echo $this -> Form -> create('Clientes', array('id'=>'formulario'));
+echo $this -> Form -> create('Clientes', array('id'=>'formulario', 'target' => '_blank'));
 echo $this -> Form -> label('cliente', 'Cliente', array('class'=>'etiqueta'));
 echo $this -> Form -> input('cliente', array('div' => FALSE, 'id' => 'cliente', 'label'=> FALSE));
 echo $this -> Form -> input('nombre', array('div' => FALSE, 'id' => 'nombre', 'label' => FALSE));
