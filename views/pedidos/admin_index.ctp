@@ -1,13 +1,17 @@
+<?php
+# Se agregan las CSS
+echo $html -> css('pedidos_admin_index');
+?>
 <div class="pedidos_index">
-	<h2><?php __('Pedidos');?></h2>
+	<h2><?php __('Pedidos Pendientes');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this -> Paginator -> sort('Número', 'Pedido.id');?></th>
 			<th><?php echo $this -> Paginator -> sort('cliente_id');?></th>
 			<th><?php echo $this -> Paginator -> sort('Fecha', 'created');?></th>
-			<th><?php echo $this -> Paginator -> sort('estado');?></th>
 			<th><?php echo 'Articulos';?></th>
 			<th><?php echo 'Progreso';?></th>
+			<th><?php echo 'Observaciones';?></th>
 			<th class="actions"><?php __('Acciones');?></th>
 	</tr>
 	<?php
@@ -27,15 +31,6 @@
 				echo $this -> Time -> format($format = 'd/m/Y H:i', $pedido['Pedido']['created']); 
 			?>&nbsp;
 		</td>
-		<td>
-			<?php 
-				if($pedido['Pedido']['estado']) {
-					echo 'Finalizado';
-				} else {
-					echo 'Pendiente';
-				} 
-			?>&nbsp;
-		</td>
 		<td><?php echo $cantidad = sizeof($pedido['Orden']); ?></td>
 		<td><?php
 			$completado = 0;
@@ -49,6 +44,7 @@
 				echo '100.0%';
 			}
 		 ?></td>
+		<td class="observaciones"><?php echo $pedido['Pedido']['observaciones']; ?></td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('Editar', true), array('controller' => 'pedidos', 'action' => 'edit', $pedido['Pedido']['id'])); ?>
 			<?php echo $this->Html->link(__('Preparar', true), array('admin' => FALSE, 'controller' => 'ordenes', 'action' => 'preparar', $pedido['Pedido']['id'])); ?>
