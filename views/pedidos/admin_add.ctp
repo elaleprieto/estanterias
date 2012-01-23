@@ -13,7 +13,7 @@ echo $javascript -> codeBlock('WEBROOT="../../"', $options = array(
 ));
 
 # Se agregan las CSS
-echo $html -> css('pedidos_add');
+echo $html -> css('pedidos_admin_add');
 
 # Aquí se arma el Formulario de Creación del Pedido
 echo $this -> Form -> create('Pedido', array(
@@ -59,7 +59,7 @@ echo $this -> Form -> create('Pedido', array(
 		<label class="datosCliente">Cobinpro:</label>
 		<input id="cobinpro" type="checkbox" class="pedidos_add" name="data[Pedido][cobinpro]" value="1" />
 		<div id="load_cliente">
-		<?php echo $this -> Html -> image('load.gif', array('class' => 'load'));?>
+			<?php echo $this -> Html -> image('load.gif', array('class' => 'load'));?>
 			Cargando Cliente...
 		</div>
 	</fieldset>
