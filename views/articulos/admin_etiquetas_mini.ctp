@@ -4,7 +4,7 @@ echo $javascript -> link(array(
 		'admin_etiquetas_mini'
 ), FALSE);
 
-echo $this -> Form -> create('Articulos');
+echo $this -> Form -> create('Articulos', array('target' => '_blank'));
 echo $this -> Form -> input('articulo', array('div' => FALSE, 'id' => 'articulo'));
 echo $this -> Form -> input('detalle', array('div' => FALSE, 'id' => 'detalle', 'label' => FALSE));
 echo $this -> Form -> input('unidades', array('value' => 50));
