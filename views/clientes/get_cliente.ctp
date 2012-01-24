@@ -11,5 +11,7 @@
 	"presupuesto":"<?=$cliente['Cliente']['presupuesto']?>",
 	"transporte_id":"<?=$cliente['Cliente']['transporte_id']?>",
 	"contrarrembolso":"<?=$cliente['Cliente']['contrarrembolso']?>",
-	"cobinpro":"<?=$cliente['Cliente']['cobinpro']?>"
+	"cobinpro":"<?=$cliente['Cliente']['cobinpro']?>",
+	"localidad_nombre":"<?=$localidad['Localidad']['nombre']?>",
+	"provincia_nombre":"<?=$localidad['Provincia']['nombre']?>"
 }

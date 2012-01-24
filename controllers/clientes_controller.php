@@ -133,7 +133,9 @@ class ClientesController extends AppController {
 	public function get_cliente($id = null) {
 		$this -> layout = 'ajax';
 		if ($id) {
-			$this -> set('cliente', $this -> Cliente -> findById($id));
+			$cliente = $this -> Cliente -> findById($id);
+			$localidad = $this -> Cliente -> Localidad -> findById($cliente['Cliente']['localidad_id']);
+			$this -> set(compact('cliente', 'localidad'));
 		}
 	}
 	
