@@ -13,7 +13,7 @@ echo $javascript -> codeBlock('WEBROOT="../../../"', $options = array(
 ));
 
 # Se agregan las CSS
-echo $html -> css('pedidos_add');
+echo $html -> css('pedidos_admin_add');
 
 # Aquí se arma el Formulario de Creación del Pedido
 echo $this -> Form -> create('Pedido', array('class' => 'pedidos_add', 'id' => 'formulario'));?>
