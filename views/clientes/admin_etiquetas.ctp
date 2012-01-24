@@ -5,18 +5,17 @@ echo $javascript -> link(array(
 ), FALSE);
 
 # Se define la ruta base
-echo $javascript -> codeBlock('WEBROOT="../../"', $options = array(
+echo $javascript -> codeBlock('WEBROOT="'.$this -> Html-> url('/', true).'"', $options = array(
 		'allowCache' => true,
 		'safe' => true,
 		'inline' => true
 ));
-
 # Se agregan las CSS
 echo $html -> css('admin_etiquetas');
 
 echo $this -> Form -> create('Clientes', array('id'=>'formulario', 'target' => '_blank'));
 echo $this -> Form -> label('cliente', 'Cliente', array('class'=>'etiqueta'));
-echo $this -> Form -> input('cliente', array('div' => FALSE, 'id' => 'cliente', 'label'=> FALSE));
+echo $this -> Form -> input('cliente', array('div' => FALSE, 'id' => 'cliente', 'label'=> FALSE, 'selected' => $cliente_id));
 echo $this -> Form -> input('nombre', array('div' => FALSE, 'id' => 'nombre', 'label' => FALSE));
 echo $this -> Form -> label('direccion', 'Dirección', array('class'=>'etiqueta'));
 echo $this -> Html -> image('load.gif', array('id' => 'direccionIMG', 'class' => 'noIMG'));
