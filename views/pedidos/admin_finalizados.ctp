@@ -45,7 +45,7 @@ $class = ' class="altrow"';
 			<?php echo $this -> Html -> link(__('Imprimir', true), array(
 						'action' => 'imprimir',
 						$pedido['Pedido']['id']
-				));
+				), array('target' => '_blank'));
 			?>
 			<?php echo $this -> Html -> link(__('Etiquetas', true), array(
 						'controller' => 'clientes',
