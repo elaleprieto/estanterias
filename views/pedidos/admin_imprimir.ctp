@@ -1,10 +1,31 @@
 <?php
+App::import('Lib', 'tcpdf/tcpdf');
+# Cliente
+define('CLIENTE', $pedido['Cliente']['nombre']);
+# Fecha de finalización del pedido
+define('FECHA', date('d/m/Y', strtotime($pedido['Pedido']['finalizado'])));
+$fecha = date('Y-m-d H.i', strtotime($pedido['Pedido']['finalizado']));
+
 # Tamaño de una Página A4 común y silvestre
 # ancho = 210 [mm]
 # alto 	= 297 [mm]
 
-App::import('Lib', 'tcpdf/tcpdf');
-$tcpdf = new TCPDF();
+// Extend the TCPDF class to create custom Header and Footer
+class MYPDF extends TCPDF {
+
+    //Page header
+    public function Header() {
+        // Seteo de la fuente
+        $this->SetFont('freesans', 'B', 12);
+        // Título
+        $this->Cell(196/2, 10, 'Pedido de ' . CLIENTE, array('B' => 1), false, 'L', 0, '', 0, false, 'M', 'B');
+        $this->Cell(196/2, 10, 'Fecha: ' . FECHA, array('B' => 1), false, 'R', 0, '', 0, false, 'M', 'B');
+    }
+}
+
+
+
+$tcpdf = new MYPDF();
 
 $textfont = 'freesans';
 $tcpdf -> SetCreator(PDF_CREATOR);
@@ -27,23 +48,6 @@ $tcpdf -> SetHeaderMargin(7);
 // $tcpdf->SetFooterMargin(PDF_MARGIN_FOOTER); en milímetros
 $tcpdf -> SetFooterMargin(7);
 
-/*	if(file_exists(K_PATH_IMAGES . 'alpha.png')) {
- echo "The file exists";
- } else {
- echo "The file does not exist";
- }
- */
-# 	Image ($file, $x='', $y='', $w=0, $h=0, $type='', $link='', $align='', $resize=false, $dpi=300, $palign='', $ismask=false, $imgmask=false, $border=0, $fitbox=false, $hidden=false, $fitonpage=false, $alt=false, $altimgs=array())
-// $tcpdf -> Image(K_PATH_IMAGES . 'logo.gif', 15, 15, 0, 0, 'GIF');
-
-# Encabezado de Página
-$tcpdf -> SetHeaderData("", "", "Pedido de " . $pedido['Cliente']['nombre'], "");
-$tcpdf -> SetHeaderFont(Array(
-		PDF_FONT_NAME_MAIN,
-		'',
-		PDF_FONT_SIZE_MAIN
-));
-
 # Pie de Página
 $tcpdf -> SetFooterFont(Array(
 		PDF_FONT_NAME_DATA,
@@ -53,10 +57,6 @@ $tcpdf -> SetFooterFont(Array(
 $tcpdf -> SetFooterMargin(7);
 
 $tcpdf -> AddPage();
-
-# Titulo
-// $tcpdf -> SetFont("freesans", "B", 20);
-// $tcpdf -> Cell(0, 15, "Pedido de " . $pedido['Cliente']['nombre'], 0, 1, 'C');
 
 ###############################################################
 # Seteo de parámetros
@@ -171,7 +171,5 @@ $html .= '</table>';
 // output the HTML content
 $tcpdf -> writeHTML($html);
 
-$fecha = date('Y-m-d H.i', strtotime($pedido['Pedido']['finalizado']));
-
-$tcpdf -> Output($pedido['Cliente']['nombre'] . " - " . $fecha . ".pdf", "I");
+$tcpdf -> Output(CLIENTE . " - " . $fecha . ".pdf", "I");
 ?>
