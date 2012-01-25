@@ -13,7 +13,7 @@ echo $javascript -> codeBlock('WEBROOT="' . $this -> Html -> url('/', true) . '"
 		<?php
 		# Aquí se inicia el Formulario para Buscar
 		echo $this -> Form -> create('Ubicado', array('id' => 'formulario'));
-
+		
 		# Se define el campo de búsqueda
 		echo $this -> Form -> input('articulo', array(
 				'id' => 'articulo',
