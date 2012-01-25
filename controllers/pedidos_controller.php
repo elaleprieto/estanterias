@@ -59,7 +59,7 @@ class PedidosController extends AppController {
 				if (isset($this -> data['Pedido']['b'])) {
 					$this -> Pedido -> Cliente -> saveField('presupuesto', $this -> data['Pedido']['b']);
 				} else {
-					$this -> Pedido -> Cliente -> saveField('presupuesto', FALSE);
+					$this -> Pedido -> Cliente -> saveField('presupuesto', 0);
 				}
 				# inserto las ordenes
 				foreach ($this -> data['Orden'] as $orden) {
