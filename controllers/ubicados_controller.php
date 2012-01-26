@@ -43,6 +43,11 @@ class UbicadosController extends AppController {
 					ORDER BY orden ASC";
 			$this -> set('ubicados', $this -> Ubicado -> query($consulta));
 		}
+		$origen = explode('/', $this->referer());
+		if($origen[1] == 'admin') {
+			# La consulta es la misma, lo que cambia es la vista porque tiene acciones en el admin
+			$this -> render('admin_get_ubicados');
+		}
 	}
 
 	function admin_index() {

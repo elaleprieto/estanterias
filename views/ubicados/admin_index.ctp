@@ -1,3 +1,10 @@
+<?php
+# Se carga la librería Jquery
+echo $javascript -> link(array('jquery-1.7.1.min','ubicados_index'), FALSE);
+
+# Se define la ruta base
+echo $javascript -> codeBlock('WEBROOT="' . $this -> Html -> url('/', true) . '"', $options = array('inline' => true));
+?>
 <div class="ubicados_index">
 	<h2><?php echo 'Ubicación de los artículos';?></h2>
 	<h4><?php echo 'Artículos que se encuentran con una ubicación asignada';?></h4>
@@ -7,7 +14,7 @@
 		</legend>
 		<?php
 		# Aquí se inicia el Formulario para Buscar
-		echo $this -> Form -> create('Ubicado');
+		echo $this -> Form -> create('Ubicado', array('id' => 'formulario'));
 
 		# Se define el campo de búsqueda
 		echo $this -> Form -> input('articulo', array(
@@ -23,17 +30,6 @@
 		?>
 	</fieldset>
 	<div id="listado">
-		<?php echo $this -> element('admin_update_listado');?>
 	</div>
-	<p>
-		<?php
-		echo $this -> Paginator -> counter(array('format' => __('Página %page% de %pages%, mostrando %current% registros de un total de %count%, empezando en el registro %start%, terminando en %end%', true)));
-		?>
-	</p>
-	<div class="paging">
-		<?php echo $this -> Paginator -> prev('<< ' . __('anterior', true), array(), null, array('class' => 'disabled'));?>
-		| 	<?php echo $this -> Paginator -> numbers();?>
-		|
-		<?php echo $this -> Paginator -> next(__('siguiente', true) . ' >>', array(), null, array('class' => 'disabled'));?>
-	</div>
+	
 </div>
