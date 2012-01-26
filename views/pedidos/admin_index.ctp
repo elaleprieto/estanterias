@@ -1,4 +1,5 @@
 <?php
+// debug($pedidos);
 # Se agregan las CSS
 echo $html -> css('pedidos_admin_index');
 ?>
@@ -11,6 +12,7 @@ echo $html -> css('pedidos_admin_index');
 			<th><?php echo $this -> Paginator -> sort('Fecha', 'created');?></th>
 			<th><?php echo 'Articulos';?></th>
 			<th><?php echo 'Progreso';?></th>
+			<th><?php echo 'Transporte';?></th>
 			<th><?php echo 'Observaciones';?></th>
 			<th class="actions"><?php __('Acciones');?></th>
 	</tr>
@@ -44,6 +46,7 @@ echo $html -> css('pedidos_admin_index');
 				echo '100.0%';
 			}
 		 ?></td>
+		<td><?php echo $pedido['Transporte']['nombre']; ?></td>
 		<td class="observaciones"><?php echo $pedido['Pedido']['observaciones']; ?></td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('Editar', true), array('controller' => 'pedidos', 'action' => 'edit', $pedido['Pedido']['id'])); ?>

@@ -1,13 +1,13 @@
 <?php //debug($pedidos);?>
 <div class="pedidos_index">
-	<h2><?php __('Pedidos');?></h2>
+	<h2><?php __('Pedidos Finalizados');?></h2>
 	<table cellpadding="0" cellspacing="0">
 		<tr>
 			<th><?php echo $this -> Paginator -> sort('Número', 'Pedido.id');?></th>
 			<th><?php echo $this -> Paginator -> sort('cliente_id');?></th>
 			<th><?php echo $this -> Paginator -> sort('Creado', 'created');?></th>
 			<th><?php echo $this -> Paginator -> sort('Finalizado', 'Pedido.finalizado');?></th>
-			<th><?php echo $this -> Paginator -> sort('estado');?></th>
+			<th><?php echo 'Transporte';?></th>
 			<th class="actions"><?php __('Acciones');?></th>
 		</tr>
 		<?php
@@ -29,13 +29,7 @@ $class = ' class="altrow"';
 			# Fecha de finalización formateada
 			echo $this -> Time -> format($format = 'd/m/Y H:i', $pedido['Pedido']['finalizado']);
 			?>&nbsp; </td>
-			<td><?php
-			if ($pedido['Pedido']['estado']) {
-				echo 'Finalizado';
-			} else {
-				echo 'Pendiente';
-			}
-			?>&nbsp; </td>
+			<td><?= $pedido['Transporte']['nombre']?></td>
 			<td class="actions"><?php echo $this -> Html -> link(__('Ver', true), array(
 						'controller' => 'ordenes',
 						'action' => 'finalizadas',
