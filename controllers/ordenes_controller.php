@@ -93,7 +93,9 @@ class OrdenesController extends AppController {
 				# Se recorre cada Orden del Pedido y se lo salva.
 				# Esto es igual que el Finalizar Pedido.
 				foreach ($this->data['Orden'] as $index => $orden) {
-					if ($this -> Orden -> save($orden)) {
+					$this -> Orden -> create($orden);
+					$this -> Orden -> id = $orden['id'];
+					if ($this -> Orden -> saveField('cantidad', $orden['cantidad']) && $this -> Orden -> saveField('estado', $orden['estado'])) {
 						$this -> Session -> setFlash('El Pedido ha sido Guardado');
 					} else {
 						$this -> Session -> setFlash('Se ha producido un error. Por favor, avise al Administrador.');
@@ -123,12 +125,13 @@ class OrdenesController extends AppController {
 				# en el que se pone el Estado del Pedido a TRUE
 				$this -> Orden -> Pedido -> save($this -> data['Pedido']);
 
-				# Luego se recorre cada Orden del Pedido y se lo salva.
+				# Luego se recorre cada Orden del Pedido y se salvan los campos de cantidad y el estado.
 				# Esto es igual que el Guardar Pedido.
 				# Además, se resta la cantidad de la Orden del Stock del Artículo
 				foreach ($this->data['Orden'] as $index => $orden) {
 					$this -> Orden -> create($orden);
-					if ($this -> Orden -> save($orden)) {
+					$this -> Orden -> id = $orden['id'];
+					if ($this -> Orden -> saveField('cantidad', $orden['cantidad']) && $this -> Orden -> saveField('estado', $orden['estado'])) {
 						$articulo_id = $this -> Orden -> read('articulo_id', $orden['id']);
 						$this -> Orden -> Articulo -> recursive = 0;
 						if ($orden['estado']) {
@@ -142,6 +145,7 @@ class OrdenesController extends AppController {
 					} else {
 						$this -> Session -> setFlash('Se ha producido un error. Por favor, avise al Administrador.');
 					}
+					$this -> render();
 				}
 				$this -> redirect(array(
 						'controller' => 'pedidos',
