@@ -83,7 +83,7 @@ foreach($ordenes as $orden){
 		<tr>
 			<td><?php echo $this -> Time -> format($format = 'd/m/Y', $orden[0]['finalizado']);?></td>
 			<td ><?php echo $orden[0]['articulo_id'];?></td>
-			<td><?php echo $orden[0]['cantidad'];?></td>
+			<td><?php echo $orden[0]['cantidad_original'];?></td>
 			<td><?php echo $orden[0]['stock'];?></td>
 			<td class="articulo"><?php echo $orden[0]['detalle'];?></td>
 			<td class="cliente"><?php echo $orden[0]['nombre'];?></td>
