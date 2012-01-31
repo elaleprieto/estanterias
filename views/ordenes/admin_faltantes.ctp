@@ -41,13 +41,13 @@ if (isset($fechaFin)) {
 		echo $form -> year('fechaFin', 2000, date('Y'), $añoFin, array('empty' => FALSE));
 		?></td>
 		<td><?php echo $form -> input('cliente', array(
-					'empty' => '(Seleccionar)',
+					'empty' => '(Todos)',
 					'label' => FALSE,
 					'div' => FALSE
 			));
 		?></td>
 		<td><?php echo $form -> input('articulo', array(
-					'empty' => '(Seleccionar)',
+					'empty' => '(Todos)',
 					'label' => FALSE,
 					'div' => FALSE
 			));
@@ -83,7 +83,7 @@ foreach($ordenes as $orden){
 		<tr>
 			<td><?php echo $this -> Time -> format($format = 'd/m/Y', $orden[0]['finalizado']);?></td>
 			<td ><?php echo $orden[0]['articulo_id'];?></td>
-			<td><?php echo $orden[0]['cantidad_original'];?></td>
+			<td><?php echo $orden[0]['cantidad_original'] != 0 ? $orden[0]['cantidad_original'] : $orden[0]['cantidad'];?></td>
 			<td><?php echo $orden[0]['stock'];?></td>
 			<td class="articulo"><?php echo $orden[0]['detalle'];?></td>
 			<td class="cliente"><?php echo $orden[0]['nombre'];?></td>
