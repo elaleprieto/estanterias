@@ -27,7 +27,7 @@ $(document).ready(function() {
 	 *
 	 * 		Aquí se registran los eventos para los objetos de la vista	*
 	 ********************************************************************/
-	
+
 	/* Botón Pedido y Menú Pedido */
 	$('#boton_pedido,#menu_pedidos').hover(function(e) {
 		$('#menu_pedidos').css({
@@ -38,7 +38,6 @@ $(document).ready(function() {
 			display : "none"
 		});
 	});
-	
 	/* Botón Artículo y Menú Artículo */
 	$('#boton_articulo,#menu_articulos').hover(function(e) {
 		$('#menu_articulos').css({
@@ -49,7 +48,6 @@ $(document).ready(function() {
 			display : "none"
 		});
 	});
-	
 	/* Botón Cliente y Menú Cliente */
 	$('#boton_cliente,#menu_clientes').hover(function(e) {
 		$('#menu_clientes').css({
@@ -60,7 +58,6 @@ $(document).ready(function() {
 			display : "none"
 		});
 	});
-	
 	/* Botón Transporte y Menú Transporte */
 	$('#boton_transporte,#menu_transportes').hover(function(e) {
 		$('#menu_transportes').css({
@@ -72,5 +69,5 @@ $(document).ready(function() {
 		});
 	});
 
-	
+	// $("#preloader").delay(700).fadeOut("slow");
 });

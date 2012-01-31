@@ -147,7 +147,10 @@
 					array('controller' => 'transportes', 'action' => 'index')); ?>
 		</div>
 		<div id="content">
-
+			<?php 
+				# Se carga el preloader
+				// echo $this -> element('preloader');
+			?>
 			<?php echo $this->Session->flash(); ?>
 
 			<?php echo $content_for_layout; ?>
