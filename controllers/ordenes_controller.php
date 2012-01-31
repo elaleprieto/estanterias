@@ -90,6 +90,18 @@ class OrdenesController extends AppController {
 				));
 			}
 			if (!empty($this -> data)) {
+				# Se define el pedido
+				$pedido_id = $this -> data['Pedido']['id'];
+				
+				# Se calcula el tiempo de preparación en segundos.
+				$fecha = new DateTime();
+				$iniciado = $this -> Orden -> Pedido -> read('iniciado', $pedido_id);
+				$iniciado = new DateTime($iniciado['Pedido']['iniciado']);
+				$intervalo = $fecha -> diff($iniciado);
+				$tiempo_preparacion = $this -> Orden -> Pedido -> read('tiempo_preparacion', $pedido_id);
+				$this -> Orden -> Pedido -> id = $pedido_id;
+				$this -> Orden -> Pedido -> saveField('tiempo_preparacion', $tiempo_preparacion['Pedido']['tiempo_preparacion'] + $intervalo->format('%d') * 24 * 3600 + $intervalo->format('%h') * 3600 + $intervalo->format('%i') * 60 + $intervalo->format('%s'));
+
 				# Se recorre cada Orden del Pedido y se lo salva.
 				# Esto es igual que el Finalizar Pedido.
 				foreach ($this->data['Orden'] as $index => $orden) {
@@ -116,14 +128,22 @@ class OrdenesController extends AppController {
 				));
 			}
 			if (!empty($this -> data)) {
-				# Se agrega la fecha de finalización
+				# Se define el Pedido
+				$pedido_id = $this -> data['Pedido']['id'];
+				
+				# Se calcula el tiempo de preparación en segundos.
+				$pedido_id = $this -> data['Pedido']['id'];
 				$fecha = new DateTime();
-				$this -> data['Pedido']['finalizado'] = $fecha -> format('Y-m-d H:i:s');
-
-				# Esta es la diferencia entre el Guardar y Finalizar: se cambia el Estado del Pedido
-				# cuando se lo salva acá, porque viene un campo oculto desde la vista
-				# en el que se pone el Estado del Pedido a TRUE
-				$this -> Orden -> Pedido -> save($this -> data['Pedido']);
+				$iniciado = $this -> Orden -> Pedido -> read('iniciado', $pedido_id);
+				$iniciado = new DateTime($iniciado['Pedido']['iniciado']);
+				$intervalo = $fecha -> diff($iniciado);
+				$tiempo_preparacion = $this -> Orden -> Pedido -> read('tiempo_preparacion', $pedido_id);
+				
+				# Se guardan los datos del Pedido
+				$this -> Orden -> Pedido -> id = $pedido_id;
+				$this -> Orden -> Pedido -> saveField('tiempo_preparacion', $tiempo_preparacion['Pedido']['tiempo_preparacion'] + $intervalo->format('%d') * 24 * 3600 + $intervalo->format('%h') * 3600 + $intervalo->format('%i') * 60 + $intervalo->format('%s'));
+				$this -> Orden -> Pedido -> saveField('estado', TRUE);
+				$this -> Orden -> Pedido -> saveField('finalizado', $fecha -> format('Y-m-d H:i:s'));
 
 				# Luego se recorre cada Orden del Pedido y se salvan los campos de cantidad y el estado.
 				# Esto es igual que el Guardar Pedido.
@@ -180,6 +200,11 @@ class OrdenesController extends AppController {
 				ORDER BY posicion";
 		$articulos = $this -> Orden -> query($consulta);
 		$this -> set(compact('articulos'));
+
+		# Se define el tiempo de inicialización del pedido
+		$fecha = new DateTime();
+		$this -> Orden -> Pedido -> id = $pedido_id;
+		$this -> Orden -> Pedido -> saveField('iniciado', $fecha -> format('Y-m-d H:i:s'));
 		// $this -> layout = 'mobile';
 	}
 

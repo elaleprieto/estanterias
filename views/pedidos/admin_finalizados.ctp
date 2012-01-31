@@ -7,6 +7,7 @@
 			<th><?php echo $this -> Paginator -> sort('cliente_id');?></th>
 			<th><?php echo $this -> Paginator -> sort('Creado', 'created');?></th>
 			<th><?php echo $this -> Paginator -> sort('Finalizado', 'Pedido.finalizado');?></th>
+			<th><?php echo 'Tiempo[m]';?></th>
 			<th><?php echo 'Transporte';?></th>
 			<th class="actions"><?php __('Acciones');?></th>
 		</tr>
@@ -29,6 +30,7 @@ $class = ' class="altrow"';
 			# Fecha de finalización formateada
 			echo $this -> Time -> format($format = 'd/m/Y H:i', $pedido['Pedido']['finalizado']);
 			?>&nbsp; </td>
+			<td><?= sprintf("%.1f", $pedido['Pedido']['tiempo_preparacion'] / 60)?></td>
 			<td><?= $pedido['Transporte']['nombre']?></td>
 			<td class="actions"><?php echo $this -> Html -> link(__('Ver', true), array(
 						'controller' => 'ordenes',
