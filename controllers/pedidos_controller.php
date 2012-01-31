@@ -215,24 +215,24 @@ class PedidosController extends AppController {
 			$this -> redirect(array('action' => 'index'));
 		}
 		$pedido = $this -> Pedido -> read(null, $id);
-		$consulta = "SELECT orden_id, cantidad, orden_estado, sin_cargo, id, detalle, unidad, observaciones, cantidad_original,
-				stock, array_agg(pasillo_nombre) AS pasillo_nombre, array_agg(pasillo_lado) AS pasillo_lado,
-				min(pasillo_distancia) AS pasillo_distancia, array_agg(ubicacion_altura) AS ubicacion_altura, 
-				array_agg(ubicacion_posicion) AS ubicacion_posicion
-			FROM (SELECT O.id AS orden_id, O.cantidad AS cantidad, O.estado AS orden_estado, O.sin_cargo AS sin_cargo, 
-					O.observaciones AS observaciones, O.cantidad_original AS cantidad_original,
-					A.id AS id, A.detalle AS detalle, A.unidad AS unidad, A.stock as stock,
-					P.nombre AS pasillo_nombre, P.lado AS pasillo_lado, 
-					P.distancia AS pasillo_distancia, Ub.altura AS ubicacion_altura, 
-					Ub.posicion AS ubicacion_posicion, U.estado AS ubicacion_estado 
-				FROM Ordenes AS O, Articulos AS A LEFT JOIN Ubicados AS U ON U.articulo_id = A.id 
-					LEFT JOIN Pasillos AS P ON U.pasillo_id = P.id LEFT JOIN Ubicaciones AS Ub ON U.ubicacion_id = Ub.id
-				WHERE O.pedido_id	= $id
-				AND O.articulo_id 	= A.id
-				ORDER BY ubicacion_estado DESC
-			) AS E
-			GROUP BY orden_id, cantidad, orden_estado, sin_cargo, id, detalle, unidad, stock, observaciones, cantidad_original
-			ORDER BY pasillo_distancia ASC, pasillo_nombre ASC, ubicacion_posicion ASC, ubicacion_altura ASC, detalle ASC";
+		$consulta = "SELECT orden_id, posicion, cantidad, cantidad_original, orden_estado, sin_cargo, id, detalle, unidad, foto, observaciones, 
+					array_agg(pasillo_nombre) AS pasillo_nombre, array_agg(pasillo_lado) AS pasillo_lado, 
+					min(pasillo_distancia) AS pasillo_distancia, array_agg(ubicacion_altura) AS ubicacion_altura, 
+					array_agg(ubicacion_posicion) AS ubicacion_posicion, array_agg(ubicacion_estado) AS ubicacion_estado 
+				FROM (SELECT O.id AS orden_id, O.cantidad AS cantidad, O.cantidad_original AS cantidad_original, O.estado AS orden_estado, O.sin_cargo AS sin_cargo, O.observaciones AS observaciones, 
+						A.id AS id, A.detalle AS detalle, A.unidad AS unidad, A.foto AS foto,
+						A.orden AS posicion,
+						P.nombre AS pasillo_nombre, P.lado AS pasillo_lado, 
+						P.distancia AS pasillo_distancia, Ub.altura AS ubicacion_altura, 
+						Ub.posicion AS ubicacion_posicion, U.estado AS ubicacion_estado 
+					FROM Ordenes AS O, Articulos AS A LEFT JOIN Ubicados AS U ON U.articulo_id = A.id 
+						LEFT JOIN Pasillos AS P ON U.pasillo_id = P.id LEFT JOIN Ubicaciones AS Ub ON U.ubicacion_id = Ub.id
+					WHERE O.pedido_id	= $id
+					AND O.articulo_id 	= A.id
+					ORDER BY ubicacion_estado DESC
+					) AS E
+				GROUP BY orden_id, posicion, cantidad, cantidad_original, orden_estado, sin_cargo, id, detalle, unidad, foto, observaciones
+				ORDER BY posicion";
 		$ordenes = $this -> Pedido -> Orden -> query($consulta);
 
 		$this -> set(compact('pedido', 'ordenes'));
