@@ -137,6 +137,7 @@ class PedidosController extends AppController {
 					$this -> Pedido -> Orden -> set(array(
 							'articulo_id' => $datos['id'],
 							'cantidad' => $datos['Cantidad'],
+							'cantidad_original' => $datos['Cantidad'],
 							'estado' => $datos['estado'],
 							'sin_cargo' => $datos['SinCargo'],
 							'observaciones' => $datos['Observaciones'],
