@@ -142,7 +142,7 @@ class OrdenesController extends AppController {
 				# Se guardan los datos del Pedido
 				$this -> Orden -> Pedido -> id = $pedido_id;
 				$this -> Orden -> Pedido -> saveField('tiempo_preparacion', $tiempo_preparacion['Pedido']['tiempo_preparacion'] + $intervalo->format('%d') * 24 * 3600 + $intervalo->format('%h') * 3600 + $intervalo->format('%i') * 60 + $intervalo->format('%s'));
-				$this -> Orden -> Pedido -> saveField('estado', TRUE);
+				$this -> Orden -> Pedido -> saveField('estado', 1);
 				$this -> Orden -> Pedido -> saveField('finalizado', $fecha -> format('Y-m-d H:i:s'));
 
 				# Luego se recorre cada Orden del Pedido y se salvan los campos de cantidad y el estado.
