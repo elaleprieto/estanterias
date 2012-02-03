@@ -348,14 +348,5 @@ class PedidosController extends AppController {
 			}
 		}
 	}
-
-	function aux_finAControl() {
-		$pedidos = $this -> Pedido -> find('list', array('conditions' => array('Pedido.estado' => '1')));
-		foreach ($pedidos as $pedido_id) {
-			$this -> Pedido -> id = $pedido_id;
-			$this -> Pedido -> saveField('estado', 2);
-		}
-	}
-
 }
 ?>
