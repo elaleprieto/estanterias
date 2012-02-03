@@ -3,12 +3,12 @@ class PedidosController extends AppController {
 	var $name = 'Pedidos';
 	var $components = array('RequestHandler');
 	var $helpers = array(
-			'Ajax',
-			'Paginator',
-			'Time',
-			'Foto',
-			'Javascript',
-			'Js' => array('Jquery')
+		'Ajax',
+		'Paginator',
+		'Time',
+		'Foto',
+		'Javascript',
+		'Js' => array('Jquery')
 	);
 
 	function index() {
@@ -24,7 +24,11 @@ class PedidosController extends AppController {
 		$this -> set('pedido', $this -> Pedido -> read(null, $id));
 	}
 
-	function admin_index() {
+	function admin_index($pedido_id = null) {
+		if ($pedido_id) {
+			$this -> Pedido -> id = $pedido_id;
+			$this -> Pedido -> saveField('estado', 0);
+		}
 		$this -> Pedido -> recursive = 1;
 		$this -> set('pedidos', $this -> paginate('Pedido', array('Pedido.estado' => '0')));
 	}
@@ -33,6 +37,52 @@ class PedidosController extends AppController {
 		$this -> Pedido -> recursive = 1;
 		$this -> paginate = array('Pedido' => array('order' => array('finalizado' => 'DESC'), ));
 		$this -> set('pedidos', $this -> paginate('Pedido', array('Pedido.estado' => '1')));
+	}
+
+	function admin_controlados($pedido_id = null) {
+		if ($pedido_id) {
+			# Se verifica que el estado del pedido sea "Finalizado", es decir, estado == 1
+			# Si no, no se cambia el estado del Pedido.
+			# Además, se verifica que la petición provenga de la acción Finalizados del controller Pedidos.
+			# Esto debería evitar errores.
+			$estado = $this -> Pedido -> read('estado', $pedido_id);
+			if ($estado['Pedido']['estado'] == 1 && strpos($this -> referer(), 'pedidos') && strpos($this -> referer(), 'finalizados')) {
+				# Se calcula el tiempo de Control en segundos.
+				$fecha = new DateTime();
+				$finalizado = $this -> Pedido -> read('finalizado', $pedido_id);
+				$finalizado = new DateTime($finalizado['Pedido']['finalizado']);
+				$intervalo = $fecha -> diff($finalizado);
+				$tiempo_control = $this -> Pedido -> read('tiempo_control', $pedido_id);
+
+				# Se guardan los datos del Pedido
+				$this -> Pedido -> id = $pedido_id;
+				$this -> Pedido -> saveField('estado', 2);
+				$this -> Pedido -> saveField('controlado', $fecha -> format('Y-m-d H:i:s'));
+				$this -> Pedido -> saveField('tiempo_control', $tiempo_control['Pedido']['tiempo_control'] + $intervalo -> format('%d') * 24 * 3600 + $intervalo -> format('%h') * 3600 + $intervalo -> format('%i') * 60 + $intervalo -> format('%s'));
+
+				# Se actualiza el Stock
+				$ordenes = $this -> Pedido -> Orden -> find('list', array(
+					'conditions' => array(
+						'Orden.pedido_id' => $pedido_id,
+						'Orden.estado' => TRUE
+					),
+					'fields' => array(
+						'Orden.articulo_id',
+						'Orden.cantidad',
+					)
+				));
+				foreach ($ordenes as $articulo_id => $cantidad) {
+					$this -> loadModel('Articulo');
+					$this -> Articulo -> recursive = 0;
+					$stock = $this -> Articulo -> read('stock', $articulo_id);
+					$this -> Articulo -> id = $articulo_id;
+					$this -> Articulo -> saveField('stock', $stock['Articulo']['stock'] - $cantidad);
+				}
+			}
+		}
+		$this -> Pedido -> recursive = 1;
+		$this -> paginate = array('Pedido' => array('order' => array('finalizado' => 'DESC'), ));
+		$this -> set('pedidos', $this -> paginate('Pedido', array('Pedido.estado' => '2')));
 	}
 
 	function admin_add() {
@@ -65,33 +115,31 @@ class PedidosController extends AppController {
 				foreach ($this -> data['Orden'] as $orden) {
 					$this -> Pedido -> Orden -> create();
 					$this -> Pedido -> Orden -> set(array(
-							'articulo_id' => $orden['id'],
-							'cantidad' => $orden['Cantidad'],
-							'cantidad_original' => $orden['Cantidad'],
-							'sin_cargo' => $orden['SinCargo'],
-							'observaciones' => $orden['Observaciones'],
-							'pedido_id' => $this -> Pedido -> id,
+						'articulo_id' => $orden['id'],
+						'cantidad' => $orden['Cantidad'],
+						'cantidad_original' => $orden['Cantidad'],
+						'sin_cargo' => $orden['SinCargo'],
+						'observaciones' => $orden['Observaciones'],
+						'pedido_id' => $this -> Pedido -> id,
 					));
 					$this -> Pedido -> Orden -> save();
 				}
 				$this -> Session -> setFlash('El pedido ha sido creado');
-				$this -> redirect(array(
-				'action' => 'index',
-				));
+				$this -> redirect(array('action' => 'index', ));
 			} else {
 				$this -> Session -> setFlash('El pedido no se ha guardado, intente nuevamente.');
 			}
 		}
 		$condicionesArticulo = array(
-				'OR' => array('NOT' => array('OR' => array(
-								array("Articulo.detalle LIKE" => "FAROL%"),
-								array("Articulo.detalle LIKE" => "BULONES%")
-						))),
-				array("Articulo.precio >" => "0")
+			'OR' => array('NOT' => array('OR' => array(
+						array("Articulo.detalle LIKE" => "FAROL%"),
+						array("Articulo.detalle LIKE" => "BULONES%")
+					))),
+			array("Articulo.precio >" => "0")
 		);
 		$articulos = $this -> Pedido -> Orden -> Articulo -> find('list', array(
-				'conditions' => $condicionesArticulo,
-				'order' => array('Articulo.orden')
+			'conditions' => $condicionesArticulo,
+			'order' => array('Articulo.orden')
 		));
 		$clientes = $this -> Pedido -> Cliente -> find('list', array('order' => array('Cliente.nombre')));
 		$transportes = $this -> Pedido -> Transporte -> find('list', array('order' => array('Transporte.nombre')));
@@ -135,13 +183,13 @@ class PedidosController extends AppController {
 					}
 
 					$this -> Pedido -> Orden -> set(array(
-							'articulo_id' => $datos['id'],
-							'cantidad' => $datos['Cantidad'],
-							'cantidad_original' => $datos['Cantidad'],
-							'estado' => $datos['estado'],
-							'sin_cargo' => $datos['SinCargo'],
-							'observaciones' => $datos['Observaciones'],
-							'pedido_id' => $this -> Pedido -> id,
+						'articulo_id' => $datos['id'],
+						'cantidad' => $datos['Cantidad'],
+						'cantidad_original' => $datos['Cantidad'],
+						'estado' => $datos['estado'],
+						'sin_cargo' => $datos['SinCargo'],
+						'observaciones' => $datos['Observaciones'],
+						'pedido_id' => $this -> Pedido -> id,
 					));
 					$this -> Pedido -> Orden -> save();
 				}
@@ -154,15 +202,15 @@ class PedidosController extends AppController {
 		}
 		$this -> data = $this -> Pedido -> read(null, $id);
 		$condicionesArticulo = array(
-				'OR' => array('NOT' => array('OR' => array(
-								array("Articulo.detalle LIKE" => "FAROL%"),
-								array("Articulo.detalle LIKE" => "BULONES%")
-						))),
-				array("Articulo.precio >" => "0")
+			'OR' => array('NOT' => array('OR' => array(
+						array("Articulo.detalle LIKE" => "FAROL%"),
+						array("Articulo.detalle LIKE" => "BULONES%")
+					))),
+			array("Articulo.precio >" => "0")
 		);
 		$articulos = $this -> Pedido -> Orden -> Articulo -> find('list', array(
-				'conditions' => $condicionesArticulo,
-				'order' => array('Articulo.orden')
+			'conditions' => $condicionesArticulo,
+			'order' => array('Articulo.orden')
 		));
 		$clientes = $this -> Pedido -> Cliente -> find('list');
 		$ordenes = $this -> Pedido -> Orden -> findAllByPedidoId($id);
@@ -199,12 +247,12 @@ class PedidosController extends AppController {
 		// $articulo = strtoupper($this -> data['Pedido']['articulo']);
 		$articulo = strtoupper($this -> params['url']['q']);
 		$this -> set('articulos', $this -> Pedido -> Orden -> Articulo -> find('all', array(
-				'conditions' => array('Articulo.detalle LIKE' => '%' . $articulo . '%'),
-				'fields' => array(
-						'detalle',
-						'id'
-				),
-				'order' => 'orden',
+			'conditions' => array('Articulo.detalle LIKE' => '%' . $articulo . '%'),
+			'fields' => array(
+				'detalle',
+				'id'
+			),
+			'order' => 'orden',
 		)));
 		$this -> layout = 'ajax';
 	}
@@ -298,6 +346,14 @@ class PedidosController extends AppController {
 			} else {
 				$this -> Session -> setFlash("Ocurrió un problema subiendo el archivo.");
 			}
+		}
+	}
+
+	function aux_finAControl() {
+		$pedidos = $this -> Pedido -> find('list', array('conditions' => array('Pedido.estado' => '1')));
+		foreach ($pedidos as $pedido_id) {
+			$this -> Pedido -> id = $pedido_id;
+			$this -> Pedido -> saveField('estado', 2);
 		}
 	}
 

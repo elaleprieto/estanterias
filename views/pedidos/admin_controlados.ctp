@@ -1,12 +1,13 @@
 <?php //debug($pedidos);?>
 <div class="pedidos_index">
-	<h2><?php __('Pedidos Finalizados');?></h2>
+	<h2><?php __('Pedidos Controlados');?></h2>
 	<table cellpadding="0" cellspacing="0">
 		<tr>
 			<th><?php echo $this -> Paginator -> sort('Número', 'Pedido.id');?></th>
 			<th><?php echo $this -> Paginator -> sort('cliente_id');?></th>
 			<th><?php echo $this -> Paginator -> sort('Creado', 'created');?></th>
 			<th><?php echo $this -> Paginator -> sort('Finalizado', 'Pedido.finalizado');?></th>
+			<th><?php echo $this -> Paginator -> sort('Controlado', 'Pedido.controlado');?></th>
 			<th><?php echo 'Tiempo[m]';?></th>
 			<th><?php echo 'Transporte';?></th>
 			<th class="actions"><?php __('Acciones');?></th>
@@ -22,15 +23,26 @@ $class = ' class="altrow"';
 		<tr<?php echo $class;?>>
 			<td><?php echo $pedido['Pedido']['id'];?>&nbsp;</td>
 			<td><?php echo $pedido['Cliente']['nombre'];?>&nbsp;</td>
-			<td><?php
-			# Fecha de creación formateada
-			echo $this -> Time -> format($format = 'd/m/Y H:i', $pedido['Pedido']['created']);
-			?>&nbsp; </td>
-			<td><?php
-			# Fecha de finalización formateada
-			echo $this -> Time -> format($format = 'd/m/Y H:i', $pedido['Pedido']['finalizado']);
-			?>&nbsp; </td>
-			<td><?= sprintf("%.1f", $pedido['Pedido']['tiempo_preparacion'] / 60)?></td>
+			<td>
+				<?php
+					# Fecha de Creación formateada
+					echo $this -> Time -> format($format = 'd/m/Y H:i', $pedido['Pedido']['created']);
+				?>
+			</td>
+			<td>
+				<?php
+					# Fecha de Finalización formateada
+					echo $this -> Time -> format($format = 'd/m/Y H:i', $pedido['Pedido']['finalizado']);
+				?>
+			</td>
+			<td>
+				<?php
+					# Fecha de Control formateada
+					$aux = $pedido['Pedido']['controlado'] ? $pedido['Pedido']['controlado'] : $pedido['Pedido']['finalizado'];
+					echo $this -> Time -> format($format = 'd/m/Y H:i', $aux);
+				?>
+			</td>
+			<td><?= sprintf("%.1f", $pedido['Pedido']['tiempo_control'] / 60)?></td>
 			<td><?= $pedido['Transporte']['nombre']?></td>
 			
 			<!------------------------------------------------------------------------------------>
@@ -43,22 +55,11 @@ $class = ' class="altrow"';
 						$pedido['Pedido']['id']
 				));
 				?>
-				<?php echo $this -> Html -> link('Pendiente', array(
-						'controller' => 'pedidos',
-						'action' => 'index',
-						$pedido['Pedido']['id']
-					), null, sprintf('¿Devolver a Pedidos Pendientes el pedido de %s?', $pedido['Cliente']['nombre']));
-				?>
-				<?php echo $this -> Html -> link(__('Imprimir', true), array(
-							'action' => 'imprimir',
-							$pedido['Pedido']['id']
-					), array('target' => '_blank'));
-				?>
-				<?php echo $this -> Html -> link('Controlado', array(
-						'controller' => 'pedidos',
-						'action' => 'controlados',
-						$pedido['Pedido']['id']
-					), null, sprintf('¿Ha sido controlado el pedido de %s?', $pedido['Cliente']['nombre']));
+				<?php echo $this -> Html -> link(__('Etiquetas', true), array(
+							'controller' => 'clientes',
+							'action' => 'etiquetas',
+							$pedido['Cliente']['id']
+					));
 				?>
 			</td>
 			</tr> <?php endforeach;?>

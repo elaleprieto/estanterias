@@ -151,13 +151,9 @@ class OrdenesController extends AppController {
 				foreach ($this->data['Orden'] as $index => $orden) {
 					$this -> Orden -> create($orden);
 					$this -> Orden -> id = $orden['id'];
-					if ($this -> Orden -> saveField('cantidad', $orden['cantidad']) && $this -> Orden -> saveField('estado', $orden['estado'])) {
-						$articulo_id = $this -> Orden -> read('articulo_id', $orden['id']);
-						$this -> Orden -> Articulo -> recursive = 0;
+					if ($this -> Orden -> saveField('estado', $orden['estado'])) {
 						if ($orden['estado']) {
-							$stock = $this -> Orden -> Articulo -> read('stock', $articulo_id['Orden']['articulo_id']);
-							$this -> Orden -> Articulo -> id = $articulo_id;
-							$this -> Orden -> Articulo -> saveField('stock', $stock['Articulo']['stock'] - $orden['cantidad']);
+							$this -> Orden -> saveField('cantidad', $orden['cantidad']);
 						} else {
 							$this -> Orden -> saveField('cantidad', 0);
 						}

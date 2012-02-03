@@ -113,6 +113,8 @@
 			<br />
 			<?php echo $this -> Html -> link('Finalizados', 
 					array('controller' => 'pedidos', 'action' => 'finalizados')); ?>
+			<?php echo $this -> Html -> link('Controlados', 
+					array('controller' => 'pedidos', 'action' => 'controlados')); ?>
 		</div>
 		<div id='menu_articulos'>
 			<?php echo $this -> Html -> link('Listar', 
