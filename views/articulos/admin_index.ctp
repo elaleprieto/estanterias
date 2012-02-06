@@ -48,7 +48,7 @@ echo $this -> Html -> css('admin_articulos_index');
 		<td><?php echo $articulo['Articulo']['created']; ?>&nbsp;</td>
 		<td><?php echo $articulo['Articulo']['modified']; ?>&nbsp;</td>
 		<td class="actions">
-			<?php echo $this->Html->link('Ver', array('action' => 'view', $articulo['Articulo']['id'], 'admin' => FALSE)); ?>
+			<?php echo $this->Html->link('Ver', array('action' => 'view', $articulo['Articulo']['id'], 'admin' => TRUE)); ?>
 			<?php echo $this->Html->link('Editar', array('action' => 'edit', $articulo['Articulo']['id'])); ?>
 			<?php echo $this->Html->link('Set Stock', array('action' => 'set_stock', $articulo['Articulo']['id'])); ?>
 			<?php echo $this->Html->link('Set Pack', array('action' => 'set_pack', $articulo['Articulo']['id'])); ?>

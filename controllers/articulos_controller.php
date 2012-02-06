@@ -32,6 +32,20 @@ class ArticulosController extends AppController {
 			))));
 		$this -> set('articulo', $this -> Articulo -> read(null, $id));
 	}
+	
+	function admin_view($id = null) {
+		if (!$id) {
+			$this -> Session -> setFlash(__('Invalid articulo', true));
+			$this -> redirect(array(
+					'controller' => 'ubicados',
+					'action' => 'index'
+			));
+		}
+		$this -> set('ubicaciones', $this -> Articulo -> Ubicado -> find('all', array('conditions' => array(
+					'Ubicado.articulo_id' => $id,
+			))));
+		$this -> set('articulo', $this -> Articulo -> read(null, $id));
+	}
 
 	function admin_add() {
 		if (!empty($this -> data)) {
