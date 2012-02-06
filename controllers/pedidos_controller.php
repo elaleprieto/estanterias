@@ -159,43 +159,67 @@ class PedidosController extends AppController {
 			if (!isset($this -> data['Pedido']['contrarrembolso'])) {$this -> data['Pedido']['contrarrembolso'] = FALSE;
 			}
 			if ($this -> Pedido -> save($this -> data)) {
-				# Lo que se hace acá es borrar todas las ordenes que tenía el pedido
-				# y crear las nuevas.
 
 				# Me traigo todas las ordenes que tienen el id del pedido que se está modificando
 				$ordenes = $this -> Pedido -> Orden -> findAllByPedidoId($id);
-
-				# Elimino todas las órdenes que busqué
+				$nuevas = $this -> data['Orden'];
+				
+				# Actualizo las que está creadas
 				foreach ($ordenes as $orden) {
-					$this -> Pedido -> Orden -> delete($orden['Orden']['id']);
+					$existe = FALSE;
+					foreach ($nuevas as $index => $datos) {
+						// debug($index);
+						# verificación de variables
+						if (!isset($datos['estado'])) {$datos['estado'] = FALSE;
+						}
+						if (!isset($datos['SinCargo'])) {$datos['SinCargo'] = FALSE;
+						}
+						if (!isset($datos['Observaciones'])) {$datos['Observaciones'] = "";
+						}
+						if ($orden['Orden']['articulo_id'] == $datos['id'] && $orden['Orden']['sin_cargo'] == $datos['SinCargo']) {
+							$this -> Pedido -> Orden -> id = $orden['Orden']['id'];
+							$this -> Pedido -> Orden -> saveField('cantidad', $datos['Cantidad']);
+							$this -> Pedido -> Orden -> saveField('estado', $datos['estado']);
+							$this -> Pedido -> Orden -> saveField('observaciones', $datos['Observaciones']);
+							$existe = TRUE;
+						}
+					}
+					# Se eliminan las ordenes que no existan en las ordenes que vienen nuevas.
+					if (!$existe)
+						$this -> Pedido -> Orden -> delete($orden['Orden']['id']);
 				}
 
-				# Creo todas las órdenes que vienen
-				foreach ($this -> data['Orden'] as $articulo_id => $datos) {
-					$this -> Pedido -> Orden -> create();
-
+				# Se crean las órdenes que no fueron actualizadas porque no existían
+				foreach ($nuevas as $index => $datos) {
 					# verificación de variables
-					if (!isset($datos['estado'])) {$datos['estado'] = 0;
+					if (!isset($datos['estado'])) {$datos['estado'] = FALSE;
 					}
-					if (!isset($datos['SinCargo'])) {$datos['SinCargo'] = 0;
-					}
-					if (!isset($datos['Observaciones'])) {$datos['Observaciones'] = "";
-					}
+					$existe = $this -> Pedido -> Orden -> find('list', array('conditions' => array(
+							'Orden.articulo_id' => $datos['id'],
+							'Orden.estado' => $datos['estado']
+						)));
 
-					$this -> Pedido -> Orden -> set(array(
-						'articulo_id' => $datos['id'],
-						'cantidad' => $datos['Cantidad'],
-						'cantidad_original' => $datos['Cantidad'],
-						'estado' => $datos['estado'],
-						'sin_cargo' => $datos['SinCargo'],
-						'observaciones' => $datos['Observaciones'],
-						'pedido_id' => $this -> Pedido -> id,
-					));
-					$this -> Pedido -> Orden -> save();
+					if (!$existe) {
+						$this -> Pedido -> Orden -> create();
+
+						# verificación de variables
+						if (!isset($datos['SinCargo'])) {$datos['SinCargo'] = FALSE;
+						}
+						if (!isset($datos['Observaciones'])) {$datos['Observaciones'] = "";
+						}
+
+						$this -> Pedido -> Orden -> set(array(
+							'articulo_id' => $datos['id'],
+							'cantidad' => $datos['Cantidad'],
+							'cantidad_original' => $datos['Cantidad'],
+							'estado' => $datos['estado'],
+							'sin_cargo' => $datos['SinCargo'],
+							'observaciones' => $datos['Observaciones'],
+							'pedido_id' => $this -> Pedido -> id,
+						));
+						$this -> Pedido -> Orden -> save();
+					}
 				}
-
-				//$this -> Session -> setFlash('El pedido ha sido modificado');
-				//$this -> redirect(array('action' => 'index'));
 			} else {
 				$this -> Session -> setFlash(__('The pedido could not be saved. Please, try again.', true));
 			}
@@ -213,7 +237,10 @@ class PedidosController extends AppController {
 			'order' => array('Articulo.orden')
 		));
 		$clientes = $this -> Pedido -> Cliente -> find('list');
-		$ordenes = $this -> Pedido -> Orden -> findAllByPedidoId($id);
+		$ordenes = $this -> Pedido -> Orden -> find('all', array(
+			'conditions' => array('pedido_id' => $id),
+			'order' => array('Articulo.orden')
+		));
 		$transportes = $this -> Pedido -> Transporte -> find('list', array('order' => array('Transporte.nombre')));
 		$this -> set(compact('clientes', 'articulos', 'ordenes', 'transportes'));
 	}
@@ -348,5 +375,6 @@ class PedidosController extends AppController {
 			}
 		}
 	}
+
 }
 ?>
