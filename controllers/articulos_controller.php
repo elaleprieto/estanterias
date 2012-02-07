@@ -446,6 +446,46 @@ class ArticulosController extends AppController {
 			$this -> set('articulo', $this -> Articulo -> findById($id));
 		} 
 	}
+	
+	public function admin_buscar() {
+		
+	}
+	
+	/**
+	 * get_buscados(): realiza la búsqueda de articulos. 
+	 * Es usado por buscar() para hacer la búsqueda desde una petición Ajax de buscar().
+	 */
+	public function admin_get_buscados() {
+		$this -> layout = 'ajax';
+		if (!empty($this->data)) {
+			$cadena = explode(' ', mb_strtoupper($this->data['Articulo']['articulo'], 'utf-8'));
+			$consulta = "SELECT  id, detalle, unidad, foto, stock, pack, precio,
+							array_agg(pasillo_nombre) AS pasillo_nombre, array_agg(pasillo_lado) AS pasillo_lado, 
+							min(pasillo_distancia) AS pasillo_distancia, array_agg(ubicacion_altura) AS ubicacion_altura, 
+							array_agg(ubicacion_posicion) AS ubicacion_posicion, array_agg(ubicacion_estado) AS ubicacion_estado 
+						FROM (SELECT 	A.id AS id, A.detalle AS detalle, A.unidad AS unidad, A.foto AS foto, A.orden AS orden,
+								A.precio AS precio, A.stock AS stock, A.pack AS pack,
+								P.nombre AS pasillo_nombre, P.lado AS pasillo_lado, 
+								P.distancia AS pasillo_distancia, Ub.altura AS ubicacion_altura, 
+								Ub.posicion AS ubicacion_posicion, U.estado AS ubicacion_estado 
+							FROM Articulos AS A LEFT JOIN Ubicados AS U ON U.articulo_id = A.id 
+								LEFT JOIN Pasillos AS P ON U.pasillo_id = P.id LEFT JOIN Ubicaciones AS Ub ON U.ubicacion_id = Ub.id
+							WHERE 1=1";
+			foreach ($cadena as $palabra) {
+				$consulta .= "AND A.detalle LIKE '%" . $palabra . "%'";
+			}
+			$consulta .= "ORDER BY ubicacion_estado DESC
+					) AS E
+					GROUP BY id, detalle, unidad, foto, orden, stock, pack, precio
+					ORDER BY orden ASC";
+			$this -> set('articulos', $this -> Articulo -> query($consulta));
+		}
+		// $origen = explode('/', $this->referer());
+		// if($origen[1] == 'admin') {
+			// # La consulta es la misma, lo que cambia es la vista porque tiene acciones en el admin
+			// $this -> render('admin_get_ubicados');
+		// }
+	}
 
 }
 ?>

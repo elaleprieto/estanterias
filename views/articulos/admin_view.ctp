@@ -69,12 +69,12 @@ echo $this -> Html -> css('admin_articulos_view');
 		</div>
 		<div class="actions">
 	<ul>
-		<li><?= $this->Html->link('Set Stock', array('action' => 'set_stock', $articulo['Articulo']['id'])); ?></li>
-		<li><?= $this->Html->link('Set Pack', array('action' => 'set_pack', $articulo['Articulo']['id'])); ?></li>
-		<li><?= $this->Html->link('Fotografiar', array('action' => 'fotografiar', $articulo['Articulo']['id'])); ?></li>
-		<li><?= $this->Html->link('Editar', array('action' => 'edit', $articulo['Articulo']['id'])); ?></li>
-		<li><?= $this->Html->link(__('Delete', true), array('action' => 'delete', $articulo['Articulo']['id']), null, '¿Está seguro que dese eliminar el artículo?'); ?></li>
-		<li><?= $this->Html->link(__('List Articulos', true), array('action' => 'index'));?></li>
+		<li><?= $this->Html->link('Ingresar Stock', array('action' => 'set_stock', $articulo['Articulo']['id'])); ?></li>
+		<li><?= $this->Html->link('Ingresar Pack', array('action' => 'set_pack', $articulo['Articulo']['id'])); ?></li>
+		<li><?= $this->Html->link('Fotografiar Articulo', array('action' => 'fotografiar', $articulo['Articulo']['id'])); ?></li>
+		<li><?= $this->Html->link('Editar Articulo', array('action' => 'edit', $articulo['Articulo']['id'])); ?></li>
+		<li><?= $this->Html->link('Eliminar Articulo', array('action' => 'delete', $articulo['Articulo']['id']), null, '¿Está seguro que dese eliminar el artículo?'); ?></li>
+		<li><?= $this->Html->link('Buscar Articulos', array('action' => 'buscar'));?></li>
 	</ul>
 </div>
 </fieldset>

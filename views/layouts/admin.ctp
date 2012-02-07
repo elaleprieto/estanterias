@@ -66,7 +66,7 @@
 							<?php
 							echo $this -> Html -> link('Articulos', array(
 									'controller' => 'articulos',
-									'action' => 'index'
+									'action' => 'buscar'
 							));
 							echo $this -> Html -> image('down_arroww.png', array(
 									'alt' => '',
@@ -117,6 +117,9 @@
 					array('controller' => 'pedidos', 'action' => 'controlados')); ?>
 		</div>
 		<div id='menu_articulos'>
+			<?php echo $this -> Html -> link('Buscar', 
+					array('controller' => 'articulos', 'action' => 'buscar')); ?>
+			<br />
 			<?php echo $this -> Html -> link('Listar', 
 					array('controller' => 'articulos', 'action' => 'index')); ?>
 			<br />
