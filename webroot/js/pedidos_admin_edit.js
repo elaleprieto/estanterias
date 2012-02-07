@@ -21,7 +21,6 @@ function articulosActualizar() {
 				/* definición de variables */
 				// cuenta secuencial por si se eliminan artículos, siempre se incrementa
 				var indice = parseInt($('#serial_articulos').html());
-				alert(indice);
 				var sinCargo = 0;
 
 				// creo la fila y columnas

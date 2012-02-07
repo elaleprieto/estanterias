@@ -189,6 +189,7 @@ class PedidosController extends AppController {
 						$this -> Pedido -> Orden -> delete($orden['Orden']['id']);
 				}
 
+
 				# Se crean las órdenes que no fueron actualizadas porque no existían
 				foreach ($nuevas as $index => $datos) {
 					# verificación de variables
@@ -196,7 +197,8 @@ class PedidosController extends AppController {
 					}
 					$existe = $this -> Pedido -> Orden -> find('list', array('conditions' => array(
 							'Orden.articulo_id' => $datos['id'],
-							'Orden.estado' => $datos['estado']
+							'Orden.estado' => $datos['estado'],
+							'Orden.pedido_id' => $this -> Pedido -> id
 						)));
 
 					if (!$existe) {
