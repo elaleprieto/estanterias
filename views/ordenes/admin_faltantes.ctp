@@ -69,7 +69,8 @@ echo $this -> Form -> end();
 		<tr>
 			<th>Fecha</th>
 			<th>Código</th>
-			<th>Cantidad</th>
+			<th>Cantidad Pedida</th>
+			<th>Cantidad Enviada</th>
 			<th>Stock</th>
 			<th>Articulo</th>
 			<th>Cliente</th>
@@ -81,12 +82,13 @@ echo $this -> Form -> end();
 foreach($ordenes as $orden){
 		?>
 		<tr>
-			<td><?php echo $this -> Time -> format($format = 'd/m/Y', $orden[0]['finalizado']);?></td>
-			<td ><?php echo $orden[0]['articulo_id'];?></td>
-			<td><?php echo $orden[0]['cantidad_original'] != 0 ? $orden[0]['cantidad_original'] : $orden[0]['cantidad'];?></td>
-			<td><?php echo $orden[0]['stock'];?></td>
-			<td class="articulo"><?php echo $orden[0]['detalle'];?></td>
-			<td class="cliente"><?php echo $orden[0]['nombre'];?></td>
+			<td><?= $this -> Time -> format($format = 'd/m/Y', $orden[0]['finalizado']) ?></td>
+			<td><?= $orden[0]['articulo_id'] ?></td>
+			<td><?= $orden[0]['cantidad_original'] ?></td>
+			<td><?= $orden[0]['cantidad'] ?></td>
+			<td><?= $orden[0]['stock'] ?></td>
+			<td class="articulo"><?= $orden[0]['detalle'] ?></td>
+			<td class="cliente"><?= $orden[0]['nombre'] ?></td>
 		</tr>
 		<?php
 		}

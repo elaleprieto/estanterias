@@ -336,8 +336,8 @@ class OrdenesController extends AppController {
 					WHERE O.articulo_id = A.id
 					AND O.pedido_id = P.id
 					AND P.cliente_id = C.id
-					AND O.estado = FALSE
-					AND P.estado = 1
+					AND P.estado > 0
+					AND O.cantidad_original > O.cantidad
 					AND P.finalizado BETWEEN '$fechaInicio' AND '$fechaFin'
 					$clienteSeleccionado
 					$articuloSeleccionado
@@ -346,6 +346,5 @@ class OrdenesController extends AppController {
 		$this -> set('clientes', $this -> Orden -> Pedido -> Cliente -> find('list', array('order' => 'Cliente.nombre ASC')));
 		$this -> set('articulos', $this -> Orden -> Articulo -> find('list', array('order' => 'Articulo.detalle ASC')));
 	}
-
 }
 ?>
