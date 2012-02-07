@@ -83,7 +83,7 @@ class ArticulosController extends AppController {
 		)));
 	}
 
-	function edit($id = null) {
+	function admin_edit($id = null) {
 		if (!$id && empty($this -> data)) {
 			$this -> Session -> setFlash(__('Invalid articulo', true));
 			$this -> redirect(array('action' => 'index'));

@@ -8,50 +8,81 @@ echo $javascript -> codeBlock('WEBROOT="' . $this -> Html -> url('/', true) . '"
 # Se agregan las CSS
 echo $this -> Html -> css('admin_articulos_view');
 ?>
-<div class="detalles">
-	<fieldset>
- 		<legend>Detalles</legend>
-		<dl><?php $i = 0; $class = ' class="altrow"';?>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Codigo'); ?></dt>
-			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $articulo['Articulo']['id']; ?>
-				&nbsp;
-			</dd>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Detalle'); ?></dt>
-			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $articulo['Articulo']['detalle']; ?>
-				&nbsp;
-			</dd>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Unidad'); ?></dt>
-			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $articulo['Articulo']['unidad']; ?>
-				&nbsp;
-			</dd>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Stock'); ?></dt>
-			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $articulo['Articulo']['stock']; ?>
-				&nbsp;
-			</dd>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Pack'); ?></dt>
-			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $articulo['Articulo']['pack']; ?>
-				&nbsp;
-			</dd>
-			<dt><?php __('Foto'); ?></dt>
-			<dd>
-				<?php 
-				# Se verifica la existencia de la foto del artículo en el directorio,
-				# si no existe se carga la foto "nofoto.png"
-				$foto = $this -> Foto -> articulo($articulo['Articulo']['foto']);
-				echo $this -> Html -> image($foto, array('class' => 'articulo_view')); ?>
-				&nbsp;
-			</dd>
-		</dl>
-	</fieldset>
+<fieldset>
+	<legend>Detalles del Artículo</legend>
+		<div class="detalles form">
+			<dl><?php $i = 0; $class = ' class="altrow"';?>
+				<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Código'); ?></dt>
+				<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+					<?php echo $articulo['Articulo']['id']; ?>
+					&nbsp;
+				</dd>
+				<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Detalle'); ?></dt>
+				<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+					<?php echo $articulo['Articulo']['detalle']; ?>
+					&nbsp;
+				</dd>
+				<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Unidad'); ?></dt>
+				<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+					<?php echo $articulo['Articulo']['unidad']; ?>
+					&nbsp;
+				</dd>
+				<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Precio'); ?></dt>
+				<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+					<?php echo $articulo['Articulo']['precio']; ?>
+					&nbsp;
+				</dd>
+				<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Stock'); ?></dt>
+				<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+					<?php echo $articulo['Articulo']['stock']; ?>
+					&nbsp;
+				</dd>
+				<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Pack'); ?></dt>
+				<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+					<?php echo $articulo['Articulo']['pack']; ?>
+					&nbsp;
+				</dd>
+				<dt<?php if ($i % 2 == 0) echo $class;?>><?= 'Creado'?></dt>
+				<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+					<?php
+						$fecha = new DateTime($articulo['Articulo']['created']);
+						echo $fecha -> format('d-m-Y H:i:s');
+				 	?>
+				 </dd>
+				<dt<?php if ($i % 2 == 0) echo $class;?>><?= 'Modificado'?></dt>
+				<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+					<?php
+						$fecha = new DateTime($articulo['Articulo']['modified']);
+						echo $fecha -> format('d-m-Y H:i:s');
+				 	?>
+				 </dd>
+				<dt><?php __('Foto'); ?></dt>
+				<dd>
+					<?php 
+					# Se verifica la existencia de la foto del artículo en el directorio,
+					# si no existe se carga la foto "nofoto.png"
+					$foto = $this -> Foto -> articulo($articulo['Articulo']['foto']);
+					echo $this -> Html -> image($foto, array('class' => 'articulo_view')); ?>
+					&nbsp;
+				</dd>
+			</dl>
+		</div>
+		<div class="actions">
+	<ul>
+		<li><?= $this->Html->link('Set Stock', array('action' => 'set_stock', $articulo['Articulo']['id'])); ?></li>
+		<li><?= $this->Html->link('Set Pack', array('action' => 'set_pack', $articulo['Articulo']['id'])); ?></li>
+		<li><?= $this->Html->link('Fotografiar', array('action' => 'fotografiar', $articulo['Articulo']['id'])); ?></li>
+		<li><?= $this->Html->link('Editar', array('action' => 'edit', $articulo['Articulo']['id'])); ?></li>
+		<li><?= $this->Html->link(__('Delete', true), array('action' => 'delete', $articulo['Articulo']['id']), null, '¿Está seguro que dese eliminar el artículo?'); ?></li>
+		<li><?= $this->Html->link(__('List Articulos', true), array('action' => 'index'));?></li>
+	</ul>
 </div>
+</fieldset>
 <div class="ubicaciones">
 	<fieldset>
- 		<legend><?= sizeof($ubicaciones) > 1 ? 'Ubicaciones' : 'Ubicación' ?></legend>
+ 		<legend><?= sizeof($ubicaciones) > 1 ? 'Ubicaciones' : 'Ubicación' ?>
+ 			<span>(<?= $this->Html->link(__('Agregar', true), array('controller' => 'Ubicados', 'action' => 'add', $articulo['Articulo']['id']));?>)</span>
+ 		</legend>
 		<table cellpadding="0" cellspacing="0">
 			<thead>
 				<tr>
