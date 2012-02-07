@@ -33,8 +33,15 @@ $(document).ready(function() {
 		}
 	});
 	$('#codigo').keyup(function(e) {
-		$('#lista option[value="' + $('#codigo').val() + '"]').attr('selected', 'selected');
-		setArticulo($('#lista option:selected').val());
+		if($('#codigo').val()) {
+			if($('#lista option[value="' + $('#codigo').val() + '"]').length > 0) {
+				$('#lista option[value="' + $('#codigo').val() + '"]').attr('selected', 'selected')
+				setArticulo($('#lista option:selected').val());
+			} else {
+				$('#codigo').val($('#codigo').val().substring(0, $('#codigo').val().length - 1));
+				alert('Código inválido');
+			}
+		}
 	});
 	$('#anterior').click(function() {
 		retroceder();
