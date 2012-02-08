@@ -6,8 +6,10 @@
 		echo $this->Form->input('id', array('type' => 'text', 'label' => 'Código', 'disabled' => 'disabled'));
 		echo $this->Form->input('detalle');
 		echo $this->Form->input('unidad');
-		echo $this->Form->input('precio');
+		echo $this->Form->input('precio', array('label' => 'Precio de Costo ($)'));
+		echo $this->Form->input('porcentaje', array('label' => 'Porcentaje de Venta (%)'));
 		echo $this->Form->input('stock');
+		echo $this->Form->input('pack');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit', true));?>

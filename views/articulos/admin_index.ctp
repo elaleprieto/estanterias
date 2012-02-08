@@ -14,7 +14,7 @@ echo $this -> Html -> css('admin_articulos_index');
 			<th><?php echo $this->Paginator->sort('id');?></th>
 			<th><?php echo $this->Paginator->sort('detalle');?></th>
 			<th><?php echo $this->Paginator->sort('unidad');?></th>
-			<th><?php echo $this->Paginator->sort('precio');?></th>
+			<th><?php echo $this->Paginator->sort('precio_venta');?></th>
 			<th><?php echo $this->Paginator->sort('stock');?></th>
 			<th><?php echo $this->Paginator->sort('pack');?></th>
 			<th><?php echo $this->Paginator->sort('created');?></th>
@@ -42,7 +42,7 @@ echo $this -> Html -> css('admin_articulos_index');
 		<td><?php echo $articulo['Articulo']['id']; ?>&nbsp;</td>
 		<td><?php echo $articulo['Articulo']['detalle']; ?>&nbsp;</td>
 		<td><?php echo $articulo['Articulo']['unidad']; ?>&nbsp;</td>
-		<td><?php echo $articulo['Articulo']['precio']; ?>&nbsp;</td>
+		<td><?php echo sprintf('$ %.2f', $articulo['Articulo']['precio_venta']); ?>&nbsp;</td>
 		<td><?php echo $articulo['Articulo']['stock']; ?>&nbsp;</td>
 		<td><?php echo $articulo['Articulo']['pack']; ?>&nbsp;</td>
 		<td><?php echo $articulo['Articulo']['created']; ?>&nbsp;</td>

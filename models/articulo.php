@@ -2,6 +2,10 @@
 class Articulo extends AppModel {
 	var $name = 'Articulo';
 	var $displayField = 'detalle';
+	var $virtualFields = array(
+		// 'precio_venta' => 'SELECT COUNT(*) FROM Ordenes AS ordenes WHERE ordenes.pedido_id = Pedido.id GROUP BY ordenes.pedido_id',
+		'precio_venta' => 'SELECT (precio + precio * porcentaje / 100) FROM Articulos as articulos WHERE articulos.id = Articulo.id',
+	);
 
 	var $validate = array(
 			'detalle' => array('notempty' => array('rule' => array('notempty'),

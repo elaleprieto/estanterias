@@ -459,12 +459,12 @@ class ArticulosController extends AppController {
 		$this -> layout = 'ajax';
 		if (!empty($this->data)) {
 			$cadena = explode(' ', mb_strtoupper($this->data['Articulo']['articulo'], 'utf-8'));
-			$consulta = "SELECT  id, detalle, unidad, foto, stock, pack, precio,
+			$consulta = "SELECT  id, detalle, unidad, foto, stock, pack, (precio + precio * porcentaje / 100) AS precio_venta,
 							array_agg(pasillo_nombre) AS pasillo_nombre, array_agg(pasillo_lado) AS pasillo_lado, 
 							min(pasillo_distancia) AS pasillo_distancia, array_agg(ubicacion_altura) AS ubicacion_altura, 
 							array_agg(ubicacion_posicion) AS ubicacion_posicion, array_agg(ubicacion_estado) AS ubicacion_estado 
 						FROM (SELECT 	A.id AS id, A.detalle AS detalle, A.unidad AS unidad, A.foto AS foto, A.orden AS orden,
-								A.precio AS precio, A.stock AS stock, A.pack AS pack,
+								A.precio AS precio, A.porcentaje AS porcentaje, A.stock AS stock, A.pack AS pack,
 								P.nombre AS pasillo_nombre, P.lado AS pasillo_lado, 
 								P.distancia AS pasillo_distancia, Ub.altura AS ubicacion_altura, 
 								Ub.posicion AS ubicacion_posicion, U.estado AS ubicacion_estado 
@@ -476,7 +476,7 @@ class ArticulosController extends AppController {
 			}
 			$consulta .= "ORDER BY ubicacion_estado DESC
 					) AS E
-					GROUP BY id, detalle, unidad, foto, orden, stock, pack, precio
+					GROUP BY id, detalle, unidad, foto, orden, stock, pack, precio, porcentaje
 					ORDER BY orden ASC";
 			$this -> set('articulos', $this -> Articulo -> query($consulta));
 		}

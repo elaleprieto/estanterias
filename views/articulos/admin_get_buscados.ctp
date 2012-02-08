@@ -7,7 +7,7 @@
 		<th><?php echo 'foto';?></th>
 		<th><?php echo 'Articulo';?></th>
 		<th><?php echo 'Unidad';?></th>
-		<th><?php echo 'Precio';?></th>
+		<th><?php echo 'Precio Venta';?></th>
 		<th><?php echo 'Stock';?></th>
 		<th><?php echo 'Pack';?></th>
 		<th><?php echo 'Pasillo';?></th>
@@ -42,7 +42,7 @@
 			$articulo['id']));
 		?></td>
 		<td><?php echo $articulo['unidad']; ?>&nbsp;</td>
-		<td><?php echo $articulo['precio']; ?>&nbsp;</td>
+		<td><?php echo sprintf('$ %.2f', $articulo['precio_venta']); ?>&nbsp;</td>
 		<td><?php echo $articulo['stock']; ?>&nbsp;</td>
 		<td><?php echo $articulo['pack']; ?>&nbsp;</td>
 		<?php

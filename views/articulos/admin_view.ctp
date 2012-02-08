@@ -27,9 +27,9 @@ echo $this -> Html -> css('admin_articulos_view');
 					<?php echo $articulo['Articulo']['unidad']; ?>
 					&nbsp;
 				</dd>
-				<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Precio'); ?></dt>
+				<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Precio Venta'); ?></dt>
 				<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-					<?php echo $articulo['Articulo']['precio']; ?>
+					<?php echo sprintf('$ %.2f', $articulo['Articulo']['precio_venta']); ?>
 					&nbsp;
 				</dd>
 				<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Stock'); ?></dt>
