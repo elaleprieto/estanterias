@@ -1,5 +1,7 @@
 <?php
 App::import('Lib', 'tcpdf/tcpdf');
+# Cliente ID
+define('CLIENTEID', $pedido['Cliente']['id']);
 # Cliente
 define('CLIENTE', $pedido['Cliente']['nombre']);
 # Fecha de finalización del pedido
@@ -18,8 +20,9 @@ class MYPDF extends TCPDF {
         // Seteo de la fuente
         $this->SetFont('freesans', 'B', 12);
         // Título
-        $this->Cell(196/2, 10, 'Pedido de ' . CLIENTE, array('B' => 1), false, 'L', 0, '', 0, false, 'M', 'B');
-        $this->Cell(196/2, 10, 'Fecha: ' . FECHA, array('B' => 1), false, 'R', 0, '', 0, false, 'M', 'B');
+        $this->Cell(196/3, 10, 'Pedido de ' . CLIENTE, array('B' => 1), false, 'L', 0, '', 0, false, 'M', 'B');
+        $this->Cell(196/3, 10, 'Código: ' . CLIENTEID, array('B' => 1), false, 'R', 0, '', 0, false, 'M', 'B');
+        $this->Cell(196/3, 10, 'Fecha: ' . FECHA, array('B' => 1), false, 'R', 0, '', 0, false, 'M', 'B');
     }
 }
 
