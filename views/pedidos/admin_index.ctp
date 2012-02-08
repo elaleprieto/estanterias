@@ -10,10 +10,10 @@ echo $html -> css('pedidos_admin_index');
 			<th><?php echo $this -> Paginator -> sort('Número', 'Pedido.id');?></th>
 			<th><?php echo $this -> Paginator -> sort('cliente_id');?></th>
 			<th><?php echo $this -> Paginator -> sort('Fecha', 'created');?></th>
-			<th><?php echo 'Articulos';?></th>
-			<th><?php echo 'Progreso';?></th>
-			<th><?php echo 'Transporte';?></th>
-			<th><?php echo 'Observaciones';?></th>
+			<th><?php echo $this -> Paginator -> sort('Artículos', 'articulos');?></th>
+			<th><?php echo $this -> Paginator -> sort('progreso');?></th>
+			<th><?php echo $this -> Paginator -> sort('Transporte', 'Transporte.nombre');?></th>
+			<th><?php echo $this -> Paginator -> sort('observaciones');?></th>
 			<th class="actions"><?php __('Acciones');?></th>
 	</tr>
 	<?php
@@ -33,18 +33,19 @@ echo $html -> css('pedidos_admin_index');
 				echo $this -> Time -> format($format = 'd/m/Y H:i', $pedido['Pedido']['created']); 
 			?>&nbsp;
 		</td>
-		<td><?php echo $cantidad = sizeof($pedido['Orden']); ?></td>
+		<td><?php echo $cantidad = $pedido['Pedido']['articulos']; ?></td>
 		<td><?php
-			$completado = 0;
-			if ($cantidad > 0) {
-				foreach ($pedido['Orden'] as $orden) :
-					if ($orden['estado'])
-						$completado++;
-				endforeach;
-				echo sprintf("%.1f %%", $completado / $cantidad * 100);
-			} else {
-				echo '100.0%';
-			}
+			// $completado = 0;
+			// if ($cantidad > 0) {
+				// foreach ($pedido['Orden'] as $orden) :
+					// if ($orden['estado'])
+						// $completado++;
+				// endforeach;
+				// echo sprintf("%.1f %%", $pedido['Pedido']['progreso']);
+			// } else {
+				// echo '100.0%';
+			// }
+			echo sprintf("%.1f %%", $pedido['Pedido']['progreso']);
 		 ?></td>
 		<td><?php echo $pedido['Transporte']['nombre']; ?></td>
 		<td class="observaciones"><?php echo $pedido['Pedido']['observaciones']; ?></td>
