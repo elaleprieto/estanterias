@@ -9,6 +9,7 @@
 			<th><?php echo $this -> Paginator -> sort('Finalizado', 'Pedido.finalizado');?></th>
 			<th><?php echo 'Tiempo[m]';?></th>
 			<th><?php echo 'Transporte';?></th>
+			<th><?php echo 'Observaciones';?></th>
 			<th class="actions"><?php __('Acciones');?></th>
 		</tr>
 		<?php
@@ -32,6 +33,7 @@ $class = ' class="altrow"';
 			?>&nbsp; </td>
 			<td><?= sprintf("%.1f", $pedido['Pedido']['tiempo_preparacion'] / 60)?></td>
 			<td><?= $pedido['Transporte']['nombre']?></td>
+			<td><?= $pedido['Pedido']['observaciones']?></td>
 			
 			<!------------------------------------------------------------------------------------>
 			<!-- 									Acciones									-->

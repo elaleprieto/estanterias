@@ -10,6 +10,7 @@
 			<th><?php echo $this -> Paginator -> sort('Controlado', 'Pedido.controlado');?></th>
 			<th><?php echo 'Tiempo[m]';?></th>
 			<th><?php echo 'Transporte';?></th>
+			<th><?php echo 'Observaciones';?></th>
 			<th class="actions"><?php __('Acciones');?></th>
 		</tr>
 		<?php
@@ -44,6 +45,7 @@ $class = ' class="altrow"';
 			</td>
 			<td><?= sprintf("%.1f", $pedido['Pedido']['tiempo_control'] / 60)?></td>
 			<td><?= $pedido['Transporte']['nombre']?></td>
+			<td><?= $pedido['Pedido']['observaciones']?></td>
 			
 			<!------------------------------------------------------------------------------------>
 			<!-- 									Acciones									-->
@@ -54,6 +56,11 @@ $class = ' class="altrow"';
 						'action' => 'finalizadas',
 						$pedido['Pedido']['id']
 				));
+				?>
+				<?php echo $this -> Html -> link(__('Imprimir', true), array(
+							'action' => 'imprimir',
+							$pedido['Pedido']['id']
+					), array('target' => '_blank'));
 				?>
 				<?php echo $this -> Html -> link(__('Etiquetas', true), array(
 							'controller' => 'clientes',
