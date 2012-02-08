@@ -24,31 +24,14 @@ echo $html -> css('pedidos_admin_index');
 			$class = ' class="altrow"';
 		}
 	?>
-	<tr<?php echo $class;?>>
-		<td><?php echo $pedido['Pedido']['id']; ?>&nbsp;</td>
-		<td><?php echo $pedido['Cliente']['nombre']; ?>&nbsp;</td>
-		<td>
-			<?php
-				# Fecha de creación formateada 
-				echo $this -> Time -> format($format = 'd/m/Y H:i', $pedido['Pedido']['created']); 
-			?>&nbsp;
-		</td>
-		<td><?php echo $cantidad = $pedido['Pedido']['articulos']; ?></td>
-		<td><?php
-			// $completado = 0;
-			// if ($cantidad > 0) {
-				// foreach ($pedido['Orden'] as $orden) :
-					// if ($orden['estado'])
-						// $completado++;
-				// endforeach;
-				// echo sprintf("%.1f %%", $pedido['Pedido']['progreso']);
-			// } else {
-				// echo '100.0%';
-			// }
-			echo sprintf("%.1f %%", $pedido['Pedido']['progreso']);
-		 ?></td>
-		<td><?php echo $pedido['Transporte']['nombre']; ?></td>
-		<td class="observaciones"><?php echo $pedido['Pedido']['observaciones']; ?></td>
+	<tr<?= $class;?>>
+		<td><?= $pedido['Pedido']['id']; ?>&nbsp;</td>
+		<td><?= $pedido['Cliente']['nombre']; ?>&nbsp;</td>
+		<td><?= $this -> Time -> format($format = 'd/m/Y H:i', $pedido['Pedido']['created']); ?></td>
+		<td><?= $pedido['Pedido']['articulos']; ?></td>
+		<td><?= sprintf("%.1f %%", $pedido['Pedido']['progreso']); ?></td>
+		<td><?= $pedido['Transporte']['nombre']; ?></td>
+		<td class="observaciones"><?= $pedido['Pedido']['observaciones']; ?></td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('Editar', true), array('controller' => 'pedidos', 'action' => 'edit', $pedido['Pedido']['id'])); ?>
 			<?php echo $this->Html->link(__('Preparar', true), array('admin' => FALSE, 'controller' => 'ordenes', 'action' => 'preparar', $pedido['Pedido']['id'])); ?>
