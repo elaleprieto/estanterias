@@ -7,9 +7,9 @@
 			<th><?php echo $this -> Paginator -> sort('cliente_id');?></th>
 			<th><?php echo $this -> Paginator -> sort('Creado', 'created');?></th>
 			<th><?php echo $this -> Paginator -> sort('Finalizado', 'Pedido.finalizado');?></th>
-			<th><?php echo 'Tiempo[m]';?></th>
-			<th><?php echo 'Transporte';?></th>
-			<th><?php echo 'Observaciones';?></th>
+			<th><?php echo $this -> Paginator -> sort('Tiempo[m]', 'Pedido.tiempo_preparacion');?></th>
+			<th><?php echo $this -> Paginator -> sort('Transporte', 'Transporte.nombre');?></th>
+			<th><?php echo $this -> Paginator -> sort('Observaciones', 'Pedido.observaciones');?></th>
 			<th class="actions"><?php __('Acciones');?></th>
 		</tr>
 		<?php
