@@ -31,7 +31,7 @@
 		echo $this->Html->css('estanterias');
 		echo $this->Html->css('admin');
 		
-		echo $javascript -> link(array('jquery-1.7.1.min', 'admin.ctp'));
+		echo $this->Html->script(array('jquery-1.7.1.min', 'admin.ctp'));
 
 		echo $scripts_for_layout;
 	?>
