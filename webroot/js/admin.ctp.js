@@ -9,18 +9,7 @@ $(document).ready(function() {
 	/********************************************************************
 	 *					Inicialización de Objetos						*
 	 ********************************************************************/
-	$('#menu_pedidos').css({
-		'margin-left' : ($('#boton_pedido').position().left)
-	});
-	$('#menu_articulos').css({
-		'margin-left' : ($('#boton_articulo').position().left)
-	});
-	$('#menu_clientes').css({
-		'margin-left' : ($('#boton_cliente').position().left)
-	});
-	$('#menu_transportes').css({
-		'margin-left' : ($('#boton_transporte').position().left)
-	});
+	menues();
 
 	/********************************************************************
 	 * 								Eventos								*
@@ -28,6 +17,9 @@ $(document).ready(function() {
 	 * 		Aquí se registran los eventos para los objetos de la vista	*
 	 ********************************************************************/
 
+	$(window).resize(function() {
+		menues();
+	});
 	/* Botón Pedido y Menú Pedido */
 	$('#boton_pedido,#menu_pedidos').hover(function(e) {
 		$('#menu_pedidos').css({
@@ -68,6 +60,20 @@ $(document).ready(function() {
 			display : "none"
 		});
 	});
-
 	// $("#preloader").delay(700).fadeOut("slow");
 });
+function menues() {
+	$('#menu_pedidos').css({
+		'margin-left' : ($('#boton_pedido').position().left)
+	});
+	$('#menu_articulos').css({
+		'margin-left' : ($('#boton_articulo').position().left)
+	});
+	$('#menu_clientes').css({
+		'margin-left' : ($('#boton_cliente').position().left)
+	});
+	$('#menu_transportes').css({
+		'margin-left' : ($('#boton_transporte').position().left)
+	});
+	console.info('ok');
+}
