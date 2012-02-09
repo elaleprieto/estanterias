@@ -6,6 +6,7 @@
 	<tr>
 		<th><?php echo 'foto';?></th>
 		<th><?php echo 'Articulo';?></th>
+		<th><?php echo 'Unidad';?></th>
 		<th><?php echo 'Pasillo';?></th>
 		<th><?php echo 'Lado';?></th>
 		<th><?php echo 'Posición';?></th>
@@ -33,10 +34,8 @@
 			echo $this -> Html -> image($imagen, array('class' => 'ubicados_index'));
 			?>&nbsp;
 		</td>
-		<td><?php echo $this -> Html -> link($ubicado['detalle'], array('controller' => 'articulos',
-			'action' => 'view',
-			$ubicado['id']));
-		?></td>
+		<td><?= $ubicado['detalle']?></td>
+		<td><?= $ubicado['unidad']?></td>
 		<?php
 		# Defino la Ubicación del Artículo
 		$pasillo = $lado = $posicion = $altura = $estado = "";
