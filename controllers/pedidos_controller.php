@@ -223,6 +223,8 @@ class PedidosController extends AppController {
 						$this -> Pedido -> Orden -> save();
 					}
 				}
+				# Se vuelva a la página anterior
+				$this -> redirect($this -> Session -> read('URL.redirect'));
 			} else {
 				$this -> Session -> setFlash(__('The pedido could not be saved. Please, try again.', true));
 			}
@@ -246,6 +248,9 @@ class PedidosController extends AppController {
 		));
 		$transportes = $this -> Pedido -> Transporte -> find('list', array('order' => array('Transporte.nombre')));
 		$this -> set(compact('clientes', 'articulos', 'ordenes', 'transportes'));
+		
+		# Se guarda la página desde donde se viene para después de editar el Pedido, retornar a ella.
+		$this -> Session -> write('URL.redirect', $this -> referer());
 	}
 
 	function admin_delete($id = null) {
