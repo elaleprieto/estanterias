@@ -425,7 +425,7 @@ class PedidosController extends AppController {
 			'recursive' => 0
 		));
 		$body = '';
-		$estilo_cabeceras = 'style="border-bottom: 3px solid black;"';
+		$estilo_cabeceras = 'style="border-bottom: 2px solid black;"';
 
 		if (sizeof($ordenes_sin_stock) > 0) {
 			$body = "<b>Artículos No Enviados por Falta de Stock: </b>";
