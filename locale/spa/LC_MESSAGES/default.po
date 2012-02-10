@@ -21,23 +21,23 @@ msgstr "Artículo Inválido"
 
 #: /controllers/articulos_controller.php:74;93
 msgid "The articulo has been saved"
-msgstr ""
+msgstr "El artículo ha sido guardado"
 
 #: /controllers/articulos_controller.php:77;96
 msgid "The articulo could not be saved. Please, try again."
-msgstr ""
+msgstr "El artículo no se ha podido guardar. Por favor, intente nuevamente."
 
 #: /controllers/articulos_controller.php:106
 msgid "Invalid id for articulo"
-msgstr ""
+msgstr "Artículo inválido"
 
 #: /controllers/articulos_controller.php:110
 msgid "Articulo deleted"
-msgstr ""
+msgstr "Artículo borrado"
 
 #: /controllers/articulos_controller.php:113
 msgid "Articulo was not deleted"
-msgstr ""
+msgstr "Articulo no eliminado"
 
 #: /controllers/articulos_controller.php:130
 msgid "No se actualizÃ³ ningÃºn artÃ­culo porque no se encontraron diferencias."
@@ -57,27 +57,27 @@ msgstr ""
 
 #: /controllers/clientes_controller.php:20;43
 msgid "Invalid cliente"
-msgstr ""
+msgstr "Cliente inválido"
 
 #: /controllers/clientes_controller.php:30;48
 msgid "The cliente has been saved"
-msgstr ""
+msgstr "El cliente ha sido guardado"
 
 #: /controllers/clientes_controller.php:33;51
 msgid "The cliente could not be saved. Please, try again."
-msgstr ""
+msgstr "El cliente no se ha podido guardar. Por favor, intente nuevamente."
 
 #: /controllers/clientes_controller.php:65
 msgid "Invalid id for cliente"
-msgstr ""
+msgstr "Cliente inválido"
 
 #: /controllers/clientes_controller.php:69
 msgid "Cliente deleted"
-msgstr ""
+msgstr "Cliente borrado"
 
 #: /controllers/clientes_controller.php:72
 msgid "Cliente was not deleted"
-msgstr ""
+msgstr "Cliente no eliminado"
 
 #: /controllers/clientes_controller.php:87
 msgid "No se actualizÃ³ ningun cliente porque no se encontraron diferencias."
@@ -85,51 +85,51 @@ msgstr ""
 
 #: /controllers/ivas_controller.php:13;33
 msgid "Invalid iva"
-msgstr ""
+msgstr "IVA  inválido"
 
 #: /controllers/ivas_controller.php:23;38
 msgid "The iva has been saved"
-msgstr ""
+msgstr "El IVA ha sido guardado"
 
 #: /controllers/ivas_controller.php:26;41
 msgid "The iva could not be saved. Please, try again."
-msgstr ""
+msgstr "El IVA no se ha podido guardar. Por favor, intente nuevamente."
 
 #: /controllers/ivas_controller.php:51
 msgid "Invalid id for iva"
-msgstr ""
+msgstr "IVA inválido"
 
 #: /controllers/ivas_controller.php:55
 msgid "Iva deleted"
-msgstr ""
+msgstr "IVA borrado"
 
 #: /controllers/ivas_controller.php:58
 msgid "Iva was not deleted"
-msgstr ""
+msgstr "IVA no eliminado"
 
 #: /controllers/localidades_controller.php:13;35
 msgid "Invalid localidad"
-msgstr ""
+msgstr "Localidad  inválida"
 
 #: /controllers/localidades_controller.php:23;40
 msgid "The localidad has been saved"
-msgstr ""
+msgstr "La localidad ha sido guardada"
 
 #: /controllers/localidades_controller.php:26;43
 msgid "The localidad could not be saved. Please, try again."
-msgstr ""
+msgstr "La localidad no se ha podido guardar. Por favor, intente nuevamente."
 
 #: /controllers/localidades_controller.php:55
 msgid "Invalid id for localidad"
-msgstr ""
+msgstr "Localidad  inválida"
 
 #: /controllers/localidades_controller.php:59
 msgid "Localidad deleted"
-msgstr ""
+msgstr "Localidad borrada"
 
 #: /controllers/localidades_controller.php:62
 msgid "Localidad was not deleted"
-msgstr ""
+msgstr "Localidad no eliminada"
 
 #: /controllers/localidades_controller.php:77
 msgid "No se actualizÃ³ ninguna localidad porque no se encontraron diferencias."
@@ -137,31 +137,31 @@ msgstr ""
 
 #: /controllers/ordenes_controller.php:25;49
 msgid "Invalid orden"
-msgstr ""
+msgstr "Orden  inválida"
 
 #: /controllers/ordenes_controller.php:35;54
 msgid "The orden has been saved"
-msgstr ""
+msgstr "La orden ha sido guardada"
 
 #: /controllers/ordenes_controller.php:38;57
 msgid "The orden could not be saved. Please, try again."
-msgstr ""
+msgstr "La orden no se ha podido guardar. Por favor, intente nuevamente."
 
 #: /controllers/ordenes_controller.php:70
 msgid "Invalid id for orden"
-msgstr ""
+msgstr "Orden  inválida"
 
 #: /controllers/ordenes_controller.php:74
 msgid "Orden deleted"
-msgstr ""
+msgstr "Orden borrada"
 
 #: /controllers/ordenes_controller.php:77
 msgid "Orden was not deleted"
-msgstr ""
+msgstr "Orden no eliminada"
 
 #: /controllers/pasillos_controller.php:17;55
 msgid "Invalid pasillo"
-msgstr ""
+msgstr "Pasillo inválido"
 
 #: /controllers/pasillos_controller.php:39
 msgid "Los pasillos han sido creados"
@@ -177,55 +177,55 @@ msgstr ""
 
 #: /controllers/pasillos_controller.php:60
 msgid "The pasillo has been saved"
-msgstr ""
+msgstr "El pasillo ha sido guardado"
 
 #: /controllers/pasillos_controller.php:63
 msgid "The pasillo could not be saved. Please, try again."
-msgstr ""
+msgstr "El pasillo no se ha podido guardar. Por favor, intente nuevamente."
 
 #: /controllers/pasillos_controller.php:73
 msgid "Invalid id for pasillo"
-msgstr ""
+msgstr "Pasillo inválido"
 
 #: /controllers/pasillos_controller.php:77
 msgid "Pasillo deleted"
-msgstr ""
+msgstr "Pasillo borrado"
 
 #: /controllers/pasillos_controller.php:80
 msgid "Pasillo was not deleted"
-msgstr ""
+msgstr "Pasillo no eliminado"
 
 #: /controllers/pedidos_controller.php:21;151
 msgid "Invalid pedido"
-msgstr ""
+msgstr "Pedido inválido"
 
 #: /controllers/pedidos_controller.php:226
 msgid "The pedido could not be saved. Please, try again."
-msgstr ""
+msgstr "El pedido no se ha podido guardar. Por favor, intente nuevamente."
 
 #: /controllers/provincias_controller.php:13;33
 msgid "Invalid provincia"
-msgstr ""
+msgstr "Provincia inválida"
 
 #: /controllers/provincias_controller.php:23;38
 msgid "The provincia has been saved"
-msgstr ""
+msgstr "La provincia ha sido guardado"
 
 #: /controllers/provincias_controller.php:26;41
 msgid "The provincia could not be saved. Please, try again."
-msgstr ""
+msgstr "La provincia no se ha podido guardar. Por favor, intente nuevamente."
 
 #: /controllers/provincias_controller.php:51
 msgid "Invalid id for provincia"
-msgstr ""
+msgstr "Provincia inválida"
 
 #: /controllers/provincias_controller.php:55
 msgid "Provincia deleted"
-msgstr ""
+msgstr "Provincia borrada"
 
 #: /controllers/provincias_controller.php:58
 msgid "Provincia was not deleted"
-msgstr ""
+msgstr "Provincia no eliminada"
 
 #: /controllers/provincias_controller.php:73
 msgid "No se actualizÃ³ ninguna provincia porque no se encontraron diferencias."
@@ -233,67 +233,67 @@ msgstr ""
 
 #: /controllers/transportes_controller.php:13;33
 msgid "Invalid transporte"
-msgstr ""
+msgstr "Transporte inválido"
 
 #: /controllers/transportes_controller.php:23;38
 msgid "The transporte has been saved"
-msgstr ""
+msgstr "El transporte ha sido guardado"
 
 #: /controllers/transportes_controller.php:26;41
 msgid "The transporte could not be saved. Please, try again."
-msgstr ""
+msgstr "El transporte no se ha podido guardar. Por favor, intente nuevamente."
 
 #: /controllers/transportes_controller.php:51
 msgid "Invalid id for transporte"
-msgstr ""
+msgstr "Transporte inválido"
 
 #: /controllers/transportes_controller.php:55
 msgid "Transporte deleted"
-msgstr ""
+msgstr "Transporte borrado"
 
 #: /controllers/transportes_controller.php:58
 msgid "Transporte was not deleted"
-msgstr ""
+msgstr "Transporte no eliminado"
 
 #: /controllers/ubicaciones_controller.php:17;37;73;93
 msgid "Invalid ubicacion"
-msgstr ""
+msgstr "Ubicación inválida"
 
 #: /controllers/ubicaciones_controller.php:27;42;83;98
 msgid "The ubicacion has been saved"
-msgstr ""
+msgstr "La ubicación ha sido guardado"
 
 #: /controllers/ubicaciones_controller.php:30;45;86;101
 msgid "The ubicacion could not be saved. Please, try again."
-msgstr ""
+msgstr "La ubicación no se ha podido guardar. Por favor, intente nuevamente."
 
 #: /controllers/ubicaciones_controller.php:55;111
 msgid "Invalid id for ubicacion"
-msgstr ""
+msgstr "Ubicación inválida"
 
 #: /controllers/ubicaciones_controller.php:59;115
 msgid "Ubicacion deleted"
-msgstr ""
+msgstr "Ubicación borrada"
 
 #: /controllers/ubicaciones_controller.php:62;118
 msgid "Ubicacion was not deleted"
-msgstr ""
+msgstr "Ubicación no eliminada"
 
 #: /controllers/ubicados_controller.php:76
 msgid "Invalid ubicado"
-msgstr ""
+msgstr "Ubicado inválido"
 
 #: /controllers/ubicados_controller.php:273
 msgid "Invalid id for ubicado"
-msgstr ""
+msgstr "Ubicado inválido"
 
 #: /controllers/ubicados_controller.php:277
 msgid "Ubicado deleted"
-msgstr ""
+msgstr "Ubicado borrado"
 
 #: /controllers/ubicados_controller.php:280
 msgid "Ubicado was not deleted"
-msgstr ""
+msgstr "Ubicado no eliminado"
 
 #: /views/articulos/actualizar.ctp:3
 msgid "ActualizaciÃ³n de Articulos"
@@ -312,7 +312,7 @@ msgstr ""
 
 #: /views/articulos/admin_add.ctp:5
 msgid "Add Articulo"
-msgstr ""
+msgstr "Nuevo Artículo"
 
 #: /views/articulos/admin_add.ctp:17
 #: /views/articulos/edit.ctp:13
@@ -338,7 +338,7 @@ msgstr ""
 #: /views/ubicados/admin_edit.ctp:13
 #: /views/ubicados/mobile/admin_agregar.ctp:52
 msgid "Submit"
-msgstr ""
+msgstr "Enviar"
 
 #: /views/articulos/admin_add.ctp:20
 #: /views/articulos/admin_listar_desubicados.ctp:26;79
@@ -392,7 +392,7 @@ msgstr ""
 #: /views/ubicados/admin_edit.ctp:16
 #: /views/ubicados/view.ctp:37
 msgid "Actions"
-msgstr ""
+msgstr "Acciones"
 
 #: /views/articulos/admin_add.ctp:23
 #: /views/articulos/admin_set_pack.ctp:21
@@ -432,7 +432,7 @@ msgstr "Listar Artículos"
 #: /views/ubicados/mobile/admin_add.ctp:2
 #: /views/ubicados/mobile/admin_agregar.ctp:2
 msgid "List Ubicados"
-msgstr ""
+msgstr "Listar Ubicados"
 
 #: /views/articulos/admin_add.ctp:33
 #: /views/articulos/admin_set_pack.ctp:23
@@ -447,7 +447,7 @@ msgstr ""
 #: /views/ubicaciones/view.ctp:41;84
 #: /views/ubicados/view.ctp:42
 msgid "New Ubicado"
-msgstr ""
+msgstr "Nuevo ubicado"
 
 #: /views/articulos/admin_fotografiar.ctp:9
 #: /views/articulos/fotografiar.ctp:4
@@ -495,7 +495,7 @@ msgstr ""
 #: /views/ubicaciones/view.ctp:35;75
 #: /views/ubicados/view.ctp:40
 msgid "Are you sure you want to delete # %s?"
-msgstr ""
+msgstr "¿Está seguro que desea eliminar # %s?"
 
 #: /views/articulos/admin_listar.ctp:72
 #: /views/articulos/admin_listar_desubicados.ctp:81
@@ -545,7 +545,7 @@ msgstr ""
 #: /views/provincias/index.ctp:40
 #: /views/transportes/index.ctp:40
 msgid "previous"
-msgstr ""
+msgstr "anterior"
 
 #: /views/articulos/admin_listar_desubicados.ctp:19;75
 #: /views/articulos/index.ctp:61
@@ -559,7 +559,7 @@ msgstr ""
 #: /views/provincias/index.ctp:43
 #: /views/transportes/index.ctp:43
 msgid "next"
-msgstr ""
+msgstr "siguiente"
 
 #: /views/articulos/admin_listar_desubicados.ctp:51
 #: /views/articulos/mobile/admin_listar_desubicados.ctp:57
@@ -582,13 +582,13 @@ msgstr ""
 #: /views/provincias/index.ctp:35
 #: /views/transportes/index.ctp:35
 msgid "Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%"
-msgstr ""
+msgstr "Página %page% de %pages%, se muestran %current% registros de un total de %count%, empezando en el registro %start% y finalizando en %end%"
 
 #: /views/articulos/admin_set_pack.ctp:4
 #: /views/articulos/admin_set_stock.ctp:4
 #: /views/articulos/set_stock.ctp:4
 msgid "Set Stock Articulo"
-msgstr ""
+msgstr "Ingresar Stock"
 
 #: /views/articulos/admin_set_pack.ctp:20
 #: /views/articulos/admin_set_stock.ctp:19
@@ -632,7 +632,7 @@ msgstr "Eliminar"
 #: /views/ivas/view.ctp:43
 #: /views/localidades/view.ctp:55
 msgid "Codigo"
-msgstr ""
+msgstr "Código"
 
 #: /views/articulos/admin_view.ctp:20
 #: /views/articulos/view.ctp:9
@@ -710,7 +710,7 @@ msgstr ""
 
 #: /views/articulos/index.ctp:43
 msgid "Set Stock"
-msgstr ""
+msgstr "Ingresar Stock"
 
 #: /views/articulos/index.ctp:44
 msgid "Fotografiar"
@@ -758,7 +758,7 @@ msgstr ""
 #: /views/clientes/add.ctp:4
 #: /views/clientes/admin_add.ctp:4
 msgid "Add Cliente"
-msgstr ""
+msgstr "Nuevo Cliente"
 
 #: /views/clientes/add.ctp:20
 #: /views/clientes/admin_add.ctp:20
@@ -775,7 +775,7 @@ msgstr ""
 #: /views/localidades/index.ctp:58
 #: /views/localidades/view.ctp:45
 msgid "List Clientes"
-msgstr ""
+msgstr "Listar Clientes"
 
 #: /views/clientes/add.ctp:21
 #: /views/clientes/admin_add.ctp:21
@@ -794,7 +794,7 @@ msgstr ""
 #: /views/transportes/index.ctp:50
 #: /views/transportes/view.ctp:33
 msgid "List Pedidos"
-msgstr ""
+msgstr "Listar Pedidos"
 
 #: /views/clientes/add.ctp:22
 #: /views/clientes/admin_add.ctp:22
@@ -975,13 +975,13 @@ msgstr ""
 
 #: /views/ivas/add.ctp:4
 msgid "Add Iva"
-msgstr ""
+msgstr "Nuevo IVA"
 
 #: /views/ivas/add.ctp:15
 #: /views/ivas/edit.ctp:17
 #: /views/ivas/view.ctp:31
 msgid "List Ivas"
-msgstr ""
+msgstr "Listar IVAs"
 
 #: /views/ivas/edit.ctp:4
 #: /views/ivas/view.ctp:29
@@ -1041,7 +1041,7 @@ msgstr ""
 
 #: /views/localidades/add.ctp:4
 msgid "Add Localidad"
-msgstr ""
+msgstr "Nueva Localidad"
 
 #: /views/localidades/add.ctp:17
 #: /views/localidades/edit.ctp:19
@@ -1051,7 +1051,7 @@ msgstr ""
 #: /views/provincias/index.ctp:50
 #: /views/provincias/view.ctp:33
 msgid "List Localidades"
-msgstr ""
+msgstr "Listar Localidades"
 
 #: /views/localidades/add.ctp:18
 #: /views/localidades/edit.ctp:20
@@ -1061,7 +1061,7 @@ msgstr ""
 #: /views/provincias/edit.ctp:17
 #: /views/provincias/view.ctp:31
 msgid "List Provincias"
-msgstr ""
+msgstr "Listar Provincias"
 
 #: /views/localidades/add.ctp:19
 #: /views/localidades/edit.ctp:21
@@ -1116,7 +1116,7 @@ msgstr ""
 #: /views/ordenes/view.ctp:41
 #: /views/pedidos/view.ctp:35
 msgid "List Ordenes"
-msgstr ""
+msgstr "Listar Ordenes"
 
 #: /views/ordenes/edit.ctp:21
 #: /views/ordenes/index.ctp:59
@@ -1203,7 +1203,7 @@ msgstr ""
 
 #: /views/pasillos/add.ctp:4
 msgid "Add Pasillo"
-msgstr ""
+msgstr "Nuevo Pasillo"
 
 #: /views/pasillos/add.ctp:16
 #: /views/pasillos/edit.ctp:19
@@ -1213,7 +1213,7 @@ msgstr ""
 #: /views/ubicaciones/index.ctp:40
 #: /views/ubicaciones/view.ctp:38
 msgid "List Pasillos"
-msgstr ""
+msgstr "Listar Pasillos"
 
 #: /views/pasillos/add.ctp:17
 #: /views/pasillos/edit.ctp:20
@@ -1229,7 +1229,7 @@ msgstr ""
 #: /views/ubicados/mobile/admin_add.ctp:13
 #: /views/ubicados/mobile/admin_agregar.ctp:13
 msgid "List Ubicaciones"
-msgstr ""
+msgstr "Listar Ubicaciones"
 
 #: /views/pasillos/add.ctp:18
 #: /views/pasillos/edit.ctp:21
@@ -1359,7 +1359,7 @@ msgstr ""
 
 #: /views/provincias/add.ctp:4
 msgid "Add Provincia"
-msgstr ""
+msgstr "Nueva Provincia"
 
 #: /views/provincias/edit.ctp:4
 #: /views/provincias/view.ctp:29
@@ -1384,13 +1384,13 @@ msgstr ""
 
 #: /views/transportes/add.ctp:4
 msgid "Add Transporte"
-msgstr ""
+msgstr "Nuevo Transporte"
 
 #: /views/transportes/add.ctp:15
 #: /views/transportes/edit.ctp:17
 #: /views/transportes/view.ctp:31
 msgid "List Transportes"
-msgstr ""
+msgstr "Listar Transportes"
 
 #: /views/transportes/edit.ctp:4
 #: /views/transportes/view.ctp:29
@@ -1432,7 +1432,7 @@ msgstr ""
 
 #: /views/ubicaciones/add.ctp:4
 msgid "Add Ubicacion"
-msgstr ""
+msgstr "Nueva Ubicación"
 
 #: /views/ubicaciones/edit.ctp:4
 #: /views/ubicaciones/view.ctp:34
