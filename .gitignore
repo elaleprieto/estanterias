@@ -9,3 +9,4 @@ target/config
 config/
 config
 config/*
+libs/contras/*
