@@ -1,6 +1,10 @@
 <?php
 class Orden extends AppModel {
 	var $name = 'Orden';
+	var $virtualFields = array(
+		// 'precio_venta' => 'SELECT COUNT(*) FROM Ordenes AS ordenes WHERE ordenes.pedido_id = Pedido.id GROUP BY ordenes.pedido_id',
+		'articulo_detalle' => 'SELECT detalle FROM Articulos as articulos WHERE articulos.id = Orden.articulo_id',
+	);
 	var $validate = array(
 		//'estado' => array(
 			//'boolean' => array(

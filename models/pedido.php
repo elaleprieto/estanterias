@@ -15,6 +15,7 @@ class Pedido extends AppModel {
 	);
 	
 	var $virtualFields = array(
+		'cliente_nombre' => 'SELECT nombre FROM Clientes as cliente WHERE cliente.id = Pedido.cliente_id',
 		'articulos' => 'SELECT COUNT(*) FROM Ordenes AS ordenes WHERE ordenes.pedido_id = Pedido.id GROUP BY ordenes.pedido_id',
 		'progreso' => 'SELECT b.completadas / a.cantidad * 100
 						FROM (SELECT CAST(COUNT(*) AS FLOAT) AS cantidad

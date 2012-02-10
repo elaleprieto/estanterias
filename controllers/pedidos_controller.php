@@ -78,6 +78,8 @@ class PedidosController extends AppController {
 					$this -> Articulo -> id = $articulo_id;
 					$this -> Articulo -> saveField('stock', $stock['Articulo']['stock'] - $cantidad);
 				}
+
+				$this -> admin_correo_faltantes($pedido_id);
 			}
 		}
 		$this -> Pedido -> recursive = 1;
@@ -163,7 +165,7 @@ class PedidosController extends AppController {
 				# Me traigo todas las ordenes que tienen el id del pedido que se está modificando
 				$ordenes = $this -> Pedido -> Orden -> findAllByPedidoId($id);
 				$nuevas = $this -> data['Orden'];
-				
+
 				# Actualizo las que está creadas
 				foreach ($ordenes as $orden) {
 					$existe = FALSE;
@@ -188,7 +190,6 @@ class PedidosController extends AppController {
 					if (!$existe)
 						$this -> Pedido -> Orden -> delete($orden['Orden']['id']);
 				}
-
 
 				# Se crean las órdenes que no fueron actualizadas porque no existían
 				foreach ($nuevas as $index => $datos) {
@@ -376,6 +377,141 @@ class PedidosController extends AppController {
 				$this -> Session -> setFlash("Ocurrió un problema subiendo el archivo.");
 			}
 		}
+	}
+
+	/**
+	 * admin_correo_faltantes($id): recorre el Pedido pasado como parámetro y arma un correo para informarlo al destinatario.
+	 * @param id: el Pedido buscado.
+	 */
+	public function admin_correo_faltantes($id = null) {
+		if (!$id) {
+			$this -> Session -> setFlash('Pedido inválido');
+			$this -> redirect(array('action' => 'index'));
+		}
+		App::import('Lib', 'phpMailer', array('file' => 'phpMailer' . DS . 'class.phpmailer.php'));
+		App::import('Lib', 'phpMailer', array('file' => 'phpMailer' . DS . 'class.smtp.php'));
+		App::import('Lib', 'contras', array('file' => 'contras' . DS . 'pedidos.correo.php'));
+
+		$pedido = $this -> Pedido -> read('cliente_nombre', $id);
+
+		# Se buscan las órdenes que no se enviaron por falta de Stock
+		$ordenes_sin_stock = $this -> Pedido -> Orden -> find('all', array(
+			'conditions' => array(
+				'Orden.pedido_id' => $id,
+				'Orden.estado' => FALSE
+			),
+			'fields' => array(
+				'Orden.articulo_id',
+				'Orden.articulo_detalle',
+				'Orden.cantidad',
+				'Orden.cantidad_original',
+			),
+			'recursive' => 0
+		));
+
+		# Se buscan las órdenes que fueron enviadas pero en una Cantidad menor a la pedida (posiblemente por falta de Stock)
+		$ordenes_menores = $this -> Pedido -> Orden -> find('all', array(
+			'conditions' => array(
+				'Orden.pedido_id' => $id,
+				'Orden.estado' => TRUE,
+				'Orden.cantidad_original > Orden.cantidad'
+			),
+			'fields' => array(
+				'Orden.articulo_id',
+				'Orden.articulo_detalle',
+				'Orden.cantidad',
+				'Orden.cantidad_original',
+			),
+			'recursive' => 0
+		));
+		$body = '';
+		$estilo_cabeceras = 'style="border-bottom: 3px solid black;"';
+
+		if (sizeof($ordenes_sin_stock) > 0) {
+			$body = "<b>Artículos No Enviados por Falta de Stock: </b>";
+			$body .= "<br /><br />";
+			$body .= '<table>';
+			$body .= '<tr>';
+			$body .= "<th $estilo_cabeceras>Código</th>";
+			$body .= "<th $estilo_cabeceras>Detalle</th>";
+			$body .= "<th $estilo_cabeceras>Cantidad Pedida</th>";
+			$body .= '</tr>';
+			foreach ($ordenes_sin_stock as $orden) {
+				$body .= '<tr>';
+				$body .= '<td style="text-align: center;">' . $orden['Orden']['articulo_id'] . '</td>';
+				$body .= '<td>' . $orden['Orden']['articulo_detalle'] . '</td>';
+				$body .= '<td style="text-align: center;">' . $orden['Orden']['cantidad_original'] . '</td>';
+				$body .= '</tr>';
+			}
+			$body .= '</table>';
+		}
+		if (sizeof($ordenes_menores) > 0) {
+			if (sizeof($ordenes_sin_stock) > 0) {
+				# Si ya se escribió en el correo, se traza un línea
+				$body .= '<br /><hr /><br />';
+			}
+			$body .= "<b>Artículos Enviados pero en una Cantidad menor a la pedida (posiblemente por falta de Stock): </b>";
+			$body .= "<br /><br />";
+			$body .= '<table>';
+			$body .= '<tr>';
+			$body .= "<th $estilo_cabeceras>Código</th>";
+			$body .= "<th $estilo_cabeceras>Detalle</th>";
+			$body .= "<th $estilo_cabeceras>Cantidad Enviada</th>";
+			$body .= "<th $estilo_cabeceras>Cantidad Pedida</th>";
+			$body .= '</tr>';
+			foreach ($ordenes_menores as $orden) {
+				$body .= '<tr>';
+				$body .= '<td style="text-align: center;">' . $orden['Orden']['articulo_id'] . '</td>';
+				$body .= '<td>' . $orden['Orden']['articulo_detalle'] . '</td>';
+				$body .= '<td style="text-align: center;">' . $orden['Orden']['cantidad'] . '</td>';
+				$body .= '<td style="text-align: center;">' . $orden['Orden']['cantidad_original'] . '</td>';
+				$body .= '</tr>';
+			}
+			$body .= '</table>';
+		}
+
+		$mail = new PHPMailer();
+
+		# la dirección del servidor, p. ej.: smtp.servidor.com
+		# con SSL habilitado, el puerto 465 y demás opciones para Gmail
+		$mail -> Host = "smtp.googlemail.com";
+		$mail -> SMTPSecure = "ssl";
+		$mail -> Port = '465';
+		$mail -> SMTPKeepAlive = true;
+		$mail -> Mailer = "smtp";
+		$mail -> CharSet = 'utf-8';
+		$mail -> IsSMTP();
+
+		# dirección remitente, p. ej.: no-responder@miempresa.com
+		$mail -> From = "general@elefe.com.ar";
+
+		# nombre remitente, p. ej.: "Servicio de envío automático"
+		$mail -> FromName = "ELEFE - Artículos Faltantes";
+
+		# asunto y cuerpo alternativo del mensaje
+		$mail -> Subject = 'Pedido de ' . $pedido['Pedido']['cliente_nombre'];
+		$mail -> AltBody = "A continuación se detallan los artículos faltantes:";
+
+		# si el cuerpo del mensaje es HTML
+		$mail -> MsgHTML($body);
+
+		# podemos hacer varios AddAdress
+		$mail -> AddAddress("aleprieto@elefe.com.ar", "Alejandro Prieto");
+		$mail -> AddAddress("aleprieto@gmail.com", "Alejandro Prieto");
+
+		# si el SMTP necesita autenticación
+		$mail -> SMTPAuth = true;
+
+		# credenciales usuario
+		$mail -> Username = USUARIO_GENERAL;
+		$mail -> Password = CONTRASENIA_GENERAL;
+		$mail -> Send();
+
+		// if (!$mail -> Send()) {
+		// echo "Error enviando: " . $mail -> ErrorInfo;
+		// } else {
+		// echo "¡¡Enviado!!";
+		// }
 	}
 
 }
