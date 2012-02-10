@@ -840,7 +840,7 @@ msgstr ""
 #: /views/localidades/index.ctp:59
 #: /views/localidades/view.ctp:46;97
 msgid "New Cliente"
-msgstr ""
+msgstr "Nuevo Cliente"
 
 #: /views/clientes/admin_view.ctp:2
 #: /views/clientes/view.ctp:2
@@ -904,7 +904,7 @@ msgstr ""
 #: /views/ubicaciones/view.ctp:19;50
 #: /views/ubicados/view.ctp:9
 msgid "Created"
-msgstr ""
+msgstr "Creado"
 
 #: /views/clientes/admin_view.ctp:34;70
 #: /views/clientes/view.ctp:34;70
@@ -918,7 +918,7 @@ msgstr ""
 #: /views/ubicaciones/view.ctp:24;51
 #: /views/ubicados/view.ctp:14
 msgid "Modified"
-msgstr ""
+msgstr "Modificado"
 
 #: /views/clientes/admin_view.ctp:39
 #: /views/clientes/view.ctp:39
@@ -995,7 +995,7 @@ msgstr ""
 #: /views/ivas/index.ctp:49
 #: /views/ivas/view.ctp:32
 msgid "New Iva"
-msgstr ""
+msgstr "Nuevo IVA"
 
 #: /views/ivas/view.ctp:2
 msgid "Iva"
@@ -1070,7 +1070,7 @@ msgstr "Listar Provincias"
 #: /views/provincias/index.ctp:49
 #: /views/provincias/view.ctp:32
 msgid "New Provincia"
-msgstr ""
+msgstr "Nueva Provincia"
 
 #: /views/localidades/edit.ctp:4
 #: /views/localidades/view.ctp:39
@@ -1088,7 +1088,7 @@ msgstr ""
 #: /views/provincias/index.ctp:51
 #: /views/provincias/view.ctp:34;75
 msgid "New Localidad"
-msgstr ""
+msgstr "Nueva Localidad"
 
 #: /views/localidades/view.ctp:2
 msgid "Localidad"
@@ -1129,7 +1129,7 @@ msgstr "Listar Ordenes"
 #: /views/ubicados/mobile/admin_add.ctp:8
 #: /views/ubicados/mobile/admin_agregar.ctp:8
 msgid "New Articulo"
-msgstr ""
+msgstr "Nuevo Artículo"
 
 #: /views/ordenes/index.ctp:2
 msgid "Ordenes"
@@ -1139,7 +1139,7 @@ msgstr ""
 #: /views/ordenes/view.ctp:42
 #: /views/pedidos/view.ctp:36
 msgid "New Orden"
-msgstr ""
+msgstr "Nueva Orden"
 
 #: /views/ordenes/view.ctp:2
 msgid "Orden"
@@ -1244,7 +1244,7 @@ msgstr "Listar Ubicaciones"
 #: /views/ubicados/mobile/admin_add.ctp:18
 #: /views/ubicados/mobile/admin_agregar.ctp:18
 msgid "New Ubicacion"
-msgstr ""
+msgstr "Nueva Ubicación"
 
 #: /views/pasillos/edit.ctp:4
 #: /views/pasillos/view.ctp:34
@@ -1262,7 +1262,7 @@ msgstr ""
 #: /views/ubicaciones/index.ctp:41
 #: /views/ubicaciones/view.ctp:39
 msgid "New Pasillo"
-msgstr ""
+msgstr "Nuevo Pasillo"
 
 #: /views/pasillos/view.ctp:35
 msgid "Delete Pasillo"
@@ -1404,7 +1404,7 @@ msgstr ""
 #: /views/transportes/index.ctp:49
 #: /views/transportes/view.ctp:32
 msgid "New Transporte"
-msgstr ""
+msgstr "Nuevo Transporte"
 
 #: /views/transportes/view.ctp:2
 msgid "Transporte"
