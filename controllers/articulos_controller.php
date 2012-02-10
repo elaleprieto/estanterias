@@ -367,17 +367,18 @@ class ArticulosController extends AppController {
 	public function admin_set_stock($id = null) {
 		if (!$id && empty($this -> data)) {
 			$this -> Session -> setFlash('Artículo Inválido');
-			$this -> redirect(array('action' => 'index'));
+			$this -> redirect($this -> referer());
 		}
 		if (!empty($this -> data)) {
 			if ($this -> Articulo -> save($this -> data, TRUE, array('stock'))) {
 				$this -> Session -> setFlash('El stock ha sido actualizado');
-				$this -> redirect(array(
-					'controller' => 'articulos',
-					'action' => 'index',
-					$this -> Session -> read('URL.letra'),
-					'page:' . $this -> Session -> read('URL.page')
-				));
+				// $this -> redirect(array(
+					// 'controller' => 'articulos',
+					// 'action' => 'index',
+					// $this -> Session -> read('URL.letra'),
+					// 'page:' . $this -> Session -> read('URL.page')
+				// ));
+				$this -> redirect($this -> Session -> read('URL.redirect'));
 			} else {
 				$this -> Session -> setFlash('Ocurrió un problema. Por favor, inténtelo nuevamente');
 			}
@@ -385,6 +386,7 @@ class ArticulosController extends AppController {
 		if (empty($this -> data)) {
 			$this -> data = $this -> Articulo -> read(null, $id);
 		}
+		$this -> Session -> write('URL.redirect', $this -> referer());
 	}
 
 	/**
@@ -393,17 +395,18 @@ class ArticulosController extends AppController {
 	public function admin_set_pack($id = null) {
 		if (!$id && empty($this -> data)) {
 			$this -> Session -> setFlash('Artículo Inválido');
-			$this -> redirect(array('action' => 'index'));
+			$this -> redirect($this -> referer());
 		}
 		if (!empty($this -> data)) {
 			if ($this -> Articulo -> save($this -> data, TRUE, array('pack'))) {
 				$this -> Session -> setFlash('El pack ha sido actualizado');
-				$this -> redirect(array(
-					'controller' => 'articulos',
-					'action' => 'index',
-					$this -> Session -> read('URL.letra'),
-					'page:' . $this -> Session -> read('URL.page')
-				));
+				// $this -> redirect(array(
+					// 'controller' => 'articulos',
+					// 'action' => 'index',
+					// $this -> Session -> read('URL.letra'),
+					// 'page:' . $this -> Session -> read('URL.page')
+				// ));
+				$this -> redirect($this -> Session -> read('URL.redirect'));
 			} else {
 				$this -> Session -> setFlash('Ocurrió un problema. Por favor, inténtelo nuevamente');
 			}
@@ -411,6 +414,7 @@ class ArticulosController extends AppController {
 		if (empty($this -> data)) {
 			$this -> data = $this -> Articulo -> read(null, $id);
 		}
+		$this -> Session -> write('URL.redirect', $this -> referer());
 	}
 
 	function admin_listar_stock($id = null) {
