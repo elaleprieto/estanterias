@@ -14,6 +14,7 @@ echo $this -> Form -> create('Pedido', array(
 		'id' => 'formulario'
 ));
 ?>
+<?php echo $this -> element('mensaje_flotante', array("mensaje" => "Código inválido.")); ?>
 <div class="pedidos_add">
 	<?php echo $this -> element('pedidos_datos'); ?>
 	<?php echo $this -> element('pedidos_articulos'); ?>

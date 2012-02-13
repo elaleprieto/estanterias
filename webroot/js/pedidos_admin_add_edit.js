@@ -37,9 +37,11 @@ $(document).ready(function() {
 			if($('#lista option[value="' + $('#codigo').val() + '"]').length > 0) {
 				$('#lista option[value="' + $('#codigo').val() + '"]').attr('selected', 'selected')
 				setArticulo($('#lista option:selected').val());
+				$('#mensaje_flotante').removeClass('mensaje_error').addClass('mensaje_ok').text('Código válido').fadeOut();
+				$('#cantidad').removeAttr('disabled');
 			} else {
-				$('#codigo').val($('#codigo').val().substring(0, $('#codigo').val().length - 1));
-				alert('Código inválido');
+				$('#mensaje_flotante').removeClass('mensaje_ok').addClass('mensaje_error').text('Código inválido').fadeIn();
+				$('#cantidad').attr('disabled', 'disabled');
 			}
 		}
 	});
@@ -288,7 +290,6 @@ function setArticulo(articulo_id) {
 	$('#stock').html(imagen.clone());
 	$('#pack').html(imagen.clone());
 	$.getJSON(WEBROOT + "articulos/get_articulo/" + articulo_id, function(data) {
-		console.info(data);
 		$('#unidad').html(data.unidad);
 		$('#stock').html(data.stock);
 		$('#pack').html(data.pack);
