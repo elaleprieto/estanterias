@@ -248,7 +248,7 @@ class PedidosController extends AppController {
 		));
 		$transportes = $this -> Pedido -> Transporte -> find('list', array('order' => array('Transporte.nombre')));
 		$this -> set(compact('clientes', 'articulos', 'ordenes', 'transportes'));
-		
+
 		# Se guarda la página desde donde se viene para después de editar el Pedido, retornar a ella.
 		$this -> Session -> write('URL.redirect', $this -> referer());
 	}
@@ -429,17 +429,20 @@ class PedidosController extends AppController {
 			),
 			'recursive' => 0
 		));
-		$body = '';
+		$body = $bodyAlt = '';
 		$estilo_cabeceras = 'style="border-bottom: 2px solid black;"';
 
 		if (sizeof($ordenes_sin_stock) > 0) {
-			$body = "<b>Artículos No Enviados por Falta de Stock: </b>";
+			$body = "<p><b>Artículos No Enviados por Falta de Stock: </b></p>";
+			$bodyAlt = 'Artículos No Enviados por Falta de Stock';
 			$body .= "<br /><br />";
+			$bodyAlt .= '\n\n';
 			$body .= '<table>';
 			$body .= '<tr>';
 			$body .= "<th $estilo_cabeceras>Código</th>";
 			$body .= "<th $estilo_cabeceras>Detalle</th>";
 			$body .= "<th $estilo_cabeceras>Cantidad Pedida</th>";
+			$bodyAlt .= 'Código | Detalle | Cantidad Pedida\n';
 			$body .= '</tr>';
 			foreach ($ordenes_sin_stock as $orden) {
 				$body .= '<tr>';
@@ -447,22 +450,27 @@ class PedidosController extends AppController {
 				$body .= '<td>' . $orden['Orden']['articulo_detalle'] . '</td>';
 				$body .= '<td style="text-align: center;">' . $orden['Orden']['cantidad_original'] . '</td>';
 				$body .= '</tr>';
+				$bodyAlt .= $orden['Orden']['articulo_id'] . $orden['Orden']['articulo_detalle'] . $orden['Orden']['cantidad_original'] . '\n';
 			}
 			$body .= '</table>';
 		}
 		if (sizeof($ordenes_menores) > 0) {
 			if (sizeof($ordenes_sin_stock) > 0) {
 				# Si ya se escribió en el correo, se traza un línea
-				$body .= '<br /><hr /><br />';
+				$body .= '<br /><br />';
+				$bodyAlt .= '\n\n\n';
 			}
-			$body .= "<b>Artículos Enviados pero en una Cantidad menor a la pedida (posiblemente por falta de Stock): </b>";
+			$body .= "<p><b>Artículos Enviados pero en una Cantidad menor a la pedida (posiblemente por falta de Stock): </b></p>";
+			$bodyAlt .= 'Artículos Enviados pero en una Cantidad menor a la pedida (posiblemente por falta de Stock): ';
 			$body .= "<br /><br />";
+			$bodyAlt .= '\n\n';
 			$body .= '<table>';
 			$body .= '<tr>';
 			$body .= "<th $estilo_cabeceras>Código</th>";
 			$body .= "<th $estilo_cabeceras>Detalle</th>";
 			$body .= "<th $estilo_cabeceras>Cantidad Enviada</th>";
 			$body .= "<th $estilo_cabeceras>Cantidad Pedida</th>";
+			$bodyAlt .= 'Código | Detalle | Cantidad Enviada | Cantidad Pedida\n';
 			$body .= '</tr>';
 			foreach ($ordenes_menores as $orden) {
 				$body .= '<tr>';
@@ -471,6 +479,7 @@ class PedidosController extends AppController {
 				$body .= '<td style="text-align: center;">' . $orden['Orden']['cantidad'] . '</td>';
 				$body .= '<td style="text-align: center;">' . $orden['Orden']['cantidad_original'] . '</td>';
 				$body .= '</tr>';
+				$bodyAlt .= $orden['Orden']['articulo_id'] . $orden['Orden']['articulo_detalle'] . $orden['Orden']['cantidad'] . $orden['Orden']['cantidad_original'] . '\n';
 			}
 			$body .= '</table>';
 		}
@@ -493,15 +502,18 @@ class PedidosController extends AppController {
 		# nombre remitente, p. ej.: "Servicio de envío automático"
 		$mail -> FromName = "ELEFE - Artículos Faltantes";
 
-		# asunto y cuerpo alternativo del mensaje
+		# asunto
 		$mail -> Subject = 'Pedido de ' . $pedido['Pedido']['cliente_nombre'];
-		$mail -> AltBody = "A continuación se detallan los artículos faltantes:";
 
 		# si el cuerpo del mensaje es HTML
+		$mail -> isHTML(TRUE);
 		$mail -> MsgHTML($body);
 
+		# cuerpo alternativo del mensaje
+		$mail -> AltBody = $bodyAlt;
+
 		# podemos hacer varios AddAdress
-		$mail -> AddAddress("aleprieto@elefe.com.ar", "Alejandro Prieto");
+		$mail -> AddAddress("elefesfe@gmail.com", "Hector Prieto");
 		$mail -> AddAddress("aleprieto@gmail.com", "Alejandro Prieto");
 
 		# si el SMTP necesita autenticación
