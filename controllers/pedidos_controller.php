@@ -37,6 +37,7 @@ class PedidosController extends AppController {
 		);
 		$this -> Pedido -> recursive = 1;
 		$this -> set('pedidos', $this -> paginate('Pedido', array('Pedido.estado' => '0')));
+		$this -> layout = 'ajax';
 	}
 
 	function admin_finalizados() {
