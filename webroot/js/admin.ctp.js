@@ -75,5 +75,4 @@ function menues() {
 	$('#menu_transportes').css({
 		'margin-left' : ($('#boton_transporte').position().left)
 	});
-	console.info('ok');
 }

@@ -1,43 +1,56 @@
 <?php
 // debug($pedidos);
+
+# Se carga la librería Jquery
+echo $javascript -> link(array('jquery-1.7.1.min','pedidos_admin_index'), FALSE);
+
+# Se define la ruta base
+echo $javascript -> codeBlock('WEBROOT="'.$this -> Html-> url('/', true).'"');
+
 # Se agregan las CSS
 echo $html -> css('pedidos_admin_index');
 ?>
 <div class="pedidos_index">
 	<h2><?php __('Pedidos Pendientes');?></h2>
-	<table cellpadding="0" cellspacing="0">
-	<tr>
-			<th><?php echo $this -> Paginator -> sort('Número', 'Pedido.id');?></th>
-			<th><?php echo $this -> Paginator -> sort('cliente_id');?></th>
-			<th><?php echo $this -> Paginator -> sort('Fecha', 'created');?></th>
-			<th><?php echo $this -> Paginator -> sort('Artículos', 'articulos');?></th>
-			<th><?php echo $this -> Paginator -> sort('progreso');?></th>
-			<th><?php echo $this -> Paginator -> sort('Transporte', 'Transporte.nombre');?></th>
-			<th><?php echo $this -> Paginator -> sort('observaciones');?></th>
-			<th class="actions"><?php __('Acciones');?></th>
-	</tr>
-	<?php
-	$i = 0;
-	foreach ($pedidos as $pedido):
-		$class = null;
-		if ($i++ % 2 == 0) {
-			$class = ' class="altrow"';
-		}
-	?>
-	<tr<?= $class;?>>
-		<td><?= $pedido['Pedido']['id']; ?>&nbsp;</td>
-		<td><?= $pedido['Cliente']['nombre']; ?>&nbsp;</td>
-		<td><?= $this -> Time -> format($format = 'd/m/Y H:i', $pedido['Pedido']['created']); ?></td>
-		<td><?= $pedido['Pedido']['articulos']; ?></td>
-		<td><?= sprintf("%.1f %%", $pedido['Pedido']['progreso']); ?></td>
-		<td><?= $pedido['Transporte']['nombre']; ?></td>
-		<td class="observaciones"><?= $pedido['Pedido']['observaciones']; ?></td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('Editar', true), array('controller' => 'pedidos', 'action' => 'edit', $pedido['Pedido']['id'])); ?>
-			<?php echo $this->Html->link(__('Preparar', true), array('admin' => FALSE, 'controller' => 'ordenes', 'action' => 'preparar', $pedido['Pedido']['id'])); ?>
-		</td>
-	</tr>
-<?php endforeach; ?>
+	<table cellpadding="0" cellspacing="0" id='pedidos'>
+		<thead>
+			<tr>
+					<th><?php echo $this -> Paginator -> sort('Número', 'Pedido.id');?></th>
+					<th><?php echo $this -> Paginator -> sort('cliente_id');?></th>
+					<th><?php echo $this -> Paginator -> sort('Fecha', 'created');?></th>
+					<th><?php echo $this -> Paginator -> sort('Artículos', 'articulos');?></th>
+					<th><?php echo $this -> Paginator -> sort('progreso');?></th>
+					<th><?php echo $this -> Paginator -> sort('Transporte', 'Transporte.nombre');?></th>
+					<th><?php echo $this -> Paginator -> sort('observaciones');?></th>
+					<th class="actions"><?php __('Acciones');?></th>
+					<th><?php echo $this -> Paginator -> sort('prioridad');?></th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php
+			foreach ($pedidos as $pedido):
+			?>
+				<tr>
+					<td class="id"><?= $pedido['Pedido']['id']; ?></td>
+					<td><?= $pedido['Cliente']['nombre']; ?></td>
+					<td><?= $this -> Time -> format($format = 'd/m/Y H:i', $pedido['Pedido']['created']); ?></td>
+					<td><?= $pedido['Pedido']['articulos']; ?></td>
+					<td><?= sprintf("%.1f %%", $pedido['Pedido']['progreso']); ?></td>
+					<td><?= $pedido['Transporte']['nombre']; ?></td>
+					<td class="observaciones"><?= $pedido['Pedido']['observaciones']; ?></td>
+					<td class="actions">
+						<?php echo $this->Html->link(__('Editar', true), array('controller' => 'pedidos', 'action' => 'edit', $pedido['Pedido']['id'])); ?>
+						<?php echo $this->Html->link(__('Preparar', true), array('admin' => FALSE, 'controller' => 'ordenes', 'action' => 'preparar', $pedido['Pedido']['id'])); ?>
+					</td>
+					<td><label><?= $pedido['Pedido']['prioridad'];?></label>
+						<?
+						echo $this -> Html -> image('arrow_down_20.png', array('alt'=> 'down', 'class' => 'arrow_down')); 
+						echo $this -> Html -> image('arrow_up_20.png', array('alt'=> 'up', 'class' => 'arrow_up')); 
+						?>
+					</td>
+				</tr>
+			<?php endforeach; ?>
+		</tbody>
 	</table>
 	<p>
 	<?php
