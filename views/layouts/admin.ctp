@@ -135,6 +135,9 @@
 					array('controller' => 'ordenes', 'action' => 'faltantes')); ?>
 		</div>
 		<div id='menu_clientes'>
+			<?php echo $this -> Html -> link('Buscar', 
+					array('controller' => 'clientes', 'action' => 'buscar')); ?>
+			<br />
 			<?php echo $this -> Html -> link('Nuevo', 
 					array('controller' => 'clientes', 'action' => 'add')); ?>
 			<br />

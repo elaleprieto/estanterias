@@ -3,11 +3,11 @@ class ClientesController extends AppController {
 
 	var $name = 'Clientes';
 	var $helpers = array(
-			'Ajax',
-			'Paginator',
-			'Time',
-			'Javascript',
-			'Js' => array('Jquery')
+		'Ajax',
+		'Paginator',
+		'Time',
+		'Javascript',
+		'Js' => array('Jquery')
 	);
 
 	function admin_index() {
@@ -99,7 +99,7 @@ class ClientesController extends AppController {
 		}
 		if (!$cliente_id) {
 			$cliente_id = 0;
-		} 
+		}
 		$this -> Cliente -> recursive = 0;
 		$clientes = $this -> Cliente -> find('list', array('order' => 'Cliente.nombre'));
 		$this -> set(compact('clientes', 'cliente_id'));
@@ -138,8 +138,35 @@ class ClientesController extends AppController {
 			$this -> set(compact('cliente', 'localidad'));
 		}
 	}
-	
-	
+
+	/**
+	 * admin_buscar(): despliega la pantalla de búsqueda.
+	 */
+	public function admin_buscar() {
+
+	}
+
+	/**
+	 * get_buscados(): realiza la búsqueda de articulos.
+	 * Es usado por admin_buscar() para hacer la búsqueda desde una petición Ajax de buscar().
+	 */
+	public function admin_get_buscados() {
+		$this -> layout = 'ajax';
+		if (!empty($this -> data)) {
+			$cadena = explode(' ', mb_strtoupper($this -> data['Cliente']['cliente'], 'utf-8'));
+			$consulta = "SELECT  c.id AS id, c.nombre AS nombre, direccion, cuit, bonificacion, l.nombre AS localidad, p.nombre AS provincia, i.categoria AS iva
+						FROM clientes AS c, Ivas AS I, Localidades AS L, Provincias AS P
+						WHERE 1=1
+						AND c.iva_id = i.id
+						AND c.localidad_id = l.id
+						AND l.provincia_id = p.id ";
+			foreach ($cadena as $palabra) {
+				$consulta .= "AND c.nombre LIKE '%" . $palabra . "%'";
+			}
+			$consulta .= "ORDER BY c.nombre";
+			$this -> set('clientes', $this -> Cliente -> query($consulta));
+		}
+	}
 
 }
 ?>

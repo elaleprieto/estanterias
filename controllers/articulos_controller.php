@@ -454,13 +454,16 @@ class ArticulosController extends AppController {
 		}
 	}
 
+	/**
+	 * admin_buscar(): despliega la pantalla de búsqueda.
+	 */
 	public function admin_buscar() {
 
 	}
 
 	/**
 	 * get_buscados(): realiza la búsqueda de articulos.
-	 * Es usado por buscar() para hacer la búsqueda desde una petición Ajax de buscar().
+	 * Es usado por admin_buscar() para hacer la búsqueda desde una petición Ajax de buscar().
 	 */
 	public function admin_get_buscados() {
 		$this -> layout = 'ajax';
@@ -487,11 +490,6 @@ class ArticulosController extends AppController {
 					ORDER BY orden ASC";
 			$this -> set('articulos', $this -> Articulo -> query($consulta));
 		}
-		// $origen = explode('/', $this->referer());
-		// if($origen[1] == 'admin') {
-		// # La consulta es la misma, lo que cambia es la vista porque tiene acciones en el admin
-		// $this -> render('admin_get_ubicados');
-		// }
 	}
 
 }
