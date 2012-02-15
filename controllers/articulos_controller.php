@@ -373,10 +373,10 @@ class ArticulosController extends AppController {
 			if ($this -> Articulo -> save($this -> data, TRUE, array('stock'))) {
 				$this -> Session -> setFlash('El stock ha sido actualizado');
 				// $this -> redirect(array(
-					// 'controller' => 'articulos',
-					// 'action' => 'index',
-					// $this -> Session -> read('URL.letra'),
-					// 'page:' . $this -> Session -> read('URL.page')
+				// 'controller' => 'articulos',
+				// 'action' => 'index',
+				// $this -> Session -> read('URL.letra'),
+				// 'page:' . $this -> Session -> read('URL.page')
 				// ));
 				$this -> redirect($this -> Session -> read('URL.redirect'));
 			} else {
@@ -401,10 +401,10 @@ class ArticulosController extends AppController {
 			if ($this -> Articulo -> save($this -> data, TRUE, array('pack'))) {
 				$this -> Session -> setFlash('El pack ha sido actualizado');
 				// $this -> redirect(array(
-					// 'controller' => 'articulos',
-					// 'action' => 'index',
-					// $this -> Session -> read('URL.letra'),
-					// 'page:' . $this -> Session -> read('URL.page')
+				// 'controller' => 'articulos',
+				// 'action' => 'index',
+				// $this -> Session -> read('URL.letra'),
+				// 'page:' . $this -> Session -> read('URL.page')
 				// ));
 				$this -> redirect($this -> Session -> read('URL.redirect'));
 			} else {
@@ -434,35 +434,38 @@ class ArticulosController extends AppController {
 		$this -> layout = 'ajax';
 	}
 
-	function admin_etiquetas_mini() {
+	function admin_etiquetas_mini($id = null) {
 		if (!empty($this -> data)) {
 			$this -> layout = 'ajax';
 			$this -> render('admin_etiquetas_mini_imprimir');
 		}
+		if (!$id) {
+			$id = 0;
+		}
 		$this -> Articulo -> recursive = 0;
 		$articulos = $this -> Articulo -> find('list', array('order' => 'Articulo.orden'));
-		$this -> set('articulos', $articulos);
+		$this -> set(compact('id', 'articulos'));
 	}
 
 	public function get_articulo($id = null) {
 		$this -> layout = 'ajax';
 		if ($id) {
 			$this -> set('articulo', $this -> Articulo -> findById($id));
-		} 
+		}
 	}
-	
+
 	public function admin_buscar() {
-		
+
 	}
-	
+
 	/**
-	 * get_buscados(): realiza la búsqueda de articulos. 
+	 * get_buscados(): realiza la búsqueda de articulos.
 	 * Es usado por buscar() para hacer la búsqueda desde una petición Ajax de buscar().
 	 */
 	public function admin_get_buscados() {
 		$this -> layout = 'ajax';
-		if (!empty($this->data)) {
-			$cadena = explode(' ', mb_strtoupper($this->data['Articulo']['articulo'], 'utf-8'));
+		if (!empty($this -> data)) {
+			$cadena = explode(' ', mb_strtoupper($this -> data['Articulo']['articulo'], 'utf-8'));
 			$consulta = "SELECT  id, detalle, unidad, foto, stock, pack, (precio + precio * porcentaje / 100) AS precio_venta,
 							array_agg(pasillo_nombre) AS pasillo_nombre, array_agg(pasillo_lado) AS pasillo_lado, 
 							min(pasillo_distancia) AS pasillo_distancia, array_agg(ubicacion_altura) AS ubicacion_altura, 
@@ -486,8 +489,8 @@ class ArticulosController extends AppController {
 		}
 		// $origen = explode('/', $this->referer());
 		// if($origen[1] == 'admin') {
-			// # La consulta es la misma, lo que cambia es la vista porque tiene acciones en el admin
-			// $this -> render('admin_get_ubicados');
+		// # La consulta es la misma, lo que cambia es la vista porque tiene acciones en el admin
+		// $this -> render('admin_get_ubicados');
 		// }
 	}
 

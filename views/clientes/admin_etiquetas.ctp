@@ -1,15 +1,10 @@
 <?php
 # Se carga la librería Jquery
-echo $javascript -> link(array(
-		'admin_etiquetas'
-), FALSE);
+echo $javascript -> link(array('admin_etiquetas'), FALSE);
 
 # Se define la ruta base
-echo $javascript -> codeBlock('WEBROOT="'.$this -> Html-> url('/', true).'"', $options = array(
-		'allowCache' => true,
-		'safe' => true,
-		'inline' => true
-));
+echo $javascript -> codeBlock('WEBROOT="'.$this -> Html-> url('/', true).'"');
+
 # Se agregan las CSS
 echo $html -> css('admin_etiquetas');
 
