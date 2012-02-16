@@ -39,9 +39,9 @@ $class = ' class="altrow"';
 			<!-- 									Acciones									-->
 			<!------------------------------------------------------------------------------------>
 			<td class="actions">
-				<?php echo $this -> Html -> link(__('Ver', true), array(
-						'controller' => 'ordenes',
-						'action' => 'finalizadas',
+				<?php echo $this -> Html -> link('Editar', array(
+						'controller' => 'pedidos',
+						'action' => 'edit',
 						$pedido['Pedido']['id']
 				));
 				?>
