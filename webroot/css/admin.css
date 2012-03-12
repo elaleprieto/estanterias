@@ -33,6 +33,7 @@ img.down_arrow {
     width: 130px;
     padding: 5px;
     text-align: center;
+    z-index: 10;
 }
 #menu_articulos a, #menu_pedidos a, #menu_clientes a, #menu_transportes a {
     color: #000000;

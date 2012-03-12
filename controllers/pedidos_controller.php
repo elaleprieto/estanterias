@@ -13,9 +13,7 @@ class PedidosController extends AppController {
 
 	function index() {
 		$this -> Pedido -> recursive = 1;
-		$this -> paginate = array(
-			'order' => 'Pedido.prioridad DESC'
-		);
+		$this -> paginate = array('order' => 'Pedido.prioridad DESC');
 		$this -> set('pedidos', $this -> paginate('Pedido', array('Pedido.estado' => '0')));
 	}
 
@@ -32,9 +30,7 @@ class PedidosController extends AppController {
 			$this -> Pedido -> id = $pedido_id;
 			$this -> Pedido -> saveField('estado', 0);
 		}
-		$this -> paginate = array(
-			'order' => 'Pedido.prioridad DESC'
-		);
+		$this -> paginate = array('order' => 'Pedido.prioridad DESC');
 		$this -> Pedido -> recursive = 1;
 		$this -> set('pedidos', $this -> paginate('Pedido', array('Pedido.estado' => '0')));
 	}
@@ -519,8 +515,7 @@ class PedidosController extends AppController {
 		$mail -> AltBody = $bodyAlt;
 
 		# podemos hacer varios AddAdress
-		$mail -> AddAddress("elefesfe@gmail.com", "Hector Prieto");
-		$mail -> AddAddress("aleprieto@gmail.com", "Alejandro Prieto");
+		$mail -> AddAddress("compras@elefe.com.ar", "Hector Prieto");
 
 		# si el SMTP necesita autenticación
 		$mail -> SMTPAuth = true;
@@ -529,12 +524,57 @@ class PedidosController extends AppController {
 		$mail -> Username = USUARIO_GENERAL;
 		$mail -> Password = CONTRASENIA_GENERAL;
 		$mail -> Send();
+	}
 
-		// if (!$mail -> Send()) {
-		// echo "Error enviando: " . $mail -> ErrorInfo;
-		// } else {
-		// echo "¡¡Enviado!!";
-		// }
+	public function mail() {
+		App::import('Lib', 'phpMailer', array('file' => 'phpMailer' . DS . 'class.phpmailer.php'));
+		App::import('Lib', 'phpMailer', array('file' => 'phpMailer' . DS . 'class.smtp.php'));
+		App::import('Lib', 'contras', array('file' => 'contras' . DS . 'pedidos.correo.php'));
+
+		$mail = new PHPMailer();
+
+		# la dirección del servidor, p. ej.: smtp.servidor.com
+		# con SSL habilitado, el puerto 465 y demás opciones para Gmail
+		$mail -> Host = "smtp.googlemail.com";
+		$mail -> SMTPSecure = "ssl";
+		// $mail -> SMTPSecure = "tls";
+		// $mail -> Port = '465';
+		$mail -> Port = '465';
+		$mail -> SMTPKeepAlive = true;
+		$mail -> Mailer = "SMTP";
+		$mail -> CharSet = 'utf-8';
+		$mail -> IsSMTP(TRUE);
+		// $mail -> IsMail(TRUE);
+		$mail -> Timeout = 30;
+
+		# dirección remitente, p. ej.: no-responder@miempresa.com
+		$mail -> From = "general@elefe.com.ar";
+
+		# nombre remitente, p. ej.: "Servicio de envío automático"
+		$mail -> FromName = "ELEFE - Artículos Faltantes";
+
+		# asunto
+		$mail -> Subject = 'Pedido de ';
+
+		# si el cuerpo del mensaje es HTML
+		$mail -> isHTML(TRUE);
+		$mail -> MsgHTML('hola');
+
+		# cuerpo alternativo del mensaje
+		$mail -> AltBody = 'hola';
+
+		# podemos hacer varios AddAdress
+		$mail -> AddAddress("aleprieto@gmail.com", "Alejandro Prieto");
+
+		# si el SMTP necesita autenticación
+		$mail -> SMTPAuth = true;
+
+		# credenciales usuario
+		$mail -> Username = USUARIO_GENERAL;
+		$mail -> Password = CONTRASENIA_GENERAL;
+		$mail -> SMTPDebug = 1;
+		echo $mail -> Send();
+		echo $mail -> ErrorInfo;
 	}
 
 	function admin_set_prioridad($id = null, $prioridad = null) {
@@ -543,6 +583,65 @@ class PedidosController extends AppController {
 			$this -> Pedido -> saveField('prioridad', $prioridad);
 		}
 		$this -> layout = 'ajax';
+	}
+
+	function embalar($id = null) {
+		if ($id) {
+			$this -> set('pedido', $this -> Pedido -> read(null, $id));
+			$this -> set('bultos', $this -> Pedido -> Orden -> Bulto -> find('list'));
+			$this -> render('embalar_pedido');
+		}
+		$this -> pedido -> recursive = 0;
+		$this -> set('pedidos', $this -> Pedido -> find('all', array('conditions' => array('Pedido.estado' => 2))));
+	}
+
+	function admin_presupuestar($id = null) {
+		if (!$id) {
+			$this -> Session -> setFlash('Pedido inválido');
+			$this -> redirect(array('action' => 'index'));
+		}
+		$this -> set('pedido', $this -> Pedido -> read(null, $id));
+		$this -> set('ordenes', $this -> Pedido -> Orden -> find('all', array('conditions' => array('Orden.pedido_id' => $id))));
+		// $consulta = "SELECT orden_id, posicion, cantidad, cantidad_original, orden_estado, sin_cargo, id, detalle, unidad, foto, observaciones,
+		// array_agg(pasillo_nombre) AS pasillo_nombre, array_agg(pasillo_lado) AS pasillo_lado,
+		// min(pasillo_distancia) AS pasillo_distancia, array_agg(ubicacion_altura) AS ubicacion_altura,
+		// array_agg(ubicacion_posicion) AS ubicacion_posicion, array_agg(ubicacion_estado) AS ubicacion_estado
+		// FROM (SELECT O.id AS orden_id, O.cantidad AS cantidad, O.cantidad_original AS cantidad_original, O.estado AS orden_estado, O.sin_cargo AS sin_cargo, O.observaciones AS observaciones,
+		// A.id AS id, A.detalle AS detalle, A.unidad AS unidad, A.foto AS foto,
+		// A.orden AS posicion,
+		// P.nombre AS pasillo_nombre, P.lado AS pasillo_lado,
+		// P.distancia AS pasillo_distancia, Ub.altura AS ubicacion_altura,
+		// Ub.posicion AS ubicacion_posicion, U.estado AS ubicacion_estado
+		// FROM Ordenes AS O, Articulos AS A LEFT JOIN Ubicados AS U ON U.articulo_id = A.id
+		// LEFT JOIN Pasillos AS P ON U.pasillo_id = P.id LEFT JOIN Ubicaciones AS Ub ON U.ubicacion_id = Ub.id
+		// WHERE O.pedido_id	= $id
+		// AND O.articulo_id 	= A.id
+		// ORDER BY ubicacion_estado DESC
+		// ) AS E
+		// GROUP BY orden_id, posicion, cantidad, cantidad_original, orden_estado, sin_cargo, id, detalle, unidad, foto, observaciones
+		// ORDER BY posicion";
+		// $ordenes = $this -> Pedido -> Orden -> query($consulta);
+
+		// debug($pedido);
+		$this -> layout = 'ajax';
+	}
+
+	/**
+	 * admin_estadisticas: realiza un gráfico de barras de los pedidos finalizados
+	 */
+	public function admin_estadisticas() {
+		App::import('Lib', 'googchart', array('file' => 'googchart' . DS . 'GoogChart.class.php'));
+		$consulta = "SELECT anio, mes, COUNT(*) AS cantidad
+					FROM (
+						SELECT *,EXTRACT(MONTH FROM P.finalizado) AS mes, EXTRACT(YEAR FROM P.finalizado) AS anio
+						FROM Pedidos P
+						WHERE P.finalizado IS NOT NULL
+					) AS R
+					GROUP BY anio,mes
+					ORDER BY anio, mes ASC";
+		$pedidos = $this -> Pedido -> query($consulta);
+		$this -> set('pedidos', $pedidos);
+		// debug($pedidos);
 	}
 
 }

@@ -115,6 +115,8 @@
 					array('controller' => 'pedidos', 'action' => 'finalizados')); ?>
 			<?php echo $this -> Html -> link('Controlados', 
 					array('controller' => 'pedidos', 'action' => 'controlados')); ?>
+			<?php echo $this -> Html -> link('Estadísticas', 
+					array('controller' => 'pedidos', 'action' => 'estadisticas')); ?>
 		</div>
 		<div id='menu_articulos'>
 			<?php echo $this -> Html -> link('Buscar', 
