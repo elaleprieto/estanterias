@@ -630,8 +630,7 @@ class PedidosController extends AppController {
 	 * admin_estadisticas: realiza un gráfico de barras de los pedidos finalizados
 	 */
 	public function admin_estadisticas() {
-		App::import('Lib', 'googchart', array('file' => 'googchart' . DS . 'GoogChart.class.php'));
-		$consulta = "SELECT anio, mes, COUNT(*) AS cantidad
+		$cantidad_pedidos_mes = "SELECT anio, mes, COUNT(*) AS cantidad
 					FROM (
 						SELECT *,EXTRACT(MONTH FROM P.finalizado) AS mes, EXTRACT(YEAR FROM P.finalizado) AS anio
 						FROM Pedidos P
@@ -639,8 +638,20 @@ class PedidosController extends AppController {
 					) AS R
 					GROUP BY anio,mes
 					ORDER BY anio, mes ASC";
-		$pedidos = $this -> Pedido -> query($consulta);
-		$this -> set('pedidos', $pedidos);
+		$cantidad_productos_pedido = "SELECT P.productos, COUNT(*) AS cantidad
+					FROM (
+						SELECT COUNT(*) AS productos
+						FROM Ordenes O
+						GROUP BY O.pedido_id
+						ORDER BY productos ASC
+					) AS P
+					GROUP BY P.productos
+					ORDER BY P.productos ASC";
+		$pedidos_mes = $this -> Pedido -> query($cantidad_pedidos_mes);
+		$productos_pedido = $this -> Pedido -> query($cantidad_productos_pedido);
+		$this -> set('pedidos_mes', $pedidos_mes);
+		$this -> set('productos_pedido', $productos_pedido);
+		
 		// debug($pedidos);
 	}
 
