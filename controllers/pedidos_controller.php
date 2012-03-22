@@ -300,13 +300,13 @@ class PedidosController extends AppController {
 			$this -> redirect(array('action' => 'index'));
 		}
 		$pedido = $this -> Pedido -> read(null, $id);
-		$consulta = "SELECT orden_id, posicion, cantidad, cantidad_original, orden_estado, sin_cargo, id, detalle, unidad, foto, observaciones, 
+		$consulta = "SELECT orden_id, posicion, cantidad, cantidad_original, orden_estado, sin_cargo, id, detalle, unidad, foto, stock, observaciones, 
 					array_agg(pasillo_nombre) AS pasillo_nombre, array_agg(pasillo_lado) AS pasillo_lado, 
 					min(pasillo_distancia) AS pasillo_distancia, array_agg(ubicacion_altura) AS ubicacion_altura, 
 					array_agg(ubicacion_posicion) AS ubicacion_posicion, array_agg(ubicacion_estado) AS ubicacion_estado 
 				FROM (SELECT O.id AS orden_id, O.cantidad AS cantidad, O.cantidad_original AS cantidad_original, O.estado AS orden_estado, O.sin_cargo AS sin_cargo, O.observaciones AS observaciones, 
 						A.id AS id, A.detalle AS detalle, A.unidad AS unidad, A.foto AS foto,
-						A.orden AS posicion,
+						A.orden AS posicion, A.stock AS stock,
 						P.nombre AS pasillo_nombre, P.lado AS pasillo_lado, 
 						P.distancia AS pasillo_distancia, Ub.altura AS ubicacion_altura, 
 						Ub.posicion AS ubicacion_posicion, U.estado AS ubicacion_estado 
@@ -316,7 +316,7 @@ class PedidosController extends AppController {
 					AND O.articulo_id 	= A.id
 					ORDER BY ubicacion_estado DESC
 					) AS E
-				GROUP BY orden_id, posicion, cantidad, cantidad_original, orden_estado, sin_cargo, id, detalle, unidad, foto, observaciones
+				GROUP BY orden_id, posicion, cantidad, cantidad_original, orden_estado, sin_cargo, id, detalle, unidad, foto, stock, observaciones
 				ORDER BY posicion";
 		$ordenes = $this -> Pedido -> Orden -> query($consulta);
 
@@ -647,12 +647,38 @@ class PedidosController extends AppController {
 					) AS P
 					GROUP BY P.productos
 					ORDER BY P.productos ASC";
+		$promedio_productos_pedido = "SELECT OM.ordenes_anio AS anio, OM.ordenes_mes AS mes, ordenes_cantidad / pedidos_cantidad AS cantidad
+					FROM (
+							SELECT ordenes_anio, ordenes_mes, COUNT(*) AS ordenes_cantidad
+							FROM (
+								SELECT *,EXTRACT(MONTH FROM P.finalizado) AS ordenes_mes, EXTRACT(YEAR FROM P.finalizado) AS ordenes_anio
+								FROM Pedidos P, Ordenes O
+								WHERE P.finalizado IS NOT NULL
+								AND P.id = O.pedido_id
+							) AS R
+							GROUP BY ordenes_anio, ordenes_mes
+							ORDER BY ordenes_anio, ordenes_mes ASC
+						) AS OM,
+						(
+							SELECT pedidos_anio, pedidos_mes, COUNT(*) AS pedidos_cantidad
+							FROM (
+								SELECT *,EXTRACT(MONTH FROM P.finalizado) AS pedidos_mes, EXTRACT(YEAR FROM P.finalizado) AS pedidos_anio
+								FROM Pedidos P
+								WHERE P.finalizado IS NOT NULL
+							) AS R
+							GROUP BY pedidos_anio, pedidos_mes
+							ORDER BY pedidos_anio, pedidos_mes ASC
+						) AS PM
+					WHERE OM.ordenes_anio = PM.pedidos_anio
+					AND OM.ordenes_mes = PM.pedidos_mes";
 		$pedidos_mes = $this -> Pedido -> query($cantidad_pedidos_mes);
 		$productos_pedido = $this -> Pedido -> query($cantidad_productos_pedido);
+		$promedio_productos_pedido = $this -> Pedido -> query($promedio_productos_pedido);
 		$this -> set('pedidos_mes', $pedidos_mes);
 		$this -> set('productos_pedido', $productos_pedido);
+		$this -> set('promedio_productos_pedido', $promedio_productos_pedido);
 		
-		// debug($pedidos);
+		debug($promedio_productos_pedido);
 	}
 
 }

@@ -73,9 +73,10 @@ $celda_ancho = 90;
 $celda_ancho_codigo = 9;
 $celda_ancho_cantidad = 8;
 $celda_ancho_unidad = 8;
-$celda_ancho_detalle = 126;
-$celda_ancho_cantidad_original = 11;
-$celda_ancho_observaciones = 25;
+$celda_ancho_detalle = 120;
+$celda_ancho_cantidad_original = 8;
+$celda_ancho_stock = 8;
+$celda_ancho_observaciones = 23;
 $fila_ancho_transporte = 171;
 $celda_ancho_b = 5;
 $celda_ancho_cobinpro = 20;
@@ -129,8 +130,11 @@ $tcpdf -> Cell($celda_ancho_codigo, $celda_alto, 'Cód', 1, 0, 'C');
 $tcpdf -> Cell($celda_ancho_cantidad, $celda_alto, 'Cant', 1, 0, 'C');
 $tcpdf -> Cell($celda_ancho_unidad, $celda_alto, 'Unid', 1, 0, 'C');
 $tcpdf -> Cell($celda_ancho_detalle, $celda_alto, 'Detalle', 1, 0, 'C');
-$tcpdf -> Cell($celda_ancho_cantidad_original, $celda_alto, 'Pedido', 1, 0, 'C');
+$tcpdf -> SetFont("freesans", "B", 8);
+$tcpdf -> Cell($celda_ancho_cantidad_original, $celda_alto, 'Orig.', 1, 0, 'C');
+$tcpdf -> Cell($celda_ancho_stock, $celda_alto, 'Stock', 1, 0, 'C');
 $tcpdf -> Cell($celda_ancho_observaciones, $celda_alto, 'Observaciones', 1, 1, 'C');
+$tcpdf -> SetFont("freesans", "B", 9);
 
 ###############################################################
 # Armo la lista
@@ -161,10 +165,11 @@ foreach ($ordenes as $key => $orden) {
 	
 	# Se verifica si la cantidad que se envía es distinta de la cantidad pedida y se modifica el estilo en dicho caso.
 	if($orden[0]["cantidad"] != $orden[0]["cantidad_original"]) {
-		$html .= '<td width="'.$celda_ancho_cantidad_original.'mm" height="'.$celda_alto.'mm" align="center"><span style="text-decoration:line-through">'.$orden[0]["cantidad_original"].'</span></td>';
+		$html .= '<td width="'.$celda_ancho_cantidad_original.'mm" height="'.$celda_alto.'mm" align="center"><font size="8"><span style="text-decoration:line-through">'.$orden[0]["cantidad_original"].'</span></font></td>';
 	} else {
-		$html .= '<td width="'.$celda_ancho_cantidad_original.'mm" height="'.$celda_alto.'mm" align="center">'.$orden[0]["cantidad_original"].'</td>';
+		$html .= '<td width="'.$celda_ancho_cantidad_original.'mm" height="'.$celda_alto.'mm" align="center"><font size="8">'.$orden[0]["cantidad_original"].'</font></td>';
 	}
+	$html .= '<td width="'.$celda_ancho_stock.'mm" height="'.$celda_alto.'mm" align="center"><font size="8">'.$orden[0]["stock"].'</font></td>';
 	$html .= '<td width="'.$celda_ancho_observaciones.'mm" height="'.$celda_alto.'mm"><font size="8">'.$orden[0]["observaciones"].'</font></td>';
 
 	$html .= "</tr>";
