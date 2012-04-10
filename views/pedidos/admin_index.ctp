@@ -11,7 +11,8 @@ echo $javascript -> codeBlock('WEBROOT="'.$this -> Html-> url('/', true).'"');
 echo $html -> css('pedidos_admin_index');
 ?>
 <div class="pedidos_index">
-	<h2><?php __('Pedidos Pendientes');?></h2>
+	<h2 class="pendientes"><?php __('Pedidos Pendientes');?></h2>
+	<p class="recargado">Actualizado: <?= date('h:i'); ?></p>
 	<table cellpadding="0" cellspacing="0" id='pedidos'>
 		<thead>
 			<tr>

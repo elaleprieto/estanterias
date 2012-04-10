@@ -8,3 +8,10 @@
 table tr.modificada td {
 	background-color: #FFFFBB;
 }
+h2.pendientes {
+	display:inline;
+}
+p.recargado {
+	float:right;
+	color: #EE3322;
+}

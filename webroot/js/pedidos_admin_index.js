@@ -10,6 +10,10 @@ $(document).ready(function() {
 	 *					Inicialización de Objetos						*
 	 ********************************************************************/
 
+	// Recargar la página cada 5 minutos
+	minutos = 5 * 60 * 1000;
+	setTimeout("location.reload()", minutos);
+
 	/********************************************************************
 	 * 								Eventos								*
 	 *
