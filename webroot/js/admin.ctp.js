@@ -64,15 +64,17 @@ $(document).ready(function() {
 });
 function menues() {
 	$('#menu_pedidos').css({
-		'margin-left' : ($('#boton_pedido').position().left)
+		// Se ajuntan los menúes a la posición del botón correspondiente.
+		// la resta es para ajutar en el layout Supervisor.
+		'margin-left' : ($('#boton_pedido').position().left - $('#header').position().left) 
 	});
 	$('#menu_articulos').css({
-		'margin-left' : ($('#boton_articulo').position().left)
+		'margin-left' : ($('#boton_articulo').position().left - $('#header').position().left)
 	});
 	$('#menu_clientes').css({
-		'margin-left' : ($('#boton_cliente').position().left)
+		'margin-left' : ($('#boton_cliente').position().left - $('#header').position().left)
 	});
 	$('#menu_transportes').css({
-		'margin-left' : ($('#boton_transporte').position().left)
+		'margin-left' : ($('#boton_transporte').position().left - $('#header').position().left)
 	});
 }
