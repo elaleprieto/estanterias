@@ -46,6 +46,8 @@
 				}
 			} else if(isset($this->params['admin'])) {
 				$this->layout = 'admin';
+			} else if(isset($this->params['supervisor'])) {
+				$this->layout = 'supervisor';
 			}
 		}
 

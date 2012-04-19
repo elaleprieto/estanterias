@@ -2,7 +2,7 @@
 	<legend>
 		<?php echo 'Artículos';?>
 	</legend>
-	<div>
+	<div id="buscar">
 		<?php
 		echo $this -> Form -> input('buscar', array(
 				'id' => 'busqueda',
@@ -61,22 +61,20 @@
 			));
 			?>
 		</div>
-		<br />
+		<div class="atributo">
+			<label class="atributo">Notas:</label>
+			<?php
+			echo $this -> Form -> input('articuloObservaciones', array(
+					'id' => 'articuloObservaciones',
+					'div' => FALSE,
+					'label' => FALSE,
+			));
+			?>
+		</div>
 		<div class="atributo">
 			<label class="atributo">Sin Cargo:</label>
 			<input id="sin_cargo_ckeckbox" type="checkbox" class="pedidos_add"/>
 		</div>
-		<br />
-	</div>
-	<div class="observaciones">
-		<label class="atributo">Observaciones:</label>
-		<?php
-		echo $this -> Form -> textarea('articuloObservaciones', array(
-				'id' => 'articuloObservaciones',
-				'div' => FALSE,
-				'label' => "Observaciones",
-		));
-		?>
 	</div>
 	<div id="info_cantidad">
 		<?php
@@ -86,9 +84,5 @@
 				'class' => 'articulo',
 		));
 		?>
-		<label class="cantidad_articulos">Cantidad Artículos: </label>
-		<div id="cantidad_articulos" class="cantidad_articulos">
-			0
-		</div>
 	</div>
 </fieldset>

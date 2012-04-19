@@ -17,6 +17,7 @@
 			'class' => 'textfield',
 			'div' => FALSE,
 			'label' => FALSE,
+			'type' => 'text'
 	));
 	?>
 	<br />

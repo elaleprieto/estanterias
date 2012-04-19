@@ -149,6 +149,67 @@ class PedidosController extends AppController {
 		$transportes = $this -> Pedido -> Transporte -> find('list', array('order' => array('Transporte.nombre')));
 		$this -> set(compact('clientes', 'articulos', 'transportes'));
 	}
+	
+	function supervisor_add() {
+		if (!empty($this -> data) && isset($this -> data['Orden'])) {
+			$this -> Pedido -> create();
+			if ($this -> Pedido -> save($this -> data)) {
+				# actualizo los datos del Cliente
+				$this -> Pedido -> Cliente -> id = $this -> data['Pedido']['cliente_id'];
+				if (isset($this -> data['Pedido']['transporte_id'])) {
+					$this -> Pedido -> Cliente -> saveField('transporte_id', $this -> data['Pedido']['transporte_id']);
+				} else {
+					$this -> Pedido -> Cliente -> saveField('transporte_id', 0);
+				}
+				if (isset($this -> data['Pedido']['contrarrembolso'])) {
+					$this -> Pedido -> Cliente -> saveField('contrarrembolso', $this -> data['Pedido']['contrarrembolso']);
+				} else {
+					$this -> Pedido -> Cliente -> saveField('contrarrembolso', FALSE);
+				}
+				if (isset($this -> data['Pedido']['cobinpro'])) {
+					$this -> Pedido -> Cliente -> saveField('cobinpro', $this -> data['Pedido']['cobinpro']);
+				} else {
+					$this -> Pedido -> Cliente -> saveField('cobinpro', FALSE);
+				}
+				if (isset($this -> data['Pedido']['b'])) {
+					$this -> Pedido -> Cliente -> saveField('presupuesto', $this -> data['Pedido']['b']);
+				} else {
+					$this -> Pedido -> Cliente -> saveField('presupuesto', 0);
+				}
+				# inserto las ordenes
+				foreach ($this -> data['Orden'] as $orden) {
+					$this -> Pedido -> Orden -> create();
+					$this -> Pedido -> Orden -> set(array(
+						'articulo_id' => $orden['id'],
+						'cantidad' => $orden['Cantidad'],
+						'cantidad_original' => $orden['Cantidad'],
+						'sin_cargo' => $orden['SinCargo'],
+						'observaciones' => $orden['Observaciones'],
+						'pedido_id' => $this -> Pedido -> id,
+					));
+					$this -> Pedido -> Orden -> save();
+				}
+				$this -> Session -> setFlash('El pedido ha sido creado');
+				$this -> redirect(array('action' => 'index', ));
+			} else {
+				$this -> Session -> setFlash('El pedido no se ha guardado, intente nuevamente.');
+			}
+		}
+		$condicionesArticulo = array(
+			'OR' => array('NOT' => array('OR' => array(
+						array("Articulo.detalle LIKE" => "FAROL%"),
+						array("Articulo.detalle LIKE" => "BULONES%")
+					))),
+			array("Articulo.precio >" => "0")
+		);
+		$articulos = $this -> Pedido -> Orden -> Articulo -> find('list', array(
+			'conditions' => $condicionesArticulo,
+			'order' => array('Articulo.orden')
+		));
+		$clientes = $this -> Pedido -> Cliente -> find('list', array('order' => array('Cliente.nombre')));
+		$transportes = $this -> Pedido -> Transporte -> find('list', array('order' => array('Transporte.nombre')));
+		$this -> set(compact('clientes', 'articulos', 'transportes'));
+	}
 
 	function admin_edit($id = null) {
 		if (!$id && empty($this -> data)) {
@@ -431,99 +492,103 @@ class PedidosController extends AppController {
 			),
 			'recursive' => 0
 		));
-		$body = $bodyAlt = '';
-		$estilo_cabeceras = 'style="border-bottom: 2px solid black;"';
 
-		if (sizeof($ordenes_sin_stock) > 0) {
-			$body = "<p><b>Artículos No Enviados por Falta de Stock: </b></p>";
-			$bodyAlt = 'Artículos No Enviados por Falta de Stock';
-			$body .= "<br /><br />";
-			$bodyAlt .= '\n\n';
-			$body .= '<table>';
-			$body .= '<tr>';
-			$body .= "<th $estilo_cabeceras>Código</th>";
-			$body .= "<th $estilo_cabeceras>Detalle</th>";
-			$body .= "<th $estilo_cabeceras>Cantidad Pedida</th>";
-			$bodyAlt .= 'Código | Detalle | Cantidad Pedida\n';
-			$body .= '</tr>';
-			foreach ($ordenes_sin_stock as $orden) {
-				$body .= '<tr>';
-				$body .= '<td style="text-align: center;">' . $orden['Orden']['articulo_id'] . '</td>';
-				$body .= '<td>' . $orden['Orden']['articulo_detalle'] . '</td>';
-				$body .= '<td style="text-align: center;">' . $orden['Orden']['cantidad_original'] . '</td>';
-				$body .= '</tr>';
-				$bodyAlt .= $orden['Orden']['articulo_id'] . $orden['Orden']['articulo_detalle'] . $orden['Orden']['cantidad_original'] . '\n';
-			}
-			$body .= '</table>';
-		}
-		if (sizeof($ordenes_menores) > 0) {
+		# Se verifique que no se envíe un correo vacío
+		if ((sizeof($ordenes_menores) > 0) || (sizeof($ordenes_sin_stock) > 0)) {
+			$body = $bodyAlt = '';
+			$estilo_cabeceras = 'style="border-bottom: 2px solid black;"';
+
 			if (sizeof($ordenes_sin_stock) > 0) {
-				# Si ya se escribió en el correo, se traza un línea
-				$body .= '<br /><br />';
-				$bodyAlt .= '\n\n\n';
-			}
-			$body .= "<p><b>Artículos Enviados pero en una Cantidad menor a la pedida (posiblemente por falta de Stock): </b></p>";
-			$bodyAlt .= 'Artículos Enviados pero en una Cantidad menor a la pedida (posiblemente por falta de Stock): ';
-			$body .= "<br /><br />";
-			$bodyAlt .= '\n\n';
-			$body .= '<table>';
-			$body .= '<tr>';
-			$body .= "<th $estilo_cabeceras>Código</th>";
-			$body .= "<th $estilo_cabeceras>Detalle</th>";
-			$body .= "<th $estilo_cabeceras>Cantidad Enviada</th>";
-			$body .= "<th $estilo_cabeceras>Cantidad Pedida</th>";
-			$bodyAlt .= 'Código | Detalle | Cantidad Enviada | Cantidad Pedida\n';
-			$body .= '</tr>';
-			foreach ($ordenes_menores as $orden) {
+				$body = "<p><b>Artículos No Enviados por Falta de Stock: </b></p>";
+				$bodyAlt = 'Artículos No Enviados por Falta de Stock';
+				$body .= "<br /><br />";
+				$bodyAlt .= '\n\n';
+				$body .= '<table>';
 				$body .= '<tr>';
-				$body .= '<td style="text-align: center;">' . $orden['Orden']['articulo_id'] . '</td>';
-				$body .= '<td>' . $orden['Orden']['articulo_detalle'] . '</td>';
-				$body .= '<td style="text-align: center;">' . $orden['Orden']['cantidad'] . '</td>';
-				$body .= '<td style="text-align: center;">' . $orden['Orden']['cantidad_original'] . '</td>';
+				$body .= "<th $estilo_cabeceras>Código</th>";
+				$body .= "<th $estilo_cabeceras>Detalle</th>";
+				$body .= "<th $estilo_cabeceras>Cantidad Pedida</th>";
+				$bodyAlt .= 'Código | Detalle | Cantidad Pedida\n';
 				$body .= '</tr>';
-				$bodyAlt .= $orden['Orden']['articulo_id'] . $orden['Orden']['articulo_detalle'] . $orden['Orden']['cantidad'] . $orden['Orden']['cantidad_original'] . '\n';
+				foreach ($ordenes_sin_stock as $orden) {
+					$body .= '<tr>';
+					$body .= '<td style="text-align: center;">' . $orden['Orden']['articulo_id'] . '</td>';
+					$body .= '<td>' . $orden['Orden']['articulo_detalle'] . '</td>';
+					$body .= '<td style="text-align: center;">' . $orden['Orden']['cantidad_original'] . '</td>';
+					$body .= '</tr>';
+					$bodyAlt .= $orden['Orden']['articulo_id'] . $orden['Orden']['articulo_detalle'] . $orden['Orden']['cantidad_original'] . '\n';
+				}
+				$body .= '</table>';
 			}
-			$body .= '</table>';
+			if (sizeof($ordenes_menores) > 0) {
+				if (sizeof($ordenes_sin_stock) > 0) {
+					# Si ya se escribió en el correo, se traza un línea
+					$body .= '<br /><br />';
+					$bodyAlt .= '\n\n\n';
+				}
+				$body .= "<p><b>Artículos Enviados pero en una Cantidad menor a la pedida (posiblemente por falta de Stock): </b></p>";
+				$bodyAlt .= 'Artículos Enviados pero en una Cantidad menor a la pedida (posiblemente por falta de Stock): ';
+				$body .= "<br /><br />";
+				$bodyAlt .= '\n\n';
+				$body .= '<table>';
+				$body .= '<tr>';
+				$body .= "<th $estilo_cabeceras>Código</th>";
+				$body .= "<th $estilo_cabeceras>Detalle</th>";
+				$body .= "<th $estilo_cabeceras>Cantidad Enviada</th>";
+				$body .= "<th $estilo_cabeceras>Cantidad Pedida</th>";
+				$bodyAlt .= 'Código | Detalle | Cantidad Enviada | Cantidad Pedida\n';
+				$body .= '</tr>';
+				foreach ($ordenes_menores as $orden) {
+					$body .= '<tr>';
+					$body .= '<td style="text-align: center;">' . $orden['Orden']['articulo_id'] . '</td>';
+					$body .= '<td>' . $orden['Orden']['articulo_detalle'] . '</td>';
+					$body .= '<td style="text-align: center;">' . $orden['Orden']['cantidad'] . '</td>';
+					$body .= '<td style="text-align: center;">' . $orden['Orden']['cantidad_original'] . '</td>';
+					$body .= '</tr>';
+					$bodyAlt .= $orden['Orden']['articulo_id'] . $orden['Orden']['articulo_detalle'] . $orden['Orden']['cantidad'] . $orden['Orden']['cantidad_original'] . '\n';
+				}
+				$body .= '</table>';
+			}
+
+			$mail = new PHPMailer();
+
+			# la dirección del servidor, p. ej.: smtp.servidor.com
+			# con SSL habilitado, el puerto 465 y demás opciones para Gmail
+			$mail -> Host = "smtp.googlemail.com";
+			$mail -> SMTPSecure = "ssl";
+			$mail -> Port = '465';
+			$mail -> SMTPKeepAlive = true;
+			$mail -> Mailer = "smtp";
+			$mail -> CharSet = 'utf-8';
+			$mail -> IsSMTP();
+
+			# dirección remitente, p. ej.: no-responder@miempresa.com
+			$mail -> From = "general@elefe.com.ar";
+
+			# nombre remitente, p. ej.: "Servicio de envío automático"
+			$mail -> FromName = "ELEFE - Artículos Faltantes";
+
+			# asunto
+			$mail -> Subject = 'Pedido de ' . $pedido['Pedido']['cliente_nombre'];
+
+			# si el cuerpo del mensaje es HTML
+			$mail -> isHTML(TRUE);
+			$mail -> MsgHTML($body);
+
+			# cuerpo alternativo del mensaje
+			$mail -> AltBody = $bodyAlt;
+
+			# podemos hacer varios AddAdress
+			$mail -> AddAddress("compras@elefe.com.ar", "Hector Prieto");
+
+			# si el SMTP necesita autenticación
+			$mail -> SMTPAuth = true;
+
+			# credenciales usuario
+			$mail -> Username = USUARIO_GENERAL;
+			$mail -> Password = CONTRASENIA_GENERAL;
+			$mail -> Send();
 		}
-
-		$mail = new PHPMailer();
-
-		# la dirección del servidor, p. ej.: smtp.servidor.com
-		# con SSL habilitado, el puerto 465 y demás opciones para Gmail
-		$mail -> Host = "smtp.googlemail.com";
-		$mail -> SMTPSecure = "ssl";
-		$mail -> Port = '465';
-		$mail -> SMTPKeepAlive = true;
-		$mail -> Mailer = "smtp";
-		$mail -> CharSet = 'utf-8';
-		$mail -> IsSMTP();
-
-		# dirección remitente, p. ej.: no-responder@miempresa.com
-		$mail -> From = "general@elefe.com.ar";
-
-		# nombre remitente, p. ej.: "Servicio de envío automático"
-		$mail -> FromName = "ELEFE - Artículos Faltantes";
-
-		# asunto
-		$mail -> Subject = 'Pedido de ' . $pedido['Pedido']['cliente_nombre'];
-
-		# si el cuerpo del mensaje es HTML
-		$mail -> isHTML(TRUE);
-		$mail -> MsgHTML($body);
-
-		# cuerpo alternativo del mensaje
-		$mail -> AltBody = $bodyAlt;
-
-		# podemos hacer varios AddAdress
-		$mail -> AddAddress("compras@elefe.com.ar", "Hector Prieto");
-
-		# si el SMTP necesita autenticación
-		$mail -> SMTPAuth = true;
-
-		# credenciales usuario
-		$mail -> Username = USUARIO_GENERAL;
-		$mail -> Password = CONTRASENIA_GENERAL;
-		$mail -> Send();
 	}
 
 	public function mail() {
@@ -671,14 +736,25 @@ class PedidosController extends AppController {
 						) AS PM
 					WHERE OM.ordenes_anio = PM.pedidos_anio
 					AND OM.ordenes_mes = PM.pedidos_mes";
+		$ventas_mensuales = "SELECT ordenes_anio AS anio, ordenes_mes AS mes, SUM(valor) AS ventas
+							FROM (
+								SELECT EXTRACT(MONTH FROM P.finalizado) AS ordenes_mes, EXTRACT(YEAR FROM P.finalizado) AS ordenes_anio,
+									(O.cantidad * A.precio) AS valor
+								FROM Pedidos P, Ordenes O, Articulos A
+								WHERE P.finalizado IS NOT NULL
+								AND P.id = O.pedido_id
+								AND A.id = O.articulo_id
+							) AS R
+							GROUP BY ordenes_anio, ordenes_mes
+							ORDER BY ordenes_anio, ordenes_mes ASC";
 		$pedidos_mes = $this -> Pedido -> query($cantidad_pedidos_mes);
 		$productos_pedido = $this -> Pedido -> query($cantidad_productos_pedido);
 		$promedio_productos_pedido = $this -> Pedido -> query($promedio_productos_pedido);
+		$ventas_mensuales = $this -> Pedido -> query($ventas_mensuales);
 		$this -> set('pedidos_mes', $pedidos_mes);
 		$this -> set('productos_pedido', $productos_pedido);
 		$this -> set('promedio_productos_pedido', $promedio_productos_pedido);
-		
-		debug($promedio_productos_pedido);
+		$this -> set('ventas_mensuales', $ventas_mensuales);
 	}
 
 }

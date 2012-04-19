@@ -6,7 +6,7 @@ echo $javascript -> link(array('jquery-1.7.1.min','pedidos_admin_add_edit','pedi
 echo $javascript -> codeBlock('WEBROOT="'.$this -> Html-> url('/', true).'"');
 
 # Se agregan las CSS
-echo $html -> css('pedidos_admin_add');
+echo $html -> css('supervisor_pedidos_add');
 
 # Aquí se arma el Formulario de Creación del Pedido
 echo $this -> Form -> create('Pedido', array(
