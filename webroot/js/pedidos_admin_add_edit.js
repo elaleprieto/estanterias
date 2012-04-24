@@ -59,6 +59,11 @@ $(document).ready(function() {
 			articulosActualizar();
 		}
 	});
+	$('#cantidad').keyup(function(e) {
+		if(e.which != 13) {
+			verificarCantidad();
+		}
+	});
 	$('#lista option').click(function() {
 		setArticulo($('#lista option:selected').val());
 	});
@@ -293,6 +298,7 @@ function setArticulo(articulo_id) {
 		$('#unidad').html(data.unidad);
 		$('#stock').html(data.stock);
 		$('#pack').html(data.pack);
+		verificarCantidad();
 	});
 }
 
@@ -335,4 +341,28 @@ function setCliente(cliente_id) {
 		}
 		$('#load_cliente').hide();
 	});
+}
+
+/**
+ * verificarCantidad(): revisa que la cantidad ingresada concuerde con el pack del producto 
+ * y la prioridad del pedido.
+ */
+function verificarCantidad() {
+	var cantidad = $("#cantidad").val();
+	var pack = $('#pack').text();
+	var prioridad = $('#presupuesto').val();
+	
+	/* se desaparece el mensaje si lo hay */
+	$('#mensaje_flotante').hide();
+	
+	/* se verifica el pack */
+	if((pack > 0) && (cantidad % pack != 0)) {
+		$('#mensaje_flotante').removeClass('mensaje_ok').addClass('mensaje_error').text('La Cantidad ' + cantidad + ' no es múltiplo del Pack ' + pack).show().delay(1500).fadeOut();
+		return;
+	}
+	/* se verifica la prioridad */
+	pack *= 2;
+	if((prioridad > 0) && (pack > 0) && (cantidad < pack)) {
+		$('#mensaje_flotante').removeClass('mensaje_ok').addClass('mensaje_error').text('Cuidado con la prioridad').show().delay(1500).fadeOut();
+	}
 }
