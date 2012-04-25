@@ -149,8 +149,12 @@ class PedidosController extends AppController {
 		$transportes = $this -> Pedido -> Transporte -> find('list', array('order' => array('Transporte.nombre')));
 		$this -> set(compact('clientes', 'articulos', 'transportes'));
 	}
+
+	function mostrador_index() {
+		$this -> redirect(array('action' => 'add'));
+	}
 	
-	function supervisor_add() {
+	function mostrador_add() {
 		if (!empty($this -> data) && isset($this -> data['Orden'])) {
 			$this -> Pedido -> create();
 			if ($this -> Pedido -> save($this -> data)) {

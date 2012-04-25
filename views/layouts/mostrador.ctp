@@ -52,7 +52,7 @@
 						<div class="header" id="boton_pedido">
 							<?php echo $this -> Html -> link('Pedidos', array(
 									'controller' => 'pedidos',
-									'action' => 'index'
+									'action' => 'add'
 							));
 							echo $this -> Html -> image('down_arroww.png', array(
 									'alt' => '',
@@ -61,6 +61,7 @@
 							?>
 						</div>
 					</td>
+					<!--
 					<td class="header">
 						<div class="header" id="boton_articulo">
 							<?php
@@ -101,6 +102,7 @@
 							?>
 						</div>
 					</td>
+					-->
 				</tr>
 			</table>
 		</div>
