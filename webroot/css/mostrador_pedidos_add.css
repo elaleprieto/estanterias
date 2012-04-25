@@ -20,7 +20,7 @@ select.articulo {
 }
 select.desplegable {
 	background: -moz-linear-gradient(center top , #F1F1D4, #E6E49F) repeat scroll 0 0 #F1F1D4;
-	background: -webkit-gradient(linear, left top, left bottom, from(#F1F1D4), to(#E6E49F));
+/*	background: -webkit-gradient(linear, left top, left bottom, from(#F1F1D4), to(#E6E49F));*/
 	vertical-align: top;
 	margin-bottom: 5px;
 }
