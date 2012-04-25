@@ -115,6 +115,12 @@
 					array('controller' => 'pedidos', 'action' => 'finalizados')); ?>
 			<?php echo $this -> Html -> link('Controlados', 
 					array('controller' => 'pedidos', 'action' => 'controlados')); ?>
+			<?php echo $this -> Html -> link('Embalados', 
+					array('controller' => 'pedidos', 'action' => 'embalados')); ?>
+			<?php echo $this -> Html -> link('Facturados', 
+					array('controller' => 'pedidos', 'action' => 'facturados')); ?>
+			<?php echo $this -> Html -> link('Despachados', 
+					array('controller' => 'pedidos', 'action' => 'despachados')); ?>
 			<?php echo $this -> Html -> link('Estadísticas', 
 					array('controller' => 'pedidos', 'action' => 'estadisticas')); ?>
 		</div>

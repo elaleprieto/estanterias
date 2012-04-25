@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:y="http://www.yworks.com/xml/graphml" xmlns:yed="http://www.yworks.com/xml/yed/3" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml/1.1/ygraphml.xsd">
-  <!--Created by yFiles for Java 2.8-->
+  <!--Created by yFiles for Java 2.9-->
   <key for="graphml" id="d0" yfiles.type="resources"/>
   <key for="port" id="d1" yfiles.type="portgraphics"/>
   <key for="port" id="d2" yfiles.type="portgeometry"/>
@@ -16,12 +16,12 @@
     <data key="d7"/>
     <node id="n0">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_DetailedEntity">
+        <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
           <y:Geometry height="109.0" width="98.2007786429366" x="106.1920713591754" y="540.7855097365407"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="DetailedEntity_NameLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="42.185546875" x="28.0076158839683" y="4.0">Pasillo</y:NodeLabel>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="DetailedEntity_AttributeLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="73.84375" modelName="custom" textColor="#000000" visible="true" width="56.541015625" x="2.0" y="29.96875">id
+          <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="com.yworks.entityRelationship.label.name" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="42.185546875" x="28.0076158839683" y="4.0">Pasillo</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="73.84375" modelName="custom" textColor="#000000" visible="true" width="56.541015625" x="2.0" y="29.96875">id
 nombre
 lado
 created
@@ -33,19 +33,19 @@ modified<y:LabelModel>
             </y:ModelParameter>
           </y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
     </node>
     <node id="n1">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_DetailedEntity">
+        <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
           <y:Geometry height="150.70161290322574" width="124.2018909899889" x="292.89905450500555" y="280.96459761195797"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="DetailedEntity_NameLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="50.060546875" x="37.07067205749445" y="4.0">Articulo</y:NodeLabel>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="DetailedEntity_AttributeLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="115.75" modelName="custom" textColor="#000000" visible="true" width="56.541015625" x="2.0" y="29.96875">id
+          <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="com.yworks.entityRelationship.label.name" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="50.060546875" x="37.07067205749445" y="4.0">Articulo</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="115.75" modelName="custom" textColor="#000000" visible="true" width="56.541015625" x="2.0" y="29.96875">id
 codigo
 detalle
 unidad
@@ -60,32 +60,32 @@ modified<y:LabelModel>
             </y:ModelParameter>
           </y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
     </node>
     <node id="n2">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_Relationship">
+        <y:GenericNode configuration="com.yworks.entityRelationship.relationship">
           <y:Geometry height="56.0" width="90.0" x="310.0" y="567.2855097365407"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="57.71875" x="16.140625" y="19.015625">ubicados</y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
     </node>
     <node id="n3">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_DetailedEntity">
+        <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
           <y:Geometry height="113.0" width="80.0" x="315.0" y="739.5355097365407"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="DetailedEntity_NameLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="62.564453125" x="8.7177734375" y="4.0">Ubicación</y:NodeLabel>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="DetailedEntity_AttributeLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="73.84375" modelName="custom" textColor="#000000" visible="true" width="56.541015625" x="2.0" y="29.96875">id
+          <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="com.yworks.entityRelationship.label.name" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="62.564453125" x="8.7177734375" y="4.0">Ubicación</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="73.84375" modelName="custom" textColor="#000000" visible="true" width="56.541015625" x="2.0" y="29.96875">id
 altura
 posición
 created
@@ -97,98 +97,98 @@ modified<y:LabelModel>
             </y:ModelParameter>
           </y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
     </node>
     <node id="n4">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_Attribute">
+        <y:GenericNode configuration="com.yworks.entityRelationship.attribute">
           <y:Geometry height="31.25" width="80.0" x="459.07131411835934" y="474.6605097365407"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="14.951171875" x="32.5244140625" y="6.640625">id</y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
     </node>
     <node id="n5">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_Attribute">
+        <y:GenericNode configuration="com.yworks.entityRelationship.attribute">
           <y:Geometry height="31.25" width="80.0" x="459.07131411835934" y="628.0355097365407"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="66.15625" x="6.921875" y="6.640625">articulo_id</y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
     </node>
     <node id="n6">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_Attribute">
+        <y:GenericNode configuration="com.yworks.entityRelationship.attribute">
           <y:Geometry height="31.25" width="80.0" x="459.07131411835934" y="665.6605097365407"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="78.337890625" x="0.8310546875" y="6.640625">ubicación_id</y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
     </node>
     <node id="n7">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_Attribute">
+        <y:GenericNode configuration="com.yworks.entityRelationship.attribute">
           <y:Geometry height="31.25" width="80.0" x="459.07131411835934" y="552.4105097365407"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="49.97265625" x="15.013671875" y="6.640625">created</y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
     </node>
     <node id="n8">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_Attribute">
+        <y:GenericNode configuration="com.yworks.entityRelationship.attribute">
           <y:Geometry height="31.25" width="80.0" x="459.07131411835934" y="590.4105097365407"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="56.541015625" x="11.7294921875" y="6.640625">modified</y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
     </node>
     <node id="n9">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_Attribute">
+        <y:GenericNode configuration="com.yworks.entityRelationship.attribute">
           <y:Geometry height="31.25" width="80.0" x="459.07131411835934" y="703.9105097365407"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="59.517578125" x="10.2412109375" y="6.640625">pasillo_id</y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
     </node>
     <node id="n10">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_Attribute">
+        <y:GenericNode configuration="com.yworks.entityRelationship.attribute">
           <y:Geometry height="31.25" width="80.0" x="459.0713141183594" y="513.5355097365407"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="44.65234375" x="17.673828125" y="6.640625">estado</y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
@@ -206,20 +206,30 @@ modified<y:LabelModel>
     </node>
     <node id="n12">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_DetailedEntity">
-          <y:Geometry height="197.57125681692935" width="114.01597621132566" x="469.27153658776973" y="-220.87489425940993"/>
+        <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
+          <y:Geometry height="379.89539055553115" width="139.58582423564178" x="452.0280023817108" y="-220.87489425940993"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="DetailedEntity_NameLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="44.529296875" x="34.74333966816283" y="4.0">Pedido</y:NodeLabel>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="DetailedEntity_AttributeLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="157.65625" modelName="custom" textColor="#000000" visible="true" width="103.36328125" x="2.0" y="29.96875">id
+          <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="com.yworks.entityRelationship.label.name" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="44.529296875" x="47.52826368032089" y="4.0">Pedido</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="297.34375" modelName="custom" textColor="#000000" visible="true" width="124.80859375" x="2.0" y="29.96875">id
 estado
 b
+prioridad
 cobinpro
 contrarrembolso
 observaciones
 created
 modified
 finalizado
+controlado
+embalado
+facturado
+despachado
+tiempo_finalizado
+tiempo_controlado
+tiempo_embalado
+tiempo_facturado
+tiempo_despachado
 cliente_id
 transporte_id<y:LabelModel>
               <y:ErdAttributesNodeLabelModel/>
@@ -229,98 +239,98 @@ transporte_id<y:LabelModel>
             </y:ModelParameter>
           </y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
     </node>
     <node id="n13">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_Relationship">
+        <y:GenericNode configuration="com.yworks.entityRelationship.relationship">
           <y:Geometry height="56.0" width="90.0" x="473.37192590923803" y="333.4657099590102"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="38.880859375" x="25.5595703125" y="19.015625">orden</y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
     </node>
     <node id="n14">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_Attribute">
+        <y:GenericNode configuration="com.yworks.entityRelationship.attribute">
           <y:Geometry height="31.25" width="80.0" x="642.1141092071358" y="229.2157099590102"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="14.951171875" x="32.5244140625" y="6.640625">id</y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
     </node>
     <node id="n15">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_Attribute">
+        <y:GenericNode configuration="com.yworks.entityRelationship.attribute">
           <y:Geometry height="31.25" width="80.0" x="642.1141092071358" y="422.0907099590102"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="66.15625" x="6.921875" y="6.640625">articulo_id</y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
     </node>
     <node id="n16">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_Attribute">
+        <y:GenericNode configuration="com.yworks.entityRelationship.attribute">
           <y:Geometry height="31.25" width="80.0" x="642.1141092071358" y="345.8407099590102"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="49.97265625" x="15.013671875" y="6.640625">created</y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
     </node>
     <node id="n17">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_Attribute">
+        <y:GenericNode configuration="com.yworks.entityRelationship.attribute">
           <y:Geometry height="31.25" width="80.0" x="642.1141092071358" y="383.8407099590102"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="56.541015625" x="11.7294921875" y="6.640625">modified</y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
     </node>
     <node id="n18">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_Attribute">
+        <y:GenericNode configuration="com.yworks.entityRelationship.attribute">
           <y:Geometry height="31.25" width="80.0" x="642.1141092071358" y="460.3407099590102"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="61.861328125" x="9.0693359375" y="6.640625">pedido_id</y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
     </node>
     <node id="n19">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_Attribute">
+        <y:GenericNode configuration="com.yworks.entityRelationship.attribute">
           <y:Geometry height="31.25" width="80.0" x="642.1141092071358" y="306.9657099590102"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="44.65234375" x="17.673828125" y="6.640625">estado</y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
@@ -338,13 +348,13 @@ transporte_id<y:LabelModel>
     </node>
     <node id="n21">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_Attribute">
+        <y:GenericNode configuration="com.yworks.entityRelationship.attribute">
           <y:Geometry height="31.25" width="80.0" x="642.1141092071358" y="268.0907099590102"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="56.18359375" x="11.908203125" y="6.640625">cantidad</y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
@@ -362,12 +372,12 @@ transporte_id<y:LabelModel>
     </node>
     <node id="n23">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_DetailedEntity">
+        <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
           <y:Geometry height="235.39104662052725" width="114.01597621132566" x="748.5153884062458" y="-269.43828460193834"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="DetailedEntity_NameLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="46.123046875" x="33.94646466816289" y="4.0">Cliente</y:NodeLabel>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="DetailedEntity_AttributeLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="199.5625" modelName="custom" textColor="#000000" visible="true" width="103.36328125" x="2.0" y="29.96875">id
+          <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="com.yworks.entityRelationship.label.name" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="46.123046875" x="33.94646466816289" y="4.0">Cliente</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="199.5625" modelName="custom" textColor="#000000" visible="true" width="103.36328125" x="2.0" y="29.96875">id
 codigo
 nombre
 direccion
@@ -388,32 +398,32 @@ transporte_id<y:LabelModel>
             </y:ModelParameter>
           </y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
     </node>
     <node id="n24">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_Relationship">
+        <y:GenericNode configuration="com.yworks.entityRelationship.relationship">
           <y:Geometry height="56.0" width="90.0" x="612.9938518184761" y="-150.08926585094525"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="64.990234375" x="12.5048828125" y="19.015625">pertenece</y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
     </node>
     <node id="n25">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_DetailedEntity">
+        <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
           <y:Geometry height="106.40621122422414" width="98.2007786429366" x="1168.1847721396161" y="72.93020022246952"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="DetailedEntity_NameLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="58.837890625" x="19.681444008968356" y="4.0">Provincia</y:NodeLabel>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="DetailedEntity_AttributeLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="59.875" modelName="custom" textColor="#000000" visible="true" width="56.541015625" x="2.0" y="29.96875">id
+          <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="com.yworks.entityRelationship.label.name" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="58.837890625" x="19.681444008968356" y="4.0">Provincia</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="59.875" modelName="custom" textColor="#000000" visible="true" width="56.541015625" x="2.0" y="29.96875">id
 nombre
 created
 modified<y:LabelModel>
@@ -424,19 +434,19 @@ modified<y:LabelModel>
             </y:ModelParameter>
           </y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
     </node>
     <node id="n26">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_DetailedEntity">
+        <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
           <y:Geometry height="127.72080088987764" width="98.2007786429366" x="1168.1847721396164" y="-210.1312937204794"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="DetailedEntity_NameLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="61.234375" x="18.483201821468356" y="4.0">Localidad</y:NodeLabel>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="DetailedEntity_AttributeLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="87.8125" modelName="custom" textColor="#000000" visible="true" width="84.267578125" x="2.0" y="29.96875">id
+          <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="com.yworks.entityRelationship.label.name" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="61.234375" x="18.483201821468356" y="4.0">Localidad</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="87.8125" modelName="custom" textColor="#000000" visible="true" width="84.267578125" x="2.0" y="29.96875">id
 nombre
 codigo postal
 created
@@ -449,58 +459,58 @@ provincia_id<y:LabelModel>
             </y:ModelParameter>
           </y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
     </node>
     <node id="n27">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_Relationship">
+        <y:GenericNode configuration="com.yworks.entityRelationship.relationship">
           <y:Geometry height="56.0" width="90.0" x="962.4504695943996" y="-194.01750678734473"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="72.455078125" x="8.7724609375" y="19.015625">ubicado_en</y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
     </node>
     <node id="n28">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_Relationship">
+        <y:GenericNode configuration="com.yworks.entityRelationship.relationship">
           <y:Geometry height="56.0" width="90.0" x="1172.2851614610847" y="-28.228865406006435"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="64.990234375" x="12.5048828125" y="19.015625">pertenece</y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
     </node>
     <node id="n29">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_Relationship">
+        <y:GenericNode configuration="com.yworks.entityRelationship.relationship">
           <y:Geometry height="56.0" width="90.0" x="889.4579011916464" y="-90.04723798141112"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="77.072265625" x="6.4638671875" y="19.015625">responsable</y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
     </node>
     <node id="n30">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_DetailedEntity">
+        <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
           <y:Geometry height="106.40621122422414" width="98.2007786429366" x="1022.1996353341103" y="-108.01750678734473"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="DetailedEntity_NameLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="23.95703125" x="37.121873696468356" y="4.0">IVA</y:NodeLabel>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="DetailedEntity_AttributeLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="59.875" modelName="custom" textColor="#000000" visible="true" width="60.619140625" x="2.0" y="29.96875">id
+          <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="com.yworks.entityRelationship.label.name" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="23.95703125" x="37.121873696468356" y="4.0">IVA</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="59.875" modelName="custom" textColor="#000000" visible="true" width="60.619140625" x="2.0" y="29.96875">id
 categoria
 created
 modified<y:LabelModel>
@@ -511,19 +521,19 @@ modified<y:LabelModel>
             </y:ModelParameter>
           </y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
     </node>
     <node id="n31">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_DetailedEntity">
+        <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
           <y:Geometry height="127.72080088987764" width="98.2007786429366" x="196.9256619498808" y="-185.94966629588407"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="DetailedEntity_NameLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="49.451171875" x="24.3748033839683" y="4.0">Factura</y:NodeLabel>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="DetailedEntity_AttributeLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="59.875" modelName="custom" textColor="#000000" visible="true" width="61.861328125" x="2.0" y="29.96875">id
+          <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="com.yworks.entityRelationship.label.name" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="49.451171875" x="24.3748033839683" y="4.0">Factura</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="59.875" modelName="custom" textColor="#000000" visible="true" width="61.861328125" x="2.0" y="29.96875">id
 created
 modified
 pedido_id<y:LabelModel>
@@ -534,32 +544,32 @@ pedido_id<y:LabelModel>
             </y:ModelParameter>
           </y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
     </node>
     <node id="n32">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_Relationship">
+        <y:GenericNode configuration="com.yworks.entityRelationship.relationship">
           <y:Geometry height="56.0" width="90.0" x="337.19898859029354" y="-150.08926585094525"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="64.990234375" x="12.5048828125" y="19.015625">pertenece</y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
     </node>
     <node id="n33">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_DetailedEntity">
+        <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
           <y:Geometry height="106.40621122422414" width="98.2007786429366" x="756.4229871904405" y="114.43828576488204"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="DetailedEntity_NameLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="69.455078125" x="14.372850258968356" y="4.0">Trasnporte</y:NodeLabel>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="DetailedEntity_AttributeLabelConfiguation" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="59.875" modelName="custom" textColor="#000000" visible="true" width="56.541015625" x="2.0" y="29.96875">id
+          <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="com.yworks.entityRelationship.label.name" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="69.455078125" x="14.372850258968242" y="4.0">Trasnporte</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="59.875" modelName="custom" textColor="#000000" visible="true" width="56.541015625" x="2.0" y="29.96875">id
 nombre
 created
 modified<y:LabelModel>
@@ -570,35 +580,64 @@ modified<y:LabelModel>
             </y:ModelParameter>
           </y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
     </node>
     <node id="n34">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_Relationship">
+        <y:GenericNode configuration="com.yworks.entityRelationship.relationship">
           <y:Geometry height="56.0" width="90.0" x="612.9938518184761" y="139.6413913769941"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="75.443359375" x="7.2783203125" y="19.015625">enviado por</y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
       </data>
     </node>
     <node id="n35">
       <data key="d6">
-        <y:GenericNode configuration="EntityRelationship_Relationship">
+        <y:GenericNode configuration="com.yworks.entityRelationship.relationship">
           <y:Geometry height="56.0" width="90.0" x="760.5233765119087" y="37.34910158583274"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="75.443359375" x="7.2783203125" y="19.015625">enviado por</y:NodeLabel>
           <y:StyleProperties>
-            <y:Property class="java.lang.Boolean" name="shadow" value="true"/>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
         </y:GenericNode>
+      </data>
+    </node>
+    <node id="n36">
+      <data key="d4"/>
+      <data key="d5"/>
+      <data key="d6">
+        <y:UMLNoteNode>
+          <y:Geometry height="185.07683741463802" width="525.4962834231203" x="-98.29729483282671" y="64.67270516717332"/>
+          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="171.625" modelName="custom" textColor="#000000" visible="true" width="506.2890625" x="9.603610461560152" y="6.7259187073190105">FINALIZADO: fecha de finalización de la preparación del Pedido.
+CONTROLADO: fecha de finalización del Control del Pedido.
+EMBALADO: fecha de finalización del Embalaje del Pedido.
+FACTURADO: fecha en que se Facturó el Pedido.
+DESPACHADO: fecha en que se Despachó el Pedido.
+--------------------------------------------------------------------------------------------------------------------
+tiempo_*: es el intervalo de tiempo que llevo desde una actividad a la otra.
+tiempo_finalizado: tiempo desde que se inició a preparar hasta que se finalizó.
+tiempo_controlado: tiempo desde que se inició a preparar hasta que se finalizó.
+tiempo_embalado: tiempo desde que se inició a preparar hasta que se finalizó.
+tiempo_facturado: tiempo desde que se inició a preparar hasta que se finalizó.
+tiempo_despachado: tiempo desde que se inició a preparar hasta que se finalizó.<y:LabelModel>
+              <y:SmartNodeLabelModel distance="4.0"/>
+            </y:LabelModel>
+            <y:ModelParameter>
+              <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+            </y:ModelParameter>
+          </y:NodeLabel>
+        </y:UMLNoteNode>
       </data>
     </node>
     <edge id="e0" source="n1" target="n2">
@@ -719,7 +758,7 @@ modified<y:LabelModel>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="none"/>
-          <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="six_pos" modelPosition="tail" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="11.60546875" x="5.06873249250998" y="-187.65553600736018">n</y:EdgeLabel>
+          <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="six_pos" modelPosition="tail" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="11.60546875" x="2.8471432432506845" y="-96.37734975329366">n</y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
         </y:PolyLineEdge>
       </data>
@@ -828,10 +867,10 @@ modified<y:LabelModel>
     <edge id="e22" source="n12" target="n24">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:Path sx="69.75623595639547" sy="-91.1620668693009" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="none"/>
-          <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="six_pos" modelPosition="shead" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="11.60546875" x="9.0443688322232" y="-19.968751934929628">n</y:EdgeLabel>
+          <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="six_pos" modelPosition="shead" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="11.60546875" x="4.8915467374455375" y="-19.9687519349296">n</y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
         </y:PolyLineEdge>
       </data>
@@ -926,7 +965,7 @@ modified<y:LabelModel>
     <edge id="e31" source="n32" target="n12">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:Path sx="0.0" sy="0.0" tx="-69.83567893722159" ty="-91.1620668693009"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="none"/>
           <y:BendStyle smoothed="false"/>
@@ -936,7 +975,7 @@ modified<y:LabelModel>
     <edge id="e32" source="n12" target="n34">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="33.39972393878577" sy="98.80497633726736" tx="0.0" ty="0.0">
+          <y:Path sx="37.85833413268665" sy="189.91389351051973" tx="0.0" ty="0.0">
             <y:Point x="559.6792486322183" y="167.6413913769941"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
@@ -971,6 +1010,25 @@ modified<y:LabelModel>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="none"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e36" source="n36" target="n12">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+          <y:Arrows source="none" target="none"/>
+          <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="85.35263076390845" y="-14.083651388903732">
+            <y:LabelModel>
+              <y:SmartEdgeLabelModel autoRotationEnabled="false" defaultAngle="0.0" defaultDistance="10.0"/>
+            </y:LabelModel>
+            <y:ModelParameter>
+              <y:SmartEdgeLabelModelParameter angle="0.0" distance="30.0" distanceToCenter="true" position="right" ratio="0.5" segment="0"/>
+            </y:ModelParameter>
+          </y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
         </y:PolyLineEdge>
       </data>

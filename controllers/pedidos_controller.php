@@ -10,6 +10,13 @@ class PedidosController extends AppController {
 		'Javascript',
 		'Js' => array('Jquery')
 	);
+	
+	/* ESTADOS DEL PEDIDO */
+	const FINALIZADO = 1;
+	const CONTROLADO = 2;
+	const EMBALADO = 3;
+	const FACTURADO = 4;
+	const DESPACHADO = 5;
 
 	function index() {
 		$this -> Pedido -> recursive = 1;
@@ -38,17 +45,17 @@ class PedidosController extends AppController {
 	function admin_finalizados() {
 		$this -> Pedido -> recursive = 1;
 		$this -> paginate = array('Pedido' => array('order' => array('finalizado' => 'DESC'), ));
-		$this -> set('pedidos', $this -> paginate('Pedido', array('Pedido.estado' => '1')));
+		$this -> set('pedidos', $this -> paginate('Pedido', array('Pedido.estado' => self::FINALIZADO)));
 	}
 
 	function admin_controlados($pedido_id = null) {
 		if ($pedido_id) {
-			# Se verifica que el estado del pedido sea "Finalizado", es decir, estado == 1
+			# Se verifica que el estado del pedido sea "Finalizado", es decir, estado == 1 == self::FINALIZADO
 			# Si no, no se cambia el estado del Pedido.
 			# Además, se verifica que la petición provenga de la acción Finalizados del controller Pedidos.
 			# Esto debería evitar errores.
 			$estado = $this -> Pedido -> read('estado', $pedido_id);
-			if ($estado['Pedido']['estado'] == 1 && strpos($this -> referer(), 'pedidos') && strpos($this -> referer(), 'finalizados')) {
+			if ($estado['Pedido']['estado'] == self::FINALIZADO && strpos($this -> referer(), 'pedidos') && strpos($this -> referer(), 'finalizados')) {
 				# Se calcula el tiempo de Control en segundos.
 				$fecha = new DateTime();
 				$finalizado = $this -> Pedido -> read('finalizado', $pedido_id);
@@ -58,7 +65,7 @@ class PedidosController extends AppController {
 
 				# Se guardan los datos del Pedido
 				$this -> Pedido -> id = $pedido_id;
-				$this -> Pedido -> saveField('estado', 2);
+				$this -> Pedido -> saveField('estado', self::CONTROLADO);
 				$this -> Pedido -> saveField('controlado', $fecha -> format('Y-m-d H:i:s'));
 				$this -> Pedido -> saveField('tiempo_control', $tiempo_control['Pedido']['tiempo_control'] + $intervalo -> format('%d') * 24 * 3600 + $intervalo -> format('%h') * 3600 + $intervalo -> format('%i') * 60 + $intervalo -> format('%s'));
 
@@ -86,7 +93,89 @@ class PedidosController extends AppController {
 		}
 		$this -> Pedido -> recursive = 1;
 		$this -> paginate = array('Pedido' => array('order' => array('finalizado' => 'DESC'), ));
-		$this -> set('pedidos', $this -> paginate('Pedido', array('Pedido.estado' => '2')));
+		$this -> set('pedidos', $this -> paginate('Pedido', array('Pedido.estado' => self::CONTROLADO)));
+	}
+
+
+	function admin_embalados($pedido_id = null) {
+		if ($pedido_id) {
+			# Se verifica que el estado del pedido sea "Controlado", es decir, estado == 2 == self::CONTROLADO
+			# Si no, no se cambia el estado del Pedido.
+			# Además, se verifica que la petición provenga de la acción Controlados del controller Pedidos.
+			# Esto debería evitar errores.
+			$estado = $this -> Pedido -> read('estado', $pedido_id);
+			if ($estado['Pedido']['estado'] == self::CONTROLADO && strpos($this -> referer(), 'pedidos') && strpos($this -> referer(), 'controlados')) {
+				# Se calcula el tiempo de Facturación en segundos.
+				$fecha = new DateTime();
+				$controlado = $this -> Pedido -> read('controlado', $pedido_id);
+				$controlado = new DateTime($controlado['Pedido']['controlado']);
+				$intervalo = $fecha -> diff($controlado);
+				$tiempo_embalado = $this -> Pedido -> read('tiempo_embalado', $pedido_id);
+
+				# Se guardan los datos del Pedido
+				$this -> Pedido -> id = $pedido_id;
+				$this -> Pedido -> saveField('estado', self::EMBALADO);
+				$this -> Pedido -> saveField('embalado', $fecha -> format('Y-m-d H:i:s'));
+				$this -> Pedido -> saveField('tiempo_embalado', $tiempo_embalado['Pedido']['tiempo_embalado'] + $intervalo -> format('%d') * 24 * 3600 + $intervalo -> format('%h') * 3600 + $intervalo -> format('%i') * 60 + $intervalo -> format('%s'));
+			}
+		}
+		$this -> Pedido -> recursive = 1;
+		$this -> paginate = array('Pedido' => array('order' => array('finalizado' => 'DESC'), ));
+		$this -> set('pedidos', $this -> paginate('Pedido', array('Pedido.estado' => self::EMBALADO)));
+	}
+	
+	function admin_facturados($pedido_id = null) {
+		if ($pedido_id) {
+			# Se verifica que el estado del pedido sea "Embalado", es decir, estado == 3 == self::EMBALADO
+			# Si no, no se cambia el estado del Pedido.
+			# Además, se verifica que la petición provenga de la acción Embalados del controller Pedidos.
+			# Esto debería evitar errores.
+			$estado = $this -> Pedido -> read('estado', $pedido_id);
+			if ($estado['Pedido']['estado'] == self::EMBALADO && strpos($this -> referer(), 'pedidos') && strpos($this -> referer(), 'embalados')) {
+				# Se calcula el tiempo de Facturación en segundos.
+				$fecha = new DateTime();
+				$embalado = $this -> Pedido -> read('embalado', $pedido_id);
+				$embalado = new DateTime($embalado['Pedido']['embalado']);
+				$intervalo = $fecha -> diff($embalado);
+				$tiempo_facturacion = $this -> Pedido -> read('tiempo_facturacion', $pedido_id);
+
+				# Se guardan los datos del Pedido
+				$this -> Pedido -> id = $pedido_id;
+				$this -> Pedido -> saveField('estado', self::FACTURADO);
+				$this -> Pedido -> saveField('facturado', $fecha -> format('Y-m-d H:i:s'));
+				$this -> Pedido -> saveField('tiempo_facturacion', $tiempo_facturacion['Pedido']['tiempo_facturacion'] + $intervalo -> format('%d') * 24 * 3600 + $intervalo -> format('%h') * 3600 + $intervalo -> format('%i') * 60 + $intervalo -> format('%s'));
+			}
+		}
+		$this -> Pedido -> recursive = 1;
+		$this -> paginate = array('Pedido' => array('order' => array('finalizado' => 'DESC'), ));
+		$this -> set('pedidos', $this -> paginate('Pedido', array('Pedido.estado' => self::FACTURADO)));
+	}
+
+	function admin_despachados($pedido_id = null) {
+		if ($pedido_id) {
+			# Se verifica que el estado del pedido sea "Facturado", es decir, estado == 4 == self::FACTURADO
+			# Si no, no se cambia el estado del Pedido.
+			# Además, se verifica que la petición provenga de la acción Facturados del controller Pedidos.
+			# Esto debería evitar errores.
+			$estado = $this -> Pedido -> read('estado', $pedido_id);
+			if ($estado['Pedido']['estado'] == self::FACTURADO && strpos($this -> referer(), 'pedidos') && strpos($this -> referer(), 'facturados')) {
+				# Se calcula el tiempo de Despacho en segundos.
+				$fecha = new DateTime();
+				$facturado = $this -> Pedido -> read('facturado', $pedido_id);
+				$facturado = new DateTime($facturado['Pedido']['facturado']);
+				$intervalo = $fecha -> diff($facturado);
+				$tiempo_despacho = $this -> Pedido -> read('tiempo_despacho', $pedido_id);
+
+				# Se guardan los datos del Pedido
+				$this -> Pedido -> id = $pedido_id;
+				$this -> Pedido -> saveField('estado', self::DESPACHADO);
+				$this -> Pedido -> saveField('despachado', $fecha -> format('Y-m-d H:i:s'));
+				$this -> Pedido -> saveField('tiempo_despacho', $tiempo_despacho['Pedido']['tiempo_despacho'] + $intervalo -> format('%d') * 24 * 3600 + $intervalo -> format('%h') * 3600 + $intervalo -> format('%i') * 60 + $intervalo -> format('%s'));
+			}
+		}
+		$this -> Pedido -> recursive = 1;
+		$this -> paginate = array('Pedido' => array('order' => array('finalizado' => 'DESC'), ));
+		$this -> set('pedidos', $this -> paginate('Pedido', array('Pedido.estado' => self::DESPACHADO)));
 	}
 
 	function admin_add() {
@@ -759,6 +848,14 @@ class PedidosController extends AppController {
 		$this -> set('productos_pedido', $productos_pedido);
 		$this -> set('promedio_productos_pedido', $promedio_productos_pedido);
 		$this -> set('ventas_mensuales', $ventas_mensuales);
+	}
+	
+	function admin_despachartodos() {
+		$controlados = $this -> Pedido -> find('list', array('conditions' => array('Pedido.estado' => 2),));
+		foreach ($controlados as $pedido_id) {
+			$this -> Pedido -> id = $pedido_id;
+			$this -> Pedido -> saveField('estado', 5);
+		}
 	}
 
 }

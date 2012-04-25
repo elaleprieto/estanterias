@@ -14,16 +14,28 @@ CREATE TABLE pedidos
   modified TIMESTAMP DEFAULT NULL,
   finalizado TIMESTAMP DEFAULT NULL,
   transporte_id integer NOT NULL DEFAULT 0,
-  cliente_id INTEGER NOT NULL
+  cliente_id INTEGER NOT NULL,
+  observaciones text,
+  iniciado timestamp without time zone,
+  tiempo_preparacion real NOT NULL DEFAULT 0,
+  controlado timestamp without time zone,
+  tiempo_control real NOT NULL DEFAULT 0,
+  prioridad integer NOT NULL DEFAULT 0,
+  facturado timestamp without time zone,
+  tiempo_facturacion real NOT NULL DEFAULT 0,
+  embalado timestamp without time zone,
+  despachado timestamp without time zone,
+  tiempo_embalado real NOT NULL DEFAULT 0,
+  tiempo_despacho real NOT NULL DEFAULT 0
 );
 
 
 -- SETEO DE CONTADOR EN 2
-SELECT pg_catalog.setval('pedidos_id_seq', 2, true);
+--SELECT pg_catalog.setval('pedidos_id_seq', 2, true);
 
 
 -- INSERTS
-INSERT INTO pedidos(id, created, modified, cliente_id)
+--INSERT INTO pedidos(id, created, modified, cliente_id)
 	VALUES (1, '2010-10-23 11:06:05', '2010-10-23 12:36:11', 1);
 
 

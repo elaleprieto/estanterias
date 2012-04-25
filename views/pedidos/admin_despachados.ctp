@@ -1,13 +1,13 @@
 <?php //debug($pedidos);?>
 <div class="pedidos_index">
-	<h2><?php __('Pedidos Controlados');?></h2>
+	<h2><?php __('Pedidos Despachados');?></h2>
 	<table cellpadding="0" cellspacing="0">
 		<tr>
 			<th><?php echo $this -> Paginator -> sort('Número', 'Pedido.id');?></th>
 			<th><?php echo $this -> Paginator -> sort('cliente_id');?></th>
 			<th><?php echo $this -> Paginator -> sort('Creado', 'created');?></th>
 			<th><?php echo $this -> Paginator -> sort('Finalizado', 'Pedido.finalizado');?></th>
-			<th><?php echo $this -> Paginator -> sort('Controlado', 'Pedido.controlado');?></th>
+			<th><?php echo $this -> Paginator -> sort('Despachado', 'Pedido.despachado');?></th>
 			<th><?php echo $this -> Paginator -> sort('Tiempo[m]', 'Pedido.tiempo_control');?></th>
 			<th><?php echo $this -> Paginator -> sort('Transporte', 'Transporte.nombre');?></th>
 			<th><?php echo $this -> Paginator -> sort('Observaciones', 'Pedido.observaciones');?></th>
@@ -38,12 +38,12 @@ $class = ' class="altrow"';
 			</td>
 			<td>
 				<?php
-					# Fecha de Control formateada
-					$aux = $pedido['Pedido']['controlado'] ? $pedido['Pedido']['controlado'] : $pedido['Pedido']['finalizado'];
+					# Fecha de Despacho formateada
+					$aux = $pedido['Pedido']['despachado'] ? $pedido['Pedido']['despachado'] : $pedido['Pedido']['finalizado'];
 					echo $this -> Time -> format($format = 'd/m/Y H:i', $aux);
 				?>
 			</td>
-			<td><?= sprintf("%.1f", $pedido['Pedido']['tiempo_control'] / 60)?></td>
+			<td><?= sprintf("%.1f", $pedido['Pedido']['tiempo_despacho'] / 60)?></td>
 			<td><?= $pedido['Transporte']['nombre']?></td>
 			<td><?= $pedido['Pedido']['observaciones']?></td>
 			
@@ -67,12 +67,6 @@ $class = ' class="altrow"';
 							'action' => 'etiquetas',
 							$pedido['Cliente']['id']
 					));
-				?>
-				<?php echo $this -> Html -> link('Embalado', array(
-						'controller' => 'pedidos',
-						'action' => 'embalados',
-						$pedido['Pedido']['id']
-					), null, sprintf('¿Ha sido EMBALADO el pedido de %s?', $pedido['Cliente']['nombre']));
 				?>
 			</td>
 			</tr> <?php endforeach;?>
