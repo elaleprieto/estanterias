@@ -29,7 +29,7 @@
 		echo $this->Html->meta('icon');
 
 		echo $this->Html->css('estanterias');
-		echo $this->Html->css('supervisor');
+		echo $this->Html->css('mostrador');
 		
 		echo $this->Html->script(array('jquery-1.7.1.min', 'admin.ctp'));
 
