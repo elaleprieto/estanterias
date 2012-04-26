@@ -292,10 +292,12 @@ function quitarArticulo(elemento) {
 function setArticulo(articulo_id) {
 	imagen = $('<img>').attr('src', WEBROOT + 'img/load.gif').attr('class', 'load');
 	$('#unidad').html(imagen);
+	$('#precio').html(imagen);
 	$('#stock').html(imagen.clone());
 	$('#pack').html(imagen.clone());
 	$.getJSON(WEBROOT + "articulos/get_articulo/" + articulo_id, function(data) {
 		$('#unidad').html(data.unidad);
+		$('#precio').html('$ ' + Number(data.precio).toFixed(2));
 		$('#stock').html(data.stock);
 		$('#pack').html(data.pack);
 		verificarCantidad();

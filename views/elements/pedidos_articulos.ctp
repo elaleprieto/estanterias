@@ -42,6 +42,10 @@
 			<label class="atributo">Unidad:</label>
 			<label id="unidad">C/U</label>
 		</div>
+		<div class="atributo unidad">
+			<label class="atributo">Precio:</label>
+			<label id="precio">0.00</label>
+		</div>
 		<div class="atributo">
 			<label class="atributo">Stock:</label>
 			<label id="stock">0</label>
