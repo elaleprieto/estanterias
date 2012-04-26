@@ -20,10 +20,10 @@ $(document).ready(function() {
 	 * 		Aquí se registran los eventos para los objetos de la vista	*
 	 ********************************************************************/
 	$('.arrow_down').click(function(e) {
-		setPrioridadDown(this);
+		setOrdenDown(this);
 	});
 	$('.arrow_up').click(function(e) {
-		setPrioridadUp(this);
+		setOrdenUp(this);
 	});
 });
 /********************************************************************
@@ -31,42 +31,42 @@ $(document).ready(function() {
  *
  *				 		Aquí se escriben las funciones				*
  ********************************************************************/
-function setPrioridadDown(elemento) {
+function setOrdenDown(elemento) {
 	// Fila del Pedido que se está modificando
 	var filaPedido = $(elemento).parents('tr');
-	// Nueva Prioridad del Pedido que se está modificando
-	var prioridadNueva = parseInt($(elemento).prevAll('label').text()) - 1;
-	// Id del Pedido que se está modificando la prioridad
+	// Nuevo Orden del Pedido que se está modificando
+	var ordenNuevo = parseInt($(elemento).prevAll('label').text()) - 1;
+	// Id del Pedido que se está modificando la orden
 	var id = $(elemento).parents('tr').children('td.id').text();
 
 	// Fila Posterior
 	var filaPosterior = $(elemento).parents('tr').next('tr');
-	// Prioridad del Pedido en la fila anterior
-	var prioridadPosterior = $(filaPosterior).find("td > label").text();
+	// Orden del Pedido en la fila anterior
+	var ordenPosterior = $(filaPosterior).find("td > label").text();
 
 	// Imagen para avisar al usuario que se está llevando a cabo la actualización
 	var imagen = $('<img>').attr('src', WEBROOT + 'img/load.gif').attr('class', 'load');
 	$(elemento).prevAll('label').html(imagen);
 	filaPedido.toggleClass('modificada', true);
 
-	// Se persiste la prioridad del Pedido
-	$.get(WEBROOT + "admin/pedidos/set_prioridad/" + id + "/" + prioridadNueva, function() {
-		// Se escribe la Prioridad Actual en la pantalla
-		$(elemento).prevAll('label').text(prioridadNueva);
+	// Se persiste la orden del Pedido
+	$.get(WEBROOT + "admin/pedidos/set_orden/" + id + "/" + ordenNuevo, function() {
+		// Se escribe la Orden Actual en la pantalla
+		$(elemento).prevAll('label').text(ordenNuevo);
 		filaPedido.toggleClass('modificada', false);
 	});
 	
-	// Si la prioridad del Pedido en la fila posterior es mayor que la nueva,
+	// Si el orden del Pedido en la fila posterior es mayor que el nuevo,
 	// se toma el Pedido modificado y se lo compara con los anteriores para bajarlo en la tabla.
-	if(prioridadPosterior != '' && prioridadNueva < prioridadPosterior) {
+	if(ordenPosterior != '' && ordenNuevo < ordenPosterior) {
 		fila = filaPedido.detach();
 		filaAux = $(filaPosterior).next('tr');
-		prioridadAux = $(filaAux).find("td > label").text();
+		ordenAux = $(filaAux).find("td > label").text();
 
-		while(prioridadAux != '' && prioridadNueva < prioridadAux) {
+		while(ordenAux != '' && ordenNuevo < ordenAux) {
 			filaPosterior = filaAux;
 			filaAux = $(filaPosterior).next('tr');
-			prioridadAux = $(filaAux).find("td > label").text();
+			ordenAux = $(filaAux).find("td > label").text();
 		}
 		$(filaPosterior).after(fila);
 	}
@@ -74,51 +74,51 @@ function setPrioridadDown(elemento) {
 
 }
 
-function setPrioridadUp(elemento) {
+function setOrdenUp(elemento) {
 	// Fila del Pedido que se está modificando
 	var filaPedido = $(elemento).parents('tr');
-	// Nueva Prioridad del Pedido que se está modificando
-	var prioridadNueva = parseInt($(elemento).prevAll('label').text()) + 1;
-	// Id del Pedido que se está modificando la prioridad
+	// Nuevo Orden del Pedido que se está modificando
+	var ordenNuevo = parseInt($(elemento).prevAll('label').text()) + 1;
+	// Id del Pedido que se está modificando la orden
 	var id = $(elemento).parents('tr').children('td.id').text();
 
 	// Fila Anterior
 	filaAnterior = $(elemento).parents('tr').prev('tr');
-	// Prioridad del Pedido en la fila anterior
-	var prioridadAnterior = $(filaAnterior).find("td > label").text();
+	// Orden del Pedido en la fila anterior
+	var ordenAnterior = $(filaAnterior).find("td > label").text();
 
 	// Imagen para avisar al usuario que se está llevando a cabo la actualización
 	var imagen = $('<img>').attr('src', WEBROOT + 'img/load.gif').attr('class', 'load');
 	$(elemento).prevAll('label').html(imagen);
 	filaPedido.toggleClass('modificada', true);
 
-	// Se persiste la prioridad del Pedido
-	$.get(WEBROOT + "admin/pedidos/set_prioridad/" + id + "/" + prioridadNueva, function() {
-		// Se escribe la Prioridad Actual en la pantalla
-		$(elemento).prevAll('label').text(prioridadNueva);
+	// Se persiste la orden del Pedido
+	$.get(WEBROOT + "admin/pedidos/set_orden/" + id + "/" + ordenNuevo, function() {
+		// Se escribe la Orden Actual en la pantalla
+		$(elemento).prevAll('label').text(ordenNuevo);
 		filaPedido.toggleClass('modificada', false);
 	});
 
-	// Si la prioridad del Pedido en la fila anterior es menor que la nueva,
+	// Si el orden del Pedido en la fila anterior es menor que el nuevo,
 	// se toma el Pedido modificado y se lo compara con los anteriores para subirlo en la tabla.
-	if(prioridadAnterior != '' && prioridadNueva > prioridadAnterior) {
+	if(ordenAnterior != '' && ordenNuevo > ordenAnterior) {
 		fila = filaPedido.detach();
 		filaAux = $(filaAnterior).prev('tr');
-		prioridadAux = $(filaAux).find("td > label").text();
+		ordenAux = $(filaAux).find("td > label").text();
 
-		while(prioridadAux != '' && prioridadNueva > prioridadAux) {
+		while(ordenAux != '' && ordenNuevo > ordenAux) {
 			filaAnterior = filaAux;
 			filaAux = $(filaAnterior).prev('tr');
-			prioridadAux = $(filaAux).find("td > label").text();
+			ordenAux = $(filaAux).find("td > label").text();
 		}
 		$(filaAnterior).before(fila);
 	}
 }
 
 /**
- * ordenarPrioridad(): ordena los pedidos según el número de prioridad.
+ * ordenarOrden(): ordena los pedidos según el número de orden.
  */
-function ordenarPrioridad() {
+function ordenarOrden() {
 	$('#pedidos > tbody > tr > td > label').each(function(index) {
 		console.info(this);
 	});

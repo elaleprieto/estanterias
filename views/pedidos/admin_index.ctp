@@ -1,5 +1,5 @@
 <?php
-// debug($pedidos);
+debug($pedido['Pedido']['preparacion_orden']);
 
 # Se carga la librería Jquery
 echo $javascript -> link(array('jquery-1.7.1.min','pedidos_admin_index'), FALSE);
@@ -24,7 +24,7 @@ echo $html -> css('pedidos_admin_index');
 					<th><?php echo $this -> Paginator -> sort('Transporte', 'Transporte.nombre');?></th>
 					<th><?php echo $this -> Paginator -> sort('observaciones');?></th>
 					<th class="actions"><?php __('Acciones');?></th>
-					<th><?php echo $this -> Paginator -> sort('prioridad');?></th>
+					<th><?php echo $this -> Paginator -> sort('Orden', 'preparacion_orden');?></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -43,7 +43,7 @@ echo $html -> css('pedidos_admin_index');
 						<?php echo $this->Html->link(__('Editar', true), array('controller' => 'pedidos', 'action' => 'edit', $pedido['Pedido']['id'])); ?>
 						<?php echo $this->Html->link(__('Preparar', true), array('admin' => FALSE, 'controller' => 'ordenes', 'action' => 'preparar', $pedido['Pedido']['id'])); ?>
 					</td>
-					<td><label><?= $pedido['Pedido']['prioridad'];?></label>
+					<td><label><?= $pedido['Pedido']['preparacion_orden'];?></label>
 						<?
 						echo $this -> Html -> image('arrow_down_20.png', array('alt'=> 'down', 'class' => 'arrow_down')); 
 						echo $this -> Html -> image('arrow_up_20.png', array('alt'=> 'up', 'class' => 'arrow_up')); 

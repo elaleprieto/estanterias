@@ -37,7 +37,7 @@ class PedidosController extends AppController {
 			$this -> Pedido -> id = $pedido_id;
 			$this -> Pedido -> saveField('estado', 0);
 		}
-		$this -> paginate = array('order' => 'Pedido.prioridad DESC');
+		$this -> paginate = array('order' => 'Pedido.preparacion_orden DESC');
 		$this -> Pedido -> recursive = 1;
 		$this -> set('pedidos', $this -> paginate('Pedido', array('Pedido.estado' => '0')));
 	}
@@ -735,10 +735,10 @@ class PedidosController extends AppController {
 		echo $mail -> ErrorInfo;
 	}
 
-	function admin_set_prioridad($id = null, $prioridad = null) {
-		if ($id && $prioridad) {
+	function admin_set_orden($id = null, $preparacionOrden = null) {
+		if ($id && $preparacionOrden) {
 			$this -> Pedido -> id = $id;
-			$this -> Pedido -> saveField('prioridad', $prioridad);
+			$this -> Pedido -> saveField('preparacion_orden', $preparacionOrden);
 		}
 		$this -> layout = 'ajax';
 	}
