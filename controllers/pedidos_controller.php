@@ -199,8 +199,8 @@ class PedidosController extends AppController {
 				} else {
 					$this -> Pedido -> Cliente -> saveField('cobinpro', FALSE);
 				}
-				if (isset($this -> data['Pedido']['b'])) {
-					$this -> Pedido -> Cliente -> saveField('presupuesto', $this -> data['Pedido']['b']);
+				if (isset($this -> data['Pedido']['prioridad'])) {
+					$this -> Pedido -> Cliente -> saveField('presupuesto', $this -> data['Pedido']['prioridad']);
 				} else {
 					$this -> Pedido -> Cliente -> saveField('presupuesto', 0);
 				}
@@ -264,8 +264,8 @@ class PedidosController extends AppController {
 				} else {
 					$this -> Pedido -> Cliente -> saveField('cobinpro', FALSE);
 				}
-				if (isset($this -> data['Pedido']['b'])) {
-					$this -> Pedido -> Cliente -> saveField('presupuesto', $this -> data['Pedido']['b']);
+				if (isset($this -> data['Pedido']['prioridad'])) {
+					$this -> Pedido -> Cliente -> saveField('presupuesto', $this -> data['Pedido']['prioridad']);
 				} else {
 					$this -> Pedido -> Cliente -> saveField('presupuesto', 0);
 				}
@@ -310,7 +310,7 @@ class PedidosController extends AppController {
 			$this -> redirect(array('action' => 'index'));
 		}
 		if (!empty($this -> data)) {
-			if (!isset($this -> data['Pedido']['b'])) {$this -> data['Pedido']['b'] = 0;
+			if (!isset($this -> data['Pedido']['prioridad'])) {$this -> data['Pedido']['prioridad'] = 0;
 			}
 			if (!isset($this -> data['Pedido']['cobinpro'])) {$this -> data['Pedido']['cobinpro'] = FALSE;
 			}
@@ -850,13 +850,13 @@ class PedidosController extends AppController {
 		$this -> set('ventas_mensuales', $ventas_mensuales);
 	}
 	
-	function admin_despachartodos() {
-		$controlados = $this -> Pedido -> find('list', array('conditions' => array('Pedido.estado' => 2),));
-		foreach ($controlados as $pedido_id) {
-			$this -> Pedido -> id = $pedido_id;
-			$this -> Pedido -> saveField('estado', 5);
-		}
-	}
+	// function admin_prioridades() {
+		// $prioridades = $this -> Pedido -> find('list', array('fields'=>array('Pedido.id', 'Pedido.b')));
+		// foreach ($prioridades as $pedido_id => $b) {
+			// $this -> Pedido -> id = $pedido_id;
+			// $this -> Pedido -> saveField('prioridad', $b);
+		// }
+	// }
 
 }
 ?>

@@ -102,7 +102,7 @@ $pedido['Pedido']['contrarrembolso'] ? $tcpdf -> Cell($celda_ancho_contrarrembol
 # Si se envía Cobinpro, se imprime... si no, se imprime en blanco.
 $pedido['Pedido']['cobinpro'] ? $tcpdf -> Cell($celda_ancho_cobinpro, $celda_alto, 'Cobinpro', 0, 0, 'C') : $tcpdf -> Cell($celda_ancho_cobinpro, $celda_alto, '', 0, 0, 'L');
 
-if ($pedido['Pedido']['b']) {
+if ($pedido['Pedido']['prioridad']) {
 	$tcpdf -> Cell($celda_ancho_prioridad, $celda_alto, 'Prioridad: Baja', 0, 0, 'C');
 }
 # Se imprime la celda que provoca el salto de línea

@@ -333,13 +333,13 @@ function setCliente(cliente_id) {
 			$('#cobinpro').removeAttr('checked');
 			$('#cobinpro').val(0);
 		}
-		// seteo el presupuesto
-		if(data.presupuesto > 0) {
-			$('#presupuesto').attr('checked', 'checked');
-			$('#presupuesto').val(1);
+		// seteo la prioridad
+		if(data.prioridad > 0) {
+			$('#prioridad').attr('checked', 'checked');
+			$('#prioidad').val(1);
 		} else {
-			$('#presupuesto').removeAttr('checked');
-			$('#presupuesto').val(0);
+			$('#prioridad').removeAttr('checked');
+			$('#prioridad').val(0);
 		}
 		$('#load_cliente').hide();
 	});
@@ -352,7 +352,7 @@ function setCliente(cliente_id) {
 function verificarCantidad() {
 	var cantidad = $("#cantidad").val();
 	var pack = $('#pack').text();
-	var prioridad = $('#presupuesto').val();
+	var prioridad = $('#prioridad').val();
 	
 	/* se desaparece el mensaje si lo hay */
 	$('#mensaje_flotante').hide();

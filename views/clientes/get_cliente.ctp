@@ -8,7 +8,7 @@
 	"modified":"<?=$cliente['Cliente']['modified']?>",
 	"localidad_id":"<?=$cliente['Cliente']['localidad_id']?>",
 	"iva_id":"<?=$cliente['Cliente']['iva_id']?>",
-	"presupuesto":"<?=$cliente['Cliente']['presupuesto']?>",
+	"prioridad":"<?=$cliente['Cliente']['prioridad']?>",
 	"transporte_id":"<?=$cliente['Cliente']['transporte_id']?>",
 	"contrarrembolso":"<?=$cliente['Cliente']['contrarrembolso']?>",
 	"cobinpro":"<?=$cliente['Cliente']['cobinpro']?>",
