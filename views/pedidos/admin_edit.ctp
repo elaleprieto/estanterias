@@ -17,9 +17,20 @@ echo $this -> Form -> create('Pedido', array('class' => 'pedidos_add', 'id' => '
 		<legend>
 			<?php echo 'Pedido';?>
 		</legend>
-		<input id="prioridad" type="hidden" class="pedidos_add" name="data[Pedido][prioridad]" value="0"/>
-		<?= $this -> Html -> image('prioridad_no.png', array('alt'=> __('ELEFE', true), 'class' => 'pedidos_add', 'id' => 'prioridad_imagen')); ?>
 		<?php
+		switch($this->data['Pedido']['prioridad']) {
+			case 1:
+				echo $this -> Form -> hidden('prioridad', array('id' => 'prioridad', 'value' => '1', 'class' => 'pedidos_add'));
+				echo $this -> Html -> image('prioridad_baja.png', array('alt'=> __('ELEFE', true), 'class' => 'pedidos_add', 'id' => 'prioridad_imagen'));
+				break;
+			case 2:
+				echo $this -> Form -> hidden('prioridad', array('id' => 'prioridad', 'value' => '2', 'class' => 'pedidos_add'));
+				echo $this -> Html -> image('prioridad_alta.png', array('alt'=> __('ELEFE', true), 'class' => 'pedidos_add', 'id' => 'prioridad_imagen'));
+				break;
+			default:
+				echo $this -> Form -> hidden('prioridad', array('id' => 'prioridad', 'value' => '0', 'class' => 'pedidos_add'));
+				echo $this -> Html -> image('prioridad_no.png', array('alt'=> __('ELEFE', true), 'class' => 'pedidos_add', 'id' => 'prioridad_imagen'));
+		}
 		echo $this -> Form -> button('Guardar Pedido', array(
 				'class' => 'articulo',
 				'type' => 'button',

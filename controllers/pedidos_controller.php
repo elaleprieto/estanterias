@@ -265,9 +265,9 @@ class PedidosController extends AppController {
 					$this -> Pedido -> Cliente -> saveField('cobinpro', FALSE);
 				}
 				if (isset($this -> data['Pedido']['prioridad'])) {
-					$this -> Pedido -> Cliente -> saveField('presupuesto', $this -> data['Pedido']['prioridad']);
+					$this -> Pedido -> Cliente -> saveField('prioridad', $this -> data['Pedido']['prioridad']);
 				} else {
-					$this -> Pedido -> Cliente -> saveField('presupuesto', 0);
+					$this -> Pedido -> Cliente -> saveField('prioridad', 0);
 				}
 				# inserto las ordenes
 				foreach ($this -> data['Orden'] as $orden) {
@@ -317,6 +317,28 @@ class PedidosController extends AppController {
 			if (!isset($this -> data['Pedido']['contrarrembolso'])) {$this -> data['Pedido']['contrarrembolso'] = FALSE;
 			}
 			if ($this -> Pedido -> save($this -> data)) {
+				# actualizo los datos del Cliente
+				$this -> Pedido -> Cliente -> id = $this -> data['Pedido']['cliente_id'];
+				if (isset($this -> data['Pedido']['transporte_id'])) {
+					$this -> Pedido -> Cliente -> saveField('transporte_id', $this -> data['Pedido']['transporte_id']);
+				} else {
+					$this -> Pedido -> Cliente -> saveField('transporte_id', 0);
+				}
+				if (isset($this -> data['Pedido']['contrarrembolso'])) {
+					$this -> Pedido -> Cliente -> saveField('contrarrembolso', $this -> data['Pedido']['contrarrembolso']);
+				} else {
+					$this -> Pedido -> Cliente -> saveField('contrarrembolso', FALSE);
+				}
+				if (isset($this -> data['Pedido']['cobinpro'])) {
+					$this -> Pedido -> Cliente -> saveField('cobinpro', $this -> data['Pedido']['cobinpro']);
+				} else {
+					$this -> Pedido -> Cliente -> saveField('cobinpro', FALSE);
+				}
+				if (isset($this -> data['Pedido']['prioridad'])) {
+					$this -> Pedido -> Cliente -> saveField('prioridad', $this -> data['Pedido']['prioridad']);
+				} else {
+					$this -> Pedido -> Cliente -> saveField('prioridad', 0);
+				}
 
 				# Me traigo todas las ordenes que tienen el id del pedido que se está modificando
 				$ordenes = $this -> Pedido -> Orden -> findAllByPedidoId($id);

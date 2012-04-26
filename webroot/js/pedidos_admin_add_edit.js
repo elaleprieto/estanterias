@@ -86,13 +86,13 @@ $(document).ready(function() {
 	$('#prioridad_imagen').click(function() {
 		switch($('#prioridad').val()) {
 			case '0':
-				setPrioridad(1);
+				setPrioridad('1');
 				break;
 			case '1':
-				setPrioridad(2);
+				setPrioridad('2');
 				break;
 			default:
-				setPrioridad(0);
+				setPrioridad('0');
 		}
 	});
 	$('#cliente').change(function() {
@@ -380,16 +380,16 @@ function verificarCantidad() {
  */
 function setPrioridad(prioridad) {
 	switch(prioridad) {
-		case 1:
-			$('#prioridad').val(1);
+		case '1':
+			$('#prioridad').val('1');
 			$('#prioridad_imagen').attr('src', WEBROOT + 'img/prioridad_baja.png');
 			break;
-		case 2:
-			$('#prioridad').val(2);
+		case '2':
+			$('#prioridad').val('2');
 			$('#prioridad_imagen').attr('src', WEBROOT + 'img/prioridad_alta.png');
 			break;
 		default:
-			$('#prioridad').val(0);
+			$('#prioridad').val('0');
 			$('#prioridad_imagen').attr('src', WEBROOT + 'img/prioridad_no.png');
 	}
 }
