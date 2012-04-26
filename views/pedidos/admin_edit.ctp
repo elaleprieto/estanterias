@@ -26,7 +26,8 @@ echo $this -> Form -> create('Pedido', array('class' => 'pedidos_add', 'id' => '
 		<?php
 		} else {
 		?>
-			<input id="prioridad" type="checkbox" class="pedidos_add" name="data[Pedido][prioridad]" value="0"/>
+			<input id="prioridad" type="hidden" class="pedidos_add" name="data[Pedido][prioridad]" value="0"/>
+			<?= $this -> Html -> image('prioridad_no.png', array('alt'=> __('ELEFE', true), 'class' => 'pedidos_add', 'id' => 'prioridad_imagen')); ?>
 		<?php
 		}
 		echo $this -> Form -> button('Guardar Pedido', array(

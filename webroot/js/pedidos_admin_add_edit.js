@@ -83,6 +83,18 @@ $(document).ready(function() {
 			$(this).val(0);
 		}
 	});
+	$('#prioridad_imagen').click(function() {
+		switch($('#prioridad').val()) {
+			case '0':
+				setPrioridad(1);
+				break;
+			case '1':
+				setPrioridad(2);
+				break;
+			default:
+				setPrioridad(0);
+		}
+	});
 	$('#cliente').change(function() {
 		$('#load_cliente').show();
 		setCliente($('#cliente option:selected').val());
@@ -334,13 +346,7 @@ function setCliente(cliente_id) {
 			$('#cobinpro').val(0);
 		}
 		// seteo la prioridad
-		if(data.prioridad > 0) {
-			$('#prioridad').attr('checked', 'checked');
-			$('#prioidad').val(1);
-		} else {
-			$('#prioridad').removeAttr('checked');
-			$('#prioridad').val(0);
-		}
+		setPrioridad(data.prioridad);
 		$('#load_cliente').hide();
 	});
 }
@@ -366,5 +372,24 @@ function verificarCantidad() {
 	pack *= 2;
 	if((prioridad > 0) && (pack > 0) && (cantidad < pack)) {
 		$('#mensaje_flotante').removeClass('mensaje_ok').addClass('mensaje_error').text('Cuidado con la prioridad').show().delay(1500).fadeOut();
+	}
+}
+
+/**
+ * setPrioridad(): setea la prioridad del pedido pasada como parámetro.
+ */
+function setPrioridad(prioridad) {
+	switch(prioridad) {
+		case 1:
+			$('#prioridad').val(1);
+			$('#prioridad_imagen').attr('src', WEBROOT + 'img/prioridad_baja.png');
+			break;
+		case 2:
+			$('#prioridad').val(2);
+			$('#prioridad_imagen').attr('src', WEBROOT + 'img/prioridad_alta.png');
+			break;
+		default:
+			$('#prioridad').val(0);
+			$('#prioridad_imagen').attr('src', WEBROOT + 'img/prioridad_no.png');
 	}
 }
