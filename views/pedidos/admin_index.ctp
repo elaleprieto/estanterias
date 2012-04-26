@@ -1,5 +1,5 @@
 <?php
-debug($pedido['Pedido']['preparacion_orden']);
+// debug($pedido['Pedido']['preparacion_orden']);
 
 # Se carga la librería Jquery
 echo $javascript -> link(array('jquery-1.7.1.min','pedidos_admin_index'), FALSE);
