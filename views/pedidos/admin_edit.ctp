@@ -1,6 +1,4 @@
 <?php
-debug($this->data['Pedido']['prioridad']);
-
 # Se carga la librería Jquery
 echo $javascript -> link(array('jquery-1.7.1.min','pedidos_admin_add_edit','pedidos_admin_edit'), FALSE);
 
@@ -19,17 +17,9 @@ echo $this -> Form -> create('Pedido', array('class' => 'pedidos_add', 'id' => '
 		<legend>
 			<?php echo 'Pedido';?>
 		</legend>
+		<input id="prioridad" type="hidden" class="pedidos_add" name="data[Pedido][prioridad]" value="0"/>
+		<?= $this -> Html -> image('prioridad_no.png', array('alt'=> __('ELEFE', true), 'class' => 'pedidos_add', 'id' => 'prioridad_imagen')); ?>
 		<?php
-		if($this->data['Pedido']['prioridad']) {
-		?>
-			<input id="prioridad" type="checkbox" class="pedidos_add" name="data[Pedido][prioridad]" value="1" checked="checked"/>
-		<?php
-		} else {
-		?>
-			<input id="prioridad" type="hidden" class="pedidos_add" name="data[Pedido][prioridad]" value="0"/>
-			<?= $this -> Html -> image('prioridad_no.png', array('alt'=> __('ELEFE', true), 'class' => 'pedidos_add', 'id' => 'prioridad_imagen')); ?>
-		<?php
-		}
 		echo $this -> Form -> button('Guardar Pedido', array(
 				'class' => 'articulo',
 				'type' => 'button',
