@@ -139,8 +139,12 @@
 			<br />
 			<?php echo $this -> Html -> link('Etiquetas Mini', 
 					array('controller' => 'articulos', 'action' => 'etiquetas_mini')); ?>
+			<br />
 			<?php echo $this -> Html -> link('Faltantes', 
 					array('controller' => 'ordenes', 'action' => 'faltantes')); ?>
+			<br />
+			<?php echo $this -> Html -> link('Ingresos', 
+					array('controller' => 'mercaderias', 'action' => 'index')); ?>
 		</div>
 		<div id='menu_clientes'>
 			<?php echo $this -> Html -> link('Buscar', 

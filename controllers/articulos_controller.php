@@ -492,5 +492,53 @@ class ArticulosController extends AppController {
 		}
 	}
 
+	/**
+	 * abc(): análisis ABC de productos
+	 */
+	public function admin_abc() {
+		$this -> Articulo -> recursive = 0;
+		$this -> set('articulos', $this -> Articulo -> find('all', array(
+			'conditions' => array('cantidad_vendida >=' => 0),
+			'order' => 'cantidad_vendida DESC'
+		)));
+	}
+
+	function admin_ingreso($id = null) {
+		if (!$id && empty($this -> data)) {
+			$this -> Session -> setFlash('Artículo Inválido');
+			$this -> redirect($this -> referer());
+		}
+		if (!empty($this -> data)) {
+			# Se define el artículo para el cual se realiza el ingreso
+			$this -> Articulo -> id = $this -> data['Articulo']['id'];
+
+			# Se arma el nuevo ingreso de mercadería.
+			$ingreso = array('Mercaderia' => array(
+					'cantidad' => $this -> data['Mercaderia']['recibida'],
+					'cantidad_anterior' => $this -> Articulo -> field('stock'),
+					'observaciones' => $this -> data['Mercaderia']['observaciones'],
+					'articulo_id' => $this -> data['Articulo']['id'],
+				));
+			# Se guarda el nuevo ingreso de mercadería.
+			$this -> Articulo -> Mercaderia -> create($ingreso);
+			if($this -> Articulo -> Mercaderia -> save($ingreso)) {
+				# La suma total del stock actual y el stock recibido, se guarda en el Stock actual.
+				$stock = $this -> data['Mercaderia']['recibida'] + $this -> Articulo -> field('stock');
+				
+				if ($this -> Articulo -> saveField('stock', $stock)) {
+					$this -> Session -> setFlash('El stock ha sido actualizado');
+					$this -> redirect($this -> Session -> read('URL.redirect'));
+				} else {
+					$this -> Session -> setFlash('Ocurrió un problema. Por favor, inténtelo nuevamente');
+					$this -> redirect($this -> Session -> read('URL.redirect'));
+				}
+			} else {
+				$this -> Session -> setFlash('Ocurrió un problema. Por favor, inténtelo nuevamente');
+			}
+		}
+		$this -> data = $this -> Articulo -> read(null, $id);
+		$this -> Session -> write('URL.redirect', $this -> referer());
+	}
+
 }
 ?>
