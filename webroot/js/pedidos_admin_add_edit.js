@@ -309,7 +309,7 @@ function setArticulo(articulo_id) {
 	$('#pack').html(imagen.clone());
 	$.getJSON(WEBROOT + "articulos/get_articulo/" + articulo_id, function(data) {
 		$('#unidad').html(data.unidad);
-		$('#precio').html('$ ' + Number(data.precio).toFixed(2));
+		$('#precio').html('$ ' + Number(data.precio_venta).toFixed(2));
 		$('#stock').html(data.stock);
 		$('#pack').html(data.pack);
 		verificarCantidad();
