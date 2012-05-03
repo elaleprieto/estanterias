@@ -20,7 +20,7 @@ class PedidosController extends AppController {
 
 	function index() {
 		$this -> Pedido -> recursive = 1;
-		$this -> paginate = array('order' => 'Pedido.prioridad DESC');
+		$this -> paginate = array('order' => 'Pedido.preparacion_orden DESC');
 		$this -> set('pedidos', $this -> paginate('Pedido', array('Pedido.estado' => '0')));
 	}
 
