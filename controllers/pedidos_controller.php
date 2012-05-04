@@ -880,5 +880,37 @@ class PedidosController extends AppController {
 		// }
 	// }
 
+	/**
+	 * admin_getFinalizadosCount(): Devuelve la cantidad de Pedidos que se encuentran en el estado Finalizado.
+	 */
+	function admin_getFinalizadosCount() {
+		$this -> layout = 'ajax';
+		return $this -> Pedido -> find('count', array('conditions' => array('Pedido.estado' => self::FINALIZADO)));
+	}
+	
+	/**
+	 * admin_getControladosCount(): Devuelve la cantidad de Pedidos que se encuentran en el estado Controlado.
+	 */
+	function admin_getControladosCount() {
+		$this -> layout = 'ajax';
+		return $this -> Pedido -> find('count', array('conditions' => array('Pedido.estado' => self::CONTROLADO)));
+	}
+	
+	/**
+	 * admin_getEmbaladosCount(): Devuelve la cantidad de Pedidos que se encuentran en el estado Embalado.
+	 */
+	function admin_getEmbaladosCount() {
+		$this -> layout = 'ajax';
+		return $this -> Pedido -> find('count', array('conditions' => array('Pedido.estado' => self::EMBALADO)));
+	}
+	
+	/**
+	 * admin_getFacturadosCount(): Devuelve la cantidad de Pedidos que se encuentran en el estado Facturado.
+	 */
+	function admin_getFacturadosCount() {
+		$this -> layout = 'ajax';
+		return $this -> Pedido -> find('count', array('conditions' => array('Pedido.estado' => self::FACTURADO)));
+	}
+	
 }
 ?>

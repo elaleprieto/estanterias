@@ -111,13 +111,13 @@
 			<?php echo $this -> Html -> link('Pendientes', 
 					array('controller' => 'pedidos', 'action' => 'index')); ?>
 			<br />
-			<?php echo $this -> Html -> link('Finalizados', 
+			<?php echo $this -> Html -> link('Finalizados ('.$this->requestAction('admin/pedidos/getFinalizadosCount').')', 
 					array('controller' => 'pedidos', 'action' => 'finalizados')); ?>
-			<?php echo $this -> Html -> link('Controlados', 
+			<?php echo $this -> Html -> link('Controlados ('.$this->requestAction('admin/pedidos/getControladosCount').')', 
 					array('controller' => 'pedidos', 'action' => 'controlados')); ?>
-			<?php echo $this -> Html -> link('Embalados', 
+			<?php echo $this -> Html -> link('Embalados ('.$this->requestAction('admin/pedidos/getEmbaladosCount').')', 
 					array('controller' => 'pedidos', 'action' => 'embalados')); ?>
-			<?php echo $this -> Html -> link('Facturados', 
+			<?php echo $this -> Html -> link('Facturados ('.$this->requestAction('admin/pedidos/getFacturadosCount').')', 
 					array('controller' => 'pedidos', 'action' => 'facturados')); ?>
 			<?php echo $this -> Html -> link('Despachados', 
 					array('controller' => 'pedidos', 'action' => 'despachados')); ?>
