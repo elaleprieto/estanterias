@@ -108,7 +108,7 @@
 			<?php echo $this -> Html -> link('Nuevo', 
 					array('controller' => 'pedidos', 'action' => 'add')); ?>
 			<br />
-			<?php echo $this -> Html -> link('Pendientes', 
+			<?php echo $this -> Html -> link('Pendientes ('.$this->requestAction('admin/pedidos/getPendientesCount').')', 
 					array('controller' => 'pedidos', 'action' => 'index')); ?>
 			<br />
 			<?php echo $this -> Html -> link('Finalizados ('.$this->requestAction('admin/pedidos/getFinalizadosCount').')', 

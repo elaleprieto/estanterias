@@ -12,6 +12,7 @@ class PedidosController extends AppController {
 	);
 	
 	/* ESTADOS DEL PEDIDO */
+	const PENDIENTE = 0;
 	const FINALIZADO = 1;
 	const CONTROLADO = 2;
 	const EMBALADO = 3;
@@ -879,6 +880,14 @@ class PedidosController extends AppController {
 			// $this -> Pedido -> saveField('prioridad', $b);
 		// }
 	// }
+
+	/**
+	 * admin_getPendientesCount(): Devuelve la cantidad de Pedidos que se encuentran en el estado Pendientes.
+	 */
+	function admin_getPendientesCount() {
+		$this -> layout = 'ajax';
+		return $this -> Pedido -> find('count', array('conditions' => array('Pedido.estado' => self::PENDIENTE)));
+	}
 
 	/**
 	 * admin_getFinalizadosCount(): Devuelve la cantidad de Pedidos que se encuentran en el estado Finalizado.
