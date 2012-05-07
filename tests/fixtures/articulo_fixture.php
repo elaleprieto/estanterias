@@ -5,10 +5,12 @@ class ArticuloFixture extends CakeTestFixture {
 
 	var $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 11, 'key' => 'primary'),
+		'orden' => array('type' => 'integer', 'null' => false, 'default' => 999999, 'length' => 11),
 		'codigo' => array('type' => 'string', 'null' => false, 'length' => 10),
 		'detalle' => array('type' => 'string', 'null' => false, 'length' => 250),
 		'unidad' => array('type' => 'string', 'null' => false, 'length' => 10),
-		'precio' => array('type' => 'float', 'null' => true, 'default' => '0.0'),
+		'precio' => array('type' => 'float', 'null' => false, 'default' => '0.0'),
+		'porcentaje' => array('type' => 'float', 'null' => false, 'default' => '0.0'),
 		'created' => array('type' => 'datetime', 'null' => true),
 		'modified' => array('type' => 'datetime', 'null' => true),
 		'indexes' => array('PRIMARY' => array('unique' => true, 'column' => 'id')),
@@ -18,6 +20,7 @@ class ArticuloFixture extends CakeTestFixture {
 	var $records = array(
 		array(
 			'id' => 1,
+			'orden' => 1,
 			'codigo' => 'Lorem ip',
 			'detalle' => 'Lorem ipsum dolor sit amet',
 			'unidad' => 'Lorem ip',

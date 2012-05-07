@@ -141,8 +141,7 @@ class Articulo extends AppModel {
 									WHERE A.id = O.articulo_id
 									GROUP BY A.id, A.precio, A.porcentaje
 									ORDER BY valor_total DESC
-									) AS S
-								) AS SV;");
+								) AS S");
 
 	}
 
