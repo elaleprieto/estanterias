@@ -71,6 +71,7 @@ class PedidosController extends AppController {
 				$this -> Pedido -> saveField('tiempo_control', $tiempo_control['Pedido']['tiempo_control'] + $intervalo -> format('%d') * 24 * 3600 + $intervalo -> format('%h') * 3600 + $intervalo -> format('%i') * 60 + $intervalo -> format('%s'));
 
 				# Se actualiza el Stock
+				$cliente = $this -> Pedido -> Cliente -> field('nombre', array('id' => $this -> Pedido -> field('cliente_id')));
 				$ordenes = $this -> Pedido -> Orden -> find('list', array(
 					'conditions' => array(
 						'Orden.pedido_id' => $pedido_id,
@@ -82,11 +83,11 @@ class PedidosController extends AppController {
 					)
 				));
 				foreach ($ordenes as $articulo_id => $cantidad) {
-					$this -> loadModel('Articulo');
-					$this -> Articulo -> recursive = 0;
-					$stock = $this -> Articulo -> read('stock', $articulo_id);
-					$this -> Articulo -> id = $articulo_id;
-					$this -> Articulo -> saveField('stock', $stock['Articulo']['stock'] - $cantidad);
+					$this -> requestAction(array(
+						'controller' => 'articulos',
+						'action' => 'egreso_pedido',
+						'admin' => TRUE
+					), array('pass' => array($articulo_id, $cantidad, "Pedido de " . $cliente)));
 				}
 
 				$this -> admin_correo_faltantes($pedido_id);

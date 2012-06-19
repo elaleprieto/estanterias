@@ -504,10 +504,6 @@ class ArticulosController extends AppController {
 	}
 
 	function admin_ingreso($id = null) {
-		if (!$id && empty($this -> data)) {
-			$this -> Session -> setFlash('Artículo Inválido');
-			$this -> redirect($this -> referer());
-		}
 		if (!empty($this -> data)) {
 			# Se define el artículo para el cual se realiza el ingreso
 			$this -> Articulo -> id = $this -> data['Articulo']['id'];
@@ -527,17 +523,49 @@ class ArticulosController extends AppController {
 				
 				if ($this -> Articulo -> saveField('stock', $stock)) {
 					$this -> Session -> setFlash('El stock ha sido actualizado');
-					$this -> redirect($this -> Session -> read('URL.redirect'));
+					// $this -> redirect($this -> Session -> read('URL.redirect'));
 				} else {
-					$this -> Session -> setFlash('Ocurrió un problema. Por favor, inténtelo nuevamente');
-					$this -> redirect($this -> Session -> read('URL.redirect'));
+					$this -> Session -> setFlash('No se actualizó el stock. Por favor, avise al administrador del problema');
+					// $this -> redirect($this -> Session -> read('URL.redirect'));
 				}
 			} else {
 				$this -> Session -> setFlash('Ocurrió un problema. Por favor, inténtelo nuevamente');
 			}
 		}
+		if (!$id && empty($this -> data)) {
+			$this -> Session -> setFlash('Artículo Inválido');
+			$this -> redirect($this -> referer());
+		}
 		$this -> data = $this -> Articulo -> read(null, $id);
 		$this -> Session -> write('URL.redirect', $this -> referer());
+	}
+
+	/**
+	 * Se registran los egresos por pedidos
+	 */
+	function admin_egreso_pedido($id = null, $cantidad = null, $observaciones = null) {
+		if (!$id && !$cantidad && !$observaciones) {
+			$this -> Session -> setFlash('Artículo Inválido');
+			return $this -> redirect($this -> referer());
+		}
+			# Se define el artículo para el cual se realiza el ingreso
+			$this -> Articulo -> id = $id;
+
+			# Se arma el nuevo egreso de mercadería.
+			$egreso = array('Mercaderia' => array(
+					'cantidad' => $cantidad,
+					'cantidad_anterior' => $this -> Articulo -> field('stock'),
+					'observaciones' => $observaciones,
+					'articulo_id' => $id,
+					# se define el movimiento 1 como salida de mercadería
+					'movimiento' => 1
+				));
+			# Se guarda el nuevo ingreso de mercadería.
+			$this -> Articulo -> Mercaderia -> create($egreso);
+			if ($this -> Articulo -> Mercaderia -> save($egreso)) {
+				# La resta total del stock actual y el stock recibido, se guarda en el Stock actual.
+				$this -> Articulo -> saveField('stock', $this -> Articulo -> field('stock') - $cantidad);
+		}
 	}
 
 }
