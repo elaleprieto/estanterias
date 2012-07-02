@@ -54,14 +54,13 @@
 									'controller' => 'pedidos',
 									'action' => 'add'
 							));
-							echo $this -> Html -> image('down_arroww.png', array(
-									'alt' => '',
-									'class' => 'down_arrow'
-							));
+							// echo $this -> Html -> image('down_arroww.png', array(
+									// 'alt' => '',
+									// 'class' => 'down_arrow'
+							// ));
 							?>
 						</div>
 					</td>
-					<!--
 					<td class="header">
 						<div class="header" id="boton_articulo">
 							<?php
@@ -69,13 +68,14 @@
 									'controller' => 'articulos',
 									'action' => 'buscar'
 							));
-							echo $this -> Html -> image('down_arroww.png', array(
-									'alt' => '',
-									'class' => 'down_arrow'
-							));
+							// echo $this -> Html -> image('down_arroww.png', array(
+									// 'alt' => '',
+									// 'class' => 'down_arrow'
+							// ));
 							?>
 						</div>
 					</td>
+					<!--
 					<td class="header">
 						<div class="header" id="boton_cliente">
 							<?php echo $this -> Html -> link('Clientes', array(
