@@ -416,6 +416,41 @@ class ArticulosController extends AppController {
 		}
 		$this -> Session -> write('URL.redirect', $this -> referer());
 	}
+	
+	/**
+	 * Setea el Pack pasado en el formulario
+	 */
+	public function mostrador_set_pack($id = null) {
+		if (!$id && empty($this -> data)) {
+			$this -> Session -> setFlash('Artículo Inválido');
+			$this -> redirect(array(
+				'mostrador' => TRUE,
+				'controller' => 'articulos',
+				'action' => 'buscar'
+			));
+		}
+		if (!empty($this -> data)) {
+			if ($this -> Articulo -> save($this -> data, TRUE, array('pack'))) {
+				$this -> Session -> setFlash('El pack ha sido actualizado');
+				// $this -> redirect(array(
+				// 'controller' => 'articulos',
+				// 'action' => 'index',
+				// $this -> Session -> read('URL.letra'),
+				// 'page:' . $this -> Session -> read('URL.page')
+				// ));
+				$this -> redirect(array(
+					'mostrador' => TRUE,
+					'controller' => 'articulos',
+					'action' => 'buscar'
+				));
+			} else {
+				$this -> Session -> setFlash('Ocurrió un problema. Por favor, inténtelo nuevamente');
+			}
+		}
+		if (empty($this -> data)) {
+			$this -> data = $this -> Articulo -> read(null, $id);
+		}
+	}
 
 	function admin_listar_stock($id = null) {
 		$this -> Articulo -> recursive = 0;
@@ -460,12 +495,50 @@ class ArticulosController extends AppController {
 	public function admin_buscar() {
 
 	}
+	
+	/**
+	 * mostrador_buscar(): despliega la pantalla de búsqueda.
+	 */
+	public function mostrador_buscar() {
+
+	}
 
 	/**
 	 * get_buscados(): realiza la búsqueda de articulos.
 	 * Es usado por admin_buscar() para hacer la búsqueda desde una petición Ajax de buscar().
 	 */
 	public function admin_get_buscados() {
+		$this -> layout = 'ajax';
+		if (!empty($this -> data)) {
+			$cadena = explode(' ', mb_strtoupper($this -> data['Articulo']['articulo'], 'utf-8'));
+			$consulta = "SELECT  id, detalle, unidad, foto, stock, pack, (precio + precio * porcentaje / 100) AS precio_venta,
+							array_agg(pasillo_nombre) AS pasillo_nombre, array_agg(pasillo_lado) AS pasillo_lado, 
+							min(pasillo_distancia) AS pasillo_distancia, array_agg(ubicacion_altura) AS ubicacion_altura, 
+							array_agg(ubicacion_posicion) AS ubicacion_posicion, array_agg(ubicacion_estado) AS ubicacion_estado 
+						FROM (SELECT 	A.id AS id, A.detalle AS detalle, A.unidad AS unidad, A.foto AS foto, A.orden AS orden,
+								A.precio AS precio, A.porcentaje AS porcentaje, A.stock AS stock, A.pack AS pack,
+								P.nombre AS pasillo_nombre, P.lado AS pasillo_lado, 
+								P.distancia AS pasillo_distancia, Ub.altura AS ubicacion_altura, 
+								Ub.posicion AS ubicacion_posicion, U.estado AS ubicacion_estado 
+							FROM Articulos AS A LEFT JOIN Ubicados AS U ON U.articulo_id = A.id 
+								LEFT JOIN Pasillos AS P ON U.pasillo_id = P.id LEFT JOIN Ubicaciones AS Ub ON U.ubicacion_id = Ub.id
+							WHERE 1=1";
+			foreach ($cadena as $palabra) {
+				$consulta .= "AND A.detalle LIKE '%" . $palabra . "%'";
+			}
+			$consulta .= "ORDER BY ubicacion_estado DESC
+					) AS E
+					GROUP BY id, detalle, unidad, foto, orden, stock, pack, precio, porcentaje
+					ORDER BY orden ASC";
+			$this -> set('articulos', $this -> Articulo -> query($consulta));
+		}
+	}
+	
+	/**
+	 * mostrador_get_buscados(): realiza la búsqueda de articulos.
+	 * Es usado por mostrador_buscar() para hacer la búsqueda desde una petición Ajax de buscar().
+	 */
+	public function mostrador_get_buscados() {
 		$this -> layout = 'ajax';
 		if (!empty($this -> data)) {
 			$cadena = explode(' ', mb_strtoupper($this -> data['Articulo']['articulo'], 'utf-8'));
