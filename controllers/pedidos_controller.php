@@ -71,7 +71,6 @@ class PedidosController extends AppController {
 				$this -> Pedido -> saveField('tiempo_control', $tiempo_control['Pedido']['tiempo_control'] + $intervalo -> format('%d') * 24 * 3600 + $intervalo -> format('%h') * 3600 + $intervalo -> format('%i') * 60 + $intervalo -> format('%s'));
 
 				# Se actualiza el Stock
-				$cliente = $this -> Pedido -> Cliente -> field('nombre', array('id' => $this -> Pedido -> field('cliente_id')));
 				$ordenes = $this -> Pedido -> Orden -> find('list', array(
 					'conditions' => array(
 						'Orden.pedido_id' => $pedido_id,
@@ -83,11 +82,11 @@ class PedidosController extends AppController {
 					)
 				));
 				foreach ($ordenes as $articulo_id => $cantidad) {
-					$this -> requestAction(array(
-						'controller' => 'articulos',
-						'action' => 'egreso_pedido',
-						'admin' => TRUE
-					), array('pass' => array($articulo_id, $cantidad, "Pedido de " . $cliente)));
+					$this -> loadModel('Articulo');
+					$this -> Articulo -> recursive = 0;
+					$stock = $this -> Articulo -> read('stock', $articulo_id);
+					$this -> Articulo -> id = $articulo_id;
+					$this -> Articulo -> saveField('stock', $stock['Articulo']['stock'] - $cantidad);
 				}
 
 				$this -> admin_correo_faltantes($pedido_id);
@@ -241,8 +240,15 @@ class PedidosController extends AppController {
 		$this -> set(compact('clientes', 'articulos', 'transportes'));
 	}
 
-	function mostrador_index() {
-		$this -> redirect(array('action' => 'add'));
+	function mostrador_index($pedido_id = null) {
+		// $this -> redirect(array('action' => 'add'));
+		if ($pedido_id) {
+			$this -> Pedido -> id = $pedido_id;
+			$this -> Pedido -> saveField('estado', 0);
+		}
+		$this -> paginate = array('order' => 'Pedido.preparacion_orden DESC');
+		$this -> Pedido -> recursive = 1;
+		$this -> set('pedidos', $this -> paginate('Pedido', array('Pedido.estado' => '0')));
 	}
 	
 	function mostrador_add() {
@@ -304,6 +310,224 @@ class PedidosController extends AppController {
 		$clientes = $this -> Pedido -> Cliente -> find('list', array('order' => array('Cliente.nombre')));
 		$transportes = $this -> Pedido -> Transporte -> find('list', array('order' => array('Transporte.nombre')));
 		$this -> set(compact('clientes', 'articulos', 'transportes'));
+	}
+
+	function mostrador_edit($id = null) {
+		if (!$id && empty($this -> data)) {
+			$this -> Session -> setFlash(__('Invalid pedido', true));
+			$this -> redirect(array('action' => 'index'));
+		}
+		if (!empty($this -> data)) {
+			if (!isset($this -> data['Pedido']['prioridad'])) {$this -> data['Pedido']['prioridad'] = 0;
+			}
+			if (!isset($this -> data['Pedido']['cobinpro'])) {$this -> data['Pedido']['cobinpro'] = FALSE;
+			}
+			if (!isset($this -> data['Pedido']['contrarrembolso'])) {$this -> data['Pedido']['contrarrembolso'] = FALSE;
+			}
+			if ($this -> Pedido -> save($this -> data)) {
+				# actualizo los datos del Cliente
+				$this -> Pedido -> Cliente -> id = $this -> data['Pedido']['cliente_id'];
+				if (isset($this -> data['Pedido']['transporte_id'])) {
+					$this -> Pedido -> Cliente -> saveField('transporte_id', $this -> data['Pedido']['transporte_id']);
+				} else {
+					$this -> Pedido -> Cliente -> saveField('transporte_id', 0);
+				}
+				if (isset($this -> data['Pedido']['contrarrembolso'])) {
+					$this -> Pedido -> Cliente -> saveField('contrarrembolso', $this -> data['Pedido']['contrarrembolso']);
+				} else {
+					$this -> Pedido -> Cliente -> saveField('contrarrembolso', FALSE);
+				}
+				if (isset($this -> data['Pedido']['cobinpro'])) {
+					$this -> Pedido -> Cliente -> saveField('cobinpro', $this -> data['Pedido']['cobinpro']);
+				} else {
+					$this -> Pedido -> Cliente -> saveField('cobinpro', FALSE);
+				}
+				if (isset($this -> data['Pedido']['prioridad'])) {
+					$this -> Pedido -> Cliente -> saveField('prioridad', $this -> data['Pedido']['prioridad']);
+				} else {
+					$this -> Pedido -> Cliente -> saveField('prioridad', 0);
+				}
+
+				# Me traigo todas las ordenes que tienen el id del pedido que se está modificando
+				$ordenes = $this -> Pedido -> Orden -> findAllByPedidoId($id);
+				$nuevas = $this -> data['Orden'];
+
+				# Actualizo las que está creadas
+				foreach ($ordenes as $orden) {
+					$existe = FALSE;
+					foreach ($nuevas as $index => $datos) {
+						// debug($index);
+						# verificación de variables
+						if (!isset($datos['estado'])) {$datos['estado'] = FALSE;
+						}
+						if (!isset($datos['SinCargo'])) {$datos['SinCargo'] = FALSE;
+						}
+						if (!isset($datos['Observaciones'])) {$datos['Observaciones'] = "";
+						}
+						if ($orden['Orden']['articulo_id'] == $datos['id'] && $orden['Orden']['sin_cargo'] == $datos['SinCargo']) {
+							$this -> Pedido -> Orden -> id = $orden['Orden']['id'];
+							$this -> Pedido -> Orden -> saveField('cantidad', $datos['Cantidad']);
+							$this -> Pedido -> Orden -> saveField('estado', $datos['estado']);
+							$this -> Pedido -> Orden -> saveField('observaciones', $datos['Observaciones']);
+							$existe = TRUE;
+						}
+					}
+					# Se eliminan las ordenes que no existan en las ordenes que vienen nuevas.
+					if (!$existe)
+						$this -> Pedido -> Orden -> delete($orden['Orden']['id']);
+				}
+
+				# Se crean las órdenes que no fueron actualizadas porque no existían
+				foreach ($nuevas as $index => $datos) {
+					# verificación de variables
+					if (!isset($datos['estado'])) {$datos['estado'] = FALSE;
+					}
+					$existe = $this -> Pedido -> Orden -> find('list', array('conditions' => array(
+							'Orden.articulo_id' => $datos['id'],
+							'Orden.estado' => $datos['estado'],
+							'Orden.pedido_id' => $this -> Pedido -> id
+						)));
+
+					if (!$existe) {
+						$this -> Pedido -> Orden -> create();
+
+						# verificación de variables
+						if (!isset($datos['SinCargo'])) {$datos['SinCargo'] = FALSE;
+						}
+						if (!isset($datos['Observaciones'])) {$datos['Observaciones'] = "";
+						}
+
+						$this -> Pedido -> Orden -> set(array(
+							'articulo_id' => $datos['id'],
+							'cantidad' => $datos['Cantidad'],
+							'cantidad_original' => $datos['Cantidad'],
+							'estado' => $datos['estado'],
+							'sin_cargo' => $datos['SinCargo'],
+							'observaciones' => $datos['Observaciones'],
+							'pedido_id' => $this -> Pedido -> id,
+						));
+						$this -> Pedido -> Orden -> save();
+					}
+				}
+				# Se vuelva a la página anterior
+				$this -> redirect($this -> Session -> read('URL.redirect'));
+			} else {
+				$this -> Session -> setFlash(__('The pedido could not be saved. Please, try again.', true));
+			}
+		}
+		$this -> data = $this -> Pedido -> read(null, $id);
+		$condicionesArticulo = array(
+			'OR' => array('NOT' => array('OR' => array(
+						array("Articulo.detalle LIKE" => "FAROL%"),
+						array("Articulo.detalle LIKE" => "BULONES%")
+					))),
+			array("Articulo.precio >" => "0")
+		);
+		$articulos = $this -> Pedido -> Orden -> Articulo -> find('list', array(
+			'conditions' => $condicionesArticulo,
+			'order' => array('Articulo.orden')
+		));
+		$clientes = $this -> Pedido -> Cliente -> find('list');
+		$ordenes = $this -> Pedido -> Orden -> find('all', array(
+			'conditions' => array('pedido_id' => $id),
+			'order' => array('Articulo.orden')
+		));
+		$transportes = $this -> Pedido -> Transporte -> find('list', array('order' => array('Transporte.nombre')));
+		$this -> set(compact('clientes', 'articulos', 'ordenes', 'transportes'));
+
+		# Se guarda la página desde donde se viene para después de editar el Pedido, retornar a ella.
+		$this -> Session -> write('URL.redirect', $this -> referer());
+	}
+
+	function mostrador_finalizados() {
+		$this -> Pedido -> recursive = 1;
+		$this -> paginate = array('Pedido' => array('order' => array('finalizado' => 'DESC'), ));
+		$this -> set('pedidos', $this -> paginate('Pedido', array('Pedido.estado' => self::FINALIZADO)));
+	}
+	
+	function mostrador_controlados($pedido_id = null) {
+		if ($pedido_id) {
+			# Se verifica que el estado del pedido sea "Finalizado", es decir, estado == 1 == self::FINALIZADO
+			# Si no, no se cambia el estado del Pedido.
+			# Además, se verifica que la petición provenga de la acción Finalizados del controller Pedidos.
+			# Esto debería evitar errores.
+			$estado = $this -> Pedido -> read('estado', $pedido_id);
+			if ($estado['Pedido']['estado'] == self::FINALIZADO && strpos($this -> referer(), 'pedidos') && strpos($this -> referer(), 'finalizados')) {
+				# Se calcula el tiempo de Control en segundos.
+				$fecha = new DateTime();
+				$finalizado = $this -> Pedido -> read('finalizado', $pedido_id);
+				$finalizado = new DateTime($finalizado['Pedido']['finalizado']);
+				$intervalo = $fecha -> diff($finalizado);
+				$tiempo_control = $this -> Pedido -> read('tiempo_control', $pedido_id);
+
+				# Se guardan los datos del Pedido
+				$this -> Pedido -> id = $pedido_id;
+				$this -> Pedido -> saveField('estado', self::CONTROLADO);
+				$this -> Pedido -> saveField('controlado', $fecha -> format('Y-m-d H:i:s'));
+				$this -> Pedido -> saveField('tiempo_control', $tiempo_control['Pedido']['tiempo_control'] + $intervalo -> format('%d') * 24 * 3600 + $intervalo -> format('%h') * 3600 + $intervalo -> format('%i') * 60 + $intervalo -> format('%s'));
+
+				# Se actualiza el Stock
+				$ordenes = $this -> Pedido -> Orden -> find('list', array(
+					'conditions' => array(
+						'Orden.pedido_id' => $pedido_id,
+						'Orden.estado' => TRUE
+					),
+					'fields' => array(
+						'Orden.articulo_id',
+						'Orden.cantidad',
+					)
+				));
+				foreach ($ordenes as $articulo_id => $cantidad) {
+					$this -> loadModel('Articulo');
+					$this -> Articulo -> recursive = 0;
+					$stock = $this -> Articulo -> read('stock', $articulo_id);
+					$this -> Articulo -> id = $articulo_id;
+					$this -> Articulo -> saveField('stock', $stock['Articulo']['stock'] - $cantidad);
+				}
+
+				$this -> admin_correo_faltantes($pedido_id);
+			}
+		}
+		// $this -> Pedido -> recursive = 1;
+		// $this -> paginate = array('Pedido' => array('order' => array('finalizado' => 'DESC'), ));
+		// $this -> set('pedidos', $this -> paginate('Pedido', array('Pedido.estado' => self::CONTROLADO)));
+		return $this -> redirect(array('action' => 'finalizados'));
+	}
+	
+	function mostrador_imprimir($id = null) {
+		if (!$id) {
+			$this -> Session -> setFlash('Pedido inválido');
+			return $this -> redirect(array('action' => 'index'));
+		}
+		$pedido = $this -> Pedido -> findById($id);
+		# Se verifica la existencia del Pedido
+		if(isset($pedido['Pedido'])) {
+			$consulta = "SELECT orden_id, posicion, cantidad, cantidad_original, orden_estado, sin_cargo, id, detalle, unidad, foto, stock, observaciones, 
+						array_agg(pasillo_nombre) AS pasillo_nombre, array_agg(pasillo_lado) AS pasillo_lado, 
+						min(pasillo_distancia) AS pasillo_distancia, array_agg(ubicacion_altura) AS ubicacion_altura, 
+						array_agg(ubicacion_posicion) AS ubicacion_posicion, array_agg(ubicacion_estado) AS ubicacion_estado 
+					FROM (SELECT O.id AS orden_id, O.cantidad AS cantidad, O.cantidad_original AS cantidad_original, O.estado AS orden_estado, O.sin_cargo AS sin_cargo, O.observaciones AS observaciones, 
+							A.id AS id, A.detalle AS detalle, A.unidad AS unidad, A.foto AS foto,
+							A.orden AS posicion, A.stock AS stock,
+							P.nombre AS pasillo_nombre, P.lado AS pasillo_lado, 
+							P.distancia AS pasillo_distancia, Ub.altura AS ubicacion_altura, 
+							Ub.posicion AS ubicacion_posicion, U.estado AS ubicacion_estado 
+						FROM Ordenes AS O, Articulos AS A LEFT JOIN Ubicados AS U ON U.articulo_id = A.id 
+							LEFT JOIN Pasillos AS P ON U.pasillo_id = P.id LEFT JOIN Ubicaciones AS Ub ON U.ubicacion_id = Ub.id
+						WHERE O.pedido_id	= $id
+						AND O.articulo_id 	= A.id
+						ORDER BY ubicacion_estado DESC
+						) AS E
+					GROUP BY orden_id, posicion, cantidad, cantidad_original, orden_estado, sin_cargo, id, detalle, unidad, foto, stock, observaciones
+					ORDER BY posicion";
+			$ordenes = $this -> Pedido -> Orden -> query($consulta);
+	
+			$this -> set(compact('pedido', 'ordenes'));
+			$this -> layout = 'ajax';
+		} else {
+			$this -> Session -> setFlash('Pedido no válido');
+			return $this -> redirect(array('action' => 'index'));
+		}
 	}
 
 	function admin_edit($id = null) {

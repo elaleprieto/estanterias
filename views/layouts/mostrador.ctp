@@ -31,7 +31,7 @@
 		echo $this->Html->css('estanterias');
 		echo $this->Html->css('mostrador');
 		
-		echo $this->Html->script(array('jquery-1.7.1.min', 'admin.ctp'));
+		echo $this->Html->script(array('jquery-1.7.1.min', 'mostrador_layout.ctp'));
 
 		echo $scripts_for_layout;
 	?>
@@ -115,15 +115,15 @@
 			<br />
 			<?php echo $this -> Html -> link('Finalizados', 
 					array('controller' => 'pedidos', 'action' => 'finalizados')); ?>
-			<?php echo $this -> Html -> link('Controlados', 
+			<!-- <?php echo $this -> Html -> link('Controlados', 
 					array('controller' => 'pedidos', 'action' => 'controlados')); ?>
 			<?php echo $this -> Html -> link('Estadísticas', 
-					array('controller' => 'pedidos', 'action' => 'estadisticas')); ?>
+					array('controller' => 'pedidos', 'action' => 'estadisticas')); ?> -->
 		</div>
 		<div id='menu_articulos'>
 			<?php echo $this -> Html -> link('Buscar', 
 					array('controller' => 'articulos', 'action' => 'buscar')); ?>
-			<br />
+			<!-- <br />
 			<?php echo $this -> Html -> link('Listar', 
 					array('controller' => 'articulos', 'action' => 'index')); ?>
 			<br />
@@ -136,9 +136,9 @@
 			<?php echo $this -> Html -> link('Etiquetas Mini', 
 					array('controller' => 'articulos', 'action' => 'etiquetas_mini')); ?>
 			<?php echo $this -> Html -> link('Faltantes', 
-					array('controller' => 'ordenes', 'action' => 'faltantes')); ?>
+					array('controller' => 'ordenes', 'action' => 'faltantes')); ?> -->
 		</div>
-		<div id='menu_clientes'>
+		<!-- <div id='menu_clientes'>
 			<?php echo $this -> Html -> link('Buscar', 
 					array('controller' => 'clientes', 'action' => 'buscar')); ?>
 			<br />
@@ -157,7 +157,7 @@
 			<br />
 			<?php echo $this -> Html -> link('Listar', 
 					array('controller' => 'transportes', 'action' => 'index')); ?>
-		</div>
+		</div> -->
 		<div id="content">
 			<?php 
 				# Se carga el preloader
