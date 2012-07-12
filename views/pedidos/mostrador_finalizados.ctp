@@ -1,9 +1,8 @@
 <?php //debug($pedidos);?>
-<div class="pedidos_index">
+<div class="mostrador">
 	<h2><?php __('Pedidos Finalizados');?></h2>
 	<table cellpadding="0" cellspacing="0">
 		<tr>
-			<th><?php echo $this -> Paginator -> sort('Número', 'Pedido.id');?></th>
 			<th><?php echo $this -> Paginator -> sort('Fecha', 'created');?></th>
 			<th><?php echo $this -> Paginator -> sort('cliente_id');?></th>
 			<th><?php echo $this -> Paginator -> sort('Transporte', 'Transporte.nombre');?></th>
@@ -19,10 +18,9 @@ $class = ' class="altrow"';
 }
 		?>
 		<tr<?php echo $class;?>>
-			<td><?php echo $pedido['Pedido']['id'];?>&nbsp;</td>
 			<td><?php
 			# Fecha de creación formateada
-			echo $this -> Time -> format($format = 'd/m/Y H:i', $pedido['Pedido']['created']);
+			echo $this -> Time -> format($format = 'd/m/y', $pedido['Pedido']['created']);
 			?>&nbsp; </td>
 			<td><?php echo $pedido['Cliente']['nombre'];?>&nbsp;</td>
 			<td><?= $pedido['Transporte']['nombre']?></td>
@@ -31,31 +29,34 @@ $class = ' class="altrow"';
 			<!------------------------------------------------------------------------------------>
 			<!-- 									Acciones									-->
 			<!------------------------------------------------------------------------------------>
-			<td class="actions">
-				<?php echo $this -> Html -> link('Editar', array(
-						'controller' => 'pedidos',
-						'action' => 'edit',
-						$pedido['Pedido']['id']
-				));
+			<td class="acciones">
+				<?php echo $this -> Html -> link($this -> Html -> image("edit.png", array("alt" => "Editar", "title" => "Editar")), array(
+					'controller' => 'pedidos',
+					'action' => 'edit',
+					$pedido['Pedido']['id']
+				), array('escape' => false));
 				?>
-				<?php echo $this -> Html -> link('Pendiente', array(
+				<?php echo $this -> Html -> link($this -> Html -> image("pendiente.png", array("alt" => "Pendiente", "title" => "Pendiente")), array(
 						'controller' => 'pedidos',
 						'action' => 'index',
 						$pedido['Pedido']['id']
-					), null, sprintf('¿Devolver a Pedidos Pendientes el pedido de %s?', $pedido['Cliente']['nombre']));
+					), array('escape' => false), sprintf('¿Devolver a Pedidos Pendientes el pedido de %s?', $pedido['Cliente']['nombre']));
 				?>
-				<?php echo $this -> Html -> link(__('Imprimir', true), array(
+				<?php echo $this -> Html -> link($this -> Html -> image("print.png", array("alt" => "Imprimir", "title" => "Imprimir")), array(
 							'action' => 'imprimir',
 							$pedido['Pedido']['id']
-					), array('target' => '_blank'));
+					), array('escape' => false, 'target' => '_blank'));
 				?>
-				<?php echo $this -> Html -> link('Controlado', array(
+				<?php echo $this -> Html -> link($this -> Html -> image("controlado.gif", array("alt" => "Controlado", "title" => "Controlado")), array(
 						'controller' => 'pedidos',
 						'action' => 'controlados',
 						$pedido['Pedido']['id']
-					), null, sprintf('¿Ha sido controlado el pedido de %s?', $pedido['Cliente']['nombre']));
+					), array('escape' => false), sprintf('¿Ha sido controlado el pedido de %s?', $pedido['Cliente']['nombre']));
 				?>
 			</td>
+			<!------------------------------------------------------------------------------------>
+			<!-- 								Fin	Acciones									-->
+			<!------------------------------------------------------------------------------------>
 			</tr> <?php endforeach;?>
 	</table>
 	<p>

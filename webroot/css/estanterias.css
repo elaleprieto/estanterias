@@ -159,6 +159,9 @@ div.pedidos_index {
 	padding: 10px 2%;
 	text-align: center;
 }
+div.mostrador {
+	text-align: center;
+}
 div.pedidos_info {
 	border-left: 1px solid #666666;
 	margin: auto;

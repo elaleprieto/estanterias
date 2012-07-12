@@ -10,15 +10,14 @@ echo $javascript -> codeBlock('WEBROOT="'.$this -> Html-> url('/', true).'"');
 # Se agregan las CSS
 echo $html -> css('pedidos_admin_index');
 ?>
-<div class="pedidos_index">
+<div class="mostrador">
 	<h2 class="pendientes"><?php __('Pedidos Pendientes');?></h2>
 	<p class="recargado">Actualizado: <?= date('h:i'); ?></p>
 	<table cellpadding="0" cellspacing="0" id='pedidos'>
 		<thead>
 			<tr>
-					<th><?php echo $this -> Paginator -> sort('Número', 'Pedido.id');?></th>
-					<th><?php echo $this -> Paginator -> sort('cliente_id');?></th>
 					<th><?php echo $this -> Paginator -> sort('Fecha', 'created');?></th>
+					<th><?php echo $this -> Paginator -> sort('cliente_id');?></th>
 					<th><?php echo $this -> Paginator -> sort('Artículos', 'articulos');?></th>
 					<th><?php echo $this -> Paginator -> sort('progreso');?></th>
 					<th><?php echo $this -> Paginator -> sort('Transporte', 'Transporte.nombre');?></th>
@@ -32,9 +31,8 @@ echo $html -> css('pedidos_admin_index');
 			foreach ($pedidos as $pedido):
 			?>
 				<tr>
-					<td class="id"><?= $pedido['Pedido']['id']; ?></td>
+					<td><?= $this -> Time -> format($format = 'd/m/y', $pedido['Pedido']['created']); ?></td>
 					<td><?= $pedido['Cliente']['nombre']; ?></td>
-					<td><?= $this -> Time -> format($format = 'd/m/Y H:i', $pedido['Pedido']['created']); ?></td>
 					<td><?= $pedido['Pedido']['articulos']; ?></td>
 					<td><?= sprintf("%.1f %%", $pedido['Pedido']['progreso']); ?></td>
 					<td><?= $pedido['Transporte']['nombre']; ?></td>
