@@ -103,9 +103,9 @@
 				<?php echo $this->Html->link('Editar', array('action' => 'edit', $articulo['id'])); ?>
 				<?php echo $this->Html->link('Set Stock', array('action' => 'set_stock', $articulo['id'])); ?>
 				<?php echo $this->Html->link('Ingreso', array('action' => 'ingreso', $articulo['id'])); ?>
-				<?php echo $this->Html->link('Etiquetar', array('action' => 'etiquetas_mini', $articulo['id'])); ?>
 			-->
 			<?php echo $this->Html->link('Set Pack', array('action' => 'set_pack', $articulo['id'])); ?>
+			<?php echo $this->Html->link('Etiquetar', array('action' => 'etiquetas_mini', $articulo['id'])); ?>
 		</td>
 		</tr> <?php endforeach;?>
 </table>

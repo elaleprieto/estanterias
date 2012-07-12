@@ -451,6 +451,19 @@ class ArticulosController extends AppController {
 			$this -> data = $this -> Articulo -> read(null, $id);
 		}
 	}
+	
+	function mostrador_etiquetas_mini($id = null) {
+		if (!empty($this -> data)) {
+			$this -> layout = 'ajax';
+			$this -> render('admin_etiquetas_mini_imprimir');
+		}
+		if (!$id) {
+			$id = 0;
+		}
+		$this -> Articulo -> recursive = 0;
+		$articulos = $this -> Articulo -> find('list', array('order' => 'Articulo.orden'));
+		$this -> set(compact('id', 'articulos'));
+	}
 
 	function admin_listar_stock($id = null) {
 		$this -> Articulo -> recursive = 0;
