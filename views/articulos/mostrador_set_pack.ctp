@@ -5,7 +5,7 @@ echo $this -> Html -> css('mostrador_set_pack');
 <div class="articulos form">
 <?php echo $this->Form->create('Articulo');?>
 	<fieldset>
- 		<legend><?php __('Set Stock Articulo'); ?></legend>
+ 		<legend><?php __('Ingresar Pack de Artículo'); ?></legend>
 	<?php
 		echo $this->Form->input('id');
 		echo $this->Form->input('detalle', array('disabled' => 'disabled'));
