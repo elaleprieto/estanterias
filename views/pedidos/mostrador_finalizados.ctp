@@ -47,6 +47,12 @@ $class = ' class="altrow"';
 							$pedido['Pedido']['id']
 					), array('escape' => false, 'target' => '_blank'));
 				?>
+				<?php echo $this -> Html -> link($this -> Html -> image("etiquetas.png", array("alt" => "Etiquetas", "title" => "Etiquetas")), array(
+							'controller' => 'clientes',
+							'action' => 'etiquetas',
+							$pedido['Cliente']['id']
+					), array('escape' => false));
+				?>
 				<?php echo $this -> Html -> link($this -> Html -> image("controlado.gif", array("alt" => "Controlado", "title" => "Controlado")), array(
 						'controller' => 'pedidos',
 						'action' => 'controlados',

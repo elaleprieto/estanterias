@@ -168,5 +168,21 @@ class ClientesController extends AppController {
 		}
 	}
 
+	/****************************************************************************************
+	 * 									MOSTRADOR
+	 ****************************************************************************************/
+	public function mostrador_etiquetas($cliente_id = null) {
+		if (!empty($this -> data)) {
+			$this -> layout = 'ajax';
+			$this -> render('admin_etiquetas_imprimir');
+		}
+		if (!$cliente_id) {
+			$cliente_id = 0;
+		}
+		$this -> Cliente -> recursive = 0;
+		$clientes = $this -> Cliente -> find('list', array('order' => 'Cliente.nombre'));
+		$this -> set(compact('clientes', 'cliente_id'));
+	}
+
 }
 ?>
