@@ -81,14 +81,12 @@ class PedidosController extends AppController {
 						'Orden.cantidad',
 					)
 				));
+				$observaciones = 'Pedido de ' . $this -> Pedido -> Cliente -> field('nombre');
 				foreach ($ordenes as $articulo_id => $cantidad) {
-					$this -> loadModel('Articulo');
-					$this -> Articulo -> recursive = 0;
-					$stock = $this -> Articulo -> read('stock', $articulo_id);
-					$this -> Articulo -> id = $articulo_id;
-					$this -> Articulo -> saveField('stock', $stock['Articulo']['stock'] - $cantidad);
+					$this -> requestAction(array('controller' => 'articulos', 'action' => 'egreso_pedido', $articulo_id, $cantidad),
+						array('pass' => array($articulo_id, $cantidad, $observaciones)));
 				}
-
+				# Se envía el correo con los artículos faltantes
 				$this -> admin_correo_faltantes($pedido_id);
 			}
 		}

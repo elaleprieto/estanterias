@@ -629,7 +629,7 @@ class ArticulosController extends AppController {
 	/**
 	 * Se registran los egresos por pedidos
 	 */
-	function admin_egreso_pedido($id = null, $cantidad = null, $observaciones = null) {
+	function egreso_pedido($id = null, $cantidad = null, $observaciones = null) {
 		if (!$id && !$cantidad && !$observaciones) {
 			$this -> Session -> setFlash('Artículo Inválido');
 			return $this -> redirect($this -> referer());
@@ -646,12 +646,13 @@ class ArticulosController extends AppController {
 					# se define el movimiento 1 como salida de mercadería
 					'movimiento' => 1
 				));
-			# Se guarda el nuevo ingreso de mercadería.
+			# Se guarda el nuevo egreso de mercadería por pedido.
 			$this -> Articulo -> Mercaderia -> create($egreso);
 			if ($this -> Articulo -> Mercaderia -> save($egreso)) {
 				# La resta total del stock actual y el stock recibido, se guarda en el Stock actual.
 				$this -> Articulo -> saveField('stock', $this -> Articulo -> field('stock') - $cantidad);
 		}
+		$this -> layout = 'ajax';
 	}
 
 }
